@@ -15,8 +15,11 @@ import nunet.rbsk.helpers.DBHelper;
 import nunet.rbsk.helpers.Helper;
 import nunet.rbsk.model.Children;
 import nunet.rbsk.model.ChildrenScreeningModel;
+import nunet.rbsk.model.ScreeningVitals;
 import nunet.rbsk.screening.ScreeningActivity;
+
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Handler;
@@ -53,318 +56,399 @@ import android.widget.TextView;
 
 //*****************************************************************************
 public class CustomStudentAdapter extends BaseAdapter implements
-		OnItemClickListener {
+        OnItemClickListener {
 
-	private Context mContext;
-	private ArrayList<Children> studList = new ArrayList<Children>();
-	private LayoutInflater inflater;
-	public static int lastSelectedPosition = -1;
-	public static int childID;
-	public static CustomDialog dialog;
+    private Context mContext;
+    private ArrayList<Children> studList = new ArrayList<Children>();
+    private LayoutInflater inflater;
+    public static int lastSelectedPosition = -1;
+    public static int childID;
+    public static CustomDialog dialog;
 
-	/**
-	 * Constructor
-	 * 
-	 * @param screeningActivity
-	 * @param childrenList
-	 */
+    /**
+     * Constructor
+     *
+     * @param screeningActivity
+     * @param childrenList
+     */
 
-	ScreeningActivity mScreeningActivity;
+    ScreeningActivity mScreeningActivity;
 
-	public CustomStudentAdapter(Context context,
-			ArrayList<Children> childrenList) {
-		mScreeningActivity = (ScreeningActivity) context;
-		this.mContext = context;
-		this.studList = childrenList;
-		dialog = new CustomDialog(mContext);
-		inflater = (LayoutInflater) mContext
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
+    public CustomStudentAdapter(Context context,
+                                ArrayList<Children> childrenList) {
+        mScreeningActivity = (ScreeningActivity) context;
+        this.mContext = context;
+        this.studList = childrenList;
+        dialog = new CustomDialog(mContext);
+        inflater = (LayoutInflater) mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
 
-	@Override
-	public int getCount() {
-		return studList.size() + 1;
-	}
+    @Override
+    public int getCount() {
+        return studList.size() + 1;
+    }
 
-	@Override
-	public Object getItem(int position) {
-		return null;
-	}
+    @Override
+    public Object getItem(int position) {
+        return null;
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return 0;
-	}
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
 
-	//
+    //
 
-	public class ViewHolder {
-		TextView tv_screening_student_lv_name;
-		TextView iv_screening_student_lv_rool_no;
-		ImageView iv_screening_student_lv_image;
-		View view;
-	}
+    public class ViewHolder {
+        TextView tv_screening_student_lv_name;
+        TextView iv_screening_student_lv_rool_no;
+        ImageView iv_screening_student_lv_image;
+        View view;
+    }
 
-	int c1 = Color.parseColor("#815CC5");
-	int c2 = Color.parseColor("#ff0000");
-	int c3 = Color.parseColor("#eeeeee");
+    int c1 = Color.parseColor("#815CC5");
+    int c2 = Color.parseColor("#ff0000");
+    int c3 = Color.parseColor("#eeeeee");
 
-	int selcol = Color.parseColor("#45cfc1");
-	int defaultcol = Color.parseColor("#625388");
+    int selcol = Color.parseColor("#45cfc1");
+    int defaultcol = Color.parseColor("#625388");
 
-	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
-		// Log.e("msg", position + "'" + studList.size());
-		if (position >= studList.size()) {
-			if (!mScreeningActivity.isLoading) {
-				View inflate = inflater.inflate(R.layout.cell_progress, parent,
-						false);
-				mScreeningActivity.getStudentDataView(inflate);
-				return inflate;
-			} else {
-				View emtpyView = new View(mScreeningActivity);
-				emtpyView.setId(R.layout.cell_progress);
-				return emtpyView;
-			}
-		}
+        // Log.e("msg", position + "'" + studList.size());
+        if (position >= studList.size()) {
+            if (!mScreeningActivity.isLoading) {
+                View inflate = inflater.inflate(R.layout.cell_progress, parent,
+                        false);
+                mScreeningActivity.getStudentDataView(inflate);
+                return inflate;
+            } else {
+                View emtpyView = new View(mScreeningActivity);
+                emtpyView.setId(R.layout.cell_progress);
+                return emtpyView;
+            }
+        }
 
-		ViewHolder mHolder;// = new ViewHolder();
-		if (convertView == null || convertView.getTag() == null) {
-			convertView = inflater.inflate(R.layout.screening_student_listview,
-					parent, false);
-			mHolder = new ViewHolder();
-			mHolder.tv_screening_student_lv_name = (TextView) convertView
-					.findViewById(R.id.tv_screening_student_lv_name);
-			mHolder.iv_screening_student_lv_rool_no = (TextView) convertView
-					.findViewById(R.id.iv_screening_student_lv_rool_no);
-			mHolder.iv_screening_student_lv_image = (ImageView) convertView
-					.findViewById(R.id.iv_screening_student_lv_image);
+        ViewHolder mHolder;// = new ViewHolder();
+        if (convertView == null || convertView.getTag() == null) {
+            convertView = inflater.inflate(R.layout.screening_student_listview,
+                    parent, false);
+            mHolder = new ViewHolder();
+            mHolder.tv_screening_student_lv_name = (TextView) convertView
+                    .findViewById(R.id.tv_screening_student_lv_name);
+            mHolder.iv_screening_student_lv_rool_no = (TextView) convertView
+                    .findViewById(R.id.iv_screening_student_lv_rool_no);
+            mHolder.iv_screening_student_lv_image = (ImageView) convertView
+                    .findViewById(R.id.iv_screening_student_lv_image);
 
-			mHolder.view = (View) convertView
-					.findViewById(R.id.vw_screening_student_lv_highlight);
+            mHolder.view = (View) convertView
+                    .findViewById(R.id.vw_screening_student_lv_highlight);
 
-			convertView.setTag(mHolder);
-		} else {
-			mHolder = (ViewHolder) convertView.getTag();
-		}
-		Children children = studList.get(position);
-		String text = children.getFirstName() + " " + children.getLastName();
-		mHolder.tv_screening_student_lv_name.setText(text.toUpperCase());
-		mHolder.iv_screening_student_lv_rool_no.setText(children.getMCTSID());
+            convertView.setTag(mHolder);
+        } else {
+            mHolder = (ViewHolder) convertView.getTag();
+        }
+        Children children = studList.get(position);
+        String text = children.getFirstName() + " " + children.getLastName();
+        mHolder.tv_screening_student_lv_name.setText(text.toUpperCase());
+        mHolder.iv_screening_student_lv_rool_no.setText(children.getMCTSID());
 
-		if (children.getChildimage() != null) {
-			mHolder.iv_screening_student_lv_image.setImageBitmap(children
-					.getChildimage());
-		} else {
-			mHolder.iv_screening_student_lv_image.setImageBitmap(null);
-			mHolder.iv_screening_student_lv_image
-					.setBackgroundResource(R.drawable.kid_image);
-		}
+        if (children.getChildimage() != null) {
+            mHolder.iv_screening_student_lv_image.setImageBitmap(children
+                    .getChildimage());
+        } else {
+            mHolder.iv_screening_student_lv_image.setImageBitmap(null);
+            mHolder.iv_screening_student_lv_image
+                    .setBackgroundResource(R.drawable.kid_image);
+        }
 
-		int studentStatus = children.getChildScreenStatusID();
-		if (studentStatus == 1) {// screened
-			mHolder.view.setBackgroundColor(c1);
-		} else if (studentStatus == 4) {// referred
-			mHolder.view.setBackgroundColor(c2);
-		} else {// unscreened
-			mHolder.view.setBackgroundColor(c3);
-		}
+        int studentStatus = children.getChildScreenStatusID();
+        if (studentStatus == 1) {// screened
+            mHolder.view.setBackgroundColor(c1);
+        } else if (studentStatus == 4) {// referred
+            mHolder.view.setBackgroundColor(c2);
+        } else {// unscreened
+            mHolder.view.setBackgroundColor(c3);
+        }
 
-		// if (lastSelectedPosition != -1) {
-		if (children.isSelected()) {
-			convertView.setBackgroundColor(selcol);
-		} else {
-			convertView.setBackgroundColor(defaultcol);
-		}
+        // if (lastSelectedPosition != -1) {
+        if (children.isSelected()) {
+            convertView.setBackgroundColor(selcol);
+        } else {
+            convertView.setBackgroundColor(defaultcol);
+        }
 
-		convertView.setId(position);
-		convertView.setOnClickListener(new myClick(position));
+        convertView.setId(position);
+        convertView.setOnClickListener(new myClick(position));
 
-		return convertView;
-	}
+        return convertView;
+    }
 
-	public class myClick implements OnClickListener {
-		private int position;
+    public class myClick implements OnClickListener {
+        private int position;
 
-		public myClick(int position) {
-			this.position = position;
-		}
+        public myClick(int position) {
+            this.position = position;
+        }
 
-		@Override
-		public void onClick(final View v) {
-			CustomStudentAdapter.view = v;
-			if (v.findViewById(R.layout.cell_progress) != null)
-				return;
-			new Handler().postDelayed(new Runnable() {
+        @Override
+        public void onClick(final View v) {
+            CustomStudentAdapter.view = v;
+            if (v.findViewById(R.layout.cell_progress) != null)
+                return;
+            new Handler().postDelayed(new Runnable() {
 
-				@Override
-				public void run() {
-					
-					ScreeningActivity.listSelectedPosition = v.getId();
-					performClick(position);
-				}
-			}, 200);
+                @Override
+                public void run() {
 
-		}
-	}
+                    ScreeningActivity.listSelectedPosition = v.getId();
+                    performClick(position);
+                }
+            }, 200);
 
-	View row;
-	public static View view;
+        }
+    }
 
-	boolean preventClick = true;
+    View row;
+    public static View view;
 
-	public void performClick(int selectedPositon) {
-		// Helper.childScreeningObj = null;
-		if (preventClick) {
-			preventClick = false;
-			new Handler().postDelayed(new Runnable() {
+    boolean preventClick = true;
 
-				@Override
-				public void run() {
-					preventClick = true;
-				}
-			}, 1000);
+    public void performClick(int selectedPositon) {
+        // Helper.childScreeningObj = null;
+        if (preventClick) {
+            preventClick = false;
+            new Handler().postDelayed(new Runnable() {
 
-		} else
-			return;
-		if (selectedPositon >= studList.size())
-			return;
-		if (lastSelectedPosition != -1) {
-			studList.get(lastSelectedPosition).setSelected(false);
-		}
-		studList.get(selectedPositon).setSelected(true);
+                @Override
+                public void run() {
+                    preventClick = true;
+                }
+            }, 1000);
 
-		// row.setBackgroundColor(Color.parseColor("#45cfc1"));
-		final Children currentChildObj = studList.get(selectedPositon);
-		currentChildObj.setSelected(true);
-		childID = studList.get(selectedPositon).getChildrenID();
-		lastSelectedPosition = selectedPositon;
-		Helper.childrenObject = currentChildObj;
+        } else
+            return;
+        if (selectedPositon >= studList.size())
+            return;
+        if (lastSelectedPosition != -1) {
+            studList.get(lastSelectedPosition).setSelected(false);
+        }
+        studList.get(selectedPositon).setSelected(true);
 
-		if (!checkChildFromChildrenScreening(childID)) {// new Student
-			boolean[] tabFlagslocal = { false, false, false, false, false,
-					false };
-			ScreeningActivity.tabFlags = tabFlagslocal;
-			ScreeningActivity.enableHeaderClick(ScreeningActivity.tabFlags);
-			ScreeningActivity.view_basicinfo.setBackgroundColor(Color
-					.parseColor("#c9c9c9"));
-			ScreeningActivity.view_medical_history.setBackgroundColor(Color
-					.parseColor("#c9c9c9"));
-			ScreeningActivity.view_capture_vitals.setBackgroundColor(Color
-					.parseColor("#c9c9c9"));
-			ScreeningActivity.view_referral.setBackgroundColor(Color
-					.parseColor("#c9c9c9"));
-			ScreeningActivity.view_signoff.setBackgroundColor(Color
-					.parseColor("#c9c9c9"));
-			ScreeningActivity.view_screen.setBackgroundColor(Color
-					.parseColor("#c9c9c9"));
-			ScreeningActivity.tabFlags[0] = true;
-			mScreeningActivity.displayView(
-					ScreeningActivity.tv_screening_basicinfo, mContext);
+        // row.setBackgroundColor(Color.parseColor("#45cfc1"));
+        final Children currentChildObj = studList.get(selectedPositon);
+        currentChildObj.setSelected(true);
+        childID = studList.get(selectedPositon).getChildrenID();
+        lastSelectedPosition = selectedPositon;
+        Helper.childrenObject = currentChildObj;
 
-		} else {// already screened student
-			boolean[] tabFlagslocal = { true, true, true, true, true, true };
-			ScreeningActivity.tabFlags = tabFlagslocal;
-			ScreeningActivity.enableHeaderClick(ScreeningActivity.tabFlags);
-			ScreeningActivity.view_basicinfo.setBackgroundColor(Color
-					.parseColor("#45cfc1"));
-			ScreeningActivity.view_medical_history.setBackgroundColor(Color
-					.parseColor("#45cfc1"));
-			ScreeningActivity.view_capture_vitals.setBackgroundColor(Color
-					.parseColor("#45cfc1"));
-			ScreeningActivity.view_referral.setBackgroundColor(Color
-					.parseColor("#45cfc1"));
-			ScreeningActivity.view_signoff.setBackgroundColor(Color
-					.parseColor("#45cfc1"));
-			ScreeningActivity.view_screen.setBackgroundColor(Color
-					.parseColor("#45cfc1"));
-			ScreeningActivity.tabFlags[0] = true;
-			mScreeningActivity.displayView(
-					ScreeningActivity.tv_screening_basicinfo, mContext);
+        if (!checkChildFromChildrenScreening(childID)) {// new Student
+            boolean[] tabFlagslocal = {false, false, false, false, false,
+                    false};
+            ScreeningActivity.tabFlags = tabFlagslocal;
+            ScreeningActivity.enableHeaderClick(ScreeningActivity.tabFlags);
+            ScreeningActivity.view_basicinfo.setBackgroundColor(Color
+                    .parseColor("#c9c9c9"));
+            ScreeningActivity.view_medical_history.setBackgroundColor(Color
+                    .parseColor("#c9c9c9"));
+            ScreeningActivity.view_capture_vitals.setBackgroundColor(Color
+                    .parseColor("#c9c9c9"));
+            ScreeningActivity.view_referral.setBackgroundColor(Color
+                    .parseColor("#c9c9c9"));
+            ScreeningActivity.view_signoff.setBackgroundColor(Color
+                    .parseColor("#c9c9c9"));
+            ScreeningActivity.view_screen.setBackgroundColor(Color
+                    .parseColor("#c9c9c9"));
+            ScreeningActivity.tabFlags[0] = true;
+            mScreeningActivity.displayView(
+                    ScreeningActivity.tv_screening_basicinfo, mContext);
 
-		}
-		notifyDataSetChanged();
-		// bundle.putInt("ChildrenID", childID);
-		// Fragment fragment = new ScreeningBasicInfoFragment();
-		// fragment.setArguments(bundle);
-		// ScreeningActivity.listSelectedPosition = selectedPositon;
-		// if (fragment != null) {
-		// android.app.FragmentManager fragmentManager = ((Activity) mContext)
-		// .getFragmentManager();
-		// fragmentManager.beginTransaction()
-		// .replace(R.id.frame_container, fragment).commit();
-		// }
+        } else {// already screened student
 
-	}
+            boolean[] tabFlagslocal = {true, true, true, true, true, true};
+            ScreeningActivity.tabFlags = tabFlagslocal;
+            ScreeningActivity.enableHeaderClick(ScreeningActivity.tabFlags);
+            ScreeningActivity.view_basicinfo.setBackgroundColor(Color
+                    .parseColor("#45cfc1"));
+            ScreeningActivity.view_medical_history.setBackgroundColor(Color
+                    .parseColor("#45cfc1"));
+            ScreeningActivity.view_capture_vitals.setBackgroundColor(Color
+                    .parseColor("#45cfc1"));
+            ScreeningActivity.view_referral.setBackgroundColor(Color
+                    .parseColor("#45cfc1"));
+            ScreeningActivity.view_signoff.setBackgroundColor(Color
+                    .parseColor("#45cfc1"));
+            ScreeningActivity.view_screen.setBackgroundColor(Color
+                    .parseColor("#45cfc1"));
+            ScreeningActivity.tabFlags[0] = true;
+            mScreeningActivity.displayView(
+                    ScreeningActivity.tv_screening_basicinfo, mContext);
 
-	public boolean checkChildFromChildrenScreening(int childId) {
-		DBHelper dbh = DBHelper.getInstance(mContext);
-		String query = "select CS.ChildrenScreeingStatusID,CS.LocalChildrenScreeningID  from childrenscreening CS where CS.IsDeleted!=1 AND  LocalChildrenID='"
-				+ childId
-				+ "' "
-				+ "and LocalInstituteScreeningDetailID='"
-				+ ((ScreeningActivity) (mContext)).locInsScreeningDetailID
-				+ "'";
-		Cursor cursor = dbh.getCursorData(mContext, query);
-		if (cursor == null) {// new Student
-			Helper.childScreeningObj = null;
-			Helper.childrenObject.setScreenedForCurrentRound(false);
-			return false;
-		} else {// screened student
-			boolean isScreened = true;
-			Helper.childScreeningObj = new ChildrenScreeningModel();
-			cursor.moveToFirst();
-			int ChildrenScreeingStatusID = NumUtil.IntegerParse.parseInt(cursor
-					.getString(cursor
-							.getColumnIndex("ChildrenScreeingStatusID")));
+        }
+        notifyDataSetChanged();
+        // bundle.putInt("ChildrenID", childID);
+        // Fragment fragment = new ScreeningBasicInfoFragment();
+        // fragment.setArguments(bundle);
+        // ScreeningActivity.listSelectedPosition = selectedPositon;
+        // if (fragment != null) {
+        // android.app.FragmentManager fragmentManager = ((Activity) mContext)
+        // .getFragmentManager();
+        // fragmentManager.beginTransaction()
+        // .replace(R.id.frame_container, fragment).commit();
+        // }
 
-			if (ChildrenScreeingStatusID == 3||ChildrenScreeingStatusID == 0) {
-				isScreened = false;
-				Helper.childrenObject.setScreenedForCurrentRound(false);
-			} else {
-				Helper.childrenObject.setScreenedForCurrentRound(true);
-			}
+    }
 
-			Helper.childrenObject
-					.setChildScreenStatusID(ChildrenScreeingStatusID);
+    public boolean checkChildFromChildrenScreening(int childId) {
+        DBHelper dbh = DBHelper.getInstance(mContext);
+        String query = "select CS.ChildrenScreeingStatusID,CS.LocalChildrenScreeningID  from childrenscreening CS where CS.IsDeleted!=1 AND  LocalChildrenID='"
+                + childId
+                + "' "
+                + "and LocalInstituteScreeningDetailID='"
+                + ((ScreeningActivity) (mContext)).locInsScreeningDetailID
+                + "'";
+        Cursor cursor = dbh.getCursorData(mContext, query);
+        if (cursor == null) {// new Student
+            Helper.childScreeningObj = null;
+            Helper.childrenObject.setScreenedForCurrentRound(false);
+            return false;
+        } else {// screened student
+            boolean isScreened = true;
+            Helper.childScreeningObj = new ChildrenScreeningModel();
+            cursor.moveToFirst();
+            int ChildrenScreeingStatusID = NumUtil.IntegerParse.parseInt(cursor
+                    .getString(cursor
+                            .getColumnIndex("ChildrenScreeingStatusID")));
 
-			String childrenScreeningIDFromDB = cursor.getString(cursor
-					.getColumnIndex("LocalChildrenScreeningID"));
-			Helper.childScreeningObj.setScreeningID(NumUtil.IntegerParse
-					.parseInt(childrenScreeningIDFromDB));
-			cursor.close();
-			return isScreened;
-		}
-	}
+            if (ChildrenScreeingStatusID == 3 || ChildrenScreeingStatusID == 0) {
+                isScreened = false;
+                Helper.childrenObject.setScreenedForCurrentRound(false);
+            } else {
+                Helper.childrenObject.setScreenedForCurrentRound(true);
+            }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget
-	 * .AdapterView, android.view.View, int, long)
-	 */
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		ScreeningActivity.listSelectedPosition = position;
-		if (CustomStudentAdapter.view != null) {
-			CustomStudentAdapter.view.setBackgroundColor(defaultcol);
-			if (view.findViewById(R.layout.cell_progress) != null)
-				return;
-		}
-		CustomStudentAdapter.view = view;
-		performClick(position);
+            Helper.childrenObject
+                    .setChildScreenStatusID(ChildrenScreeingStatusID);
 
-	}
+            String childrenScreeningIDFromDB = cursor.getString(cursor
+                    .getColumnIndex("LocalChildrenScreeningID"));
+            Helper.childScreeningObj.setScreeningID(NumUtil.IntegerParse
+                    .parseInt(childrenScreeningIDFromDB));
+            cursor.close();
+            String query1 = "select *  from ChildrenScreeningVitals CS where CS.IsDeleted!=1 AND  LocalChildrenScreeningID='"
+                    + childrenScreeningIDFromDB + "';";
 
-	public void notifyDataSetChanged(ArrayList<Children> childrenList) {
-		synchronized (studList) {
-			studList = childrenList;
-			notifyDataSetChanged();
-		}
+            Cursor cursor1 = dbh.getCursorData(mContext, query1);
+            if (cursor1 != null) {
+                if (cursor1.moveToFirst()) {
+                    do {
+                        ScreeningVitals sc = new ScreeningVitals();
+                        if (cursor1.getString(cursor1.
+                                getColumnIndex("Height")) != null && cursor1.getString(cursor1.
+                                getColumnIndex("Height")).length() > 0)
+                            sc.setHeight(Float.parseFloat(cursor1.getString(cursor1.
+                                    getColumnIndex("Height"))));
+                        sc.setHeightIndication(cursor1.getString(cursor1.
+                                getColumnIndex("HeightIndication")));
+                        if (cursor1.getString(cursor1.
+                                getColumnIndex("Weight")) != null && cursor1.getString(cursor1.
+                                getColumnIndex("Weight")).length() > 0)
+                            sc.setWeight(Float.parseFloat(cursor1.getString(cursor1.
+                                    getColumnIndex("Weight"))));
+                        sc.setWeightIndication(cursor1.getString(cursor1.
+                                getColumnIndex("WeightIndication")));
+                        if (cursor1.getString(cursor1.
+                                getColumnIndex("BMI")) != null && cursor1.getString(cursor1.
+                                getColumnIndex("BMI")).length() > 0)
+                            sc.setBmi(Double.parseDouble(cursor1.getString(cursor1.
+                                    getColumnIndex("BMI"))));
+                        sc.setBmiIndication(cursor1.getString(cursor1.
+                                getColumnIndex("BMIIndication")));
+                        sc.setAcutyVisionLeft(cursor1.getString(cursor1.
+                                getColumnIndex("AcuityOfVisionLefteye")));
+                        sc.setAcutyVisionRight(cursor1.getString(cursor1.
+                                getColumnIndex("AcuityOfVisionRighteye")));
+                        sc.setBp(cursor1.getString(cursor1.
+                                getColumnIndex("BP")));
+                        sc.setBpIndication(cursor1.getString(cursor1.
+                                getColumnIndex("BPIndication")));
+                        if (cursor1.getString(cursor1.
+                                getColumnIndex("BloodGroupID")) != null && cursor1.getString(cursor1.
+                                getColumnIndex("BloodGroupID")).length() > 0)
+                            sc.setBloodGroupId(Integer.parseInt(cursor1.getString(cursor1.
+                                    getColumnIndex("BloodGroupID"))));
+                        sc.setBloodGroupNotes(cursor1.getString(cursor1.
+                                getColumnIndex("BloodGroupNotes")));
+                        if (cursor1.getString(cursor1.
+                                getColumnIndex("TemperatureID")) != null && cursor1.getString(cursor1.
+                                getColumnIndex("TemperatureID")).length() > 0)
+                            sc.setTemperatureId(Integer.parseInt(cursor1.getString(cursor1.
+                                    getColumnIndex("TemperatureID"))));
+                        sc.setTemperatureIndication(cursor1.getString(cursor1.
+                                getColumnIndex("TemperatureIndication")));
+                        if (cursor1.getString(cursor1.
+                                getColumnIndex("HemoGlobinID")) != null && cursor1.getString(cursor1.
+                                getColumnIndex("HemoGlobinID")).length() > 0)
+                            sc.setHemoglobinId(Integer.parseInt(cursor1.getString(cursor1.
+                                    getColumnIndex("HemoGlobinID"))));
+                        sc.setHemoglobinIndication(cursor1.getString(cursor1.
+                                getColumnIndex("HemoGlobinIndication")));
+                        if (cursor1.getString(cursor1.
+                                getColumnIndex("MUACInCms")) != null && cursor1.getString(cursor1.
+                                getColumnIndex("MUACInCms")).length() > 0)
+                            sc.setMuacCm(Float.parseFloat(cursor1.getString(cursor1.
+                                    getColumnIndex("MUACInCms"))));
+                        sc.setMuacIndication(cursor1.getString(cursor1.
+                                getColumnIndex("MUACIndication")));
+                        if (cursor1.getString(cursor1.
+                                getColumnIndex("HeadCircumferenceInCms")) != null && cursor1.getString(cursor1.
+                                getColumnIndex("HeadCircumferenceInCms")).length() > 0)
+                            sc.setHeadCircumferenceCm(Float.parseFloat(cursor1.getString(cursor1.
+                                    getColumnIndex("HeadCircumferenceInCms"))));
+                        sc.setHeadCircumferenceIndication(cursor1.getString(cursor1.
+                                getColumnIndex("HeadCircumferenceIndication")));
+                        Helper.childScreeningObj.setVitals(sc);
+                    } while (cursor1.moveToNext());
+                }
+            }
 
-	}
+
+            cursor.close();
+
+            return isScreened;
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget
+     * .AdapterView, android.view.View, int, long)
+     */
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+        ScreeningActivity.listSelectedPosition = position;
+        if (CustomStudentAdapter.view != null) {
+            CustomStudentAdapter.view.setBackgroundColor(defaultcol);
+            if (view.findViewById(R.layout.cell_progress) != null)
+                return;
+        }
+        CustomStudentAdapter.view = view;
+        performClick(position);
+
+    }
+
+    public void notifyDataSetChanged(ArrayList<Children> childrenList) {
+        synchronized (studList) {
+            studList = childrenList;
+            notifyDataSetChanged();
+        }
+
+    }
 
 }

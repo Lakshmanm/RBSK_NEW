@@ -377,7 +377,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
         super.onResume();
 
         if (resumeFlag) {
-            listSelectedPosition = 0;
+            //listSelectedPosition = 0;
             startingRang = 0;
             rangeCount = 1;
             if (mArrayListRang != null)
@@ -570,6 +570,89 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
 
     }
 
+    public void getStudentDataFromDBFromsignof(final int instId,
+                                               final String searchString) {
+
+//        if (mArrayListRang.contains(startingRang) || noMoreUpdate) {
+//            if (inflateLoading != null)
+//                inflateLoading.setVisibility(View.INVISIBLE);
+//            return;
+//        }
+//        if (startingRang == 0)
+//            CustomStudentAdapter.lastSelectedPosition = -1;
+//        mArrayListRang.add(startingRang);
+
+        // if (childrenList == null) {
+        childrenList = new ArrayList<Children>();
+        //   }
+
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                String query_students = "select u.FirstName,u.MiddleName,u.LastName, u.DateOfBirth,u.GenderID,c.MCTSID,c.ChildrenStatusID, "
+                        + "(select ChildrenScreeingStatusID from childrenscreening cs "
+                        + "inner join institutescreeningdetails isd on isd.localinstitutescreeningdetailid=cs.localinstitutescreeningdetailid "
+                        + "inner join institutescreening ins on ins.localinstitutescreeningid=isd.localinstitutescreeningid "
+                        + "where RBSKCalendarYearID='"
+                        + RBSKCalenarYearID
+                        + "' and SCREENINGROUNDID='"
+                        + screeningRoundID
+                        + "' and cs.LocalChildrenID =c.LocalChildrenID ) as ChildrenScreeingStatusID "
+                        + ",c.LocalChildrenID,u.LocalUserID,c.LocalInstituteID,"
+                        + " i.InstituteTypeId, c.ClassID, c.SectionID from "
+                        + "users u inner join children c on c.LocalUserID=u.LocalUserID "
+                        + "inner join institutes i on i.LocalInstituteID=c.LocalInstituteID "
+                        + "where u.IsDeleted!=1 AND i.IsDeleted!=1 AND c.isdeleted !=1 "
+                        + "AND i.InstituteID='"
+                        + instId
+                        + "' and c.ChildrenStatusID='1'";
+
+                Integer ClassID = filterData.get("ClassID");
+                if (ClassID != null)
+                    query_students += " and c.ClassID='" + ClassID + "' ";
+
+                Integer SectionID = filterData.get("SectionID");
+                if (SectionID != null)
+                    query_students += " and c.SectionID='" + SectionID + "' ";
+
+                Integer GenderID = filterData.get("GenderID");
+                if (GenderID != null)
+                    query_students += " and u.GenderID='" + GenderID + "' ";
+
+                Integer ChildrenScreeingStatusID = filterData.get("StatusID");
+                if (ChildrenScreeingStatusID != null
+                        && ChildrenScreeingStatusID.intValue() != 2)
+                    query_students += " and ChildrenScreeingStatusID="
+                            + ChildrenScreeingStatusID;
+
+                if (searchString.length() > 0) {
+                    query_students += " and (u.firstname like '%" + searchString
+                            + "%' or u.lastname like '%" + searchString + "%')"
+                            + " order by lower(firstname) limit " + startingRang
+                            + " , " + rangeCount;
+                } else {
+                    query_students += " order by lower(firstname) limit " + startingRang
+                            + " , " + rangeCount;
+                }
+
+
+                Log.e("array pos", startingRang + " , " + rangeCount);
+                Log.w("array pos", query_students);
+                // --ChildrenStatusID=1 means active student
+                final Cursor studentCur = dbh.getCursorData(ScreeningActivity.this,
+                        query_students);
+                if (studentCur != null)
+                    Log.e("Cursor pos", "" + studentCur.getCount());
+                setToChildrenModel(studentCur, 1);
+
+            }
+        }).start();
+
+    }
+
+
     public void getStudentDataFromDB(final int instId,
                                      final String searchString) {
 
@@ -585,65 +668,67 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
         if (childrenList == null) {
             childrenList = new ArrayList<Children>();
         }
-        String query_students = "select u.FirstName,u.MiddleName,u.LastName, u.DateOfBirth,u.GenderID,c.MCTSID,c.ChildrenStatusID, "
-                + "(select ChildrenScreeingStatusID from childrenscreening cs "
-                + "inner join institutescreeningdetails isd on isd.localinstitutescreeningdetailid=cs.localinstitutescreeningdetailid "
-                + "inner join institutescreening ins on ins.localinstitutescreeningid=isd.localinstitutescreeningid "
-                + "where RBSKCalendarYearID='"
-                + RBSKCalenarYearID
-                + "' and SCREENINGROUNDID='"
-                + screeningRoundID
-                + "' and cs.LocalChildrenID =c.LocalChildrenID ) as ChildrenScreeingStatusID "
-                + ",c.LocalChildrenID,u.LocalUserID,c.LocalInstituteID,"
-                + " i.InstituteTypeId, c.ClassID, c.SectionID from "
-                + "users u inner join children c on c.LocalUserID=u.LocalUserID "
-                + "inner join institutes i on i.LocalInstituteID=c.LocalInstituteID "
-                + "where u.IsDeleted!=1 AND i.IsDeleted!=1 AND c.isdeleted !=1 "
-                + "AND i.InstituteID='"
-                + instId
-                + "' and c.ChildrenStatusID='1'";
 
-        Integer ClassID = filterData.get("ClassID");
-        if (ClassID != null)
-            query_students += " and c.ClassID='" + ClassID + "' ";
-
-        Integer SectionID = filterData.get("SectionID");
-        if (SectionID != null)
-            query_students += " and c.SectionID='" + SectionID + "' ";
-
-        Integer GenderID = filterData.get("GenderID");
-        if (GenderID != null)
-            query_students += " and u.GenderID='" + GenderID + "' ";
-
-        Integer ChildrenScreeingStatusID = filterData.get("StatusID");
-        if (ChildrenScreeingStatusID != null
-                && ChildrenScreeingStatusID.intValue() != 2)
-            query_students += " and ChildrenScreeingStatusID="
-                    + ChildrenScreeingStatusID;
-
-        if (searchString.length() > 0) {
-            query_students += " and (u.firstname like '%" + searchString
-                    + "%' or u.lastname like '%" + searchString + "%')"
-                    + " order by lower(firstname) limit " + startingRang
-                    + " , " + rangeCount;
-        } else {
-            query_students += " order by lower(firstname) limit " + startingRang
-                    + " , " + rangeCount;
-        }
-
-
-        Log.e("array pos", startingRang + " , " + rangeCount);
-        Log.w("array pos", query_students);
-        // --ChildrenStatusID=1 means active student
-        final Cursor studentCur = dbh.getCursorData(ScreeningActivity.this,
-                query_students);
         new Thread(new Runnable() {
 
             @Override
             public void run() {
 
+                String query_students = "select u.FirstName,u.MiddleName,u.LastName, u.DateOfBirth,u.GenderID,c.MCTSID,c.ChildrenStatusID, "
+                        + "(select ChildrenScreeingStatusID from childrenscreening cs "
+                        + "inner join institutescreeningdetails isd on isd.localinstitutescreeningdetailid=cs.localinstitutescreeningdetailid "
+                        + "inner join institutescreening ins on ins.localinstitutescreeningid=isd.localinstitutescreeningid "
+                        + "where RBSKCalendarYearID='"
+                        + RBSKCalenarYearID
+                        + "' and SCREENINGROUNDID='"
+                        + screeningRoundID
+                        + "' and cs.LocalChildrenID =c.LocalChildrenID ) as ChildrenScreeingStatusID "
+                        + ",c.LocalChildrenID,u.LocalUserID,c.LocalInstituteID,"
+                        + " i.InstituteTypeId, c.ClassID, c.SectionID from "
+                        + "users u inner join children c on c.LocalUserID=u.LocalUserID "
+                        + "inner join institutes i on i.LocalInstituteID=c.LocalInstituteID "
+                        + "where u.IsDeleted!=1 AND i.IsDeleted!=1 AND c.isdeleted !=1 "
+                        + "AND i.InstituteID='"
+                        + instId
+                        + "' and c.ChildrenStatusID='1'";
 
-                setToChildrenModel(studentCur);
+                Integer ClassID = filterData.get("ClassID");
+                if (ClassID != null)
+                    query_students += " and c.ClassID='" + ClassID + "' ";
+
+                Integer SectionID = filterData.get("SectionID");
+                if (SectionID != null)
+                    query_students += " and c.SectionID='" + SectionID + "' ";
+
+                Integer GenderID = filterData.get("GenderID");
+                if (GenderID != null)
+                    query_students += " and u.GenderID='" + GenderID + "' ";
+
+                Integer ChildrenScreeingStatusID = filterData.get("StatusID");
+                if (ChildrenScreeingStatusID != null
+                        && ChildrenScreeingStatusID.intValue() != 2)
+                    query_students += " and ChildrenScreeingStatusID="
+                            + ChildrenScreeingStatusID;
+
+                if (searchString.length() > 0) {
+                    query_students += " and (u.firstname like '%" + searchString
+                            + "%' or u.lastname like '%" + searchString + "%')"
+                            + " order by lower(firstname) limit " + startingRang
+                            + " , " + rangeCount;
+                } else {
+                    query_students += " order by lower(firstname) limit " + startingRang
+                            + " , " + rangeCount;
+                }
+
+
+                Log.e("array pos", startingRang + " , " + rangeCount);
+                Log.w("array pos", query_students);
+                // --ChildrenStatusID=1 means active student
+                final Cursor studentCur = dbh.getCursorData(ScreeningActivity.this,
+                        query_students);
+                if (studentCur != null)
+                    Log.e("Cursor pos", "" + studentCur.getCount());
+                setToChildrenModel(studentCur, 0);
 
             }
         }).start();
@@ -653,7 +738,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
     /**
      * to set data to children
      */
-    private void setToChildrenModel(final Cursor studentCur) {
+    private void setToChildrenModel(final Cursor studentCur, final int index) {
         final ArrayList<Children> childCopy = new ArrayList<Children>();
 
         if (studentCur != null) {
@@ -802,8 +887,28 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                             if (ll_screening_list_students.getAdapter() == null)
                                 ll_screening_list_students.setAdapter(adapter);
                             adapter.notifyDataSetChanged(childrenList);
-                            if (childrenList.size() == 1)
-                                adapter.performClick(0);
+                            if (index == 0) {
+                                if (childrenList.size() == 1) {
+                                    adapter.performClick(0);
+                                }
+                            } else {
+                                android.app.FragmentManager fragmentManager = getFragmentManager();
+
+                                updateHeaderColorsScreening(R.drawable.headerbg_selectced,
+                                        R.drawable.headerbg, R.drawable.headerbg,
+                                        R.drawable.headerbg, R.drawable.headerbg,
+                                        R.drawable.headerbg);
+                                Bundle bundle=new Bundle();
+                                bundle.putInt("ChildrenID", CustomStudentAdapter.childID);
+                                fragment = new ScreeningBasicInfoFragment();
+                                fragment.setArguments(bundle);
+resumeFlag=false;
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container, fragment).commit();
+
+                            }
+
+
                         } else {
                             adapter = new CustomStudentAdapter(
                                     ScreeningActivity.this, childrenList);
@@ -820,6 +925,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                                     listSelectedPosition,
                                     ll_screening_list_students.getAdapter()
                                             .getItemId(listSelectedPosition));
+
                         }
                     } else {
                         ll_screening_list_students.setAdapter(null);
@@ -844,6 +950,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                         // Log.e("MainActivity", "Error in creating fragment");
                         // }
                     }
+
 
                 }
             });
@@ -881,7 +988,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                 path = "";
             }
             String root = Environment.getExternalStorageDirectory().toString();
-            System.out.println("path.........."+root + "/DCIM/myCapturedImages/" + path);
+            System.out.println("path.........." + root + "/DCIM/myCapturedImages/" + path);
             File imgFile = new File(root + "/DCIM/myCapturedImages/" + path);
             if (imgFile.exists()) {
                 Bitmap decodeFile = BitmapFactory.decodeFile(imgFile

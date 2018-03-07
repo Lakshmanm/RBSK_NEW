@@ -8,16 +8,6 @@
 
 package nunet.rbsk.screening;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import nunet.adapter.CustomGridAdapter;
-import nunet.rbsk.R;
-import nunet.rbsk.helpers.DBHelper;
-import nunet.rbsk.helpers.Helper;
-import nunet.rbsk.model.Category;
-import nunet.rbsk.model.Question;
 import android.app.Fragment;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -29,6 +19,17 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import nunet.adapter.CustomGridAdapter;
+import nunet.rbsk.R;
+import nunet.rbsk.helpers.DBHelper;
+import nunet.rbsk.helpers.Helper;
+import nunet.rbsk.model.Category;
+import nunet.rbsk.model.Question;
 
 //*****************************************************************************
 //* Name   :  ScreeningExaminations.java
@@ -251,7 +252,7 @@ public class ScreeningExaminations extends Fragment implements OnClickListener {
 			int lastCatPosition = categories.length - 2;
 			// ***
 			Category lastCategory = categories[lastCatPosition];
-			if (lastCategory.getIsVerified()) {
+			//if (lastCategory.getIsVerified()) {
 				// *** Send to next Screen.
 				// Helper.showShortToast(getActivity(), "Enjoy");
 				ScreeningActivity.tabFlags[4] = true;
@@ -261,10 +262,10 @@ public class ScreeningExaminations extends Fragment implements OnClickListener {
 						.parseColor("#45cfc1"));
 				mScreeningActivity.displayView(ScreeningActivity.tv_referral,
 						this.getActivity());
-			} else {
-				Helper.showShortToast(getActivity(),
-						"Please verify all the Examination Categories");
-			}
+//			} else {
+//				Helper.showShortToast(getActivity(),
+//						"Please verify all the Examination Categories");
+//			}
 		}
 	}
 }

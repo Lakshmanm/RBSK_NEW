@@ -303,6 +303,7 @@ public class ScreeningFilterStudent extends Activity implements OnClickListener 
 						.elementAt(spn_screening_filter_status
 								.getSelectedItemPosition() - 1));
 			}
+			ScreeningActivity.listSelectedPosition = 0;
 			ScreeningActivity.resumeFlag = true;
 			finish();
 		} else if (v == btn_screening_filter_cancel) {

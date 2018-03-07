@@ -693,7 +693,9 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(
                                                 DialogInterface dialog, int id) {
-                                            int nextPosition = (ScreeningActivity.listSelectedPosition + 1);
+                                            ((ScreeningActivity)getActivity()).getStudentDataFromDBFromsignof(((ScreeningActivity) getActivity()).instituteID,"");
+                                            dialog.cancel();
+                                              int nextPosition = (ScreeningActivity.listSelectedPosition + 1);
                                             localListView
                                                     .performItemClick(
                                                             localListView
@@ -726,22 +728,12 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(
                                                 DialogInterface dialog, int id) {
-
-                                            int nextPosition = 0;
-                                            localListView
-                                                    .performItemClick(
-                                                            localListView
-                                                                    .getAdapter()
-                                                                    .getView(
-                                                                            nextPosition,
-                                                                            null,
-                                                                            null),
-                                                            nextPosition,
-                                                            localListView
-                                                                    .getAdapter()
-                                                                    .getItemId(
-                                                                            nextPosition));
-
+                                            Intent in = new Intent(getActivity(), ScreeningActivity.class);
+                                            Bundle mBundle = getActivity().getIntent().getExtras();
+                                            getActivity().finish();
+                                            in.putExtras(mBundle);
+                                            startActivity(in);
+                                            dialog.cancel();
                                         }
                                     });
                     AlertDialog alertDialog = alertDialogBuilder.create();
@@ -749,9 +741,8 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
 
                 }
             }
-//            ((ScreeningActivity) getActivity()).startingRang = 0;
-//            ((ScreeningActivity) getActivity()).mArrayListRang = new ArrayList<Integer>();
-            ((ScreeningActivity) getActivity()).getStudentDataFromDB(((ScreeningActivity) getActivity()).instituteID, "");
+
+            // ((ScreeningActivity) getActivity()).getStudentDataFromDB(((ScreeningActivity) getActivity()).instituteID, "");
 
         }
     }
