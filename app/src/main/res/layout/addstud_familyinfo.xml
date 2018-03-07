@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="10" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="5" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="4.6"
+                    android:padding="10dp"
+                    android:text="Father Details"
+                    android:textColor="#6b6b76"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_stud_familydetails_fatherdet"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/info" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_addstu_fatherdetails"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.5"
+                android:background="#f0f0f0"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:weightSum="5" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1.4"
+                    android:orientation="horizontal"
+                    android:weightSum="4" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:weightSum="2" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Salutation"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spn_stud_familydet_father_salutation"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Full Name *"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_father_firstname"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/validName"
+                            android:hint="First Name"
+                            android:imeOptions="actionNext"
+                            android:maxLength="50"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_father_middlename"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/validName"
+                            android:hint="Middle Name"
+                            android:imeOptions="actionNext"
+                            android:maxLength="50"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_father_lastname"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/validName"
+                            android:hint="Last Name"
+                            android:imeOptions="actionNext"
+                            android:maxLength="50"
+                            android:singleLine="true" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1.4"
+                    android:orientation="horizontal"
+                    android:weightSum="4" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Aadhaar No."
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_father_aadhaar_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="0123456789"
+                            android:hint="Eg: AP9999999999"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="12"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Contact"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spn_stud_familydet_father_contact_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_father_contact_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="0123456789"
+                            android:hint="Eg: 999999999"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:singleLine="true" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1.4"
+                    android:orientation="horizontal"
+                    android:weightSum="3" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Email ID"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_father_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/dataAllowData"
+                            android:focusable="true"
+                            android:hint="Eg: username@domain.com"
+                            android:imeOptions="actionNext"
+                            android:maxLength="100"
+                            android:singleLine="true" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#f0f0f0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="5" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="4.6"
+                    android:padding="10dp"
+                    android:text="Mother Details"
+                    android:textColor="#6b6b76"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_stud_familydetails_motherdet"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/info" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_addstu_motherdetails"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.5"
+                android:background="#f0f0f0"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:visibility="gone"
+                android:weightSum="5" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1.4"
+                    android:orientation="horizontal"
+                    android:weightSum="4" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:weightSum="2" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Salutation"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spn_stud_familydet_mother_salutation"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Full Name *"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_mother_firstname"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/validName"
+                            android:hint="First Name"
+                            android:imeOptions="actionNext"
+                            android:maxLength="50"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_mother_middlename"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/validName"
+                            android:hint="Middle Name"
+                            android:imeOptions="actionNext"
+                            android:maxLength="50"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_mother_lastname"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/validName"
+                            android:hint="Last Name"
+                            android:imeOptions="actionNext"
+                            android:maxLength="50"
+                            android:singleLine="true" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1.4"
+                    android:orientation="horizontal"
+                    android:weightSum="4" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Aadhaar No."
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_mother_aadhaar_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="0123456789"
+                            android:hint="Eg: AP9999999999"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="12"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Contact"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spn_stud_familydet_mother_contact_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_mother_contact_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="0123456789"
+                            android:hint="Eg: 999999999"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:singleLine="true" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1.4"
+                    android:orientation="horizontal"
+                    android:weightSum="3" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Email ID"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_mother_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/dataAllowData"
+                            android:focusable="true"
+                            android:hint="Eg: username@domain.com"
+                            android:imeOptions="actionNext"
+                            android:maxLength="100"
+                            android:singleLine="true" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#f0f0f0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" >
+
+                <CheckBox
+                    android:id="@+id/cb_stud_family_guardiandetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:text="Child lives with a Guardian"
+                    android:textColor="#6b6b76"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_stud_family_guardianlayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.5"
+                android:background="#f0f0f0"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:visibility="gone"
+                android:weightSum="5" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1.4"
+                    android:orientation="horizontal"
+                    android:weightSum="4" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:weightSum="2" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Salutation"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spn_stud_familydet_guardian_salutation"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Full Name *"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_guardian_firstname"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/validName"
+                            android:hint="First Name"
+                            android:imeOptions="actionNext"
+                            android:maxLength="50"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_guardian_middlename"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/validName"
+                            android:hint="Middle Name"
+                            android:imeOptions="actionNext"
+                            android:maxLength="50"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_guardian_lastname"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/validName"
+                            android:hint="Last Name"
+                            android:imeOptions="actionNext"
+                            android:maxLength="50"
+                            android:singleLine="true" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1.4"
+                    android:orientation="horizontal"
+                    android:weightSum="4" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Aadhaar No."
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_guardian_aadhaar_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="0123456789"
+                            android:hint="Eg: AP9999999999"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="12"
+                            android:singleLine="true" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Contact"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spn_stud_familydet_guardian_contact_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_guardian_contact_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="0123456789"
+                            android:hint="Eg: 999999999"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:singleLine="true" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1.4"
+                    android:orientation="horizontal"
+                    android:weightSum="3" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="0.7"
+                            android:text="Email ID"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#6b6b76"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_stud_familydet_guardian_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.3"
+                            android:background="@drawable/border_style_stud"
+                            android:digits="@string/dataAllowData"
+                            android:focusable="true"
+                            android:hint="Eg: username@domain.com"
+                            android:imeOptions="actionNext"
+                            android:maxLength="100"
+                            android:singleLine="true" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:gravity="bottom|right"
+                android:orientation="vertical"
+                android:padding="20dp" >
+
+                <Button
+                    android:id="@+id/btn_edit_student_family_details_next"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/buttonbg_green"
+                    android:text="Next"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

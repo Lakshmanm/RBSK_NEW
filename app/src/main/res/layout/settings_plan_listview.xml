@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="15dp"
+    android:weightSum="5" >
+
+    <TextView
+        android:id="@+id/tv_settings_sno"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight=".5"
+        android:text="S.No"
+        android:textColor="#7f7f7f"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_settings_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1.9"
+        android:text="Seeting Name"
+        android:textColor="#7f7f7f"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_settings_defaultvalue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight=".9"
+        android:text="Default value"
+        android:textColor="#7f7f7f"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_settings_minVal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight=".9"
+        android:text="Min Value"
+        android:textColor="#7f7f7f"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_settings_maxVal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_weight=".9"
+        android:text="Max Value"
+        android:textColor="#7f7f7f"
+        android:textSize="20dp" />
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RBSK</string>
+    <string name="dataAllowData">abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890.@#*(),;:</string>
+    <string name="validText">abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ </string>
+    <string name="validName">abcdefghijklmnopqrtsuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="title_activity_add_student_fragment">AddStudentFragment</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="day_mon">MON</string>
+    <string name="day_tue">TUE</string>
+    <string name="day_wed">WED</string>
+    <string name="day_thu">THU</string>
+    <string name="day_fri">FRI</string>
+    <string name="day_sat">SAT</string>
+    <string name="day_sun">SUN</string>
+    <string name="title_activity_search_plan">SearchPlan</string>
+    <string name="title_activity_user_login">UserLogin</string>
+    <string name="title_activity_modify_plan">ModifyPlan</string>
+    <string name="title_activity_settings_plan">SettingsPlan</string>
+    <string name="title_activity_spalsh_screen">SpalshScreen</string>
+
+</resources>

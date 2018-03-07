@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="@dimen/dialog_height"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bottom_border"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/tv_referal_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Referral"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#6B6B76"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bottom_border"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Place of Referral"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#6B6B76" />
+
+                <Spinner
+                    android:id="@+id/spn_referral_place_of_referral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_referral_investigations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bottom_border"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_referral_pop_comments"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/border"
+                android:hint="Comments" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center" >
+
+                <Button
+                    android:id="@+id/btn_referral_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="20dp"
+                    android:background="#9999A0"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:text="Close"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/btn_referral_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="#45cfc1"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:text="Save"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

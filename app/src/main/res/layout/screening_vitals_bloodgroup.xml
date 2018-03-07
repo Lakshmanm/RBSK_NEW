@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:minHeight="@dimen/dialog_vital_height"
+    android:minWidth="@dimen/dialog_vital_width"
+    android:orientation="vertical"
+    android:padding="20dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bloodgrouph" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Blood Group"
+            android:textColor="#6b6b76"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp" >
+
+        <Spinner
+            android:id="@+id/spn_screen_vital_blood_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp" >
+
+        <EditText
+            android:id="@+id/et_screen_vitals_blood_group_comments"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border_background_edittext"
+            android:digits="@string/dataAllowData"
+            android:gravity="center_horizontal|center_vertical"
+            android:hint="Add Comments"
+            android:textColor="#6b6b76"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:gravity="left|center_vertical"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_screen_vitals_blood_group_save"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:background="#45cfc1"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Save"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_screen_vitals_blood_group_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_violet"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Cancel"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</LinearLayout>

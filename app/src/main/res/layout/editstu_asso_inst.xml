@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_add_associ"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dialog_height_fill"
+    android:clickable="false"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:weightSum="4" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:orientation="vertical"
+            android:weightSum="3.8" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1.4"
+                android:orientation="horizontal"
+                android:weightSum="5" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.4"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Institute Name"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#6b6b76"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_edit_student_asso_inst_inst_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="@string/dataAllowData"
+                        android:editable="false"
+                        android:ems="10"
+                        android:focusable="false"
+                        android:hint="Enter Text"
+                        android:imeOptions="actionNext"
+                        android:maxLength="100"
+                        android:singleLine="true" >
+                    </EditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.3"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Admission Date"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#6b6b76"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_edit_student_asso_inst_admission_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:ems="10"
+                        android:focusable="false"
+                        android:hint="dd-mm-yyyy"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true" >
+                    </EditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.3"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Admission No."
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#6b6b76"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_edit_student_asso_inst_admission_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="@string/dataAllowData"
+                        android:ems="10"
+                        android:hint="Eg:999999999"
+                        android:imeOptions="actionNext"
+                        android:maxLength="6"
+                        android:numeric="integer"
+                        android:singleLine="true" >
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_editstu_ass_hide"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1.4"
+                android:orientation="horizontal"
+                android:weightSum="5" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2.4"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView205"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Roll No."
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#6b6b76"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_edit_student_asso_inst_roll_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="Eg:999999999"
+                        android:imeOptions="actionNext"
+                        android:maxLength="3"
+                        android:numeric="integer"
+                        android:singleLine="true" >
+                    </EditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.3"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView27"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Class"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#6b6b76"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spn_edit_student_asso_inst_class"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.3"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/textView35"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Section"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#6b6b76"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spn_edit_student_asso_inst_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+                    </Spinner>
+                </LinearLayout>
+            </LinearLayout>
+
+          <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10sp"
+            android:gravity="bottom|right" >
+
+            <Button
+              android:id="@+id/btn_edit_student_asso_inst_save"
+              android:layout_width="180dp"
+              android:layout_height="40dp"
+              android:background="@drawable/buttonbg_green"
+              android:text="Save"
+              android:textColor="#ffffff" />
+          </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+</LinearLayout>

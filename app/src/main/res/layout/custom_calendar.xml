@@ -1,0 +1,1460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:background="@drawable/bg_custom_calendar"
+    android:orientation="vertical"
+    android:weightSum="7.18" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@color/bg_days_weekend"
+            android:gravity="center"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:text="@string/day_mon"
+            android:textColor="@color/text_days_weekday"
+            android:textSize="@dimen/text_days_size"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border_name" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@color/bg_days_weekend"
+            android:gravity="center"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:text="@string/day_tue"
+            android:textColor="@color/text_days_weekday"
+            android:textSize="@dimen/text_days_size"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border_name" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@color/bg_days_weekend"
+            android:gravity="center"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:text="@string/day_wed"
+            android:textColor="@color/text_days_weekday"
+            android:textSize="@dimen/text_days_size"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border_name" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@color/bg_days_weekend"
+            android:gravity="center"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:text="@string/day_thu"
+            android:textColor="@color/text_days_weekday"
+            android:textSize="@dimen/text_days_size"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border_name" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@color/bg_days_weekend"
+            android:gravity="center"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:text="@string/day_fri"
+            android:textColor="@color/text_days_weekday"
+            android:textSize="@dimen/text_days_size"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border_name" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@color/bg_days_weekend"
+            android:gravity="center"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:text="@string/day_sat"
+            android:textColor="@color/text_days_weekday"
+            android:textSize="@dimen/text_days_size"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border_name" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@color/bg_days_weekend"
+            android:gravity="center"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:text="@string/day_sun"
+            android:textColor="@color/text_days_weekday"
+            android:textSize="@dimen/text_days_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.03"
+        android:background="@color/border" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <LinearLayout android:id="@+id/ll_month_calendarDay"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.03"
+        android:background="@color/border" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.03"
+        android:background="@color/border" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.03"
+        android:background="@color/border" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.03"
+        android:background="@color/border" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.03"
+        android:background="@color/border" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/border" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/cell_padding_bottom"
+            android:paddingLeft="@dimen/cell_padding_left"
+            android:paddingRight="@dimen/cell_padding_right"
+            android:paddingTop="@dimen/cell_padding_top"
+            android:textSize="@dimen/text_calendar_days_size" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

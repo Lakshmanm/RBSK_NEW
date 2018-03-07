@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="@dimen/dialog_height"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:weightSum="5" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_modify_plan_inst_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zilla Parshid High School"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#7f7f7f"
+            android:textSize="28dp" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/studentlist" />
+
+        <TextView
+            android:id="@+id/tv_modify_plan_inst_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="198"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#8f71cb"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/tv_modify_screen_percent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="0 % screened"
+            android:visibility="gone"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#8f71cb"
+            android:textSize="28sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:weightSum="4" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#8f71cb"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="20dp" >
+
+            <TextView
+                android:id="@+id/tv_modify_plan_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friday ,07 March 2015"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="4" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border_linear_3"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Day&apos;s Target"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#7f7f7f"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_modify_plan_now_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="60"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#7f7f7f"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_info" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/border_linear_2"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="35dp" >
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Set Screening Target"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#7f7f7f"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_modify_plan_target"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/border_style_edittext_bold"
+                    android:ems="10"
+                    android:inputType="number" >
+                </EditText>
+
+                <TextView
+                    android:id="@+id/tv_modify_plan_error_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Daily Target of MHT exceeded,please enter lower target"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#ed1c24"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="20dp" >
+
+        <Button
+            android:id="@+id/btn_modify_plan_save"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:background="#9f77c9"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Save"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_modify_plan_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#efeeec"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Cancel"
+            android:textColor="#b9b4b5" />
+    </LinearLayout>
+
+</LinearLayout>

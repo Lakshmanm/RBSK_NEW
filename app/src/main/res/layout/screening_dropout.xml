@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="@dimen/dialog_height"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:weightSum="6" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/tv_dropout_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Drop Out"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#6b6b76"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#6b6b76" />
+
+    <EditText
+        android:id="@+id/et_screening_dropout_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/border_style_edittext"
+        android:digits="@string/dataAllowData"
+        android:editable="false"
+        android:ems="10"
+        android:focusable="false" >
+    </EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/et_screening_dropout_comments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:background="@drawable/border_style_edittext"
+            android:digits="@string/dataAllowData"
+            android:ems="10"
+            android:hint="Add Comments"
+            android:maxLength="200" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/btn_screening_dropout_close"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_violet"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Cancle"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btn_screening_dropout_save"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#45cfc1"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="Save and Proceed to Next Child >"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</LinearLayout>

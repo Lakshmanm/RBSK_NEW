@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="6" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp" >
+
+        <ImageView
+            android:id="@+id/iv_screening_student_lv_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:tag="nunet.rbsk.CircularImageView"
+            android:scaleType="fitXY"
+            android:background="@drawable/kid_image" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4.8"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_screening_student_lv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Student Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#cfc1e8"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/iv_screening_student_lv_rool_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Roll No."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#cfc1e8" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vw_screening_student_lv_highlight"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:background="#eeeeee" />
+
+</LinearLayout>

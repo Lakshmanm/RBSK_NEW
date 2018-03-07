@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_refertablelist"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="6dp" >
+
+    <TextView
+        android:id="@+id/tv_allergy_year"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="Screeming Year and Round"
+        android:textColor="#000000"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/tv_allergy_alleryName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"
+        android:text="Allergy"
+        android:textColor="#000000"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/tv_allergy_comments"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Comments"
+        android:textColor="#000000"
+        android:textSize="19dp" />
+
+    <ImageView
+        android:id="@+id/iv_allergy_delete"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_weight="1.2"
+        android:src="@drawable/delete" />
+
+</LinearLayout>

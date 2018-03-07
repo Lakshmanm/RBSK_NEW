@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="@dimen/dialog_width"
+  android:layout_height="@dimen/dialog_height"
+  android:background="#FCFEFC"
+  android:orientation="vertical">
+
+  <RelativeLayout
+    android:id="@+id/header"
+    android:layout_width="fill_parent"
+    android:layout_height="50dp"
+    android:layout_alignParentTop="true"
+    android:layout_margin="5dp">
+
+    <ImageView
+      android:id="@+id/iv_dynamic_previous"
+      android:layout_width="64dp"
+      android:layout_height="64dp"
+      android:layout_alignParentLeft="true"
+      android:layout_centerVertical="true"
+      android:background="@drawable/arrow_left" />
+
+    <TextView
+      android:id="@+id/tv_dynamic_moduleName"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
+      android:text="ModuleName"
+      android:textColor="#6B6B76"
+      android:textSize="18dp"
+      android:textStyle="bold" />
+
+    <ImageView
+      android:id="@+id/iv_dyamic_next"
+      android:layout_width="64dp"
+      android:layout_height="64dp"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      android:background="@drawable/arrow_right_highlight" />
+
+    <TextView
+      android:id="@+id/tv_dynamic_studentname"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+      android:layout_marginLeft="26dp"
+      android:layout_toRightOf="@+id/iv_dynamic_previous"
+      android:text=""
+      android:textColor="#6B6B76"
+      android:textSize="18sp" />
+  </RelativeLayout>
+
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/btn_questions_close"
+    android:layout_below="@+id/header">
+
+    <RelativeLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="8dp"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:id="@+id/ll_dynamicQuestions"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"></LinearLayout>
+
+
+    </RelativeLayout>
+  </ScrollView>
+
+  <Button
+    android:id="@+id/btn_questions_close"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:layout_gravity="center"
+    android:layout_marginBottom="15dp"
+    android:layout_marginTop="15dp"
+    android:background="#9999A0"
+    android:paddingBottom="15dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="15dp"
+    android:text="Close"
+    android:textColor="#fff"
+    android:textStyle="bold" />
+
+</RelativeLayout>

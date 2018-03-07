@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="border">#efefef</color>
+    <color name="text_days_weekday">#6b6b76</color>
+    <color name="bg_days_weekday">#ffffff</color>
+    <color name="text_days_weekend">#000000</color>
+    <color name="bg_days_weekend">#eeeeee</color>
+    <color name="text_curr_month_weekday">#6b6b76</color>
+    <color name="bg_curr_month_weekday">#ffffff</color>
+    <color name="text_curr_month_weekend">#bfbfbf</color>
+    <color name="bg_curr_month_weekend">#eeeeee</color>
+    <color name="text_not_curr_month_weekday">#bfbfbf</color>
+    <color name="bg_not_curr_month_weekday">#ffffff</color>
+     <color name="border_name">#d6d6d6</color>
+    
+    <color name="text_not_curr_month_weekend">#bfbfbf</color>
+    <color name="bg_not_curr_month_weekend">#eeeeee</color>
+    <color name="text_today">#ffffff</color>
+    <color name="bg_today">#8f70cb</color>
+</resources>

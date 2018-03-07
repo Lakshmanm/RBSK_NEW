@@ -1,0 +1,271 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:clickable="true"
+  android:orientation="horizontal"
+  android:weightSum="5">
+
+  <fragment
+    android:id="@+id/fragment_edit_institute_edit_address_map"
+    android:name="nunet.rbsk.InsituteFragment"
+    class="com.google.android.gms.maps.MapFragment"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1.5" />
+
+  <ScrollView
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="3.5"
+    android:weightSum="4.5">
+
+    <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:padding="10dp">
+
+      <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State *"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#6b6b76"
+            android:textStyle="bold" />
+
+          <Spinner
+            android:id="@+id/spn_edit_institute_edit_address_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="District *"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#6b6b76"
+            android:textStyle="bold" />
+
+          <Spinner
+            android:id="@+id/spn_edit_institute_edit_address_district"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="21312132as" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mandal *"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#6b6b76"
+            android:textStyle="bold" />
+
+          <Spinner
+            android:id="@+id/spn_edit_institute_edit_address_mandal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="21312132as" />
+        </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Village *"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#6b6b76"
+            android:textStyle="bold" />
+
+          <Spinner
+            android:id="@+id/spn_edit_institute_edit_address_village"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="School" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Habitation *"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#6b6b76"
+            android:textStyle="bold" />
+
+          <Spinner
+            android:id="@+id/spn_edit_institute_edit_address_habitation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Regular" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pin Code"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#6b6b76"
+            android:textStyle="bold" />
+
+          <EditText
+            android:id="@+id/et_edit_institute_edit_address_pin_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:editable="false"
+            android:ems="10"
+            android:hint="Eg:99999"></EditText>
+        </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#6b6b76"
+            android:textStyle="bold" />
+
+          <EditText
+            android:id="@+id/et_edit_institute_address_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:digits="@string/dataAllowData"
+            android:ems="10"
+            android:hint="Address Line 1"></EditText>
+        </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:id="@+id/textView82"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#6b6b76"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+          <EditText
+            android:id="@+id/et_edit_institute_address_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:hint="Address Line 2"></EditText>
+          F
+
+        </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="right|bottom"
+        android:orientation="horizontal">
+
+        <Button
+          android:id="@+id/btn_edit_institute_address_previous"
+          android:layout_width="180dp"
+          android:layout_height="40dp"
+          android:layout_marginRight="20dp"
+          android:background="@drawable/buttonbg_grey"
+          android:text="Previous"
+          android:textColor="#ffffff" />
+
+        <Button
+          android:id="@+id/btn_edit_institute_address_next"
+          android:layout_width="180dp"
+          android:layout_height="40dp"
+          android:background="@drawable/buttonbg_violet"
+          android:text="Next"
+          android:textColor="#ffffff" />
+      </LinearLayout>
+    </LinearLayout>
+  </ScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_student_list_hide"
+    android:layout_width="400dp"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_violet"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_screening_list_filter"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#9a7dd0"
+                android:drawableLeft="@drawable/filter"
+                android:text="Apply Filter"
+                android:textColor="#fff" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#000" />
+
+            <Button
+                android:id="@+id/btn_screening_list_add_child"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#9a7dd0"
+                android:drawableLeft="@drawable/addstudent"
+                android:text="Add Child"
+                android:textColor="#fff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/et_screening_list_student_search"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="0dp"
+                android:layout_weight="5"
+                android:background="@drawable/search_edittext"
+                android:digits="@string/dataAllowData"
+                android:hint="Enter Student Name"
+                android:singleLine="true" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/btn_screening_list_searchGo"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/search_button"
+                android:text="Go"
+                android:textColor="#ffffff"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/ll_screening_list_students"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp" >
+    </ListView>
+
+</LinearLayout>

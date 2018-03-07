@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_refertablelist"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="6dp" >
+
+    <TextView
+        android:id="@+id/tv_refer_healthCondition"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="Health Condition"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/tv_refer_placeofReferral"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"
+        android:text="Place of Referral"
+        android:textSize="19dp" />
+
+    <TextView
+        android:id="@+id/tv_refer_placeofReferralInvertigations"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Investigations"
+        android:textSize="19dp" />
+
+    <ImageView
+        android:id="@+id/iv_refer_delete"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_weight="1.2"
+        android:src="@drawable/delete" />
+
+</LinearLayout>

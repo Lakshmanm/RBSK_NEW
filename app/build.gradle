@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+
+    defaultConfig {
+        applicationId "nunet.rbsk"
+        minSdkVersion 14
+        targetSdkVersion 26
+      multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+  aaptOptions {
+    cruncherEnabled = false
+  }
+  useLibrary 'org.apache.http.legacy'
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile files('libs/crittercism_v5_4_0_sdkonly.jar')
+    compile 'com.google.android.gms:play-services-maps:9.0.0'
+}

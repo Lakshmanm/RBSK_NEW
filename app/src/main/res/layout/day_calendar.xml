@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_violet"
+    android:orientation="horizontal"
+    android:padding="15dp"
+    android:weightSum="4" >
+
+    <TextView
+        android:id="@+id/tv_day_cal_date_day"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:text="16"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#cec0e7"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/tv_day_cal_date_weekday"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:text="Monday"
+        android:textColor="#cec0e7"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/tv_day_cal_school_no"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="right"
+        android:text="N/A Schools"
+        android:textColor="#cec0e7"
+        android:textSize="17dp"/>
+
+</LinearLayout>

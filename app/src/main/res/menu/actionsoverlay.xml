@@ -1,0 +1,78 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_userName"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="aaa"/>
+    <item
+        android:id="@+id/warning"
+        android:icon="@drawable/schedule_top"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Warning"
+        android:visible="false"/>
+    <item
+        android:id="@+id/masterDataSend"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Warning"
+        android:visible="false"/>
+    <!--
+         <item
+        android:id="@+id/event"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="Event"/>
+    -->
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="collapseActionView"
+        android:title="Settings"/>
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Logout"/>
+    <item
+        android:id="@+id/backupdb"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="backupdb"
+        android:visible="true"/>
+    <item
+        android:id="@+id/sendInc"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="SendInc"
+        android:visible="true"/>
+    <item
+        android:id="@+id/logsync"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Logsync"
+        android:visible="true"/>
+    <item
+        android:id="@+id/hybrid_DB"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Rest to Hybrid DB"
+        android:visible="false"/>
+    <item
+        android:id="@+id/qa_DB"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Rest to QA DB"
+        android:visible="false"/>
+
+</menu>

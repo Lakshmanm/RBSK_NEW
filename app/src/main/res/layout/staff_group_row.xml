@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/tv_staff_name"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_weight=".9"
+        android:padding="5dp"
+        android:text="Name"
+        android:textColor="#6b6b76" />
+
+    <TextView
+        android:id="@+id/tv_staff_department"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_weight=".9"
+        android:padding="5dp"
+        android:text="Department"
+        android:textColor="#6b6b76" />
+
+    <TextView
+        android:id="@+id/tv_staff_designation"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_weight=".9"
+        android:padding="5dp"
+        android:text="Designation"
+        android:textColor="#6b6b76" />
+
+    <CheckBox
+        android:id="@+id/cb_staff_headmaster"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:focusable="false" />
+
+    <CheckBox
+        android:id="@+id/cb_staff_schoolHealthCoord"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:focusable="false" />
+
+    <CheckBox
+        android:id="@+id/cb_health_coord"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:focusable="false" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/iv_staff_info"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight=".9"
+        android:src="@drawable/info" />
+
+</LinearLayout>

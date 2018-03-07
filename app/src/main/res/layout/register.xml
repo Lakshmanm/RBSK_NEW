@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#815CC5" >
+
+    <LinearLayout
+        android:id="@+id/ll_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/Logo"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:src="@drawable/loginlogo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/et_register_deviceCode"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/et_background"
+                android:ems="10"
+                android:hint="Device Code"
+                android:imeOptions="actionNext"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColorHint="#FCFEFC"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/et_register_unlockId"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/et_background"
+                android:ems="10"
+                android:hint="Unlock ID"
+                android:imeOptions="actionGo"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColorHint="#FCFEFC"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/et_register_unlockPassword"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/et_background"
+                android:ems="10"
+                android:hint="Unlock Password"
+                android:imeOptions="actionGo"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColorHint="#FCFEFC"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/et_register_healthBlockId"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/et_background"
+                android:ems="10"
+                android:hint="Health Block ID"
+                android:imeOptions="actionGo"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textColorHint="#FCFEFC"
+                android:textSize="18dp" />
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="400dp"
+                android:layout_height="75dp"
+                android:layout_marginBottom="25dp"
+                android:background="#64C2DC"
+                android:text="Register"
+                android:textColor="#FCFEFC"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_login_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Forgot Username/Password ?"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
