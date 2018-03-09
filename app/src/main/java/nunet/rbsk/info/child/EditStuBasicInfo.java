@@ -249,9 +249,9 @@ public class EditStuBasicInfo extends Fragment implements OnClickListener {
 
         iv_edit_stu_basic_info_child_image = (ImageView) rootView.findViewById(
                 R.id.iv_edit_stu_basic_info_child_image);
-        tv_editstu_basicInfo = (TextView) rootView.findViewById(
+        tv_editstu_basicInfo = (TextView) getActivity().findViewById(
                 R.id.tv_editstu_basicInfo);
-        tv_editstu_disability = (TextView) rootView.findViewById(
+        tv_editstu_disability = (TextView) getActivity().findViewById(
                 R.id.tv_editstu_disability);
         et_edit_student_basic_info_student_firstname = (EditText) rootView
                 .findViewById(R.id.et_edit_student_basic_info_student_firstname);
@@ -410,7 +410,7 @@ public class EditStuBasicInfo extends Fragment implements OnClickListener {
                 AddStudentActivityDialog
                         .enableHeaderClick1(AddStudentActivityDialog.tabFlags);
 
-                Helper.updateHeaderFromNext(getActivity(),
+                Helper.updateHeaderFromNext(this.getActivity(),
                         tv_editstu_basicInfo, tv_editstu_disability,
                         R.drawable.headerbg, R.drawable.headerbg_selectced);
                 // bundle.putInt("InsituteID", instituteId);

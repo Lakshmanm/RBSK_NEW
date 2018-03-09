@@ -898,11 +898,11 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                                         R.drawable.headerbg, R.drawable.headerbg,
                                         R.drawable.headerbg, R.drawable.headerbg,
                                         R.drawable.headerbg);
-                                Bundle bundle=new Bundle();
+                                Bundle bundle = new Bundle();
                                 bundle.putInt("ChildrenID", CustomStudentAdapter.childID);
                                 fragment = new ScreeningBasicInfoFragment();
                                 fragment.setArguments(bundle);
-resumeFlag=false;
+                                resumeFlag = false;
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container, fragment).commit();
 

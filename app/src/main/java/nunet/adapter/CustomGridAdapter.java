@@ -8,10 +8,6 @@
 
 package nunet.adapter;
 
-import nunet.rbsk.R;
-import nunet.rbsk.helpers.Helper;
-import nunet.rbsk.model.Category;
-import nunet.rbsk.screening.DynamicQuestions;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +18,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import nunet.rbsk.R;
+import nunet.rbsk.helpers.Helper;
+import nunet.rbsk.model.Category;
+import nunet.rbsk.screening.DynamicQuestions;
 
 //*****************************************************************************
 //* Name   :  CustomGridAdapter.java
@@ -129,18 +130,20 @@ public class CustomGridAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(context, DynamicQuestions.class);
-				if (position != 0) {
-					Category[] categoriesArray = Helper.childScreeningObj
-							.getCategories();
-					Category previousCategory = categoriesArray[position - 1];
-					if (previousCategory.getIsVerified()) {
-						intent.putExtra("position", position);
-						context.startActivity(intent);
-					}
-				} else {
-					intent.putExtra("position", position);
-					context.startActivity(intent);
-				}
+				intent.putExtra("position", position);
+				context.startActivity(intent);
+//				if (position != 0) {
+//					Category[] categoriesArray = Helper.childScreeningObj
+//							.getCategories();
+//					Category previousCategory = categoriesArray[position ];
+//					if (previousCategory.getIsVerified()) {
+//						intent.putExtra("position", position);
+//						context.startActivity(intent);
+//					}
+//				} else {
+//					intent.putExtra("position", position);
+//					context.startActivity(intent);
+//				}
 			}
 		});
 		return row;

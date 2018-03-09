@@ -101,6 +101,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
     private boolean tempImages;
     private String tempName;
     private LinearLayout ll_sign_off_cam;
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -645,7 +646,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
 
     public class Loader extends AsyncTask<String, Context, Void> {
 
-        private ProgressDialog progressDialog;
+
         private Context targetCtx;
 
         public Loader(Context context) {
@@ -693,9 +694,10 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(
                                                 DialogInterface dialog, int id) {
-                                            ((ScreeningActivity)getActivity()).getStudentDataFromDBFromsignof(((ScreeningActivity) getActivity()).instituteID,"");
+
                                             dialog.cancel();
-                                              int nextPosition = (ScreeningActivity.listSelectedPosition + 1);
+                                            ((ScreeningActivity) getActivity()).getStudentDataFromDBFromsignof(((ScreeningActivity) getActivity()).instituteID, "");
+                                            int nextPosition = (ScreeningActivity.listSelectedPosition + 1);
                                             localListView
                                                     .performItemClick(
                                                             localListView
@@ -728,12 +730,13 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(
                                                 DialogInterface dialog, int id) {
+                                            dialog.cancel();
                                             Intent in = new Intent(getActivity(), ScreeningActivity.class);
                                             Bundle mBundle = getActivity().getIntent().getExtras();
                                             getActivity().finish();
                                             in.putExtras(mBundle);
                                             startActivity(in);
-                                            dialog.cancel();
+
                                         }
                                     });
                     AlertDialog alertDialog = alertDialogBuilder.create();
@@ -744,6 +747,22 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
 
             // ((ScreeningActivity) getActivity()).getStudentDataFromDB(((ScreeningActivity) getActivity()).instituteID, "");
 
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
         }
     }
 
@@ -765,10 +784,10 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
         } else {
             childScreenStatusID = 1;
         }
-        if (Helper.childScreeningObj.getSignOffModel() != null) {
-            if (Helper.childScreeningObj.getSignOffModel().getMedicationsGiven() != null)
-                childScreenStatusID = 6;
-        }
+//        if (Helper.childScreeningObj.getSignOffModel() != null) {
+//            if (Helper.childScreeningObj.getSignOffModel().getMedicationsGiven() != null)
+//                childScreenStatusID = 6;
+//        }
 
         Children childrenObject = Helper.childrenObject;
         if (dataCursor != null && dataCursor.getCount() > 0) {
@@ -1342,27 +1361,29 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
 
             // --------------------Physical examinations-------------
             Category[] categories = Helper.childScreeningObj.getCategories();
-            for (int i = 0; i < categories.length - 1; i++) {
-                Category category = categories[i];
-                ArrayList<Question> questions = category.getQuestions();
-                for (Question question : questions) {
+            if (categories != null)
+                for (int i = 0; i < categories.length - 1; i++) {
+                    Category category = categories[i];
+                    ArrayList<Question> questions = category.getQuestions();
+                    if (questions != null)
+                        for (Question question : questions) {
 
-                    dbh.insertintoTable(
-                            this.getActivity(),
-                            "childrenscreeningpe",
-                            new String[]{"LocalChildrenScreeningID",
-                                    "ScreeningQuestionID", "Question",
-                                    "Answer", "IsReferredWhenYes",
-                                    "HealthConditionID"},
-                            new String[]{
-                                    localChildScreeningID + "".trim(),
-                                    question.getScreenQuestionID() + "".trim(),
-                                    "",// question.getQuestion(),
-                                    question.getAnswer(),
-                                    question.getIsReferedWhen() + "".trim(),
-                                    question.getHealthConditionID() + "".trim()});
+                            dbh.insertintoTable(
+                                    this.getActivity(),
+                                    "childrenscreeningpe",
+                                    new String[]{"LocalChildrenScreeningID",
+                                            "ScreeningQuestionID", "Question",
+                                            "Answer", "IsReferredWhenYes",
+                                            "HealthConditionID"},
+                                    new String[]{
+                                            localChildScreeningID + "".trim(),
+                                            question.getScreenQuestionID() + "".trim(),
+                                            "",// question.getQuestion(),
+                                            question.getAnswer(),
+                                            question.getIsReferedWhen() + "".trim(),
+                                            question.getHealthConditionID() + "".trim()});
+                        }
                 }
-            }
             // ------------------------Referal----------------------Update
             // Comments
             // and
