@@ -37,7 +37,7 @@ import android.widget.TextView;
 //* Type    : Frgament
 
 //* Description     : To Edit Staff info of an Institute
-//* References     :                                                        
+//* References     :
 //* Author    :Deepika.chevvakula
 
 //* Created Date       : 24-04-2015
@@ -48,11 +48,11 @@ import android.widget.TextView;
 
 //*
 //*
-//*                             Code Review LOG                    
-//*****************************************************************************                    
+//*                             Code Review LOG
+//*****************************************************************************
 //* Ver        Date                Code Review By            Observations
 
-//*****************************************************************************  
+//*****************************************************************************
 
 public class EditInstituteStaffInfo extends Fragment implements OnClickListener {
 	// Button btn_editInst_staff_close;
@@ -122,7 +122,7 @@ public class EditInstituteStaffInfo extends Fragment implements OnClickListener 
 
 	/**
 	 * Method to get all Staff details from DB Kiruthika
-	 * 
+	 *
 	 */
 	private void getStaffInfoFromDB() {
 
@@ -162,7 +162,7 @@ public class EditInstituteStaffInfo extends Fragment implements OnClickListener 
 
 	/**
 	 * Method to set Data from DB to Staff Model class kiruthika 27/04/2015
-	 * 
+	 *
 	 * @param staffCur2
 	 */
 	private void setToStaffModel(Cursor staffCur2) {

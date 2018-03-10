@@ -73,7 +73,7 @@
                 android:layout_marginTop="3dp"
                 android:background="@drawable/et_background"
                 android:ems="10"
-                android:hint="Health Block ID"
+                android:hint="Revenue Division ID"
                 android:imeOptions="actionGo"
                 android:paddingLeft="10dp"
                 android:singleLine="true"

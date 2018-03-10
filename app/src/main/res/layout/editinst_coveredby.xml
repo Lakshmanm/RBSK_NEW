@@ -43,7 +43,7 @@
                     android:layout_width="180dp"
                     android:layout_height="40dp"
                     android:background="@drawable/buttonbg_violet"
-                    android:text="Save"
+                    android:text="Next"
                     android:textColor="#ffffff" />
             </LinearLayout>
         </LinearLayout>

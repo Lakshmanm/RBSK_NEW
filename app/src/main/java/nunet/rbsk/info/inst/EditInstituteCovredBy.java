@@ -33,7 +33,7 @@ import android.widget.ToggleButton;
 //* Type    : Frgament
 
 //* Description     : To add covered by of an Institute
-//* References     :                                                        
+//* References     :
 //* Author    :Deepika.chevvakula
 
 //* Created Date       : 23-04-2015
@@ -44,17 +44,18 @@ import android.widget.ToggleButton;
 
 //*
 //*
-//*                             Code Review LOG                    
-//*****************************************************************************                    
+//*                             Code Review LOG
+//*****************************************************************************
 //* Ver        Date                Code Review By            Observations
 
-//*****************************************************************************  
+//*****************************************************************************
 
 public class EditInstituteCovredBy extends Fragment implements OnClickListener {
 	private Button btn_edit_institute_covered_previous;
 	private Button btn_edit_institute_covered_next;
 	private TextView tv_editInst_staff;
 	private TextView tv_editInst_coveredby;
+  private TextView tv_editInst_signoff;
 	// private String[] data_title = new String[] { "NakkavaniPlaem-CHNC",
 	// "NakkavaniPlaem-CHN", "Udrajavaram-PHC", "Jaggayyapeta-SubCenter" };
 	// private String[] data = new String[] {
@@ -234,7 +235,7 @@ public class EditInstituteCovredBy extends Fragment implements OnClickListener {
 
 	/**
 	 * To get the view id's from R.java
-	 * 
+	 *
 	 * @param rootView
 	 */
 	private void findViews(View rootView) {
@@ -246,6 +247,8 @@ public class EditInstituteCovredBy extends Fragment implements OnClickListener {
 				R.id.tv_editInst_staff);
 		tv_editInst_coveredby = (TextView) getActivity().findViewById(
 				R.id.tv_editInst_coveredby);
+    tv_editInst_signoff = (TextView) getActivity().findViewById(
+      R.id.tv_editInst_signoff);
 		ll_coveredByData = (LinearLayout) rootView
 				.findViewById(R.id.ll_coveredByData);
 	}
@@ -263,7 +266,10 @@ public class EditInstituteCovredBy extends Fragment implements OnClickListener {
 					R.drawable.headerbg_selectced);
 			activity.replaceFragment(activity.fragmentArr[2]);
 		} else if (v == btn_edit_institute_covered_next) {
-			this.getActivity().finish();
+      Helper.updateHeaderFromNext(getActivity(), tv_editInst_coveredby,
+        tv_editInst_signoff, R.drawable.headerbg,
+        R.drawable.headerbg_selectced);
+      activity.replaceFragment(activity.fragmentArr[4]);
 		}
 	}
 }

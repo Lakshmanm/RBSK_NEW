@@ -43,7 +43,7 @@
         android:layout_weight="1"
         android:background="#eeeeee"
         android:orientation="horizontal"
-        android:weightSum="4" >
+        android:weightSum="5" >
 
         <TextView
             android:id="@+id/tv_editInst_basicInfo"
@@ -88,6 +88,17 @@
             android:text="Covered by"
             android:textColor="#ffffff"
             android:textSize="18dp" />
+
+      <TextView
+        android:id="@+id/tv_editInst_signoff"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Sign Off"
+        android:textColor="#ffffff"
+        android:textSize="18dp" />
     </LinearLayout>
 
    <FrameLayout

@@ -37,7 +37,7 @@ import android.widget.TextView;
 //* Type    : Frgament
 
 //* Description     : To add basic info of an Institute
-//* References     :                                                        
+//* References     :
 //* Author    :Promodh.munjeti
 
 //* Created Date       : 23-04-2015
@@ -48,11 +48,11 @@ import android.widget.TextView;
 
 //*
 //*
-//*                             Code Review LOG                    
-//*****************************************************************************                    
+//*                             Code Review LOG
+//*****************************************************************************
 //* Ver        Date                Code Review By            Observations
 
-//*****************************************************************************  
+//*****************************************************************************
 
 public class EditInstBasicInfo extends Fragment implements OnClickListener {
 
@@ -147,10 +147,10 @@ public class EditInstBasicInfo extends Fragment implements OnClickListener {
 
 	/**
 	 * Method to Set data from db to Institute Model class kiruthika 22/04/2015
-	 * 
+	 *
 	 * @param instituteCursor
 	 *            from DB
-	 * 
+	 *
 	 */
 	private void setToInstituteModel(Cursor insCur) {
 		if (insCur != null) {
@@ -217,7 +217,7 @@ public class EditInstBasicInfo extends Fragment implements OnClickListener {
 	/**
 	 * Method to get contact details from contact table based on the contact id
 	 * from institute table
-	 * 
+	 *
 	 * @param contactID
 	 * @return
 	 */
@@ -307,9 +307,9 @@ public class EditInstBasicInfo extends Fragment implements OnClickListener {
 	}
 
 	/**
-	 * 
+	 *
 	 * To get the view id's from R.java
-	 * 
+	 *
 	 */
 	private void findViews(View rootView) {
 
@@ -347,7 +347,7 @@ public class EditInstBasicInfo extends Fragment implements OnClickListener {
 			InsituteFragmentActivityDialog insituteFragment = (InsituteFragmentActivityDialog) getActivity();
 			insituteFragment.updateHeaderColors(R.drawable.headerbg,
 					R.drawable.headerbg_selectced, R.drawable.headerbg,
-					R.drawable.headerbg);
+					R.drawable.headerbg,R.drawable.headerbg_selectced);
 			insituteFragment.replaceFragment(insituteFragment.fragmentArr[1]);
 		}
 	}
