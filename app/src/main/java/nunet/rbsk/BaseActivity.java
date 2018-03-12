@@ -1,16 +1,5 @@
 package nunet.rbsk;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.channels.FileChannel;
-
-import nunet.rbsk.helpers.DBHelper;
-import nunet.rbsk.login.LoginActivity;
-import nunet.services.DBTestActivity;
-import nunet.services.IncrementalService;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,6 +15,15 @@ import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.nio.channels.FileChannel;
+
+import nunet.rbsk.helpers.DBHelper;
+import nunet.rbsk.login.LoginActivity;
 
 public class BaseActivity extends Activity {
 

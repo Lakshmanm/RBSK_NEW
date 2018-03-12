@@ -17,4 +17,5 @@
     <color name="bg_not_curr_month_weekend">#eeeeee</color>
     <color name="text_today">#ffffff</color>
     <color name="bg_today">#8f70cb</color>
+    <color name="transparency_white">#AAFFFFFF</color>
 </resources>

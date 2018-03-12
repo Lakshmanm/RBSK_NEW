@@ -91,7 +91,7 @@ public class EditInstBasicInfo extends Fragment implements OnClickListener {
 	/**
 	 * Method to get All basic info from DB Kiruthika 22/04/2015
 	 */
-	private void getBasicInfoFromDB() {
+	public void getBasicInfoFromDB() {
 
 		new AsyncTask<Void, Void, Void>() {
 

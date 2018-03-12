@@ -1,186 +1,311 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:clickable="true">
-
-  <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true">
 
     <LinearLayout
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      android:orientation="vertical">
-
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
-
-
-          <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-              android:id="@+id/tv_instit_sign_off_name"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="3dp"
-              android:text="Name of the Institute"
-              android:textAppearance="?android:attr/textAppearanceLarge"
-              android:textColor="#6b6b76"
-              android:textSize="21dp"
-              android:textStyle="bold" />
-          </LinearLayout>
-
-        <View
-          android:layout_width="match_parent"
-          android:layout_height="1dp"
-          android:background="#efefef" />
-
-        <LinearLayout
-          android:id="@+id/ll_instit_signoff_images"
-          android:layout_width="match_parent"
-          android:layout_height="150dp"
-          android:visibility="gone"
-          android:orientation="horizontal"
-          android:weightSum="5">
-
-          <ImageView
-            android:id="@+id/iv_inst_signof_image_1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-          <View
-            android:layout_width="10dp"
-            android:layout_height="match_parent" />
-
-          <ImageView
-            android:id="@+id/iv_inst_signof_image_2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-          <View
-            android:layout_width="10dp"
-            android:layout_height="match_parent" />
-
-          <ImageView
-            android:id="@+id/iv_inst_signof_image_3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-          <View
-            android:layout_width="10dp"
-            android:layout_height="match_parent" />
-
-          <ImageView
-            android:id="@+id/iv_inst_signof_image_4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-          <View
-            android:layout_width="10dp"
-            android:layout_height="match_parent" />
-
-          <ImageView
-            android:id="@+id/iv_inst_signof_image_5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-          <View
-            android:layout_width="10dp"
-            android:layout_height="match_parent" />
-        </LinearLayout>
-
-          <LinearLayout
-            android:id="@+id/ll_sign_off_cam"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:background="#45cfc1"
-            android:gravity="center"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:visibility="visible">
-
-            <ImageView
-              android:layout_width="40dp"
-              android:layout_height="40dp"
-              android:background="#fff"
-              android:src="@drawable/camx" />
-
-            <TextView
-              android:id="@+id/tv_images_count"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginLeft="15dp"
-              android:text="Capture Sign Off Images (5)"
-              android:textColor="#fff"
-              android:textSize="20dp" />
-          </LinearLayout>
-
-
-      </LinearLayout>
-
-      <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:gravity="right"
+        android:layout_height="fill_parent"
         android:orientation="horizontal">
 
-        <Button
-          android:id="@+id/btn_edit_institute_signof_previous"
-          android:layout_width="180dp"
-          android:layout_height="40dp"
-          android:layout_marginRight="20dp"
-          android:background="@drawable/buttonbg_grey"
-          android:text="Previous"
-          android:textColor="#ffffff" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
-        <Button
-          android:id="@+id/btn_edit_institute_signof_next"
-          android:layout_width="180dp"
-          android:layout_height="40dp"
-          android:background="@drawable/buttonbg_violet"
-          android:text="Save"
-          android:textColor="#ffffff" />
-      </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_instit_sign_off_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
+                        android:text="Name of the Institute"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#6b6b76"
+                        android:textSize="21dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#efefef" />
+
+                <LinearLayout
+                    android:id="@+id/ll_instit_signoff_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="5"
+                    tools:visibility="visible">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_inst_signof_image_1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/iv_inst_signof_image_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_launcher" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@color/transparency_white"
+                            android:padding="3dp">
+
+                            <ImageView
+                                android:id="@+id/iv_delete_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_close_black_18dp" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent" />
+
+
+                    <RelativeLayout
+                        android:id="@+id/rl_inst_signof_image_2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/iv_inst_signof_image_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_launcher" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@color/transparency_white"
+                            android:padding="3dp">
+
+                            <ImageView
+                                android:id="@+id/iv_delete_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_close_black_18dp" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_inst_signof_image_3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/iv_inst_signof_image_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_launcher" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@color/transparency_white"
+                            android:padding="3dp">
+
+                            <ImageView
+                                android:id="@+id/iv_delete_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_close_black_18dp" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_inst_signof_image_4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/iv_inst_signof_image_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_launcher" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@color/transparency_white"
+                            android:padding="3dp">
+
+                            <ImageView
+                                android:id="@+id/iv_delete_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_close_black_18dp" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_inst_signof_image_5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/iv_inst_signof_image_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_launcher" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@color/transparency_white"
+                            android:padding="3dp">
+
+                            <ImageView
+                                android:id="@+id/iv_delete_5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_close_black_18dp" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_sign_off_cam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:background="#45cfc1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="#fff"
+                        android:src="@drawable/camx" />
+
+                    <TextView
+                        android:id="@+id/tv_images_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:text="Capture Sign Off Images (5)"
+                        android:textColor="#fff"
+                        android:textSize="20dp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="35dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_edit_institute_signof_previous"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/buttonbg_grey"
+                    android:text="Previous"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/btn_edit_institute_signof_next"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/buttonbg_violet"
+                    android:text="Save"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-  </LinearLayout>
 
 </ScrollView> <!-- </LinearLayout> -->
