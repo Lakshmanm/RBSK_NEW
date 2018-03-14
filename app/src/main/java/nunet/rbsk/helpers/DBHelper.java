@@ -61,7 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "RBSK_V3.3il";
     @SuppressLint("SdCardPath")
-    private static String DATABASE_PATH = "/data/data/nunet.rbsk/databases/";
+    public static String DATABASE_PATH = "/data/data/nunet.rbsk/databases/";
     public static int DB_VERSION = 1;
     public static final String TAG = "Sample";
     private final Context mContext;
