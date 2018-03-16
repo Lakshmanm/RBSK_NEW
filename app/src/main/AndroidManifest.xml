@@ -35,7 +35,7 @@
         android:name="nunet.rbsk.RBSKApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/primor_color"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme" >
