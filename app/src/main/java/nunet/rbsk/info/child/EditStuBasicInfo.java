@@ -204,7 +204,7 @@ public class EditStuBasicInfo extends Fragment implements OnClickListener {
     }
 
     public  Bitmap getiImageofChild(Context ctx, int childrenID) {
-        String query = "select ChildrenScreeingStatusID,LocalChildrenScreeningID from childrenscreening CS where  CS.IsDeleted!=1 AND  LocalChildrenID='"
+        String query = "select ChildrenScreenStatusID,LocalChildrenScreeningID from childrenscreening CS where  CS.IsDeleted!=1 AND  LocalChildrenID='"
                 + childrenID + "';";
         DBHelper dbh = new DBHelper(ctx);
         Cursor cursor = dbh.getCursorData(ctx, query);

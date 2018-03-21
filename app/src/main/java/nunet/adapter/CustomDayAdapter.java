@@ -634,7 +634,7 @@ public class CustomDayAdapter extends BaseAdapter {
 
             @Override
             protected Void doInBackground(Void... params) {
-                String query1 = "select CS.ChildrenScreeingStatusID from childrenscreening CS "
+                String query1 = "select CS.ChildrenScreenStatusID from childrenscreening CS "
                         + " inner join children C on (C.LocalChildrenID=CS.LocalChildrenID)"
                         + " inner join institutes I on I.LocalInstituteID=C.LocalInstituteID"
                         + " inner join institutescreeningdetails isd on isd.localinstitutescreeningdetailid=cs.localinstitutescreeningdetailid"

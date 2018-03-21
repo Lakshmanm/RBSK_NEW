@@ -442,7 +442,7 @@ public class EditStuAssocInst extends Fragment implements OnClickListener {
               "address",
               new String[]{"StateID", "DistrictID",
                 "MandalID", "VillageID",
-                "HabitationID", "PINCode",
+                "HabitatID", "PINCode",
                 "AddressLine1", "AddressLine2"},
               new String[]{
                 childUserAddress.getState()
@@ -515,7 +515,7 @@ public class EditStuAssocInst extends Fragment implements OnClickListener {
               "address",
               new String[]{"StateID", "DistrictID",
                 "MandalID", "VillageID",
-                "HabitationID", "PINCode",
+                "HabitatID", "PINCode",
                 "AddressLine1", "AddressLine2"},
               new String[]{
                 permanentAddress.getState()
@@ -747,7 +747,7 @@ public class EditStuAssocInst extends Fragment implements OnClickListener {
               "address",
               new String[]{"StateID", "DistrictID",
                 "MandalID", "VillageID",
-                "HabitationID", "PINCode",
+                "HabitatID", "PINCode",
                 "AddressLine1", "AddressLine2"},
               new String[]{
                 childUserAddress.getState()
@@ -778,7 +778,7 @@ public class EditStuAssocInst extends Fragment implements OnClickListener {
                   new String[]{"StateID",
                     "DistrictID", "MandalID",
                     "VillageID",
-                    "HabitationID", "PINCode",
+                    "HabitatID", "PINCode",
                     "AddressLine1",
                     "AddressLine2"},
                   new String[]{
@@ -895,7 +895,7 @@ public class EditStuAssocInst extends Fragment implements OnClickListener {
                   new String[]{"StateID",
                     "DistrictID", "MandalID",
                     "VillageID",
-                    "HabitationID", "PINCode",
+                    "HabitatID", "PINCode",
                     "AddressLine1",
                     "AddressLine2"},
                   new String[]{
@@ -939,7 +939,7 @@ public class EditStuAssocInst extends Fragment implements OnClickListener {
                   new String[]{"StateID",
                     "DistrictID", "MandalID",
                     "VillageID",
-                    "HabitationID", "PINCode",
+                    "HabitatID", "PINCode",
                     "AddressLine1",
                     "AddressLine2"},
                   new String[]{

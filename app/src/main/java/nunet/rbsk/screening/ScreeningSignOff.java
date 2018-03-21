@@ -801,7 +801,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                     "childrenscreening",
                     new String[]{"ScreeningTemplateTypeID",
                             // "ScreeningStartDateTime",
-                            "ScreeningEndDateTime", "ChildrenScreeingStatusID",
+                            "ScreeningEndDateTime", "ChildrenScreenStatusID",
                             "ScreeningComments", "ScreenedBy"},
                     new String[]{
                             childrenObject.getChildrenInsitute()
@@ -826,7 +826,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                         "ScreeningTemplateTypeID",
                                         "ScreeningStartDateTime",
                                         "ScreeningEndDateTime",
-                                        "ChildrenScreeingStatusID",
+                                        "ChildrenScreenStatusID",
                                         "ScreeningComments", "ScreenedBy"},
                                 new String[]{
                                         String.valueOf(mScreeningActivity.locInsScreeningDetailID),
@@ -1223,7 +1223,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     "ScreeningTemplateTypeID",
                                     "ScreeningStartDateTime",
                                     "ScreeningEndDateTime",
-                                    "ChildrenScreeingStatusID",
+                                    "ChildrenScreenStatusID",
                                     "ScreeningComments", "ScreenedBy"},
                             new String[]{
                                     String.valueOf(mScreeningActivity.locInsScreeningDetailID),

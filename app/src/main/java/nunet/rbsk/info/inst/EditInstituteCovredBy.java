@@ -95,7 +95,7 @@ public class EditInstituteCovredBy extends Fragment implements OnClickListener {
 				+ " left join Address ad on ad.LocalAddressID = f.LocalAddressID left join States s on s.StateID = ad.StateID"
 				+ " left join Districts d on d.DistrictID = ad.DistrictID left join Mandals m on m.MandalID =  ad.MandalID "
 				+ "left join Panchayats p on p.PanchayatID = ad.PanchayatID left join Villages v on v.VillageID = ad.VillageID"
-				+ " left join habitatas h on h.HabitationID = ad.HabitationID where f.IsDeleted!=1 AND fc.DoesCover=1 AND i.InstituteID = "
+				+ " left join habitats h on h.HabitatID = ad.HabitatID where f.IsDeleted!=1 AND fc.DoesCover=1 AND i.InstituteID = "
 				+ +((InsituteFragmentActivityDialog) getActivity()).selectedInstituteId
 				+ "";
 		Cursor cursor = dbh.getCursorData(this.getActivity(), query);

@@ -194,9 +194,9 @@ public class Helper {
 		}
 
 		if (!TextUtils
-				.isEmpty(cur.getString(cur.getColumnIndex("HabitationID")))) {
+				.isEmpty(cur.getString(cur.getColumnIndex("HabitatID")))) {
 			habitationModelObj.setHabitatID(NumUtil.IntegerParse.parseInt(cur
-					.getString(cur.getColumnIndex("HabitationID"))));
+					.getString(cur.getColumnIndex("HabitatID"))));
 			habitationModelObj.setHabitatName(cur.getString(cur
 					.getColumnIndex("habitationName")));
 		}
@@ -498,7 +498,7 @@ public class Helper {
 	 */
 	public static ArrayList<Habitation> getHabitationList(Context ctx,
 			ArrayList<Habitation> habitationList, int villageID) {
-		String districtQuery = "Select HabitationID, DisplayText from Habitatas H where   H.IsDeleted!=1  AND VillageID="
+		String districtQuery = "Select HabitatID, DisplayText from habitats H where   H.IsDeleted!=1  AND VillageID="
 				+ villageID;
 		Habitation habitationObj;
 		habitationList = new ArrayList<Habitation>();
@@ -517,7 +517,7 @@ public class Helper {
 						habitationObj = new Habitation();
 						habitationObj.setHabitatID(NumUtil.IntegerParse
 								.parseInt(cur.getString(cur
-										.getColumnIndex("HabitationID"))));
+										.getColumnIndex("HabitatID"))));
 						habitationObj.setHabitatName(cur.getString(cur
 								.getColumnIndex("DisplayText")));
 

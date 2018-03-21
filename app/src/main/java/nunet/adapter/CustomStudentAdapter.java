@@ -304,7 +304,7 @@ public class CustomStudentAdapter extends BaseAdapter implements
 
     public boolean checkChildFromChildrenScreening(int childId) {
         DBHelper dbh = DBHelper.getInstance(mContext);
-        String query = "select CS.ChildrenScreeingStatusID,CS.LocalChildrenScreeningID  from childrenscreening CS where CS.IsDeleted!=1 AND  LocalChildrenID='"
+        String query = "select CS.ChildrenScreenStatusID,CS.LocalChildrenScreeningID  from childrenscreening CS where CS.IsDeleted!=1 AND  LocalChildrenID='"
                 + childId
                 + "' "
                 + "and LocalInstituteScreeningDetailID='"
@@ -319,11 +319,11 @@ public class CustomStudentAdapter extends BaseAdapter implements
             boolean isScreened = true;
             Helper.childScreeningObj = new ChildrenScreeningModel();
             cursor.moveToFirst();
-            int ChildrenScreeingStatusID = NumUtil.IntegerParse.parseInt(cursor
+            int ChildrenScreenStatusID = NumUtil.IntegerParse.parseInt(cursor
                     .getString(cursor
-                            .getColumnIndex("ChildrenScreeingStatusID")));
+                            .getColumnIndex("ChildrenScreenStatusID")));
 
-            if (ChildrenScreeingStatusID == 3 || ChildrenScreeingStatusID == 0) {
+            if (ChildrenScreenStatusID == 3 || ChildrenScreenStatusID == 0) {
                 isScreened = false;
                 Helper.childrenObject.setScreenedForCurrentRound(false);
             } else {
@@ -331,7 +331,7 @@ public class CustomStudentAdapter extends BaseAdapter implements
             }
 
             Helper.childrenObject
-                    .setChildScreenStatusID(ChildrenScreeingStatusID);
+                    .setChildScreenStatusID(ChildrenScreenStatusID);
 
             String childrenScreeningIDFromDB = cursor.getString(cursor
                     .getColumnIndex("LocalChildrenScreeningID"));

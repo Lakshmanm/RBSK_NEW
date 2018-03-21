@@ -592,14 +592,14 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
             public void run() {
 
                 String query_students = "select u.FirstName,u.MiddleName,u.LastName, u.DateOfBirth,u.GenderID,c.MCTSID,c.ChildrenStatusID, "
-                        + "(select ChildrenScreeingStatusID from childrenscreening cs "
+                        + "(select ChildrenScreenStatusID from childrenscreening cs "
                         + "inner join institutescreeningdetails isd on isd.localinstitutescreeningdetailid=cs.localinstitutescreeningdetailid "
                         + "inner join institutescreening ins on ins.localinstitutescreeningid=isd.localinstitutescreeningid "
                         + "where RBSKCalendarYearID='"
                         + RBSKCalenarYearID
                         + "' and SCREENINGROUNDID='"
                         + screeningRoundID
-                        + "' and cs.LocalChildrenID =c.LocalChildrenID ) as ChildrenScreeingStatusID "
+                        + "' and cs.LocalChildrenID =c.LocalChildrenID ) as ChildrenScreenStatusID "
                         + ",c.LocalChildrenID,u.LocalUserID,c.LocalInstituteID,"
                         + " i.InstituteTypeId, c.ClassID, c.SectionID from "
                         + "users u inner join children c on c.LocalUserID=u.LocalUserID "
@@ -621,11 +621,11 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                 if (GenderID != null)
                     query_students += " and u.GenderID='" + GenderID + "' ";
 
-                Integer ChildrenScreeingStatusID = filterData.get("StatusID");
-                if (ChildrenScreeingStatusID != null
-                        && ChildrenScreeingStatusID.intValue() != 2)
-                    query_students += " and ChildrenScreeingStatusID="
-                            + ChildrenScreeingStatusID;
+                Integer ChildrenScreenStatusID = filterData.get("StatusID");
+                if (ChildrenScreenStatusID != null
+                        && ChildrenScreenStatusID.intValue() != 2)
+                    query_students += " and ChildrenScreenStatusID="
+                            + ChildrenScreenStatusID;
 
                 if (searchString.length() > 0) {
                     query_students += " and (u.firstname like '%" + searchString
@@ -675,14 +675,14 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
             public void run() {
 
                 String query_students = "select u.FirstName,u.MiddleName,u.LastName, u.DateOfBirth,u.GenderID,c.MCTSID,c.ChildrenStatusID, "
-                        + "(select ChildrenScreeingStatusID from childrenscreening cs "
+                        + "(select ChildrenScreenStatusID from childrenscreening cs "
                         + "inner join institutescreeningdetails isd on isd.localinstitutescreeningdetailid=cs.localinstitutescreeningdetailid "
                         + "inner join institutescreening ins on ins.localinstitutescreeningid=isd.localinstitutescreeningid "
                         + "where RBSKCalendarYearID='"
                         + RBSKCalenarYearID
                         + "' and SCREENINGROUNDID='"
                         + screeningRoundID
-                        + "' and cs.LocalChildrenID =c.LocalChildrenID ) as ChildrenScreeingStatusID "
+                        + "' and cs.LocalChildrenID =c.LocalChildrenID ) as ChildrenScreenStatusID "
                         + ",c.LocalChildrenID,u.LocalUserID,c.LocalInstituteID,"
                         + " i.InstituteTypeId, c.ClassID, c.SectionID from "
                         + "users u inner join children c on c.LocalUserID=u.LocalUserID "
@@ -704,11 +704,11 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                 if (GenderID != null)
                     query_students += " and u.GenderID='" + GenderID + "' ";
 
-                Integer ChildrenScreeingStatusID = filterData.get("StatusID");
-                if (ChildrenScreeingStatusID != null
-                        && ChildrenScreeingStatusID.intValue() != 2)
-                    query_students += " and ChildrenScreeingStatusID="
-                            + ChildrenScreeingStatusID;
+                Integer ChildrenScreenStatusID = filterData.get("StatusID");
+                if (ChildrenScreenStatusID != null
+                        && ChildrenScreenStatusID.intValue() != 2)
+                    query_students += " and ChildrenScreenStatusID="
+                            + ChildrenScreenStatusID;
 
                 if (searchString.length() > 0) {
                     query_students += " and (u.firstname like '%" + searchString
@@ -757,8 +757,8 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                 final int GenderID = studentCur.getColumnIndex("GenderID");
                 final int ClassID = studentCur.getColumnIndex("ClassID");
                 final int SectionID = studentCur.getColumnIndex("SectionID");
-                final int ChildrenScreeingStatusID = studentCur
-                        .getColumnIndex("ChildrenScreeingStatusID");
+                final int ChildrenScreenStatusID = studentCur
+                        .getColumnIndex("ChildrenScreenStatusID");
                 final int ChildrenStatusID = studentCur
                         .getColumnIndex("ChildrenStatusID");
 
@@ -767,7 +767,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                         Children childModelObj = new Children();
 
                         String mScreeingStatusID = studentCur
-                                .getString(ChildrenScreeingStatusID);
+                                .getString(ChildrenScreenStatusID);
 
                         if (!TextUtils.isEmpty(mScreeingStatusID)) {
                             childModelObj
@@ -778,10 +778,10 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                             childModelObj.setChildScreenStatusID(2);
                         }
 
-                        Integer ChildrenScreeingStatusIDVal = filterData
+                        Integer ChildrenScreenStatusIDVal = filterData
                                 .get("StatusID");
-                        if (ChildrenScreeingStatusIDVal != null
-                                && ChildrenScreeingStatusIDVal.intValue() == 2) {
+                        if (ChildrenScreenStatusIDVal != null
+                                && ChildrenScreenStatusIDVal.intValue() == 2) {
 
                             if (childModelObj.getChildScreenStatusID() != 2)
                                 continue;
@@ -964,7 +964,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
     }
 
     public static Bitmap getiImageofChild(Context ctx, int childrenID) {
-        String query = "select ChildrenScreeingStatusID,LocalChildrenScreeningID from childrenscreening CS where  CS.IsDeleted!=1 AND  LocalChildrenID='"
+        String query = "select ChildrenScreenStatusID,LocalChildrenScreeningID from childrenscreening CS where  CS.IsDeleted!=1 AND  LocalChildrenID='"
                 + childrenID + "';";
         DBHelper dbh = new DBHelper(ctx);
         Cursor cursor = dbh.getCursorData(ctx, query);

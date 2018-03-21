@@ -220,7 +220,7 @@ public class ScreeningBasicInfoFragment extends Fragment implements
 
   private void getScreeningStatus() {
     DBHelper dbh = new DBHelper(this.getActivity().getApplicationContext());
-    String query = "select CS.ChildrenScreeingStatusID,CS.ScreeningComments  from childrenscreening CS" +
+    String query = "select CS.ChildrenScreenStatusID,CS.ScreeningComments  from childrenscreening CS" +
       " where CS.IsDeleted!=1 AND  LocalChildrenID='"
       + childID
       + "' and LocalInstituteScreeningDetailID='"
@@ -230,14 +230,14 @@ public class ScreeningBasicInfoFragment extends Fragment implements
     if (mCursor != null) {
       mCursor.moveToFirst();
       try {
-        String ChildrenScreeingStatusID = mCursor.getString(0);
+        String ChildrenScreenStatusID = mCursor.getString(0);
         Helper.childrenObject
           .setScreeningComments(mCursor.getString(1));
-        if (!TextUtils.isEmpty(ChildrenScreeingStatusID)) {
+        if (!TextUtils.isEmpty(ChildrenScreenStatusID)) {
           if (Helper.childrenObject != null)
             Helper.childrenObject
               .setChildScreenStatusID(NumUtil.IntegerParse
-                .parseInt(ChildrenScreeingStatusID));
+                .parseInt(ChildrenScreenStatusID));
         } else {
           if (Helper.childrenObject != null)
             Helper.childrenObject.setChildScreenStatusID(2);
@@ -746,7 +746,7 @@ public class ScreeningBasicInfoFragment extends Fragment implements
       // "inner join childreninstitutes on childreninstitutes.LocalChildrenID=children.LocalChildrenID "
       + "where  institutes.IsDeleted!=1 AND  children.IsDeleted!=1 AND  users.IsDeleted!=1 AND  children.LocalChildrenID='"
       + childID + "'";
-    // AND  childrenscreen.ChildrenScreeingStatusID!=3"
+    // AND  childrenscreen.ChildrenScreenStatusID!=3"
 
     Cursor childCur = dbh.getCursorData(this.getActivity(), query);
     setDataToModel(childCur);
@@ -973,7 +973,7 @@ public class ScreeningBasicInfoFragment extends Fragment implements
    * @param string
    */
   private Address getAddress(Address address, String addressgetID) {
-    String address_query = "Select AddressName,AddressLine1,AddressLine2,LandMark,PINCode,Post,DriveInstructions,HabitationID,VillageID,PanchayatID,MandalID,DistrictID,StateID from address A where   A.IsDeleted!=1 AND  LocalAddressID="
+    String address_query = "Select AddressName,AddressLine1,AddressLine2,LandMark,PINCode,Post,DriveInstructions,HabitatID,VillageID,PanchayatID,MandalID,DistrictID,StateID from address A where   A.IsDeleted!=1 AND  LocalAddressID="
       + addressgetID;
 
     Cursor childCur = dbh.getCursorData(this.getActivity(), address_query);
@@ -1002,7 +1002,7 @@ public class ScreeningBasicInfoFragment extends Fragment implements
             Habitation habittate = new Habitation();
             habittate = gethabitationDetails(habittate,
               childCur.getString(childCur
-                .getColumnIndex("HabitationID")));
+                .getColumnIndex("HabitatID")));
             address.setHabitation(habittate);
 
             Village village = new Village();
@@ -1244,7 +1244,7 @@ public class ScreeningBasicInfoFragment extends Fragment implements
   private Habitation gethabitationDetails(Habitation habittate,
                                           String habitategetId) {
 
-    String habitate_query = "Select * from habitatas H where  H.IsDeleted!=1 AND  HabitationID="
+    String habitate_query = "Select * from habitats H where  H.IsDeleted!=1 AND  HabitatID="
       + habitategetId;
     if (!TextUtils.isEmpty(habitategetId)) {
       Cursor childCur = dbh.getCursorData(this.getActivity(),
@@ -1440,7 +1440,7 @@ public class ScreeningBasicInfoFragment extends Fragment implements
             "ScreeningTemplateTypeID",
             "ScreeningStartDateTime",
             "ScreeningEndDateTime",
-            "ChildrenScreeingStatusID",},
+            "ChildrenScreenStatusID",},
           new String[]{
             String.valueOf(((ScreeningActivity) getActivity()).locInsScreeningDetailID),
             childrenObject.getChildrenID() + "".trim(),
@@ -1453,7 +1453,7 @@ public class ScreeningBasicInfoFragment extends Fragment implements
 
     } else {
       dbh.updateROW(getActivity(), "childrenscreening",
-        new String[]{"ChildrenScreeingStatusID"},
+        new String[]{"ChildrenScreenStatusID"},
         new String[]{"3"}, "LocalChildrenScreeningID",
         String.valueOf(Helper.childScreeningObj.getScreeningID()));
 

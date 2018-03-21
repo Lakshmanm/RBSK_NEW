@@ -107,10 +107,10 @@ public class ScreenVitalHeight extends DialogFragment implements
 		float height = 0;
 		String heightQuery;
 		if (StringUtils.equalsNoCase(type_ofinstitute,"awc")) {
-			heightQuery = "Select Median from heightchart0to5years where IsDeleted!=1 and   AgeinMonths ='"
+			heightQuery = "Select Median from 0to5yearsheightchart where IsDeleted!=1 and   AgeinMonths ='"
 					+ (age * 12) + "' and GenderId='" + genderId + "'";
 		} else {
-			heightQuery = "Select MedianHeightInCms from heightchart6to18years where IsDeleted!=1 and   AgeinYears ="
+			heightQuery = "Select MedianHeightInCms from 6to18yearsheightchart where IsDeleted!=1 and   AgeinYears ="
 					+ age + " and GenderId=" + genderId + "";
 		}
 		cur = dbh.getCursorData(getActivity(), heightQuery);

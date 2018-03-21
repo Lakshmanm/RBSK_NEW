@@ -519,7 +519,7 @@ public class EditInstituteEditAddress extends Fragment implements
 	 */
 	public void getUpdateDb() {
 		dbh.updateROW(this.getActivity(), "address", new String[] { "StateID",
-				"DistrictID", "MandalID", "VillageID", "HabitationID",
+				"DistrictID", "MandalID", "VillageID", "HabitatID",
 				"AddressLine1", "AddressLine2 " },
 				new String[] { stateID + "".trim(), districtID + "".trim(),
 						mandalID + "".trim(), villageID + "".trim(),
@@ -552,14 +552,14 @@ public class EditInstituteEditAddress extends Fragment implements
 			protected Void doInBackground(Void... params) {
 				String query = "select  institutes.LocalAddressID,   address.AddressName,address.AddressLine1,"
 						+ "address.AddressLine2,address.LandMark,address.PINCode,address.Post,"
-						+ "address.HabitationID,habitatas.DisplayText as habitationName ,address.VillageID,villages.DisplayText as villageName,"
+						+ "address.HabitatID,habitatas.DisplayText as habitationName ,address.VillageID,villages.DisplayText as villageName,"
 						+ "address.PanchayatID,panchayats.DisplayText as panchayatName,address.MandalID, mandals.DisplayText as mandalName,"
 						+ "address.DistrictID,districts.DisplayText as districtName,address.StateID,states.DisplayText  as stateName"
 						+ " from institutes inner join institutetypes on"
 						+ " institutes.InstituteTypeID=institutetypes.InstituteTypeID"
 						+ " inner join schoolcategories on institutes.SchoolCategoryID=schoolcategories.SchoolCategoryID"
 						+ " inner join address on address.LocalAddressID=institutes.LocalAddressID "
-						+ " left join habitatas on address.HabitationID=habitatas.HabitationID"
+						+ " left join habitatas on address.HabitatID=habitatas.HabitatID"
 						+ " left join villages on villages.VillageID=address.VillageID "
 						+ " left join panchayats on panchayats.PanchayatID=address.PanchayatID"
 						+ " left join mandals on mandals.MandalID=address.MandalID"
