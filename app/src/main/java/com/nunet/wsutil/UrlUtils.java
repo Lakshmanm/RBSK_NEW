@@ -46,6 +46,9 @@ public class UrlUtils {
 	public static String URL_Register = BASE_URL + "/Service/Device/Register/";
 	// to get token
 	public static String URL_Hello = BASE_URL + "/Service/Device/Hello/";
+
+	// to initial setup
+	public static String URL_INTITAL_SETUP = BASE_URL + "/Service/Device/Hello/";
 	// to request FTS status
 	public static String URL_RequestFTSStatus = BASE_URL
 			+ "/Service/Device/FTSStatus/";

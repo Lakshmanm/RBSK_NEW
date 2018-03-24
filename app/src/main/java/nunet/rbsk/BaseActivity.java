@@ -186,11 +186,6 @@ public class BaseActivity extends Activity {
 
     }
 
-    public static final String DB_NAME_HYB = "RBSK_V3";
-    public static final String DB_NAME_QA = "RBSK_QA";
-
-    @SuppressLint("SdCardPath")
-    private final String DATABASE_PATH = "/data/data/nunet.rbsk/databases/";
 
     //private void copyDatabase(String DB_NAME) { // praveen modified this code.
     private void copyDatabase() {

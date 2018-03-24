@@ -51,7 +51,7 @@ public class SpalshScreenActivity extends Activity {
                 String usedOne = sharedpreferences.getString(
                         UserLoginActivity.noOfUsers, null);
                 // Praveen Hack code Start
-                sharedpreferences.edit().putString("DB", "Yes").commit();
+               // sharedpreferences.edit().putString("DB", "Yes").commit();
                 // Praveen Hack code ends
 
                 if (sharedpreferences.getString("DB", "").equals("Yes")) {
@@ -94,30 +94,19 @@ public class SpalshScreenActivity extends Activity {
                                 IdentifyLoginActivity.class);
                         startActivity(in);
                     } else {
-                        Intent in = new Intent(SpalshScreenActivity.this,
-                                RegisterActivity.class);
-                        startActivity(in);
-                        finish();
-                        return;
+                        if (StringUtils.equalsNoCase(
+                                sharedpreferences.getString("DB", ""), "Yes")) {
+                            Intent in = new Intent(SpalshScreenActivity.this,
+                                    LoginActivity.class);
+                            startActivity(in);
+                        } else {
+                            Intent in = new Intent(SpalshScreenActivity.this,
+                                    Register_download.class);
+                            startActivity(in);
+                        }
                     }
                 }
 
-                if (usedOne != null) {
-                    Intent in = new Intent(SpalshScreenActivity.this,
-                            IdentifyLoginActivity.class);
-                    startActivity(in);
-                } else {
-                    if (StringUtils.equalsNoCase(
-                            sharedpreferences.getString("DB", ""), "Yes")) {
-                        Intent in = new Intent(SpalshScreenActivity.this,
-                                LoginActivity.class);
-                        startActivity(in);
-                    } else {
-                        Intent in = new Intent(SpalshScreenActivity.this,
-                                RegisterActivity.class);
-                        startActivity(in);
-                    }
-                }
                 finish(); // Activity closure
             }
         }, SPLASH_TIME_OUT);

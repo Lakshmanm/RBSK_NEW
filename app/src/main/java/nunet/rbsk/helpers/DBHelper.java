@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -18,6 +19,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -25,6 +27,9 @@ import android.widget.Toast;
 
 import com.nunet.utils.DateUtil;
 import com.nunet.utils.StringUtils;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 //=============================================================================
 //All rights reserved to Nunet Cube Software Solutions.
@@ -59,7 +64,7 @@ import com.nunet.utils.StringUtils;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DB_NAME = "RBSK_V3.3il";
+    public static final String DB_NAME = "RBSK_V3.1.3il";
     @SuppressLint("SdCardPath")
     public static String DATABASE_PATH = "/data/data/nunet.rbsk/databases/";
     public static int DB_VERSION = 1;
@@ -359,6 +364,62 @@ public class DBHelper extends SQLiteOpenHelper {
         return insertintoTable(context, tableName, colNames, values, true);
     }
 
+    public void bulkinsertintoTable(Context context, final String tableName, JSONArray jsonArray) {
+        try {
+
+            DBHelper dbhelper = getInstance(mContext);
+
+            SQLiteDatabase db = dbhelper.getReadableDatabase();
+            String columns = "", values = "";
+            JSONObject jsonObject = new JSONObject();
+            if (jsonArray.length() > 0)
+                jsonObject = jsonArray.getJSONObject(0);
+            Iterator<String> coloumnsArr = jsonObject.keys();
+            while (coloumnsArr.hasNext()) {
+                String str=coloumnsArr.next().trim();
+                if (str.equalsIgnoreCase("order")) {
+                    columns += "\"" + str + "\",";
+                } else {
+                    columns += str + ",";
+                }
+
+
+                values += "? ,";
+            }
+            if (columns.length() > 0) {
+                columns += "PushStatus,LastCommitedDate,";
+                values += "? ,? ,";
+                columns = columns.substring(0, columns.lastIndexOf(','));
+                values = values.substring(0, values.lastIndexOf(','));
+                try {
+                    String sql = "INSERT OR REPLACE INTO " + tableName + "(" + columns + ") VALUES (" + values + ");";
+                    db.beginTransactionNonExclusive();
+                    SQLiteStatement statement = db.compileStatement(sql);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        statement.clearBindings();
+                        JSONObject j = jsonArray.getJSONObject(i);
+                        Iterator<String> coloumnsArr1 = j.keys();
+                        int index = 1;
+                        while (coloumnsArr1.hasNext()) {
+                            String key = coloumnsArr1.next();
+                            statement.bindString(index, j.getString(key));
+                            index = index + 1;
+                        }
+                        statement.bindString(index, "0");
+                        statement.bindString((index + 1), "");
+                        statement.execute();
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public long insertintoTable(Context context, final String tableName,
                                 String[] columnNames, String[] columnValues,
                                 boolean isLastCommtedDateNull) {
@@ -399,6 +460,21 @@ public class DBHelper extends SQLiteOpenHelper {
             cv.put("IsDeleted", "0");
         }
 
+        String insertQuery = "";
+        insertQuery = "insert into " + tableName + " (";
+        for (int i = 0; i < columnNames.length; i++) {
+            insertQuery += "'" + columnNames[i] + "' ,";
+        }
+        if (insertQuery.length() > 0)
+            insertQuery = insertQuery.substring(0, insertQuery.lastIndexOf(',')) + ") values (";
+
+        for (int i = 0; i < columnValues.length; i++) {
+            insertQuery += "'" + columnValues[i] + "' ,";
+        }
+        if (insertQuery.length() > 0)
+            insertQuery = insertQuery.substring(0, insertQuery.lastIndexOf(',')) + ");";
+        System.out.println("insert Query......" + insertQuery);
+
         long cnt = db.insert(tableName, null, cv);
         db.close();
         if (cnt == -1) {
@@ -414,6 +490,9 @@ public class DBHelper extends SQLiteOpenHelper {
                               String columnName, String value) {
         DBHelper dbhelper = getInstance(mContext);
         SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String delQuery = "";
+        delQuery = "Delete from " + tablename + " where " + columnName + " ='" + value + "';";
+        System.out.println("delete Query......" + delQuery);
         boolean flag = db.delete(tablename, columnName + "='" + value + "'",
                 null) > 0;
         db.close();
@@ -430,6 +509,9 @@ public class DBHelper extends SQLiteOpenHelper {
             condition = condition + whereColumn[i] + "='" + whereValue[i]
                     + "' AND ";
         condition = condition.substring(0, condition.lastIndexOf("'") + 1);
+        String delQuery = "";
+        delQuery = "Delete from " + tablename + " where " + condition;
+        System.out.println("delete by condition Query......" + delQuery);
         boolean flag = db.delete(tablename, condition, null) > 0;
         db.close();
         return flag;
@@ -438,6 +520,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean deleteAllRows(Context context, final String tablename) {
         DBHelper dbhelper = getInstance(mContext);
         SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String delQuery = "";
+        delQuery = "Delete " + tablename;
+        System.out.println("delete all rows Query......" + delQuery);
         boolean flag = db.delete(tablename, null, null) > 0;
         db.close();
         return flag;
@@ -508,6 +593,21 @@ public class DBHelper extends SQLiteOpenHelper {
         if (whereColumn != null)
             whereColumn += "='" + whereValue + "'";
 
+        String updateQuery = "";
+        updateQuery = "Update " + tablename + " set ";
+        for (int i = 0; i < columnNames.length; i++) {
+            updateQuery += columnNames[i] + " = '" + columnValues[i] + "' ,";
+        }
+        if (updateQuery.length() > 0)
+            updateQuery = updateQuery.substring(0, updateQuery.lastIndexOf(','));
+
+        if (whereColumn != null)
+            updateQuery = updateQuery + " where " + whereColumn;
+
+
+        System.out.println("update Query......" + updateQuery);
+
+
         int effectdRows = db.update(tablename, cv, whereColumn, null);
         boolean flag = effectdRows > 0;
         if (!flag) {
@@ -543,6 +643,20 @@ public class DBHelper extends SQLiteOpenHelper {
         for (int i = 0; i < whereColumn.length; i++)
             query = query + whereColumn[i] + "='" + whereValue[i] + "' AND ";
         query = query.substring(0, query.length() - 5);
+        String updateQuery = "";
+        updateQuery = "Update " + tablename + " set ";
+        for (int i = 0; i < columnNames.length; i++) {
+            updateQuery += columnNames[i] + " = '" + columnValues[i] + "' ,";
+        }
+        if (updateQuery.length() > 0)
+            updateQuery = updateQuery.substring(0, updateQuery.lastIndexOf(','));
+
+        if (query.length() > 0)
+            updateQuery = updateQuery + " where " + query;
+
+
+        System.out.println("update by values  Query......" + updateQuery);
+
         boolean flag = db.update(tablename, cv, query, null) > 0;
         db.close();
         cdbh.close();
