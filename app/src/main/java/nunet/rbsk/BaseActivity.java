@@ -1,6 +1,5 @@
 package nunet.rbsk;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaScannerConnection;
 import android.media.MediaScannerConnection.MediaScannerConnectionClient;
 import android.net.Uri;
@@ -19,6 +20,9 @@ import android.support.annotation.RequiresApi;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -125,7 +129,7 @@ public class BaseActivity extends Activity {
                 // Praveen Code Start
                 Toast.makeText(this, "This feature is not available in this version",
                         Toast.LENGTH_SHORT).show();
-               // startActivity(new Intent(this, DBTestActivity.class));
+                // startActivity(new Intent(this, DBTestActivity.class));
                 // Praveen Code Ends
                 break;
             case R.id.hybrid_DB:
@@ -157,6 +161,92 @@ public class BaseActivity extends Activity {
 
 
         }
+    }
+
+    public JSONObject syncData() {
+        DBHelper dbh = new DBHelper(this);
+        JSONObject ret_json = new JSONObject();
+        try {
+            SQLiteDatabase db = dbh.getReadableDatabase();
+            String Query = "Select * from InstitutePlans";
+            Cursor c = db.rawQuery(Query, null);
+            JSONArray InstitutePlan = new JSONArray();
+            while (c.moveToNext()) {
+                JSONObject j = new JSONObject();
+                j.put("LocalInstitutePlanID", c.getString(c.getColumnIndex("LocalInstitutePlanID")));
+                j.put("InstitutePlanID", c.getString(c.getColumnIndex("InstitutePlanID")));
+                j.put("LocalInstituteID", c.getString(c.getColumnIndex("LocalInstituteID")));
+                j.put("RBSKCalendarYearID", c.getString(c.getColumnIndex("RBSKCalendarYearID")));
+                j.put("ScreeningRoundID", c.getString(c.getColumnIndex("ScreeningRoundId")));
+                j.put("InstitutePlanStatusID", c.getString(c.getColumnIndex("InstitutePlanStatusID")));
+                InstitutePlan.put(j);
+
+            }
+            c.close();
+
+            String Query1 = "Select * from InstitutePlanDetails";
+            Cursor c1 = db.rawQuery(Query1, null);
+            JSONArray InstitutePlanDetails = new JSONArray();
+            while (c1.moveToNext()) {
+                JSONObject j = new JSONObject();
+                j.put("LocalInstitutePlanDetailID", c1.getString(c1.getColumnIndex("LocalInstitutePlanDetailID")));
+                j.put("InstitutePlanDetailID", c1.getString(c1.getColumnIndex("InstitutePlanDetailID")));
+                j.put("LocalInstitutePlanID", c1.getString(c1.getColumnIndex("LocalInstitutePlanID")));
+                j.put("ScheduledDate", c1.getString(c1.getColumnIndex("scheduleDate")));
+                j.put("PlannedCount", c1.getString(c1.getColumnIndex("PlannedCount")));
+                j.put("InstitutePlanSkipReasonID", c1.getString(c1.getColumnIndex("InstitutePlanSkipReasonID")));
+                j.put("SkipComments", c1.getString(c1.getColumnIndex("SkipComments")));
+                InstitutePlanDetails.put(j);
+
+            }
+            c1.close();
+            String Query2 = "Select * from Institute";
+            Cursor c2 = db.rawQuery(Query2, null);
+            JSONArray Institute = new JSONArray();
+            while (c2.moveToNext()) {
+                JSONObject j = new JSONObject();
+                j.put("InstituteID", c2.getString(c2.getColumnIndex("InstituteID")));
+                j.put("LocalInstituteID", c2.getString(c2.getColumnIndex("LocalInstituteID")));
+                j.put("InstituteName", c2.getString(c2.getColumnIndex("InstituteName")));
+                j.put("DISECode", c2.getString(c2.getColumnIndex("DiseCode")));
+                Institute.put(j);
+
+            }
+            c2.close();
+            ret_json.put("Institute", Institute);
+            String Query3 = "Select * from Children";
+            Cursor c3 = db.rawQuery(Query3, null);
+            JSONArray Children = new JSONArray();
+            while (c1.moveToNext()) {
+                JSONObject j = new JSONObject();
+                j.put("ChildrenID", c3.getString(c3.getColumnIndex("ChildrenID")));
+                j.put("LocalChildrenID", c3.getString(c3.getColumnIndex("LocalChildrenID")));
+                j.put("UserID", c3.getString(c3.getColumnIndex("LocalUserID")));
+                Children.put(j);
+
+            }
+            c3.close();
+            String Query4 = "Select * from ChildrenScreening";
+            Cursor c4 = db.rawQuery(Query4, null);
+            JSONArray ChildrenScreening = new JSONArray();
+            while (c1.moveToNext()) {
+                JSONObject j = new JSONObject();
+                j.put("ChildrenID", c3.getString(c3.getColumnIndex("ChildrenID")));
+                j.put("LocalChildrenID", c3.getString(c3.getColumnIndex("LocalChildrenID")));
+                j.put("UserID", c3.getString(c3.getColumnIndex("LocalUserID")));
+                Children.put(j);
+
+            }
+            c3.close();
+            ret_json.put("Children", Children);
+            db.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret_json;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
