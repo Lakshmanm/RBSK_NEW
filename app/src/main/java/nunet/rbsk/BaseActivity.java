@@ -278,7 +278,7 @@ public class BaseActivity extends Activity {
 
 
     //private void copyDatabase(String DB_NAME) { // praveen modified this code.
-    private void copyDatabase() {
+    public void copyDatabase() {
         String BACKUP_DB_NAME = "";
         //
         try {

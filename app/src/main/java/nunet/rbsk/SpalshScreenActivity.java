@@ -27,10 +27,10 @@ public class SpalshScreenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
-        // Intent serviceIntent = new Intent(
-        // SpalshScreenActivity.this, IncrementalService.class);
-        // stopService(serviceIntent);
-        // startService(serviceIntent);
+//         Intent serviceIntent = new Intent(
+//         SpalshScreenActivity.this, IncrementalService.class);
+//         stopService(serviceIntent);
+//         startService(serviceIntent);
         DBHelper dbh = DBHelper.getInstance(SpalshScreenActivity.this);
 
         try {

@@ -170,6 +170,7 @@ public class MyAsyncTask extends AsyncTask<AsyncData, Integer, AsyncData> {
 					}
 				}
 			}
+			Log.i("input in post",new UrlEncodedFormEntity(nameValuePairs).toString());
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			HttpResponse response = httpclient.execute(httppost);
 
@@ -195,9 +196,12 @@ public class MyAsyncTask extends AsyncTask<AsyncData, Integer, AsyncData> {
 		}
 		if (result != null && result.isNetwork_status()) {
 			try {
-				if (mJsonResult != null)
+				if (mJsonResult != null){
+					Log.i("Response : ",result.getRespoanseJson().toString());
 					mJsonResult.onJsonResut(result.getRespoanseJson(),
 							result.getUrlId());
+				}
+
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
