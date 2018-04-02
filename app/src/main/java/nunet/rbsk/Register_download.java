@@ -113,7 +113,7 @@ public class Register_download extends Activity implements OnClickListener {
                 String TokenID = sharedpreferences.getString("TokenID", "");
 
 
-                 webConn(UrlUtils.URL_INTITAL_SETUP, TokenID);
+                webConn(UrlUtils.URL_INTITAL_SETUP, TokenID);
 
 //                Toast.makeText(this, "Downloading DBfile", Toast.LENGTH_LONG)
 //                        .show();
@@ -139,13 +139,13 @@ public class Register_download extends Activity implements OnClickListener {
     // -------------------GET METHOD CALL-----------------
     private void webConn(final String url, final String str) {
         System.out.println("Sending URL :" + url);
-        System.out.println("Sending String :" + str);
+        System.out.println("Sending String :" + str + File.separator + Helper.getTodayDateTime1());
         final ProgressDialog progDailog = ProgressDialog.show(this,
                 "Please Wait...", "Setting up Device...", true);
         new Thread() {
             public void run() {
                 try {
-                    strResponse = postData(url + str+ File.separator+Helper.getTodayDateTime1());
+                    strResponse = postData(url + str + File.separator + Helper.getTodayDateTime1());
                     handler.sendEmptyMessage(0);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -191,14 +191,14 @@ public class Register_download extends Activity implements OnClickListener {
             System.out.println("Response String :" + strResponse);
 
             try {
-                JSONObject mJsonObject = new JSONObject(strResponse);
-                String mData = mJsonObject.getString("Data");
-                if (mData.equalsIgnoreCase("0")
-                        || mData.equalsIgnoreCase("-1")) {
-                    Helper.showShortToast(Register_download.this,
-                            "Device is not identified by Server");
-                } else {
-                    try {
+                if (strResponse.indexOf("{") != -1) {
+                    JSONObject mJsonObject = new JSONObject(strResponse);
+                    String mData = mJsonObject.getString("Data");
+                    if (mData.equalsIgnoreCase("0")
+                            || mData.equalsIgnoreCase("-1")) {
+                        Helper.showShortToast(Register_download.this,
+                                "Device is not identified by Server");
+                    } else {
 //                        String string = "{\"ADDRESS\": [\n" +
 //                                "    {\n" +
 //                                "      \"AddressID\": 20836,\n" +
@@ -946,11 +946,13 @@ public class Register_download extends Activity implements OnClickListener {
                         btn_register_continue.setVisibility(View.VISIBLE);
                         btn_register_checkSetupStatus.setVisibility(View.VISIBLE);
                         btn_register_setup.setVisibility(View.GONE);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+
                     }
 
 
+                } else {
+                    Helper.showShortToast(Register_download.this,
+                            strResponse);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

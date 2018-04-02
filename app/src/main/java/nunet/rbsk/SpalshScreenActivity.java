@@ -101,7 +101,7 @@ public class SpalshScreenActivity extends Activity {
                             startActivity(in);
                         } else {
                             Intent in = new Intent(SpalshScreenActivity.this,
-                                    Register_download.class);
+                                    RegisterActivity.class);
                             startActivity(in);
                         }
                     }

@@ -35,7 +35,7 @@ public class UrlUtils {
 	// public static String BASE_URL = "http://125.62.194.40:4455"; // Dev
 // 182.18.164.29:2233
 	public static String BASE_URL = "http://182.18.164.29:2233";
-    public static String BASE_URL_1 = "http://192.168.100.3:8022";
+    public static String BASE_URL_1 = "http://182.18.164.29:2223";
 
 	// public static String BASE_URL = "http://192.168.100.3:2222"; // Dev
 
@@ -51,7 +51,7 @@ public class UrlUtils {
 	public static String URL_INTITAL_SETUP = BASE_URL_1 + "/api/master/";
 
     // to initial setup
-    public static String URL_SYNC = BASE_URL_1 + "/api/sync/";
+    public static String URL_SYNC = BASE_URL_1 + "/api/sync/post";
 	// to request FTS status
 	public static String URL_RequestFTSStatus = BASE_URL
 			+ "/Service/Device/FTSStatus/";
