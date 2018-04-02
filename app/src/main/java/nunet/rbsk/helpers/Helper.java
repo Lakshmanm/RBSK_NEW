@@ -298,6 +298,10 @@ public class Helper {
 		return sdf.format(new Date());
 	}
 
+	public static String getTodayDateTime1() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		return sdf.format(new Date());
+	}
 	public static String getTodayDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(new Date());
