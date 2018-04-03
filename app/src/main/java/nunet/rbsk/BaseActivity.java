@@ -2,6 +2,7 @@ package nunet.rbsk;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,25 +16,52 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.nunet.wsutil.UrlUtils;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import nunet.rbsk.helpers.DBHelper;
 import nunet.rbsk.helpers.Helper;
 import nunet.rbsk.login.LoginActivity;
+import nunet.rbsk.login.RegisterActivity;
 
 public class BaseActivity extends Activity {
+
+    public String strResponse = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +146,7 @@ public class BaseActivity extends Activity {
                     checkPermission();
                 } else {
                     copyDatabase();
+                    // backupdb(this);
                 }
 
                 // backupdb(this);
@@ -127,8 +156,9 @@ public class BaseActivity extends Activity {
 
             case R.id.logsync:
                 // Praveen Code Start
-                Toast.makeText(this, "This feature is not available in this version",
-                        Toast.LENGTH_SHORT).show();
+                webConn(UrlUtils.URL_SYNC, syncData());
+//                Toast.makeText(this, "This feature is not available in this version",
+//                        Toast.LENGTH_SHORT).show();
                 // startActivity(new Intent(this, DBTestActivity.class));
                 // Praveen Code Ends
                 break;
@@ -151,6 +181,96 @@ public class BaseActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    // -------------------GET METHOD CALL-----------------
+    private void webConn(final String url, final JSONObject str) {
+        System.out.println("Sending URL :" + url);
+        System.out.println("Sending String :" + str + File.separator + "20000101000000");
+        final ProgressDialog progDailog = ProgressDialog.show(this,
+                "Please Wait...", "Syncing Data...", true);
+        new Thread() {
+            public void run() {
+                try {
+                    // strResponse = postData(url + str + File.separator + Helper.getTodayDateTime1());
+                    strResponse = postData(url, str);
+                    handler.sendEmptyMessage(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                progDailog.dismiss();
+            }
+        }.start();
+    }
+
+    public String postData(String s_url, JSONObject jsonObject) {
+        // Create a new HttpClient and get Header
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost(s_url);
+
+        String mResultData = null;
+        try {
+            // Add your data
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+            if (jsonObject != null) {
+                @SuppressWarnings("unchecked")
+                Iterator<String> iter = jsonObject.keys();
+                while (iter.hasNext()) {
+                    String key = iter.next();
+                    try {
+                        String string = jsonObject.getString(key);
+                        nameValuePairs.add(new BasicNameValuePair(key, string));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            Log.i("input in post", new UrlEncodedFormEntity(nameValuePairs).toString());
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response = httpclient.execute(httppost);
+
+            mResultData = EntityUtils.toString(response.getEntity());
+            strResponse = mResultData;
+        } catch (ClientProtocolException e) {
+            strResponse = "ClientProtocolException";
+        } catch (IOException e) {
+            strResponse = "There is no network";
+        } catch (Exception e) {
+            strResponse = "Exception";
+        }
+        return strResponse;
+    }
+
+    private Handler handler = new Handler() {
+
+        public void handleMessage(Message msg) {
+            System.out.println("Response String :" + strResponse);
+
+            try {
+                if (strResponse.trim().indexOf("{") != -1) {
+                    JSONObject mJsonObject = new JSONObject(strResponse);
+                    String mData = mJsonObject.getString("Data");
+                    if (mData.equalsIgnoreCase("0")
+                            || mData.equalsIgnoreCase("-1")) {
+                        Helper.showShortToast(BaseActivity.this,
+                                "Device is not identified by Server");
+                    } else {
+                        // {deviceID}/{unlockid}/{unlockpassword}
+
+                    }
+                } else {
+                    Helper.showShortToast(BaseActivity.this,
+                            strResponse);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    };
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void checkPermission() {
@@ -226,6 +346,7 @@ public class BaseActivity extends Activity {
 
             }
             c3.close();
+            ret_json.put("Children", Children);
             String Query4 = "Select * from ChildrenScreening";
             Cursor c4 = db.rawQuery(Query4, null);
             JSONArray ChildrenScreening = new JSONArray();
@@ -234,11 +355,11 @@ public class BaseActivity extends Activity {
                 j.put("ChildrenID", c3.getString(c3.getColumnIndex("ChildrenID")));
                 j.put("LocalChildrenID", c3.getString(c3.getColumnIndex("LocalChildrenID")));
                 j.put("UserID", c3.getString(c3.getColumnIndex("LocalUserID")));
-                Children.put(j);
+                ChildrenScreening.put(j);
 
             }
             c3.close();
-            ret_json.put("Children", Children);
+            ret_json.put("ChildrenScreening", Children);
             db.close();
 
 
@@ -251,7 +372,8 @@ public class BaseActivity extends Activity {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         boolean allgranted = false;
         if (requestCode == 101) {
@@ -268,6 +390,7 @@ public class BaseActivity extends Activity {
             }
             if (allgranted) {
                 copyDatabase();
+                // backupdb(this);
             } else {
                 checkPermission();
             }
@@ -282,10 +405,10 @@ public class BaseActivity extends Activity {
         String BACKUP_DB_NAME = "";
         //
         try {
-            String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(java.util.Calendar.getInstance().getTime());
-            BACKUP_DB_NAME = "RBSK_V3_" + timeStamp + ".3il";
+            String timeStamp = new java.text.SimpleDateFormat("yyyyMMdd-HHmmss").format(java.util.Calendar.getInstance().getTime());
+            BACKUP_DB_NAME = "RBSK-V3-" + timeStamp + ".3il";
             final String outFileName = Environment.getExternalStorageDirectory() + "/RBSK/DB/";
-            File directory = new File(Environment.getExternalStorageDirectory(), "RBSK/DB");
+            File directory = new File(Environment.getExternalStorageDirectory(), "RBSK");
             if (!directory.exists())
                 directory.mkdir();
             File directorydbFile = new File(directory, BACKUP_DB_NAME);

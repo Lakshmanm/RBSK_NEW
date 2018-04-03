@@ -376,7 +376,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 jsonObject = jsonArray.getJSONObject(0);
             Iterator<String> coloumnsArr = jsonObject.keys();
             while (coloumnsArr.hasNext()) {
-                String str=coloumnsArr.next().trim();
+                String str = coloumnsArr.next().trim();
                 if (str.equalsIgnoreCase("order")) {
                     columns += "\"" + str + "\",";
                 } else {
@@ -402,22 +402,63 @@ public class DBHelper extends SQLiteOpenHelper {
                         int index = 1;
                         while (coloumnsArr1.hasNext()) {
                             String key = coloumnsArr1.next();
-                            statement.bindString(index, j.getString(key));
+                            if (key.trim().equalsIgnoreCase("isdeleted")) {
+                                if (j.getString(key).trim().equalsIgnoreCase("false")) {
+                                    statement.bindString(index, "0");
+                                } else if (j.getString(key).trim().equalsIgnoreCase("true")) {
+                                    statement.bindString(index, "1");
+                                } else {
+                                    if(j.getString(key)==null ||j.getString(key).equalsIgnoreCase("null"))
+                                    statement.bindString(index, "");
+                                    else
+                                        statement.bindString(index, j.getString(key));
+                                }
+                            } else if (key.trim().equalsIgnoreCase("DoesCover")) {
+                                if (j.getString(key).trim().equalsIgnoreCase("false")) {
+                                    statement.bindString(index, "0");
+                                } else if (j.getString(key).trim().equalsIgnoreCase("true")) {
+                                    statement.bindString(index, "1");
+                                } else {
+                                    if(j.getString(key)==null ||j.getString(key).equalsIgnoreCase("null"))
+                                        statement.bindString(index, "");
+                                    else
+                                        statement.bindString(index, j.getString(key));
+                                }
+                            } else if (key.trim().equalsIgnoreCase("isprofilepicture")) {
+                                if (j.getString(key).trim().equalsIgnoreCase("false")) {
+                                    statement.bindString(index, "0");
+                                } else if (j.getString(key).trim().equalsIgnoreCase("true")) {
+                                    statement.bindString(index, "1");
+                                } else {
+                                    if(j.getString(key)==null ||j.getString(key).equalsIgnoreCase("null"))
+                                        statement.bindString(index, "");
+                                    else
+                                        statement.bindString(index, j.getString(key));
+                                }
+                            } else {
+                                if(j.getString(key)==null ||j.getString(key).equalsIgnoreCase("null"))
+                                    statement.bindString(index, "");
+                                else
+                                    statement.bindString(index, j.getString(key));
+                            }
+
                             index = index + 1;
                         }
                         statement.bindString(index, "0");
-                        statement.bindString((index + 1), "");
+                        statement.bindString((index + 1), Helper.getTodayDateTime1());
                         statement.execute();
                     }
                     db.setTransactionSuccessful();
                 } finally {
                     db.endTransaction();
                 }
+                Log.e("Table Completed....", tableName);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public long insertintoTable(Context context, final String tableName,

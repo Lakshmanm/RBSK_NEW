@@ -682,7 +682,7 @@ public class CustomDayAdapter extends BaseAdapter {
     protected Institute getInstituteDataFromDB(long LocalInstitutePlanDetailID,
                                                String scheduleDate) {
         String instituteQuery = "select I.LocalInstituteID,IPD.LocalInstitutePlanDetailID, I.InstituteID,I.InstituteName,I.InstituteTypeId,"
-                + " IPD.PlanStatusID,RBSKCalendarYearID,ScreeningRoundID,IP.LocalInstitutePlanID,scheduleDate "
+                + " IPD.PlanStatusID,IP.RBSKCalendarYearID,IP.ScreeningRoundID,IP.LocalInstitutePlanID,IPD.scheduleDate "
                 + " from institutes I inner join instituteplans IP on IP.InstituteID=I.InstituteID "
                 + " inner join instituteplandetails IPD on IPD.LocalInstitutePlanID=IP.LocalInstitutePlanID "
                 + " where   IP.IsDeleted!=1  AND IPD.IsDeleted!=1  AND I.IsDeleted!=1 AND IPD.LocalInstitutePlanDetailID='"

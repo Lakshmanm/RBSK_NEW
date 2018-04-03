@@ -556,7 +556,7 @@ public class DashBoardActivity extends BaseActivity {
         }
 
         if (fragment != null) {
-            fragmentManager = ((DashBoardActivity) ctx).getFragmentManager();
+            fragmentManager = this.getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, fragment).commit();
 

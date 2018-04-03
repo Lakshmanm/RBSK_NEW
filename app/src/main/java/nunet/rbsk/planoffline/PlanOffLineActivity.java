@@ -153,12 +153,12 @@ public class PlanOffLineActivity extends BaseActivity implements
             @Override
             public void run() {
 
-                String query_Wards = "SELECT IPD.LocalInstitutePlanDetailID,I.InstituteID,I.InstituteName,"
-                        + " I.DiseCode,IPD.scheduleDate, IPD.PlannedCount,IPD.PlanStatusID,IP.RBSKCalendarYearID,"
+                String query_Wards = "SELECT distinct I.DiseCode,IPD.LocalInstitutePlanDetailID,I.InstituteID,I.InstituteName,"
+                        + " IPD.scheduleDate, IPD.PlannedCount,IPD.PlanStatusID,IP.RBSKCalendarYearID,"
                         + " IP.ScreeningRoundID from InstitutePlanDetails IPD inner join instituteplans IP on "
                         + " IP.LocalInstitutePlanID=IPD.LocalInstitutePlanID "
                         + " inner join institutes I on I.InstituteID=IP.InstituteID where"
-                        + " IPD.isDeleted='0' AND IP.IsDeleted!=1 AND  I.IsDeleted!=1 "
+                        + " IPD.isDeleted!=1 AND IP.IsDeleted!=1 AND  I.IsDeleted!=1"
                         + " AND IPD.PlanStatusID in(1,2)";
                 Cursor scheduleCur = dbh.getCursorData(
                         PlanOffLineActivity.this, query_Wards);
@@ -475,7 +475,8 @@ public class PlanOffLineActivity extends BaseActivity implements
      * Method to get Facility Values and added to spinner
      */
     public void updatePHCData() {
-        String query = "select FacilityID,F.DisplayText from facilities F inner join facilitytypes ft on ft.facilitytypeid=F.facilitytypeid where  F.IsDeleted!=1 AND   lower(Ft.DisplayText) ='phc'";
+        String query = "select FacilityID,F.DisplayText from facilities F inner join facilitytypes " +
+                "ft on ft.facilitytypeid=F.facilitytypeid where  F.IsDeleted!=1 AND   lower(Ft.DisplayText) ='phc'";
         // 12- PHC
         final List<String[]> data = dbh.getCursorFromQueryData(this, query);
         ArrayAdapter<String> adp_spnphc = new ArrayAdapter<String>(this,
