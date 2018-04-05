@@ -13,11 +13,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaScannerConnection;
 import android.media.MediaScannerConnection.MediaScannerConnectionClient;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
@@ -27,13 +26,11 @@ import android.widget.Toast;
 
 import com.nunet.wsutil.UrlUtils;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -42,13 +39,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -57,11 +51,10 @@ import java.util.List;
 import nunet.rbsk.helpers.DBHelper;
 import nunet.rbsk.helpers.Helper;
 import nunet.rbsk.login.LoginActivity;
-import nunet.rbsk.login.RegisterActivity;
 
 public class BaseActivity extends Activity {
 
-    public String strResponse = "";
+    ProgressDialog progDailog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,7 +149,7 @@ public class BaseActivity extends Activity {
 
             case R.id.logsync:
                 // Praveen Code Start
-                webConn(UrlUtils.URL_SYNC, syncData());
+                new WebConn().execute(syncData());
 //                Toast.makeText(this, "This feature is not available in this version",
 //                        Toast.LENGTH_SHORT).show();
                 // startActivity(new Intent(this, DBTestActivity.class));
@@ -183,94 +176,73 @@ public class BaseActivity extends Activity {
     }
 
 
-    // -------------------GET METHOD CALL-----------------
-    private void webConn(final String url, final JSONObject str) {
-        System.out.println("Sending URL :" + url);
-        System.out.println("Sending String :" + str + File.separator + "20000101000000");
-        final ProgressDialog progDailog = ProgressDialog.show(this,
-                "Please Wait...", "Syncing Data...", true);
-        new Thread() {
-            public void run() {
-                try {
-                    // strResponse = postData(url + str + File.separator + Helper.getTodayDateTime1());
-                    strResponse = postData(url, str);
-                    handler.sendEmptyMessage(0);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                progDailog.dismiss();
-            }
-        }.start();
-    }
+    public class WebConn extends AsyncTask<JSONObject, Void, String> {
 
-    public String postData(String s_url, JSONObject jsonObject) {
-        // Create a new HttpClient and get Header
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httppost = new HttpPost(s_url);
+        @Override
+        protected void onPreExecute() {
+            progDailog = ProgressDialog.show(BaseActivity.this,
+                    "Please Wait...", "Syncing Data...", true);
 
-        String mResultData = null;
-        try {
-            // Add your data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-            if (jsonObject != null) {
-                @SuppressWarnings("unchecked")
-                Iterator<String> iter = jsonObject.keys();
-                while (iter.hasNext()) {
-                    String key = iter.next();
-                    try {
-                        String string = jsonObject.getString(key);
-                        nameValuePairs.add(new BasicNameValuePair(key, string));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            Log.i("input in post", new UrlEncodedFormEntity(nameValuePairs).toString());
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            HttpResponse response = httpclient.execute(httppost);
-
-            mResultData = EntityUtils.toString(response.getEntity());
-            strResponse = mResultData;
-        } catch (ClientProtocolException e) {
-            strResponse = "ClientProtocolException";
-        } catch (IOException e) {
-            strResponse = "There is no network";
-        } catch (Exception e) {
-            strResponse = "Exception";
         }
-        return strResponse;
-    }
 
-    private Handler handler = new Handler() {
+        @Override
+        protected String doInBackground(JSONObject... params) {
 
-        public void handleMessage(Message msg) {
-            System.out.println("Response String :" + strResponse);
+            String strResponse = "";
 
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(UrlUtils.URL_SYNC);
+
+            String mResultData = null;
             try {
-                if (strResponse.trim().indexOf("{") != -1) {
-                    JSONObject mJsonObject = new JSONObject(strResponse);
-                    String mData = mJsonObject.getString("Data");
-                    if (mData.equalsIgnoreCase("0")
-                            || mData.equalsIgnoreCase("-1")) {
-                        Helper.showShortToast(BaseActivity.this,
-                                "Device is not identified by Server");
-                    } else {
-                        // {deviceID}/{unlockid}/{unlockpassword}
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
+                if (params[0] != null) {
+                    @SuppressWarnings("unchecked")
+
+                    Iterator<String> iter = params[0].keys();
+                    while (iter.hasNext()) {
+                        String key = iter.next();
+                        try {
+                            String string = params[0].getString(key);
+                            nameValuePairs.add(new BasicNameValuePair(key, string));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                } else {
-                    Helper.showShortToast(BaseActivity.this,
-                            strResponse);
                 }
+                Log.i("input in post", new UrlEncodedFormEntity(nameValuePairs).toString());
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                HttpResponse response = httpclient.execute(httppost);
+
+                mResultData = EntityUtils.toString(response.getEntity());
+                strResponse = mResultData;
+            } catch (ClientProtocolException e) {
+                strResponse = "ClientProtocolException";
+            } catch (IOException e) {
+                strResponse = "There is no network";
+            } catch (Exception e) {
+                strResponse = "Exception";
+            }
+            return strResponse;
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            try {
+
+                System.out.println("in post...." + response);
+                progDailog.dismiss();
+
 
             } catch (Exception e) {
                 e.printStackTrace();
+
             }
-
-
         }
-    };
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void checkPermission() {
@@ -287,8 +259,12 @@ public class BaseActivity extends Activity {
         DBHelper dbh = new DBHelper(this);
         JSONObject ret_json = new JSONObject();
         try {
+            SharedPreferences sharedpreferences = getSharedPreferences(
+                    "LoginMain", Context.MODE_PRIVATE);
+            String TokenID = sharedpreferences.getString("DeviceCode", "");
+            ret_json.put("devicecode", TokenID);
             SQLiteDatabase db = dbh.getReadableDatabase();
-            String Query = "Select * from InstitutePlans";
+            String Query = "Select * from InstitutePlans where isDeleted =0";
             Cursor c = db.rawQuery(Query, null);
             JSONArray InstitutePlan = new JSONArray();
             while (c.moveToNext()) {
@@ -304,7 +280,7 @@ public class BaseActivity extends Activity {
             }
             c.close();
 
-            String Query1 = "Select * from InstitutePlanDetails";
+            String Query1 = "Select * from InstitutePlanDetails where PlanStatusID = 1 and isDeleted =0";
             Cursor c1 = db.rawQuery(Query1, null);
             JSONArray InstitutePlanDetails = new JSONArray();
             while (c1.moveToNext()) {
@@ -320,7 +296,7 @@ public class BaseActivity extends Activity {
 
             }
             c1.close();
-            String Query2 = "Select * from Institute";
+            String Query2 = "Select * from Institute where isDeleted =0";
             Cursor c2 = db.rawQuery(Query2, null);
             JSONArray Institute = new JSONArray();
             while (c2.moveToNext()) {
@@ -334,7 +310,7 @@ public class BaseActivity extends Activity {
             }
             c2.close();
             ret_json.put("Institute", Institute);
-            String Query3 = "Select * from Children";
+            String Query3 = "Select * from Children where isDeleted =0";
             Cursor c3 = db.rawQuery(Query3, null);
             JSONArray Children = new JSONArray();
             while (c1.moveToNext()) {
@@ -347,19 +323,59 @@ public class BaseActivity extends Activity {
             }
             c3.close();
             ret_json.put("Children", Children);
-            String Query4 = "Select * from ChildrenScreening";
+            String Query4 = "Select * from ChildrenScreening where isDeleted =0";
             Cursor c4 = db.rawQuery(Query4, null);
             JSONArray ChildrenScreening = new JSONArray();
-            while (c1.moveToNext()) {
+            while (c4.moveToNext()) {
                 JSONObject j = new JSONObject();
-                j.put("ChildrenID", c3.getString(c3.getColumnIndex("ChildrenID")));
-                j.put("LocalChildrenID", c3.getString(c3.getColumnIndex("LocalChildrenID")));
-                j.put("UserID", c3.getString(c3.getColumnIndex("LocalUserID")));
+                j.put("ChildrenID", c4.getString(c4.getColumnIndex("ChildrenID")));
+                j.put("LocalChildrenID", c4.getString(c4.getColumnIndex("LocalChildrenID")));
+                j.put("UserID", c4.getString(c4.getColumnIndex("LocalUserID")));
+                j.put("ChildrenScreeningID", c4.getString(c4.getColumnIndex("ChildrenScreeningID")));
+                j.put("ScreeningTemplateTypeID", c4.getString(c4.getColumnIndex("ScreeningTemplateTypeID")));
+                j.put("ScreeningStartDateTime", c4.getString(c4.getColumnIndex("ScreeningStartDateTime")));
+                j.put("ScreeningEndDateTime", c4.getString(c4.getColumnIndex("ScreeningEndDateTime")));
+                j.put("ChildrenScreeingStatusID", c4.getString(c4.getColumnIndex("ChildrenScreeingStatusID")));
+                j.put("InstituteScreeningDetailID", c4.getString(c4.getColumnIndex("InstituteScreeningDetailID")));
                 ChildrenScreening.put(j);
 
             }
             c3.close();
-            ret_json.put("ChildrenScreening", Children);
+            ret_json.put("ChildrenScreening", ChildrenScreening);
+
+            String Query5 = "Select * from ChildrenScreening where isDeleted =0";
+            Cursor c5 = db.rawQuery(Query5, null);
+            JSONArray ChildrenScreeningVitals = new JSONArray();
+            while (c5.moveToNext()) {
+                JSONObject j = new JSONObject();
+                j.put("ChildrenScreeningVitalsID", c5.getString(c5.getColumnIndex("ChildrenScreeningVitalsID")));
+                j.put("LocalChildrenScreeningVitalsID", c5.getString(c5.getColumnIndex("LocalChildrenScreeningVitalsID")));
+                j.put("LocalChildrenScreeningID", c5.getString(c5.getColumnIndex("LocalChildrenScreeningID")));
+                j.put("Height", c5.getString(c5.getColumnIndex("Height")));
+                j.put("HeightIndication", c5.getString(c5.getColumnIndex("HeightIndication")));
+                j.put("Weight", c5.getString(c5.getColumnIndex("Weight")));
+                j.put("WeightIndication", c5.getString(c5.getColumnIndex("WeightIndication")));
+                j.put("BMI", c5.getString(c5.getColumnIndex("BMI")));
+                j.put("BMIIndication", c5.getString(c5.getColumnIndex("BMIIndication")));
+                j.put("AcuityOfVisionLefteye", c5.getString(c5.getColumnIndex("AcuityOfVisionLefteye")));
+                j.put("AcuityOfVisionRighteye", c5.getString(c5.getColumnIndex("AcuityOfVisionRighteye")));
+                j.put("BP", c5.getString(c5.getColumnIndex("BP")));
+                j.put("BPIndication", c5.getString(c5.getColumnIndex("BPIndication")));
+                j.put("BloodGroupID", c5.getString(c5.getColumnIndex("BloodGroupID")));
+                j.put("BloodGroupNotes", c5.getString(c5.getColumnIndex("BloodGroupNotes")));
+                j.put("TemperatureID", c5.getString(c5.getColumnIndex("TemperatureID")));
+                j.put("TemperatureIndication", c5.getString(c5.getColumnIndex("TemperatureIndication")));
+                j.put("HemoGlobinID", c5.getString(c5.getColumnIndex("HemoGlobinID")));
+                j.put("HemoGlobinIndication", c5.getString(c5.getColumnIndex("HemoGlobinIndication")));
+                j.put("MUACInCms", c5.getString(c5.getColumnIndex("MUACInCms")));
+                j.put("MUACIndication", c5.getString(c5.getColumnIndex("MUACIndication")));
+                j.put("HeadCircumferenceInCms", c5.getString(c5.getColumnIndex("HeadCircumferenceInCms")));
+                j.put("HeadCircumferenceIndication", c5.getString(c5.getColumnIndex("HeadCircumferenceIndication")));
+                ChildrenScreeningVitals.put(j);
+
+            }
+            c3.close();
+            ret_json.put("ChildrenScreeningVitals", ChildrenScreeningVitals);
             db.close();
 
 
