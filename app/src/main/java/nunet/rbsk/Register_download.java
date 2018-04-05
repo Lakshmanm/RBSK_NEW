@@ -18,6 +18,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -114,7 +115,7 @@ public class Register_download extends Activity implements OnClickListener {
                         "LoginMain", Context.MODE_PRIVATE);
                 String TokenID = sharedpreferences.getString("DeviceCode", "");
                 // webConn(UrlUtils.URL_INTITAL_SETUP, TokenID);
-                new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + "/" + TokenID + "/20000101000000");
+                new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/20000101000000");
 //                Toast.makeText(this, "Downloading DBfile", Toast.LENGTH_LONG)
 //                        .show();
 //                v.setVisibility(View.GONE);
@@ -701,6 +702,7 @@ public class Register_download extends Activity implements OnClickListener {
         @Override
         protected String doInBackground(String... params) {
             HttpClient httpclient = new DefaultHttpClient();
+            Log.e("url in intitial setup", params[0]);
             HttpGet httppost = new HttpGet(params[0]);
             String strResponse = "";
             try {
@@ -718,6 +720,7 @@ public class Register_download extends Activity implements OnClickListener {
                     sb.append(line);
                 }
                 is.close();
+                System.out.println("output post...." + sb.toString());
                 strResponse = UpdateTable(sb.toString());
 
             } catch (ClientProtocolException e) {
@@ -735,7 +738,8 @@ public class Register_download extends Activity implements OnClickListener {
             try {
 
                 System.out.println("in post...." + response);
-                progDailog.dismiss();
+                if (progDailog != null && progDailog.isShowing())
+                    progDailog.dismiss();
                 if (response.trim().length() == 0) {
                     Helper.showShortToast(Register_download.this, "There is a problem in setup process so please try again...");
                 } else if (response.trim().equalsIgnoreCase("200")) {
@@ -759,9 +763,6 @@ public class Register_download extends Activity implements OnClickListener {
             }
         }
     }
-
-
-
 
 
 }

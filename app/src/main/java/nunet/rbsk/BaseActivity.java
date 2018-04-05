@@ -264,125 +264,151 @@ public class BaseActivity extends Activity {
             String TokenID = sharedpreferences.getString("DeviceCode", "");
             ret_json.put("devicecode", TokenID);
             SQLiteDatabase db = dbh.getReadableDatabase();
-            String Query = "Select * from InstitutePlans where isDeleted =0";
-            Cursor c = db.rawQuery(Query, null);
+
             JSONArray InstitutePlan = new JSONArray();
+            String Query = "Select * from InstitutePlans where InstitutePlanStatusID in (3,4) and IsDeleted = 0";
+            Cursor c = db.rawQuery(Query, null);
+            ArrayList<String> LocalInstitutePlanID = new ArrayList<>();
+            ArrayList<String> LocalInstituteID = new ArrayList<>();
             while (c.moveToNext()) {
                 JSONObject j = new JSONObject();
                 j.put("LocalInstitutePlanID", c.getString(c.getColumnIndex("LocalInstitutePlanID")));
                 j.put("InstitutePlanID", c.getString(c.getColumnIndex("InstitutePlanID")));
-                j.put("LocalInstituteID", c.getString(c.getColumnIndex("LocalInstituteID")));
+                j.put("LocalInstituteID", c.getString(c.getColumnIndex("InstituteID")));
                 j.put("RBSKCalendarYearID", c.getString(c.getColumnIndex("RBSKCalendarYearID")));
                 j.put("ScreeningRoundID", c.getString(c.getColumnIndex("ScreeningRoundId")));
                 j.put("InstitutePlanStatusID", c.getString(c.getColumnIndex("InstitutePlanStatusID")));
+                LocalInstitutePlanID.add(c.getString(c.getColumnIndex("LocalInstitutePlanID")));
+                LocalInstituteID.add(c.getString(c.getColumnIndex("InstitutePlanID")));
                 InstitutePlan.put(j);
 
             }
             c.close();
-
-            String Query1 = "Select * from InstitutePlanDetails where PlanStatusID = 1 and isDeleted =0";
-            Cursor c1 = db.rawQuery(Query1, null);
+            ret_json.put("InstitutePlan", InstitutePlan);
             JSONArray InstitutePlanDetails = new JSONArray();
-            while (c1.moveToNext()) {
-                JSONObject j = new JSONObject();
-                j.put("LocalInstitutePlanDetailID", c1.getString(c1.getColumnIndex("LocalInstitutePlanDetailID")));
-                j.put("InstitutePlanDetailID", c1.getString(c1.getColumnIndex("InstitutePlanDetailID")));
-                j.put("LocalInstitutePlanID", c1.getString(c1.getColumnIndex("LocalInstitutePlanID")));
-                j.put("ScheduledDate", c1.getString(c1.getColumnIndex("scheduleDate")));
-                j.put("PlannedCount", c1.getString(c1.getColumnIndex("PlannedCount")));
-                j.put("InstitutePlanSkipReasonID", c1.getString(c1.getColumnIndex("InstitutePlanSkipReasonID")));
-                j.put("SkipComments", c1.getString(c1.getColumnIndex("SkipComments")));
-                InstitutePlanDetails.put(j);
-
+            if (!LocalInstitutePlanID.isEmpty()) {
+                String str = "";
+                for (int i = 0; i < LocalInstitutePlanID.size(); i++) {
+                    str += LocalInstitutePlanID.get(i) + ",";
+                }
+                if (str.length() > 0)
+                    str = str.substring(0, str.lastIndexOf(','));
+                String Query1 = "Select * from InstitutePlanDetails where LocalInstitutePlanID in (str) and isDeleted = 0";
+                Cursor c1 = db.rawQuery(Query1, null);
+                while (c1.moveToNext()) {
+                    JSONObject j = new JSONObject();
+                    j.put("LocalInstitutePlanDetailID", c1.getString(c1.getColumnIndex("LocalInstitutePlanDetailID")));
+                    j.put("InstitutePlanDetailID", c1.getString(c1.getColumnIndex("InstitutePlanDetailID")));
+                    j.put("LocalInstitutePlanID", c1.getString(c1.getColumnIndex("LocalInstitutePlanID")));
+                    j.put("ScheduledDate", c1.getString(c1.getColumnIndex("scheduleDate")));
+                    j.put("PlannedCount", c1.getString(c1.getColumnIndex("PlannedCount")));
+                    j.put("InstitutePlanSkipReasonID", c1.getString(c1.getColumnIndex("InstitutePlanSkipReasonID")));
+                    j.put("SkipComments", c1.getString(c1.getColumnIndex("SkipComments")));
+                    InstitutePlanDetails.put(j);
+                }
+                c1.close();
             }
-            c1.close();
-            String Query2 = "Select * from Institute where isDeleted =0";
-            Cursor c2 = db.rawQuery(Query2, null);
+            ret_json.put("InstitutePlanDetails", InstitutePlanDetails);
+
+
             JSONArray Institute = new JSONArray();
-            while (c2.moveToNext()) {
-                JSONObject j = new JSONObject();
-                j.put("InstituteID", c2.getString(c2.getColumnIndex("InstituteID")));
-                j.put("LocalInstituteID", c2.getString(c2.getColumnIndex("LocalInstituteID")));
-                j.put("InstituteName", c2.getString(c2.getColumnIndex("InstituteName")));
-                j.put("DISECode", c2.getString(c2.getColumnIndex("DiseCode")));
-                Institute.put(j);
+            if (!LocalInstituteID.isEmpty()) {
+                String str = "";
+                for (int i = 0; i < LocalInstituteID.size(); i++) {
+                    str += LocalInstituteID.get(i) + ",";
+                }
+                if (str.length() > 0)
+                    str = str.substring(0, str.lastIndexOf(','));
+                String Query2 = "Select * from Institute where InstituteID in(str) and isDeleted =0";
+                Cursor c2 = db.rawQuery(Query2, null);
+                while (c2.moveToNext()) {
+                    JSONObject j = new JSONObject();
+                    j.put("InstituteID", c2.getString(c2.getColumnIndex("InstituteID")));
+                    j.put("LocalInstituteID", c2.getString(c2.getColumnIndex("LocalInstituteID")));
+                    j.put("InstituteName", c2.getString(c2.getColumnIndex("InstituteName")));
+                    j.put("DISECode", c2.getString(c2.getColumnIndex("DiseCode")));
+                    Institute.put(j);
 
+                }
+                c2.close();
             }
-            c2.close();
+
             ret_json.put("Institute", Institute);
-            String Query3 = "Select * from Children where isDeleted =0";
-            Cursor c3 = db.rawQuery(Query3, null);
-            JSONArray Children = new JSONArray();
-            while (c1.moveToNext()) {
-                JSONObject j = new JSONObject();
-                j.put("ChildrenID", c3.getString(c3.getColumnIndex("ChildrenID")));
-                j.put("LocalChildrenID", c3.getString(c3.getColumnIndex("LocalChildrenID")));
-                j.put("UserID", c3.getString(c3.getColumnIndex("LocalUserID")));
-                Children.put(j);
 
-            }
-            c3.close();
-            ret_json.put("Children", Children);
-            String Query4 = "Select * from ChildrenScreening where isDeleted =0";
-            Cursor c4 = db.rawQuery(Query4, null);
-            JSONArray ChildrenScreening = new JSONArray();
-            while (c4.moveToNext()) {
-                JSONObject j = new JSONObject();
-                j.put("ChildrenID", c4.getString(c4.getColumnIndex("ChildrenID")));
-                j.put("LocalChildrenID", c4.getString(c4.getColumnIndex("LocalChildrenID")));
-                j.put("UserID", c4.getString(c4.getColumnIndex("LocalUserID")));
-                j.put("ChildrenScreeningID", c4.getString(c4.getColumnIndex("ChildrenScreeningID")));
-                j.put("ScreeningTemplateTypeID", c4.getString(c4.getColumnIndex("ScreeningTemplateTypeID")));
-                j.put("ScreeningStartDateTime", c4.getString(c4.getColumnIndex("ScreeningStartDateTime")));
-                j.put("ScreeningEndDateTime", c4.getString(c4.getColumnIndex("ScreeningEndDateTime")));
-                j.put("ChildrenScreeingStatusID", c4.getString(c4.getColumnIndex("ChildrenScreeingStatusID")));
-                j.put("InstituteScreeningDetailID", c4.getString(c4.getColumnIndex("InstituteScreeningDetailID")));
-                ChildrenScreening.put(j);
 
-            }
-            c3.close();
-            ret_json.put("ChildrenScreening", ChildrenScreening);
-
-            String Query5 = "Select * from ChildrenScreening where isDeleted =0";
-            Cursor c5 = db.rawQuery(Query5, null);
-            JSONArray ChildrenScreeningVitals = new JSONArray();
-            while (c5.moveToNext()) {
-                JSONObject j = new JSONObject();
-                j.put("ChildrenScreeningVitalsID", c5.getString(c5.getColumnIndex("ChildrenScreeningVitalsID")));
-                j.put("LocalChildrenScreeningVitalsID", c5.getString(c5.getColumnIndex("LocalChildrenScreeningVitalsID")));
-                j.put("LocalChildrenScreeningID", c5.getString(c5.getColumnIndex("LocalChildrenScreeningID")));
-                j.put("Height", c5.getString(c5.getColumnIndex("Height")));
-                j.put("HeightIndication", c5.getString(c5.getColumnIndex("HeightIndication")));
-                j.put("Weight", c5.getString(c5.getColumnIndex("Weight")));
-                j.put("WeightIndication", c5.getString(c5.getColumnIndex("WeightIndication")));
-                j.put("BMI", c5.getString(c5.getColumnIndex("BMI")));
-                j.put("BMIIndication", c5.getString(c5.getColumnIndex("BMIIndication")));
-                j.put("AcuityOfVisionLefteye", c5.getString(c5.getColumnIndex("AcuityOfVisionLefteye")));
-                j.put("AcuityOfVisionRighteye", c5.getString(c5.getColumnIndex("AcuityOfVisionRighteye")));
-                j.put("BP", c5.getString(c5.getColumnIndex("BP")));
-                j.put("BPIndication", c5.getString(c5.getColumnIndex("BPIndication")));
-                j.put("BloodGroupID", c5.getString(c5.getColumnIndex("BloodGroupID")));
-                j.put("BloodGroupNotes", c5.getString(c5.getColumnIndex("BloodGroupNotes")));
-                j.put("TemperatureID", c5.getString(c5.getColumnIndex("TemperatureID")));
-                j.put("TemperatureIndication", c5.getString(c5.getColumnIndex("TemperatureIndication")));
-                j.put("HemoGlobinID", c5.getString(c5.getColumnIndex("HemoGlobinID")));
-                j.put("HemoGlobinIndication", c5.getString(c5.getColumnIndex("HemoGlobinIndication")));
-                j.put("MUACInCms", c5.getString(c5.getColumnIndex("MUACInCms")));
-                j.put("MUACIndication", c5.getString(c5.getColumnIndex("MUACIndication")));
-                j.put("HeadCircumferenceInCms", c5.getString(c5.getColumnIndex("HeadCircumferenceInCms")));
-                j.put("HeadCircumferenceIndication", c5.getString(c5.getColumnIndex("HeadCircumferenceIndication")));
-                ChildrenScreeningVitals.put(j);
-
-            }
-            c3.close();
-            ret_json.put("ChildrenScreeningVitals", ChildrenScreeningVitals);
+//            String Query3 = "Select * from Children where isDeleted =0";
+//            Cursor c3 = db.rawQuery(Query3, null);
+//            JSONArray Children = new JSONArray();
+//            while (c3.moveToNext()) {
+//                JSONObject j = new JSONObject();
+//                j.put("ChildrenID", c3.getString(c3.getColumnIndex("ChildrenID")));
+//                j.put("LocalChildrenID", c3.getString(c3.getColumnIndex("LocalChildrenID")));
+//                j.put("UserID", c3.getString(c3.getColumnIndex("LocalUserID")));
+//                Children.put(j);
+//
+//            }
+//            c3.close();
+//            ret_json.put("Children", Children);
+//            String Query4 = "Select * from ChildrenScreening where isDeleted =0";
+//            Cursor c4 = db.rawQuery(Query4, null);
+//            JSONArray ChildrenScreening = new JSONArray();
+//            while (c4.moveToNext()) {
+//                JSONObject j = new JSONObject();
+//                j.put("ChildrenID", c4.getString(c4.getColumnIndex("ChildrenID")));
+//                j.put("LocalChildrenID", c4.getString(c4.getColumnIndex("LocalChildrenID")));
+//                j.put("UserID", c4.getString(c4.getColumnIndex("LocalUserID")));
+//                j.put("ChildrenScreeningID", c4.getString(c4.getColumnIndex("ChildrenScreeningID")));
+//                j.put("ScreeningTemplateTypeID", c4.getString(c4.getColumnIndex("ScreeningTemplateTypeID")));
+//                j.put("ScreeningStartDateTime", c4.getString(c4.getColumnIndex("ScreeningStartDateTime")));
+//                j.put("ScreeningEndDateTime", c4.getString(c4.getColumnIndex("ScreeningEndDateTime")));
+//                j.put("ChildrenScreeingStatusID", c4.getString(c4.getColumnIndex("ChildrenScreeingStatusID")));
+//                j.put("InstituteScreeningDetailID", c4.getString(c4.getColumnIndex("InstituteScreeningDetailID")));
+//                ChildrenScreening.put(j);
+//
+//            }
+//            c3.close();
+//            ret_json.put("ChildrenScreening", ChildrenScreening);
+//
+//            String Query5 = "Select * from ChildrenScreening where isDeleted =0";
+//            Cursor c5 = db.rawQuery(Query5, null);
+//            JSONArray ChildrenScreeningVitals = new JSONArray();
+//            while (c5.moveToNext()) {
+//                JSONObject j = new JSONObject();
+//                j.put("ChildrenScreeningVitalsID", c5.getString(c5.getColumnIndex("ChildrenScreeningVitalsID")));
+//                j.put("LocalChildrenScreeningVitalsID", c5.getString(c5.getColumnIndex("LocalChildrenScreeningVitalsID")));
+//                j.put("LocalChildrenScreeningID", c5.getString(c5.getColumnIndex("LocalChildrenScreeningID")));
+//                j.put("Height", c5.getString(c5.getColumnIndex("Height")));
+//                j.put("HeightIndication", c5.getString(c5.getColumnIndex("HeightIndication")));
+//                j.put("Weight", c5.getString(c5.getColumnIndex("Weight")));
+//                j.put("WeightIndication", c5.getString(c5.getColumnIndex("WeightIndication")));
+//                j.put("BMI", c5.getString(c5.getColumnIndex("BMI")));
+//                j.put("BMIIndication", c5.getString(c5.getColumnIndex("BMIIndication")));
+//                j.put("AcuityOfVisionLefteye", c5.getString(c5.getColumnIndex("AcuityOfVisionLefteye")));
+//                j.put("AcuityOfVisionRighteye", c5.getString(c5.getColumnIndex("AcuityOfVisionRighteye")));
+//                j.put("BP", c5.getString(c5.getColumnIndex("BP")));
+//                j.put("BPIndication", c5.getString(c5.getColumnIndex("BPIndication")));
+//                j.put("BloodGroupID", c5.getString(c5.getColumnIndex("BloodGroupID")));
+//                j.put("BloodGroupNotes", c5.getString(c5.getColumnIndex("BloodGroupNotes")));
+//                j.put("TemperatureID", c5.getString(c5.getColumnIndex("TemperatureID")));
+//                j.put("TemperatureIndication", c5.getString(c5.getColumnIndex("TemperatureIndication")));
+//                j.put("HemoGlobinID", c5.getString(c5.getColumnIndex("HemoGlobinID")));
+//                j.put("HemoGlobinIndication", c5.getString(c5.getColumnIndex("HemoGlobinIndication")));
+//                j.put("MUACInCms", c5.getString(c5.getColumnIndex("MUACInCms")));
+//                j.put("MUACIndication", c5.getString(c5.getColumnIndex("MUACIndication")));
+//                j.put("HeadCircumferenceInCms", c5.getString(c5.getColumnIndex("HeadCircumferenceInCms")));
+//                j.put("HeadCircumferenceIndication", c5.getString(c5.getColumnIndex("HeadCircumferenceIndication")));
+//                ChildrenScreeningVitals.put(j);
+//
+//            }
+//            c3.close();
+//            ret_json.put("ChildrenScreeningVitals", ChildrenScreeningVitals);
             db.close();
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        Log.e("sync json.....", ret_json.toString());
         return ret_json;
     }
 

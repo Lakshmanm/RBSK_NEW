@@ -445,7 +445,7 @@ public class DBHelper extends SQLiteOpenHelper {
                             index = index + 1;
                         }
                         statement.bindString(index, "0");
-                        statement.bindString((index + 1), Helper.getTodayDateTime1());
+                        statement.bindString((index + 1), Helper.getTodayDateTime());
                         statement.execute();
                     }
                     db.setTransactionSuccessful();
