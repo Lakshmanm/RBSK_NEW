@@ -128,6 +128,8 @@ public class Helper {
 	// public static String doctorsComments="";
 	// public static String localTreatment ="";
 
+	public static String syncDate="20000101000000";
+
 	public static void updateHeaderFromNext(Context ctx, TextView oldHeader,
 			TextView newHeader, int oldId, int newId) {
 		oldHeader.setBackgroundDrawable(ctx.getResources().getDrawable(oldId));

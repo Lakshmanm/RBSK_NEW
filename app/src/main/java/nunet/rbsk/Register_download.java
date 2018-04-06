@@ -76,6 +76,8 @@ public class Register_download extends Activity implements OnClickListener {
     private Button btn_register_continue;
     public ProgressDialog progDailog = null;
     DBHelper dbHelper;
+    String TokenID ="";
+    int navIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,9 +115,10 @@ public class Register_download extends Activity implements OnClickListener {
             case R.id.btn_register_setup:
                 SharedPreferences sharedpreferences = getSharedPreferences(
                         "LoginMain", Context.MODE_PRIVATE);
-                String TokenID = sharedpreferences.getString("DeviceCode", "");
+                 TokenID = sharedpreferences.getString("DeviceCode", "");
                 // webConn(UrlUtils.URL_INTITAL_SETUP, TokenID);
-                new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/20000101000000");
+                navIndex = 0;
+                new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/20000101000000/1");
 //                Toast.makeText(this, "Downloading DBfile", Toast.LENGTH_LONG)
 //                        .show();
 //                v.setVisibility(View.GONE);
@@ -171,16 +174,7 @@ public class Register_download extends Activity implements OnClickListener {
                 }
                 c2.close();
 
-                String Query6 = "Select DISTINCT userID, LocalUserID from Users";
-                Cursor c6 = db.rawQuery(Query6, null);
-                List<String> userID = new ArrayList<>();
-                List<String> LocalUserID = new ArrayList<>();
-                while (c6.moveToNext()) {
-                    userID.add(c6.getString(0));
-                    LocalUserID.add(c6.getString(1));
-                }
-                c6.close();
-                db.close();
+
                 if (mJsonObject.has("USERS")) {
 
                     JSONArray USERS = mJsonObject.getJSONArray("USERS");
@@ -200,6 +194,16 @@ public class Register_download extends Activity implements OnClickListener {
 
                     dbHelper.bulkinsertintoTable(Register_download.this, "USERS", USERS);
                 }
+                String Query6 = "Select DISTINCT userID, LocalUserID from Users";
+                Cursor c6 = db.rawQuery(Query6, null);
+                List<String> userID = new ArrayList<>();
+                List<String> LocalUserID = new ArrayList<>();
+                while (c6.moveToNext()) {
+                    userID.add(c6.getString(0));
+                    LocalUserID.add(c6.getString(1));
+                }
+                c6.close();
+                db.close();
                 if (mJsonObject.has("INSTITUTES")) {
                     JSONArray INSTITUTES = mJsonObject.getJSONArray("INSTITUTES");
 
@@ -319,6 +323,133 @@ public class Register_download extends Activity implements OnClickListener {
                     dbHelper.bulkinsertintoTable(Register_download.this, "INSTITUTESCREENINGDETAILS", INSTITUTESCREENINGDETAILS);
                 }
 
+
+                if (mJsonObject.has("CONTACTDETAILS")) {
+
+                    JSONArray CONTACTDETAILS = mJsonObject.getJSONArray("CONTACTDETAILS");
+                    for (int i = 0; i < CONTACTDETAILS.length(); i++) {
+                        JSONObject j = CONTACTDETAILS.getJSONObject(i);
+                        String insplanID = j.getString("ContactID");
+                        if (contactID.contains(insplanID)) {
+                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(insplanID)));
+                            CONTACTDETAILS.put(i, j);
+                        }
+
+                    }
+                    dbHelper.bulkinsertintoTable(Register_download.this, "CONTACTDETAILS", CONTACTDETAILS);
+                }
+                if (mJsonObject.has("DEVICESETTINGS")) {
+                    JSONArray DEVICESETTINGS = mJsonObject.getJSONArray("DEVICESETTINGS");
+                    dbHelper.bulkinsertintoTable(Register_download.this, "DEVICESETTINGS", DEVICESETTINGS);
+                }
+                if (mJsonObject.has("FACILITIES")) {
+                    JSONArray FACILITIES = mJsonObject.getJSONArray("FACILITIES");
+
+                    for (int i = 0; i < FACILITIES.length(); i++) {
+                        JSONObject j = FACILITIES.getJSONObject(i);
+                        String insplanID = j.getString("AddressID");
+                        if (addressID.contains(insplanID)) {
+                            j.put("LocalAddressID", LocalAddressID.get(addressID.indexOf(insplanID)));
+                            FACILITIES.put(i, j);
+                        }
+                        String contID = j.getString("ContactID");
+                        if (contactID.contains(contID)) {
+                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(contID)));
+                            FACILITIES.put(i, j);
+                        }
+                    }
+
+                    dbHelper.bulkinsertintoTable(Register_download.this, "FACILITIES", FACILITIES);
+                }
+                if (mJsonObject.has("FACILITYCOVERAGE")) {
+                    JSONArray FACILITYCOVERAGE = mJsonObject.getJSONArray("FACILITYCOVERAGE");
+                    dbHelper.bulkinsertintoTable(Register_download.this, "FACILITYCOVERAGE", FACILITYCOVERAGE);
+                }
+                if (mJsonObject.has("HABITATS")) {
+                    JSONArray HABITATS = mJsonObject.getJSONArray("HABITATS");
+                    dbHelper.bulkinsertintoTable(Register_download.this, "HABITATS", HABITATS);
+                }
+                if (mJsonObject.has("MHTSTAFF")) {
+                    JSONArray MHTSTAFF = mJsonObject.getJSONArray("MHTSTAFF");
+
+                    for (int i = 0; i < MHTSTAFF.length(); i++) {
+                        JSONObject j = MHTSTAFF.getJSONObject(i);
+                        String insplanID = j.getString("UserID");
+                        if (userID.contains(insplanID)) {
+                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(insplanID)));
+                            MHTSTAFF.put(i, j);
+                        }
+
+                    }
+                    dbHelper.bulkinsertintoTable(Register_download.this, "MHTSTAFF", MHTSTAFF);
+                }
+                if (mJsonObject.has("MOBILEHEALTHTEAMS")) {
+                    JSONArray MOBILEHEALTHTEAMS = mJsonObject.getJSONArray("MOBILEHEALTHTEAMS");
+                    dbHelper.bulkinsertintoTable(Register_download.this, "MOBILEHEALTHTEAMS", MOBILEHEALTHTEAMS);
+                }
+                if (mJsonObject.has("USERCREDENTIALS")) {
+                    JSONArray USERCREDENTIALS = mJsonObject.getJSONArray("USERCREDENTIALS");
+
+                    for (int i = 0; i < USERCREDENTIALS.length(); i++) {
+                        JSONObject j = USERCREDENTIALS.getJSONObject(i);
+                        String insplanID = j.getString("UserID");
+                        if (userID.contains(insplanID)) {
+                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(insplanID)));
+                            USERCREDENTIALS.put(i, j);
+                        }
+                    }
+                    dbHelper.bulkinsertintoTable(Register_download.this, "USERCREDENTIALS", USERCREDENTIALS);
+                }
+                if (mJsonObject.has("VILLAGES")) {
+                    JSONArray VILLAGES = mJsonObject.getJSONArray("VILLAGES");
+                    dbHelper.bulkinsertintoTable(Register_download.this, "VILLAGES", VILLAGES);
+                }
+
+                retstr = "200";
+
+
+            } else {
+                retstr = strResponse;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            retstr = "";
+        }
+
+        return retstr;
+    }
+
+    public String UpdateTable1(String strResponse) {
+        String retStr = "";
+        try {
+            if (strResponse.indexOf("{") != -1) {
+                strResponse = strResponse.replace("\\", "");
+                strResponse = strResponse.substring(1, strResponse.length() - 1);
+                JSONObject mJsonObject = new JSONObject(strResponse);
+                SQLiteDatabase db2 = dbHelper.getWritableDatabase();
+                String Query3 = "Select DISTINCT InstituteID , LocalInstituteID from Institutes";
+                Cursor c3 = db2.rawQuery(Query3, null);
+                List<String> InstituteID = new ArrayList<>();
+                List<String> LocalInstituteID = new ArrayList<>();
+                while (c3.moveToNext()) {
+                    InstituteID.add(c3.getString(0));
+                    LocalInstituteID.add(c3.getString(1));
+                }
+                c3.close();
+
+                String Query6 = "Select DISTINCT userID, LocalUserID from Users";
+                Cursor c6 = db2.rawQuery(Query6, null);
+                List<String> userID = new ArrayList<>();
+                List<String> LocalUserID = new ArrayList<>();
+                while (c6.moveToNext()) {
+                    userID.add(c6.getString(0));
+                    LocalUserID.add(c6.getString(1));
+                }
+                c6.close();
+                db2.close();
+
+
                 if (mJsonObject.has("CHILDREN")) {
                     JSONArray CHILDREN = mJsonObject.getJSONArray("CHILDREN");
 
@@ -348,7 +479,6 @@ public class Register_download extends Activity implements OnClickListener {
                 }
                 c18.close();
                 db8.close();
-
                 if (mJsonObject.has("CHILDRENSCREENING")) {
                     JSONArray CHILDRENSCREENING = mJsonObject.getJSONArray("CHILDRENSCREENING");
 
@@ -592,110 +722,26 @@ public class Register_download extends Activity implements OnClickListener {
                     }
                     dbHelper.bulkinsertintoTable(Register_download.this, "CHILDSCREENINGFH", CHILDSCREENINGFH);
                 }
-
-
-                if (mJsonObject.has("CONTACTDETAILS")) {
-
-                    JSONArray CONTACTDETAILS = mJsonObject.getJSONArray("CONTACTDETAILS");
-                    for (int i = 0; i < CONTACTDETAILS.length(); i++) {
-                        JSONObject j = CONTACTDETAILS.getJSONObject(i);
-                        String insplanID = j.getString("ContactID");
-                        if (contactID.contains(insplanID)) {
-                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(insplanID)));
-                            CONTACTDETAILS.put(i, j);
-                        }
-
-                    }
-                    dbHelper.bulkinsertintoTable(Register_download.this, "CONTACTDETAILS", CONTACTDETAILS);
-                }
-                if (mJsonObject.has("DEVICESETTINGS")) {
-                    JSONArray DEVICESETTINGS = mJsonObject.getJSONArray("DEVICESETTINGS");
-                    dbHelper.bulkinsertintoTable(Register_download.this, "DEVICESETTINGS", DEVICESETTINGS);
-                }
-                if (mJsonObject.has("FACILITIES")) {
-                    JSONArray FACILITIES = mJsonObject.getJSONArray("FACILITIES");
-
-                    for (int i = 0; i < FACILITIES.length(); i++) {
-                        JSONObject j = FACILITIES.getJSONObject(i);
-                        String insplanID = j.getString("AddressID");
-                        if (addressID.contains(insplanID)) {
-                            j.put("LocalAddressID", LocalAddressID.get(addressID.indexOf(insplanID)));
-                            FACILITIES.put(i, j);
-                        }
-                        String contID = j.getString("ContactID");
-                        if (contactID.contains(contID)) {
-                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(contID)));
-                            FACILITIES.put(i, j);
-                        }
-                    }
-
-                    dbHelper.bulkinsertintoTable(Register_download.this, "FACILITIES", FACILITIES);
-                }
-                if (mJsonObject.has("FACILITYCOVERAGE")) {
-                    JSONArray FACILITYCOVERAGE = mJsonObject.getJSONArray("FACILITYCOVERAGE");
-                    dbHelper.bulkinsertintoTable(Register_download.this, "FACILITYCOVERAGE", FACILITYCOVERAGE);
-                }
-                if (mJsonObject.has("HABITATS")) {
-                    JSONArray HABITATS = mJsonObject.getJSONArray("HABITATS");
-                    dbHelper.bulkinsertintoTable(Register_download.this, "HABITATS", HABITATS);
-                }
-                if (mJsonObject.has("MHTSTAFF")) {
-                    JSONArray MHTSTAFF = mJsonObject.getJSONArray("MHTSTAFF");
-
-                    for (int i = 0; i < MHTSTAFF.length(); i++) {
-                        JSONObject j = MHTSTAFF.getJSONObject(i);
-                        String insplanID = j.getString("UserID");
-                        if (userID.contains(insplanID)) {
-                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(insplanID)));
-                            MHTSTAFF.put(i, j);
-                        }
-
-                    }
-                    dbHelper.bulkinsertintoTable(Register_download.this, "MHTSTAFF", MHTSTAFF);
-                }
-                if (mJsonObject.has("MOBILEHEALTHTEAMS")) {
-                    JSONArray MOBILEHEALTHTEAMS = mJsonObject.getJSONArray("MOBILEHEALTHTEAMS");
-                    dbHelper.bulkinsertintoTable(Register_download.this, "MOBILEHEALTHTEAMS", MOBILEHEALTHTEAMS);
-                }
-                if (mJsonObject.has("USERCREDENTIALS")) {
-                    JSONArray USERCREDENTIALS = mJsonObject.getJSONArray("USERCREDENTIALS");
-
-                    for (int i = 0; i < USERCREDENTIALS.length(); i++) {
-                        JSONObject j = USERCREDENTIALS.getJSONObject(i);
-                        String insplanID = j.getString("UserID");
-                        if (userID.contains(insplanID)) {
-                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(insplanID)));
-                            USERCREDENTIALS.put(i, j);
-                        }
-                    }
-                    dbHelper.bulkinsertintoTable(Register_download.this, "USERCREDENTIALS", USERCREDENTIALS);
-                }
-                if (mJsonObject.has("VILLAGES")) {
-                    JSONArray VILLAGES = mJsonObject.getJSONArray("VILLAGES");
-                    dbHelper.bulkinsertintoTable(Register_download.this, "VILLAGES", VILLAGES);
-                }
-
-                retstr = "200";
-
-
+                retStr = "200";
             } else {
-                retstr = strResponse;
-
+                retStr = strResponse;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            retstr = "";
+            retStr = "";
         }
 
-        return retstr;
+
+        return retStr;
     }
 
     public class WebConn extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
-            progDailog = ProgressDialog.show(Register_download.this,
-                    "Please Wait...", "Setting up Device...", true);
+            if (navIndex == 0)
+                progDailog = ProgressDialog.show(Register_download.this,
+                        "Please Wait...", "Setting up Device...", true);
 
         }
 
@@ -708,7 +754,6 @@ public class Register_download extends Activity implements OnClickListener {
             try {
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
-
                 HttpEntity entity = response.getEntity();
                 InputStream is = entity.getContent();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -721,7 +766,10 @@ public class Register_download extends Activity implements OnClickListener {
                 }
                 is.close();
                 System.out.println("output post...." + sb.toString());
-                strResponse = UpdateTable(sb.toString());
+                if (navIndex == 0)
+                    strResponse = UpdateTable(sb.toString());
+                else
+                    strResponse = UpdateTable1(sb.toString());
 
             } catch (ClientProtocolException e) {
                 strResponse = "ClientProtocolException";
@@ -738,21 +786,32 @@ public class Register_download extends Activity implements OnClickListener {
             try {
 
                 System.out.println("in post...." + response);
-                if (progDailog != null && progDailog.isShowing())
-                    progDailog.dismiss();
+
                 if (response.trim().length() == 0) {
+                    if (progDailog != null && progDailog.isShowing())
+                        progDailog.dismiss();
                     Helper.showShortToast(Register_download.this, "There is a problem in setup process so please try again...");
                 } else if (response.trim().equalsIgnoreCase("200")) {
-                    SharedPreferences sharedpreferences = getSharedPreferences(
-                            "LoginMain", Context.MODE_PRIVATE);
-                    sharedpreferences = getSharedPreferences(
-                            UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
+                    if (navIndex == 0) {
+                        navIndex = 1;
+                        new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/20000101000000/2");
+                    } else {
+                        if (progDailog != null && progDailog.isShowing())
+                            progDailog.dismiss();
+                        SharedPreferences sharedpreferences = getSharedPreferences(
+                                "LoginMain", Context.MODE_PRIVATE);
+                        sharedpreferences = getSharedPreferences(
+                                UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
 
-                    sharedpreferences.edit().putString("DB", "Yes").commit();
-                    btn_register_continue.setVisibility(View.VISIBLE);
-                    btn_register_checkSetupStatus.setVisibility(View.VISIBLE);
-                    btn_register_setup.setVisibility(View.GONE);
+                        sharedpreferences.edit().putString("DB", "Yes").commit();
+                        btn_register_continue.setVisibility(View.VISIBLE);
+                        btn_register_checkSetupStatus.setVisibility(View.VISIBLE);
+                        btn_register_setup.setVisibility(View.GONE);
+                    }
+
                 } else {
+                    if (progDailog != null && progDailog.isShowing())
+                        progDailog.dismiss();
                     Helper.showShortToast(Register_download.this, response);
                 }
 
