@@ -3,7 +3,6 @@ package nunet.rbsk;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.bluetooth.BluetoothAssignedNumbers;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -235,6 +234,16 @@ public class BaseActivity extends Activity {
 
                 System.out.println("in post...." + response);
                 progDailog.dismiss();
+                JSONObject jsonObject = new JSONObject(response);
+                String status = jsonObject.getString("status");
+                if (status.trim().equalsIgnoreCase("success")) {
+                    Helper.syncDate = jsonObject.getString("syncdate");
+
+                } else if (status.trim().equalsIgnoreCase("fail")) {
+                    Helper.showShortToast(BaseActivity.this, jsonObject.getString("message"));
+                } else {
+                    Helper.showShortToast(BaseActivity.this, response);
+                }
 
 
             } catch (Exception e) {
@@ -276,16 +285,44 @@ public class BaseActivity extends Activity {
             ArrayList<String> LocalInstituteID = new ArrayList<>();
             while (c.moveToNext()) {
                 JSONObject j = new JSONObject();
-                j.put("LocalInstitutePlanID", c.getString(c.getColumnIndex("LocalInstitutePlanID")));
-                j.put("InstitutePlanID", c.getString(c.getColumnIndex("InstitutePlanID")));
-                j.put("InstituteID", c.getString(c.getColumnIndex("InstituteID")));
-                j.put("RBSKCalendarYearID", c.getString(c.getColumnIndex("RBSKCalendarYearID")));
-                j.put("ScreeningRoundID", c.getString(c.getColumnIndex("ScreeningRoundId")));
-                j.put("InstitutePlanStatusID", c.getString(c.getColumnIndex("InstitutePlanStatusID")));
+                if (c.isNull(c.getColumnIndex("LocalInstitutePlanID")))
+                    j.put("LocalInstitutePlanID", "");
+                else
+                    j.put("LocalInstitutePlanID", c.getString(c.getColumnIndex("LocalInstitutePlanID")));
+                if (c.isNull(c.getColumnIndex("InstitutePlanID")))
+                    j.put("InstitutePlanID", "");
+                else
+                    j.put("InstitutePlanID", c.getString(c.getColumnIndex("InstitutePlanID")));
+
+                if (c.isNull(c.getColumnIndex("InstituteID")))
+                    j.put("InstituteID", "");
+                else
+                    j.put("InstituteID", c.getString(c.getColumnIndex("InstituteID")));
+
+                if (c.isNull(c.getColumnIndex("RBSKCalendarYearID")))
+                    j.put("RBSKCalendarYearID", "");
+                else
+                    j.put("RBSKCalendarYearID", c.getString(c.getColumnIndex("RBSKCalendarYearID")));
+
+                if (c.isNull(c.getColumnIndex("ScreeningRoundID")))
+                    j.put("ScreeningRoundID", "");
+                else
+                    j.put("ScreeningRoundID", c.getString(c.getColumnIndex("ScreeningRoundId")));
+
+                if (c.isNull(c.getColumnIndex("InstitutePlanStatusID")))
+                    j.put("InstitutePlanStatusID", "");
+                else
+                    j.put("InstitutePlanStatusID", c.getString(c.getColumnIndex("InstitutePlanStatusID")));
                 j.put("UserID", userID);
-                j.put("LastCommitedDateTime", c.getString(c.getColumnIndex("LastCommitedDate")));
-                LocalInstitutePlanID.add(c.getString(c.getColumnIndex("LocalInstitutePlanID")));
-                LocalInstituteID.add(c.getString(c.getColumnIndex("InstituteID")));
+                if (c.isNull(c.getColumnIndex("LastCommitedDateTime")))
+                    j.put("LastCommitedDateTime", "");
+                else
+                    j.put("LastCommitedDateTime", c.getString(c.getColumnIndex("LastCommitedDateTime")));
+                if (!c.isNull(c.getColumnIndex("LocalInstitutePlanID")))
+                    LocalInstitutePlanID.add(c.getString(c.getColumnIndex("LocalInstitutePlanID")));
+
+                if (!c.isNull(c.getColumnIndex("InstituteID")))
+                    LocalInstituteID.add(c.getString(c.getColumnIndex("InstituteID")));
                 InstitutePlan.put(j);
 
             }
@@ -303,16 +340,46 @@ public class BaseActivity extends Activity {
                 Cursor c1 = db.rawQuery(Query1, null);
                 while (c1.moveToNext()) {
                     JSONObject j = new JSONObject();
-                    j.put("LocalInstitutePlanDetailID", c1.getString(c1.getColumnIndex("LocalInstitutePlanDetailID")));
-                    j.put("InstitutePlanDetailID", c1.getString(c1.getColumnIndex("InstitutePlanDetailID")));
-                    j.put("LocalInstitutePlanID", c1.getString(c1.getColumnIndex("LocalInstitutePlanID")));
-                    j.put("ScheduledDate", c1.getString(c1.getColumnIndex("scheduleDate")));
-                    j.put("PlannedCount", c1.getString(c1.getColumnIndex("PlannedCount")));
-                    j.put("InstitutePlanSkipReasonID", c1.getString(c1.getColumnIndex("InstitutePlanSkipReasonID")));
-                    j.put("SkipComments", c1.getString(c1.getColumnIndex("SkipComments")));
+                    if (c1.isNull(c1.getColumnIndex("LocalInstitutePlanDetailID")))
+                        j.put("LocalInstitutePlanDetailID", "");
+                    else
+                        j.put("LocalInstitutePlanDetailID", c1.getString(c1.getColumnIndex("LocalInstitutePlanDetailID")));
+
+                    if (c1.isNull(c1.getColumnIndex("InstitutePlanDetailID")))
+                        j.put("InstitutePlanDetailID", "");
+                    else
+                        j.put("InstitutePlanDetailID", c1.getString(c1.getColumnIndex("InstitutePlanDetailID")));
+
+                    if (c1.isNull(c1.getColumnIndex("LocalInstitutePlanID")))
+                        j.put("LocalInstitutePlanID", "");
+                    else
+                        j.put("LocalInstitutePlanID", c1.getString(c1.getColumnIndex("LocalInstitutePlanID")));
+
+                    if (c1.isNull(c1.getColumnIndex("ScheduledDate")))
+                        j.put("ScheduledDate", "");
+                    else
+                        j.put("ScheduledDate", c1.getString(c1.getColumnIndex("ScheduledDate")));
+
+                    if (c1.isNull(c1.getColumnIndex("PlannedCount")))
+                        j.put("PlannedCount", "");
+                    else
+                        j.put("PlannedCount", c1.getString(c1.getColumnIndex("PlannedCount")));
+
+                    if (c1.isNull(c1.getColumnIndex("InstitutePlanSkipReasonID")))
+                        j.put("InstitutePlanSkipReasonID", "");
+                    else
+                        j.put("InstitutePlanSkipReasonID", c1.getString(c1.getColumnIndex("InstitutePlanSkipReasonID")));
+                    if (c1.isNull(c1.getColumnIndex("SkipComments")))
+                        j.put("SkipComments", "");
+                    else
+                        j.put("SkipComments", c1.getString(c1.getColumnIndex("SkipComments")));
+
                     j.put("MobileHealthTeamID", DBHelper.getColoumnFromDBonWhere(BaseActivity.this, "MHTStaff", "MobileHealthTeamID", "UserID", userID));
                     j.put("UserID", userID);
-                    j.put("LastCommitedDateTime", c1.getString(c1.getColumnIndex("LastCommitedDate")));
+                    if (c1.isNull(c1.getColumnIndex("LastCommitedDateTime")))
+                        j.put("LastCommitedDateTime", "");
+                    else
+                        j.put("LastCommitedDateTime", c1.getString(c1.getColumnIndex("LastCommitedDateTime")));
                     InstitutePlanDetails.put(j);
                 }
                 c1.close();
