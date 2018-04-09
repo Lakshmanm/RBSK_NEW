@@ -658,6 +658,60 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public  boolean updateTableROWS(Context context, final String tablename,
+                             String[] columnNames, String[] columnValues, String whereColumn,
+                             String whereValue) {
+        DBHelper dbhelper = getInstance(mContext);
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        for (int i = 0; i < columnNames.length; i++) {
+            String value = null;
+
+            if (!TextUtils.isEmpty(columnValues[i]))
+                value = columnValues[i].trim();
+
+            if (columnNames[i].toUpperCase().endsWith("ID")
+                    && (TextUtils.isEmpty(value) || value.equals("0"))) {
+                if (TextUtils.isEmpty(value) || value.equals("0"))
+                    cv.putNull(columnNames[i]);
+            } else
+                cv.put(columnNames[i], value);
+
+        }
+
+
+        if (whereColumn != null)
+            whereColumn += "='" + whereValue + "'";
+
+        String updateQuery = "";
+        updateQuery = "Update " + tablename + " set ";
+        for (int i = 0; i < columnNames.length; i++) {
+            updateQuery += columnNames[i] + " = '" + columnValues[i] + "' ,";
+        }
+        if (updateQuery.length() > 0)
+            updateQuery = updateQuery.substring(0, updateQuery.lastIndexOf(','));
+
+        if (whereColumn != null)
+            updateQuery = updateQuery + " where " + whereColumn;
+
+
+        System.out.println("update Query......" + updateQuery);
+
+
+        int effectdRows = db.update(tablename, cv, whereColumn, null);
+        boolean flag = effectdRows > 0;
+        if (!flag) {
+            Log.e("DbLog", "No Rows Effected");
+        }
+        db.close();
+        return flag;
+
+    }
+
+
+
+
+
     public boolean updateROWByValues(Context context, final String tablename,
                                      String[] columnNames, String[] columnValues, String[] whereColumn,
                                      String[] whereValue) {
@@ -678,7 +732,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 cv.put(columnNames[i], value);
         }
         cv.put("PushStatus", "0");
-        cv.put("LastCommitedDate", "");
+        cv.put("LastCommitedDate", Helper.getTodayDateTime1());
         String query = "";
         for (int i = 0; i < whereColumn.length; i++)
             query = query + whereColumn[i] + "='" + whereValue[i] + "' AND ";
