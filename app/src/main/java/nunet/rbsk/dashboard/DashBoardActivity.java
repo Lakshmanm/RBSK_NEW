@@ -127,11 +127,11 @@ public class DashBoardActivity extends BaseActivity {
         setContentView(R.layout.schedule_view);
         dbh = DBHelper.getInstance(this);
 
-		/*
-     * if (!isServiceRunning(IncrementalService.class)) { Intent
-		 * serviceIntent = new Intent(ScheduleFragment.this,
-		 * IncrementalService.class); startService(serviceIntent); }
-		 */
+        /*
+         * if (!isServiceRunning(IncrementalService.class)) { Intent
+         * serviceIntent = new Intent(ScheduleFragment.this,
+         * IncrementalService.class); startService(serviceIntent); }
+         */
 
         sharedpreferences = getSharedPreferences("RbskPref",
                 Context.MODE_PRIVATE);
@@ -525,8 +525,8 @@ public class DashBoardActivity extends BaseActivity {
 
     // public static int kk = 0;
     public void displayView(View v, Context ctx, int day) {
-
-        dialog.show();
+        if (dialog != null)
+            dialog.show();
         switch (v.getId()) {
             case R.id.btn_schedule_monthview:
                 bundle = new Bundle();

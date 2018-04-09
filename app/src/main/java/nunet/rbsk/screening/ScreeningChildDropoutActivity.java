@@ -134,8 +134,8 @@ public class ScreeningChildDropoutActivity extends Activity implements
   public void childStatusUpdateToDB() {
     // boolean statusUpdated =
     dbh.updateROWByValues(this, "children",
-      new String[]{"ChildrenStatusID"}, new String[]{droputValue
-        + "".trim()}, new String[]{"LocalChildrenID"},
+      new String[]{"ChildrenStatusID","LastCommitedDate"}, new String[]{droputValue
+        + "".trim(),Helper.getTodayDateTime1()}, new String[]{"LocalChildrenID"},
       new String[]{childID + "".trim()});
     // if (statusUpdated)
     // Helper.childrenObject.setChildrenStatusID(droputValue);

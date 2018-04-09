@@ -1440,21 +1440,21 @@ public class ScreeningBasicInfoFragment extends Fragment implements
             "ScreeningTemplateTypeID",
             "ScreeningStartDateTime",
             "ScreeningEndDateTime",
-            "ChildrenScreenStatusID",},
+            "ChildrenScreenStatusID","LastCommitedDate",},
           new String[]{
             String.valueOf(((ScreeningActivity) getActivity()).locInsScreeningDetailID),
             childrenObject.getChildrenID() + "".trim(),
             childrenObject.getChildrenInsitute()
               .getInstituteTypeId() + "".trim(),
             childrenObject.getScreningStartTime(),
-            childrenObject.getScreningEndTime(), "3",});
+            childrenObject.getScreningEndTime(), "3",Helper.getTodayDateTime1(),});
       Helper.childScreeningObj.setScreeningID(localChildScreeningID);
 
 
     } else {
       dbh.updateROW(getActivity(), "childrenscreening",
-        new String[]{"ChildrenScreenStatusID"},
-        new String[]{"3"}, "LocalChildrenScreeningID",
+        new String[]{"ChildrenScreenStatusID","LastCommitedDate"},
+        new String[]{"3",Helper.getTodayDateTime1()}, "LocalChildrenScreeningID",
         String.valueOf(Helper.childScreeningObj.getScreeningID()));
 
     }

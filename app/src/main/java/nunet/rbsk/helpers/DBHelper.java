@@ -408,8 +408,8 @@ public class DBHelper extends SQLiteOpenHelper {
                                 } else if (j.getString(key).trim().equalsIgnoreCase("true")) {
                                     statement.bindString(index, "1");
                                 } else {
-                                    if(j.getString(key)==null ||j.getString(key).equalsIgnoreCase("null"))
-                                    statement.bindString(index, "");
+                                    if (j.getString(key) == null || j.getString(key).equalsIgnoreCase("null"))
+                                        statement.bindString(index, "");
                                     else
                                         statement.bindString(index, j.getString(key));
                                 }
@@ -419,7 +419,7 @@ public class DBHelper extends SQLiteOpenHelper {
                                 } else if (j.getString(key).trim().equalsIgnoreCase("true")) {
                                     statement.bindString(index, "1");
                                 } else {
-                                    if(j.getString(key)==null ||j.getString(key).equalsIgnoreCase("null"))
+                                    if (j.getString(key) == null || j.getString(key).equalsIgnoreCase("null"))
                                         statement.bindString(index, "");
                                     else
                                         statement.bindString(index, j.getString(key));
@@ -430,13 +430,13 @@ public class DBHelper extends SQLiteOpenHelper {
                                 } else if (j.getString(key).trim().equalsIgnoreCase("true")) {
                                     statement.bindString(index, "1");
                                 } else {
-                                    if(j.getString(key)==null ||j.getString(key).equalsIgnoreCase("null"))
+                                    if (j.getString(key) == null || j.getString(key).equalsIgnoreCase("null"))
                                         statement.bindString(index, "");
                                     else
                                         statement.bindString(index, j.getString(key));
                                 }
                             } else {
-                                if(j.getString(key)==null ||j.getString(key).equalsIgnoreCase("null"))
+                                if (j.getString(key) == null || j.getString(key).equalsIgnoreCase("null"))
                                     statement.bindString(index, "");
                                 else
                                     statement.bindString(index, j.getString(key));
@@ -491,8 +491,8 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         if (isLastCommtedDateNull) {
-            cv.put("LastCommitedDate", "");
             cv.put("PushStatus", "0");
+            cv.put("LastCommitedDate", Helper.getTodayDateTime1());
         } else {
             cv.put("PushStatus", "1");
         }
@@ -622,10 +622,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 cv.put(columnNames[i], value);
 
         }
-        cv.put("PushStatus", "0");
 
         if (isLastCommtedDateNull) {
-            cv.put("LastCommitedDate", "");
+            cv.put("LastCommitedDate", Helper.getTodayDateTime1());
             cv.put("PushStatus", "0");
         } else {
             cv.put("PushStatus", "1");
@@ -838,5 +837,22 @@ public class DBHelper extends SQLiteOpenHelper {
         cdbh.close();
         return list;
     }
+
+    public static String getColoumnFromDBonWhere(Context ctx, String tablename,
+                                                 String colName, String whereCol, String whereVal) {
+        String retStr = "";
+        DBHelper dbh = new DBHelper(ctx);
+        SQLiteDatabase db = dbh.getWritableDatabase();
+        String Query = "Select " + colName + " From " + tablename + " Where "
+                + whereCol + " ='" + whereVal + "';";
+        Cursor c = db.rawQuery(Query, null);
+        while (c.moveToNext()) {
+            retStr = c.getString(0);
+        }
+        c.close();
+        db.close();
+        return retStr;
+    }
+
 
 }
