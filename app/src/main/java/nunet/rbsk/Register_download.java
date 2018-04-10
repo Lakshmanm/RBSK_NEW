@@ -118,7 +118,7 @@ public class Register_download extends Activity implements OnClickListener {
                  TokenID = sharedpreferences.getString("DeviceCode", "");
                 // webConn(UrlUtils.URL_INTITAL_SETUP, TokenID);
                 navIndex = 0;
-                new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/20000101000000/1");
+                new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/"+Helper.syncDate+"/1");
 //                Toast.makeText(this, "Downloading DBfile", Toast.LENGTH_LONG)
 //                        .show();
 //                v.setVisibility(View.GONE);
@@ -794,7 +794,7 @@ public class Register_download extends Activity implements OnClickListener {
                 } else if (response.trim().equalsIgnoreCase("200")) {
                     if (navIndex == 0) {
                         navIndex = 1;
-                        new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/20000101000000/2");
+                        new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/"+Helper.syncDate+"/2");
                     } else {
                         if (progDailog != null && progDailog.isShowing())
                             progDailog.dismiss();

@@ -53,7 +53,7 @@ public class UrlUtils {
 	public static String URL_INTITAL_SETUP = BASE_URL_1 + "/api/master/";
 
     // to initial setup
-    public static String URL_SYNC = BASE_URL_1 + "/api/sync/post";
+    public static String URL_SYNC = BASE_URL_1 + "/api/sync";
 	// to request FTS status
 	public static String URL_RequestFTSStatus = BASE_URL
 			+ "/Service/Device/FTSStatus/";

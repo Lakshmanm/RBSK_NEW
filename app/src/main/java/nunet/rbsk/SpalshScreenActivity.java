@@ -12,6 +12,7 @@ import com.nunet.utils.StringUtils;
 import java.io.IOException;
 
 import nunet.rbsk.helpers.DBHelper;
+import nunet.rbsk.helpers.Helper;
 import nunet.rbsk.login.IdentifyLoginActivity;
 import nunet.rbsk.login.LoginActivity;
 import nunet.rbsk.login.RegisterActivity;
@@ -50,8 +51,11 @@ public class SpalshScreenActivity extends Activity {
                         UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
                 String usedOne = sharedpreferences.getString(
                         UserLoginActivity.noOfUsers, null);
+                Helper.syncDate = sharedpreferences.getString("SyncDate", "");
+                if (Helper.syncDate.length() == 0)
+                    Helper.syncDate = "20000101000000";
                 // Praveen Hack code Start
-               // sharedpreferences.edit().putString("DB", "Yes").commit();
+                // sharedpreferences.edit().putString("DB", "Yes").commit();
                 // Praveen Hack code ends
 
                 if (sharedpreferences.getString("DB", "").equals("Yes")) {

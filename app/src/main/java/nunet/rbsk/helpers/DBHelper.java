@@ -658,9 +658,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public  boolean updateTableROWS(Context context, final String tablename,
-                             String[] columnNames, String[] columnValues, String whereColumn,
-                             String whereValue) {
+    public boolean updateTableROWS(Context context, final String tablename,
+                                   String[] columnNames, String[] columnValues, String[] whereColumn,
+                                   String[] whereValue) {
         DBHelper dbhelper = getInstance(mContext);
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         ContentValues cv = new ContentValues();
@@ -680,8 +680,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
 
-        if (whereColumn != null)
-            whereColumn += "='" + whereValue + "'";
+        String query = "";
+        for (int i = 0; i < whereColumn.length; i++)
+            query = query + whereColumn[i] + "='" + whereValue[i] + "' AND ";
+        query = query.substring(0, query.length() - 5);
 
         String updateQuery = "";
         updateQuery = "Update " + tablename + " set ";
@@ -698,7 +700,7 @@ public class DBHelper extends SQLiteOpenHelper {
         System.out.println("update Query......" + updateQuery);
 
 
-        int effectdRows = db.update(tablename, cv, whereColumn, null);
+        int effectdRows = db.update(tablename, cv, query, null);
         boolean flag = effectdRows > 0;
         if (!flag) {
             Log.e("DbLog", "No Rows Effected");
@@ -707,9 +709,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return flag;
 
     }
-
-
-
 
 
     public boolean updateROWByValues(Context context, final String tablename,

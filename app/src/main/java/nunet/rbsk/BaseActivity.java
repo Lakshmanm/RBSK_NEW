@@ -42,6 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,6 +50,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -196,41 +201,49 @@ public class BaseActivity extends Activity {
         @Override
         protected String doInBackground(JSONObject... params) {
 
-            String strResponse = "";
-
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(UrlUtils.URL_SYNC);
-
-            String mResultData = null;
+            String mResultData = "", strResponse = "";
             try {
-                // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                URL url = new URL(UrlUtils.URL_SYNC);
+                URLConnection urlConn = url.openConnection();
+                String j = params[0].toString();
 
-                if (params[0] != null) {
-                    @SuppressWarnings("unchecked")
+                HttpURLConnection httpConn = (HttpURLConnection) urlConn;
+                httpConn.setConnectTimeout((3 * 60 * 1000));
+                httpConn.setReadTimeout((3 * 60 * 1000));
+                httpConn.setDoInput(true);
+                httpConn.setDoOutput(true);
+                httpConn.setRequestProperty("Content-Type",
+                        "application/json;charset=utf-8");
+                httpConn.setRequestMethod("POST");
+                httpConn.connect();
 
-                    Iterator<String> iter = params[0].keys();
-                    while (iter.hasNext()) {
-                        String key = iter.next();
-                        try {
-                            String string = params[0].getString(key);
-                            nameValuePairs.add(new BasicNameValuePair(key, string));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                OutputStream os = new BufferedOutputStream(
+                        httpConn.getOutputStream());
+                os.write(j.getBytes());
+                os.flush();
+                os.close();
+                InputStream content = httpConn.getInputStream();
+                StringBuilder sb = new StringBuilder();
+                BufferedReader bufferedReader = new BufferedReader(
+                        new InputStreamReader(content, "UTF-8"));
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    sb.append(line);
                 }
-                Log.i("input in post", new UrlEncodedFormEntity(nameValuePairs).toString());
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                HttpResponse response = httpclient.execute(httppost);
+                bufferedReader.close();
+                content.close();
 
-                mResultData = EntityUtils.toString(response.getEntity());
+                mResultData = sb.toString();
+                Log.e("response in sync...", mResultData);
                 strResponse = updateSyncTables(mResultData);
             } catch (ClientProtocolException e) {
+                e.printStackTrace();
                 strResponse = "ClientProtocolException";
             } catch (IOException e) {
+                e.printStackTrace();
                 strResponse = "There is no network";
             } catch (Exception e) {
+                e.printStackTrace();
                 strResponse = "Exception";
             }
             return strResponse;
@@ -946,58 +959,65 @@ public class BaseActivity extends Activity {
     public String updateSyncTables(String response) {
         String str = "";
         try {
+            response = response.replace("\\", "");
+            response = response.substring(1, response.length() - 1);
             JSONObject jsonObject = new JSONObject(response);
-            String status = jsonObject.getString("status");
+            String status = jsonObject.getString("Status");
             if (status.trim().equalsIgnoreCase("success")) {
-                Helper.syncDate = jsonObject.getString("syncdate");
+                String syncDate = jsonObject.getString("SyncDate");
                 DBHelper dbh = new DBHelper(BaseActivity.this);
-                dbh.updateROWByValues(BaseActivity.this, "InstitutePlans", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "InstitutePlanDetails", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "Institutes", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "InstituteScreening", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "InstituteScreeningDetails", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenScreening", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "Children", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenScreeningvitals", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenScreeningReferrals", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenScreeningInvestigations", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenScreeningSurgicals", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenScreeningRecommendations", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenScreeningPE", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenScreeningLocalTreatment", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenScreeningAllergies", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildScreeningFH", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenDisabilities", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenParents", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenAllergiesHistory", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenFamilyHistory", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenMedicalHistory", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
-                dbh.updateROWByValues(BaseActivity.this, "ChildrenSurgicalsHistory", new String[]{"PushStatus", "LastCommitedDate"},
-                        new String[]{"1", Helper.syncDate}, new String[]{"PushStatus"}, new String[]{"0"});
+                dbh.updateTableROWS(BaseActivity.this, "InstitutePlans", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "InstitutePlanDetails", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "Institutes", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "InstituteScreening", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "InstituteScreeningDetails", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenScreening", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "Children", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenScreeningvitals", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenScreeningReferrals", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenScreeningInvestigations", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenScreeningSurgicals", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenScreeningRecommendations", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenScreeningPE", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenScreeningLocalTreatment", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenScreeningAllergies", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildScreeningFH", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenDisabilities", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenParents", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenAllergiesHistory", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenFamilyHistory", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenMedicalHistory", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                dbh.updateTableROWS(BaseActivity.this, "ChildrenSurgicalsHistory", new String[]{"PushStatus", "LastCommitedDate"},
+                        new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
+                Helper.syncDate = syncDate;
+                SharedPreferences sharedpreferences = getSharedPreferences(
+                        UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
+
+                sharedpreferences.edit().putString("SyncDate", Helper.syncDate).commit();
                 str = "200";
             } else if (status.trim().equalsIgnoreCase("fail")) {
-                str = jsonObject.getString("message");
+                str = jsonObject.getString("Message");
             } else {
                 str = response;
             }
@@ -1060,7 +1080,7 @@ public class BaseActivity extends Activity {
                 else
                     j.put("RBSKCalendarYearID", c.getString(c.getColumnIndex("RBSKCalendarYearID")));
 
-                if (c.isNull(c.getColumnIndex("ScreeningRoundID")))
+                if (c.isNull(c.getColumnIndex("ScreeningRoundId")))
                     j.put("ScreeningRoundID", "");
                 else
                     j.put("ScreeningRoundID", c.getString(c.getColumnIndex("ScreeningRoundId")));
@@ -1215,10 +1235,10 @@ public class BaseActivity extends Activity {
                         j.put("InstituteID", c2.getString(c2.getColumnIndex("InstituteID")));
                     }
 
-                    if (c2.isNull(c2.getColumnIndex("InstituteScreenStatusID"))) {
-                        j.put("InstituteScreenStatusID", "");
+                    if (c2.isNull(c2.getColumnIndex("InstituteScreeningStatusID"))) {
+                        j.put("InstituteScreeningStatusID", "");
                     } else {
-                        j.put("InstituteScreenStatusID", c2.getString(c2.getColumnIndex("InstituteScreenStatusID")));
+                        j.put("InstituteScreeningStatusID", c2.getString(c2.getColumnIndex("InstituteScreeningStatusID")));
                     }
 
                     j.put("UserID", userID);
@@ -1508,6 +1528,8 @@ public class BaseActivity extends Activity {
                 }
                 if (c5.isNull(c5.getColumnIndex("BP"))) {
                     j.put("BP", "");
+                } else if (c5.getString(c5.getColumnIndex("BP")).trim().equalsIgnoreCase("null")) {
+                    j.put("BP", "0");
                 } else {
                     j.put("BP", c5.getString(c5.getColumnIndex("BP")));
                 }
@@ -1567,7 +1589,6 @@ public class BaseActivity extends Activity {
                 } else {
                     j.put("HeadCircumferenceIndication", c5.getString(c5.getColumnIndex("HeadCircumferenceIndication")));
                 }
-                j.put("", c5.getString(c5.getColumnIndex("HeadCircumferenceIndication")));
                 j.put("UserID", userID);
                 if (c5.isNull(c5.getColumnIndex("LastCommitedDate"))) {
                     j.put("LastCommitedDateTime", "");
@@ -1621,7 +1642,6 @@ public class BaseActivity extends Activity {
                 } else {
                     j.put("ReferredFacilityID", c6.getString(c6.getColumnIndex("ReferredFacilityID")));
                 }
-                j.put("", c6.getString(c6.getColumnIndex("ReferredFacilityID")));
                 // j.put("ReferralStatusID", c6.getString(c6.getColumnIndex("ReferralStatusID")));
                 j.put("UserID", userID);
                 if (c6.isNull(c6.getColumnIndex("LastCommitedDate"))) {
@@ -2016,7 +2036,6 @@ public class BaseActivity extends Activity {
                 } else {
                     j.put("FamilyMemberRelationID", c13.getString(c13.getColumnIndex("FamilyMemberRelationID")));
                 }
-                j.put("", c13.getString(c13.getColumnIndex("FamilyMemberRelationID")));
                 j.put("UserID", userID);
                 if (c13.isNull(c13.getColumnIndex("LastCommitedDate"))) {
                     j.put("LastCommitedDateTime", "");
