@@ -10,6 +10,7 @@ import nunet.rbsk.helpers.Helper;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -128,6 +129,24 @@ public class ModifyPlanActivtyDialog extends Activity implements
     private void updateDataToDB(int tdyCount) {
 
         int count = studStrength - tdyCount;
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String Query = "Select RBSKCalendarYearID from RBSKCalendarYears where year = " + Helper.getyear() + " and IsDeleted =0";
+        Cursor c = db.rawQuery(Query, null);
+        while (c.moveToNext()) {
+            RBSKCalendarYearID = Integer.parseInt(c.getString(0));
+        }
+        c.close();
+        String todayDate = Helper.getTodayDateTime();
+        if (todayDate.indexOf(" ") != -1)
+            todayDate = todayDate.substring(0, todayDate.indexOf(" ")) + " 00:00:00";
+        String Query1 = "Select ScreeningRoundID from ScreeningRounds where RoundStartDate <= '" + todayDate + "' and RoundEndDate >= '" + todayDate + "' and IsDeleted =0";
+        Cursor c1 = db.rawQuery(Query1, null);
+        while (c1.moveToNext()) {
+            ScreeningRoundId = Integer.parseInt(c1.getString(0));
+        }
+        c1.close();
+        db.close();
         if (count != 0) {
             // change institute
             dbh.updateROWByValues(this, "Instituteplandetails", new String[]{
@@ -173,8 +192,8 @@ public class ModifyPlanActivtyDialog extends Activity implements
                     .parseInt(cursor.getString(1)) + tdyCount;
             String LocalInstitutePlanDetailID = cursor.getString(0);
             dbh.updateROWByValues(this, "Instituteplandetails", new String[]{
-                            "PlannedCount", "PlanStatusID","LastCommitedDate" }, new String[]{
-                            dbPlanCount + "".trim(), "1",Helper.getTodayDateTime1()},
+                            "PlannedCount", "PlanStatusID", "LastCommitedDate"}, new String[]{
+                            dbPlanCount + "".trim(), "1", Helper.getTodayDateTime1()},
                     new String[]{"LocalInstitutePlanDetailID"},
                     new String[]{LocalInstitutePlanDetailID});
         }

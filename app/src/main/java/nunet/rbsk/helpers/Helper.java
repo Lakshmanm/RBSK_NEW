@@ -304,10 +304,17 @@ public class Helper {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		return sdf.format(new Date());
 	}
+
+	public static String getyear() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+		return sdf.format(new Date());
+	}
 	public static String getTodayDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(new Date());
 	}
+
+
 
 	/**
 	 * Kiruthika 24-04-2015 Method to retrieve All District based on State
