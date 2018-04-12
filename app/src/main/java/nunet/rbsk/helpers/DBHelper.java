@@ -452,7 +452,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 } finally {
                     db.endTransaction();
                 }
-                Log.e("Table Completed....", tableName);
+               Log.e("Table Completed....", tableName);
             }
 
         } catch (Exception e) {

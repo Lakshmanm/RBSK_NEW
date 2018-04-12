@@ -68,7 +68,7 @@ public class BaseActivity extends Activity {
 
     ProgressDialog progDailog;
     int navIndex = 0;
-
+    String syncDate ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -938,6 +938,11 @@ public class BaseActivity extends Activity {
                     } else {
                         if (progDailog != null && progDailog.isShowing())
                             progDailog.dismiss();
+                        Helper.syncDate = syncDate;
+                        SharedPreferences sharedpreferences = getSharedPreferences(
+                                UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
+
+                        sharedpreferences.edit().putString("SyncDate", Helper.syncDate).commit();
                         Helper.showShortToast(BaseActivity.this, "Sync Process Completed");
                     }
 
@@ -964,7 +969,7 @@ public class BaseActivity extends Activity {
             JSONObject jsonObject = new JSONObject(response);
             String status = jsonObject.getString("Status");
             if (status.trim().equalsIgnoreCase("success")) {
-                String syncDate = jsonObject.getString("SyncDate");
+                 syncDate = jsonObject.getString("SyncDate");
                 DBHelper dbh = new DBHelper(BaseActivity.this);
                 dbh.updateTableROWS(BaseActivity.this, "InstitutePlans", new String[]{"PushStatus", "LastCommitedDate"},
                         new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
@@ -1010,11 +1015,7 @@ public class BaseActivity extends Activity {
                         new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
                 dbh.updateTableROWS(BaseActivity.this, "ChildrenSurgicalsHistory", new String[]{"PushStatus", "LastCommitedDate"},
                         new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
-                Helper.syncDate = syncDate;
-                SharedPreferences sharedpreferences = getSharedPreferences(
-                        UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
 
-                sharedpreferences.edit().putString("SyncDate", Helper.syncDate).commit();
                 str = "200";
             } else if (status.trim().equalsIgnoreCase("fail")) {
                 str = jsonObject.getString("Message");
