@@ -481,7 +481,7 @@ public class EditStuBasicInfo extends Fragment implements OnClickListener {
                     System.out.println("basicoj:::::" + Helper.childrenObject);
                     android.app.FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.frame_container, fragment).commit();
+                            .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
 
                 }
             }

@@ -1366,7 +1366,7 @@ public class EditStuFamilyDetails extends Fragment implements OnClickListener {
 				if (fragment != null) {
 					android.app.FragmentManager fragmentManager = getFragmentManager();
 					fragmentManager.beginTransaction()
-							.replace(R.id.frame_container, fragment).commit();
+							.replace(R.id.frame_container, fragment).commitAllowingStateLoss();
 				}
 				System.out.println("family obj:::::"
 						+ Helper.childrenObject.getFirstName());

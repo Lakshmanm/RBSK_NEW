@@ -104,10 +104,10 @@ public class ScreeningVitalsWeight extends DialogFragment implements
 		float height = 0;
 		String weightQuery;
 		if (StringUtils.equalsNoCase(type_ofinstitute, "awc")) {
-			weightQuery = "Select Median from 0to5yearsweightchart where IsDeleted!=1 and   AgeinMonths ="
+			weightQuery = "Select Median from [0to5yearsweightchart] where IsDeleted!=1 and   AgeinMonths ="
 					+ (age * 12) + " and GenderID=" + genderId;
 		} else {
-			weightQuery = "Select MedianWeightInKGs from 6to18yearsweightchart IsDeleted!=1 and   where AgeinYears ="
+			weightQuery = "Select MedianWeightInKGs from [6to18yearsweightchart] IsDeleted!=1 and   where AgeinYears ="
 					+ age + " and GenderID=" + genderId;
 		}
 		cur = dbh.getCursorData(getActivity(), weightQuery);

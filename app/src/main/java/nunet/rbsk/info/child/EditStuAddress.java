@@ -783,7 +783,7 @@ public class EditStuAddress extends Fragment implements OnClickListener,
 				if (fragment != null) {
 					android.app.FragmentManager fragmentManager = getFragmentManager();
 					fragmentManager.beginTransaction()
-							.replace(R.id.frame_container, fragment).commit();
+							.replace(R.id.frame_container, fragment).commitAllowingStateLoss();
 
 				}
 
@@ -874,7 +874,7 @@ public class EditStuAddress extends Fragment implements OnClickListener,
 						android.app.FragmentManager fragmentManager = getFragmentManager();
 						fragmentManager.beginTransaction()
 								.replace(R.id.frame_container, fragment)
-								.commit();
+								.commitAllowingStateLoss();
 
 					}
 

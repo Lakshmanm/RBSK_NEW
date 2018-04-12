@@ -26,6 +26,7 @@ import org.apache.http.NameValuePair;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -269,6 +270,12 @@ public class DashBoardActivity extends BaseActivity {
 
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateCalendar();
     }
 
     public boolean isHoliday() {
@@ -520,13 +527,15 @@ public class DashBoardActivity extends BaseActivity {
     /**
      * On click listener
      *
-     * @param i
+     * @param
      */
 
     // public static int kk = 0;
     public void displayView(View v, Context ctx, int day) {
-        if (dialog != null)
-            dialog.show();
+        if(!((Activity)ctx).isFinishing()) {
+            if (dialog != null)
+                dialog.show();
+        }
         switch (v.getId()) {
             case R.id.btn_schedule_monthview:
                 bundle = new Bundle();
@@ -558,7 +567,7 @@ public class DashBoardActivity extends BaseActivity {
         if (fragment != null) {
             fragmentManager = this.getFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.frame_container, fragment).commit();
+                    .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
 
         } else {
             // error in creating fragment
@@ -595,7 +604,7 @@ public class DashBoardActivity extends BaseActivity {
             fragment.setArguments(bundle);
             fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.frame_container, fragment).commit();
+                    .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
             final Handler handler = new Handler();
             final Runnable runnable = new Runnable() {
                 @Override

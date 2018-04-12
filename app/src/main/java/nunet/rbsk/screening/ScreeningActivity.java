@@ -514,7 +514,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
             android.app.FragmentManager fragmentManager = getFragmentManager();
             resumeFlag = false;
             fragmentManager.beginTransaction()
-                    .replace(R.id.frame_container, fragment).commit();
+                    .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
 
         } else {
             // error in creating fragment
@@ -904,7 +904,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                                 fragment.setArguments(bundle);
                                 resumeFlag = false;
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, fragment).commit();
+                                        .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
 
                             }
 

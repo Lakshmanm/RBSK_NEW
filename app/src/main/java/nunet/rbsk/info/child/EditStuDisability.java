@@ -396,7 +396,7 @@ public class EditStuDisability extends Fragment implements OnClickListener,
 						android.app.FragmentManager fragmentManager = getFragmentManager();
 						fragmentManager.beginTransaction()
 								.replace(R.id.frame_container, fragment)
-								.commit();
+								.commitAllowingStateLoss();
 
 					}
 				}
@@ -418,7 +418,7 @@ public class EditStuDisability extends Fragment implements OnClickListener,
 				if (fragment != null) {
 					android.app.FragmentManager fragmentManager = getFragmentManager();
 					fragmentManager.beginTransaction()
-							.replace(R.id.frame_container, fragment).commit();
+							.replace(R.id.frame_container, fragment).commitAllowingStateLoss();
 
 				}
 				final InputMethodManager imm = (InputMethodManager) getActivity()

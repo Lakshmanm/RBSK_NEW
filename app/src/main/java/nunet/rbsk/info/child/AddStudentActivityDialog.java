@@ -196,7 +196,7 @@ public class AddStudentActivityDialog extends Activity implements
 		if (mFragment != null) {
 			android.app.FragmentManager fragmentManager = getFragmentManager();
 			fragmentManager.beginTransaction()
-					.replace(R.id.frame_container, mFragment).commit();
+					.replace(R.id.frame_container, mFragment).commitAllowingStateLoss();
 		} else {
 			// error in creating fragment
 			Log.e("MainActivity", "Error in creating fragment");

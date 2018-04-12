@@ -868,10 +868,10 @@ public class ScreeningVitalsFragment extends Fragment implements
     float[] weight_array = new float[7];
     String weightQuery;
     if (StringUtils.equalsNoCase(type_ofinstitute, "awc")) {
-      weightQuery = "Select Negative3SD,Negative2SD,Negative1SD,Median,[3SD],[2SD],[1SD] from 0to5yearsweightchart where IsDeleted!=1 and   AgeinMonths ="
+      weightQuery = "Select Negative3SD,Negative2SD,Negative1SD,Median,[3SD],[2SD],[1SD] from [0to5yearsweightchart] where IsDeleted!=1 and   AgeinMonths ="
         + ageInMonths + " and GenderID=" + genderId;
     } else {
-      weightQuery = "Select MedianWeightInKGs from 6to18yearsweightchart where IsDeleted!=1 and   AgeinYears ="
+      weightQuery = "Select MedianWeightInKGs from [6to18yearsweightchart] where IsDeleted!=1 and   AgeinYears ="
         + age + " and GenderID=" + genderId;
     }
     Cursor cur = dbh.getCursorData(this.getActivity(), weightQuery);
@@ -918,10 +918,10 @@ public class ScreeningVitalsFragment extends Fragment implements
     float[] height_array = new float[7];
     String heightQuery;
     if (StringUtils.equalsNoCase(type_ofinstitute, "awc")) {
-      heightQuery = "Select Negative3SD,Negative2SD,Negative1SD,Median,[3SD],[2SD],[1SD] from 0to5yearsweightchart where  IsDeleted!=1 and  AgeinMonths ="
+      heightQuery = "Select Negative3SD,Negative2SD,Negative1SD,Median,[3SD],[2SD],[1SD] from [0to5yearsheightchart] where  IsDeleted!=1 and  AgeinMonths ="
         + ageInMonths + " and GenderID=" + genderId;
     } else {
-      heightQuery = "Select MedianHeightInCms from 6to18yearsheightchart where IsDeleted!=1 and   AgeinYears"
+      heightQuery = "Select MedianHeightInCms from [6to18yearsheightchart] where IsDeleted!=1 and   AgeinYears"
         + " =" + age + " and GenderID=" + genderId;
     }
     Cursor cur = dbh.getCursorData(this.getActivity(), heightQuery);
@@ -1006,7 +1006,7 @@ public class ScreeningVitalsFragment extends Fragment implements
     float[] head_array = new float[7];
     String headQuery;
 
-    headQuery = "Select Negative3SD,Negative2SD,Negative1SD,Median,[3SD],[2SD],[1SD] from 0to5YearsHCChart where IsDeleted!=1 and   AgeinMonths ="
+    headQuery = "Select Negative3SD,Negative2SD,Negative1SD,Median,[3SD],[2SD],[1SD] from [0to5YearsHCChart] where IsDeleted!=1 and   AgeinMonths ="
       + ageInMonths + " and GenderID=" + genderId;
 
     Cursor cur = dbh.getCursorData(this.getActivity(), headQuery);
@@ -1081,7 +1081,7 @@ public class ScreeningVitalsFragment extends Fragment implements
     float[] bmi_array = new float[7];
     String bmiQuery;
 
-    bmiQuery = "Select Negative3SD,Negative2SD,Negative1SD,Median,[3SD],[2SD],[1SD] from 6Mto19YBMIChartZScores where IsDeleted!=1 and   AgeinMonths ="
+    bmiQuery = "Select Negative3SD,Negative2SD,Negative1SD,Median,[3SD],[2SD],[1SD] from [6Mto19YBMIChartZScores] where IsDeleted!=1 and   AgeinMonths ="
       + ageInMonths + " and GenderID=" + genderId;
 
     Cursor cur = dbh.getCursorData(this.getActivity(), bmiQuery);

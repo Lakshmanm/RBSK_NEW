@@ -219,7 +219,7 @@ public class ScreeningBasicInfoFragment extends Fragment implements
   }
 
   private void getScreeningStatus() {
-    DBHelper dbh = new DBHelper(this.getActivity().getApplicationContext());
+    DBHelper dbh = new DBHelper(this.getActivity());
     String query = "select CS.ChildrenScreenStatusID,CS.ScreeningComments  from childrenscreening CS" +
       " where CS.IsDeleted!=1 AND  LocalChildrenID='"
       + childID

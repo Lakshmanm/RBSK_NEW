@@ -165,7 +165,7 @@ public class InsituteFragmentActivityDialog extends Activity implements
         if (fragmentArr[0] != null) {
           android.app.FragmentManager fragmentManager = getFragmentManager();
           fragmentManager.beginTransaction()
-            .add(R.id.frame_container, fragmentArr[0]).commit();
+            .add(R.id.frame_container, fragmentArr[0]).commitAllowingStateLoss();
 
         } else {
           // error in creating fragment
@@ -186,7 +186,7 @@ public class InsituteFragmentActivityDialog extends Activity implements
         if (fragmentArr[4] != null) {
           android.app.FragmentManager fragmentManager = getFragmentManager();
           fragmentManager.beginTransaction()
-            .add(R.id.frame_container, fragmentArr[4]).commit();
+            .add(R.id.frame_container, fragmentArr[4]).commitAllowingStateLoss();
 
         } else {
           // error in creating fragment
@@ -292,19 +292,19 @@ public class InsituteFragmentActivityDialog extends Activity implements
             .setCustomAnimations(android.R.animator.fade_in,
               android.R.animator.fade_out)
             .add(R.id.frame_container, fragmentArr[i])
-            .show(fragmentArr[i]).commit();
+            .show(fragmentArr[i]).commitAllowingStateLoss();
         } else
           getFragmentManager()
             .beginTransaction()
             .setCustomAnimations(android.R.animator.fade_in,
               android.R.animator.fade_out)
-            .show(fragmentArr[i]).commit();
+            .show(fragmentArr[i]).commitAllowingStateLoss();
       } else if (fragmentArr[i] != null)
 
         getFragmentManager().beginTransaction()
           // .setCustomAnimations(android.R.animator.fade_out,
           // android.R.animator.fade_in)
-          .hide(fragmentArr[i]).commit();
+          .hide(fragmentArr[i]).commitAllowingStateLoss();
     }
 
   }
@@ -312,10 +312,10 @@ public class InsituteFragmentActivityDialog extends Activity implements
   /**
    * To change colors of header based on the user selection
    *
-   * @param headerbg
-   * @param headerbgSelectced
-   * @param headerbg2
-   * @param headerbg3
+   * @param
+   * @param
+   * @param
+   * @param
    */
   public void updateHeaderColors(int basicInfoHeader, int addressHeader,
                                  int staffHeader, int coveredByHeader, int signoffHeader) {
