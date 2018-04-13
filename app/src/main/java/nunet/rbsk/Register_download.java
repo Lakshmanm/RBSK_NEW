@@ -76,7 +76,7 @@ public class Register_download extends Activity implements OnClickListener {
     private Button btn_register_continue;
     public ProgressDialog progDailog = null;
     DBHelper dbHelper;
-    String TokenID ="";
+    String TokenID = "";
     int navIndex = 0;
 
     @Override
@@ -115,10 +115,10 @@ public class Register_download extends Activity implements OnClickListener {
             case R.id.btn_register_setup:
                 SharedPreferences sharedpreferences = getSharedPreferences(
                         "LoginMain", Context.MODE_PRIVATE);
-                 TokenID = sharedpreferences.getString("DeviceCode", "");
+                TokenID = sharedpreferences.getString("DeviceCode", "");
                 // webConn(UrlUtils.URL_INTITAL_SETUP, TokenID);
                 navIndex = 0;
-                new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/"+Helper.syncDate+"/1");
+                new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + Helper.syncDate + "/1");
 //                Toast.makeText(this, "Downloading DBfile", Toast.LENGTH_LONG)
 //                        .show();
 //                v.setVisibility(View.GONE);
@@ -794,7 +794,7 @@ public class Register_download extends Activity implements OnClickListener {
                 } else if (response.trim().equalsIgnoreCase("200")) {
                     if (navIndex == 0) {
                         navIndex = 1;
-                        new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/"+Helper.syncDate+"/2");
+                        new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + Helper.syncDate + "/2");
                     } else {
                         if (progDailog != null && progDailog.isShowing())
                             progDailog.dismiss();

@@ -22,24 +22,17 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.nunet.wsutil.UrlUtils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
@@ -56,7 +49,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import nunet.rbsk.helpers.DBHelper;
@@ -68,7 +60,8 @@ public class BaseActivity extends Activity {
 
     ProgressDialog progDailog;
     int navIndex = 0;
-    String syncDate ="";
+    String syncDate = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -262,7 +255,7 @@ public class BaseActivity extends Activity {
                     String TokenID = sharedpreferences.getString("DeviceCode", "");
                     // webConn(UrlUtils.URL_INTITAL_SETUP, TokenID);
                     navIndex = 0;
-                    new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/1");
+                    new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + syncDate + "/1");
                 } else {
                     progDailog.dismiss();
                     Helper.showShortToast(BaseActivity.this, response);
@@ -934,7 +927,7 @@ public class BaseActivity extends Activity {
                         SharedPreferences sharedpreferences = getSharedPreferences(
                                 "LoginMain", Context.MODE_PRIVATE);
                         String TokenID = sharedpreferences.getString("DeviceCode", "");
-                        new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/2");
+                        new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + syncDate + "/2");
                     } else {
                         if (progDailog != null && progDailog.isShowing())
                             progDailog.dismiss();
@@ -969,7 +962,7 @@ public class BaseActivity extends Activity {
             JSONObject jsonObject = new JSONObject(response);
             String status = jsonObject.getString("Status");
             if (status.trim().equalsIgnoreCase("success")) {
-                 syncDate = jsonObject.getString("SyncDate");
+                syncDate = jsonObject.getString("SyncDate");
                 DBHelper dbh = new DBHelper(BaseActivity.this);
                 dbh.updateTableROWS(BaseActivity.this, "InstitutePlans", new String[]{"PushStatus", "LastCommitedDate"},
                         new String[]{"1", syncDate}, new String[]{"PushStatus", "LastCommitedDate"}, new String[]{"0", Helper.syncDate});
