@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:orientation="vertical" >
+    android:keepScreenOn="true"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/callheader"
@@ -14,14 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingLeft="10dp"         
-        android:fastScrollEnabled="true"/>
+        android:fastScrollEnabled="true"
+        android:paddingLeft="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="right"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_edit_institute_staff_previous"
@@ -29,8 +30,8 @@
             android:layout_height="36dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/buttonbg_grey"
-            android:text="Previous"
             android:scrollbars="vertical"
+            android:text="Previous"
             android:textColor="#ffffff" />
 
         <Button

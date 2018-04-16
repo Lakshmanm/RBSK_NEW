@@ -4,7 +4,8 @@
     android:layout_height="@dimen/dialog_vital_height"
     android:background="#fff"
     android:orientation="vertical"
-    android:weightSum="5.6" >
+    android:weightSum="5.6"
+    android:keepScreenOn="true">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:keepScreenOn="true"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,7 +11,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:weightSum="5" >
+        android:weightSum="5">
 
         <TextView
             android:id="@+id/tv_familyhistory_disease_name"
@@ -27,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_family_history_diseases_no"
@@ -64,8 +65,7 @@
             android:digits="@string/dataAllowData"
             android:ems="10"
             android:hint="Add Comments"
-            android:maxLength="100" >
-        </EditText>
+            android:maxLength="100"></EditText>
     </LinearLayout>
 
 </LinearLayout>

@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:keepScreenOn="true"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#FCFEFC"
         android:orientation="horizontal"
-        android:weightSum="3" >
+        android:weightSum="3">
 
         <LinearLayout
             android:id="@+id/ll_calender_view"
@@ -17,28 +18,26 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#ECFAF4"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ListView
                 android:id="@+id/lv_day_calendar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:cacheColorHint="#00000000"
-                android:scrollingCache="false" >
-            </ListView>
+                android:scrollingCache="false"></ListView>
         </LinearLayout>
 
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2" >
+            android:layout_weight="2">
 
             <LinearLayout
                 android:id="@+id/ll_schlist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" >
-            </LinearLayout>
+                android:orientation="vertical"></LinearLayout>
         </ScrollView>
     </LinearLayout>
 

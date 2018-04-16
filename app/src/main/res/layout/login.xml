@@ -2,14 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#815CC5" >
+    android:background="#815CC5"
+    android:keepScreenOn="true">
 
     <LinearLayout
         android:id="@+id/ll_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/Logo"
@@ -20,7 +21,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/et_login_username"
@@ -31,9 +32,9 @@
                 android:ems="10"
                 android:hint="Username"
                 android:imeOptions="actionNext"
-                android:text=""
                 android:paddingLeft="10dp"
                 android:singleLine="true"
+                android:text=""
                 android:textColorHint="#FCFEFC"
                 android:textSize="20dp" />
 
@@ -46,11 +47,11 @@
                 android:background="@drawable/et_background"
                 android:ems="10"
                 android:hint="Password"
-                android:text=""
                 android:imeOptions="actionGo"
                 android:paddingLeft="10dp"
                 android:password="true"
                 android:singleLine="true"
+                android:text=""
                 android:textColorHint="#FCFEFC"
                 android:textSize="20dp" />
 

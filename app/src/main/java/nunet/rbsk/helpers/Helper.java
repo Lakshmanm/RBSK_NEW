@@ -131,6 +131,7 @@ public class Helper {
     // public static String localTreatment ="";
 
     public static String syncDate = "20000101000000";
+    public static String syncDate1 = "";
     public static AlertDialog progressDialog;
 
     public static void updateHeaderFromNext(Context ctx, TextView oldHeader,

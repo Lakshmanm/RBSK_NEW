@@ -132,15 +132,9 @@ public class DayViewCalendar extends Fragment {
                 lv_day_calendar.setAdapter(dayAdapter);
                 lv_day_calendar.setSelector(R.drawable.listselector);
                 lv_day_calendar.setSelection(daySelected - 1);
-                Handler h = new Handler();
-                h.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (Helper.progressDialog != null) {
-                            Helper.progressDialog.dismiss();
-                        }
-                    }
-                }, 500);
+                if (Helper.progressDialog != null && Helper.progressDialog.isShowing()) {
+                    Helper.progressDialog.dismiss();
+                }
             }
         }.execute();
     }

@@ -811,8 +811,8 @@ public class PlanOffLineActivity extends BaseActivity implements
     public void onBackPressed() {
         super.onBackPressed();
         Intent i = new Intent(PlanOffLineActivity.this, DashBoardActivity.class);
-        finish();
         startActivity(i);
+        finish();
 
     }
 

@@ -3,7 +3,8 @@
     android:id="@+id/mainScrollView"
     android:layout_width="match_parent"
     android:layout_height="300dp"
-    android:background="#ffffff" >
+    android:background="#ffffff"
+    android:keepScreenOn="true">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -4,14 +4,15 @@
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     android:background="@drawable/bg_custom_calendar"
+    android:keepScreenOn="true"
     android:orientation="vertical"
-    android:weightSum="7.18" >
+    android:weightSum="7.18">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="fill_parent"
@@ -159,9 +160,10 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
-        <LinearLayout android:id="@+id/ll_month_calendarDay"
+        <LinearLayout
+            android:id="@+id/ll_month_calendarDay"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -171,7 +173,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -201,7 +203,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -231,7 +233,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -261,7 +263,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -291,7 +293,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -321,7 +323,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -351,7 +353,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -377,7 +379,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -389,7 +391,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -419,7 +421,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -449,7 +451,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -479,7 +481,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -509,7 +511,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -539,7 +541,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -569,7 +571,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -595,7 +597,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -607,7 +609,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -637,7 +639,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -667,7 +669,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -697,7 +699,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -727,7 +729,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -757,7 +759,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -787,7 +789,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -813,7 +815,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -825,7 +827,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -855,7 +857,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -885,7 +887,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -915,7 +917,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -945,7 +947,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -975,7 +977,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1005,7 +1007,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1031,7 +1033,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -1043,7 +1045,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1073,7 +1075,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1103,7 +1105,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1133,7 +1135,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1163,7 +1165,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1193,7 +1195,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1223,7 +1225,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1249,7 +1251,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -1261,7 +1263,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1291,7 +1293,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1321,7 +1323,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1351,7 +1353,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1381,7 +1383,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1411,7 +1413,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"
@@ -1441,7 +1443,7 @@
             android:paddingLeft="@dimen/cell_padding_left"
             android:paddingRight="@dimen/cell_padding_right"
             android:paddingTop="@dimen/cell_padding_top"
-            android:textSize="@dimen/text_calendar_days_size" >
+            android:textSize="@dimen/text_calendar_days_size">
 
             <TextView
                 android:layout_width="match_parent"

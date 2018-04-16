@@ -54,6 +54,7 @@ public class SpalshScreenActivity extends Activity {
                 Helper.syncDate = sharedpreferences.getString("SyncDate", "");
                 if (Helper.syncDate.length() == 0)
                     Helper.syncDate = "20000101000000";
+                Helper.syncDate1 = sharedpreferences.getString("SyncDate1", "");
                 // Praveen Hack code Start
                 // sharedpreferences.edit().putString("DB", "Yes").commit();
                 // Praveen Hack code ends

@@ -184,7 +184,7 @@ public class BaseActivity extends Activity {
 
         @Override
         protected void onPreExecute() {
-       Helper.showProgressDialog(BaseActivity.this);
+            Helper.showProgressDialog(BaseActivity.this);
 
         }
 
@@ -252,7 +252,7 @@ public class BaseActivity extends Activity {
                     String TokenID = sharedpreferences.getString("DeviceCode", "");
                     // webConn(UrlUtils.URL_INTITAL_SETUP, TokenID);
                     navIndex = 0;
-                    new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + syncDate + "/1");
+                    new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate1 + "/1");
                 } else {
                     Helper.progressDialog.dismiss();
                     Helper.showShortToast(BaseActivity.this, response);
@@ -851,6 +851,14 @@ public class BaseActivity extends Activity {
                     }
                     dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDSCREENINGFH", CHILDSCREENINGFH);
                 }
+                if (mJsonObject.has("SyncDate")) {
+                    Helper.syncDate1 = mJsonObject.getString("SyncDate");
+                    SharedPreferences sharedpreferences = getSharedPreferences(
+                            UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
+
+                    sharedpreferences.edit().putString("SyncDate1", Helper.syncDate1).commit();
+                }
+
                 retStr = "200";
             } else {
                 retStr = strResponse;
@@ -915,7 +923,7 @@ public class BaseActivity extends Activity {
                 System.out.println("in post...." + response);
 
                 if (response.trim().length() == 0) {
-                    if (  Helper.progressDialog != null &&   Helper.progressDialog.isShowing())
+                    if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
                         Helper.progressDialog.dismiss();
                     Helper.showShortToast(BaseActivity.this, "There is a problem in sync process so please try again...");
                 } else if (response.trim().equalsIgnoreCase("200")) {
@@ -924,9 +932,9 @@ public class BaseActivity extends Activity {
                         SharedPreferences sharedpreferences = getSharedPreferences(
                                 "LoginMain", Context.MODE_PRIVATE);
                         String TokenID = sharedpreferences.getString("DeviceCode", "");
-                        new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + syncDate + "/2");
+                        new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate1 + "/2");
                     } else {
-                        if (  Helper.progressDialog != null &&   Helper.progressDialog.isShowing())
+                        if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
                             Helper.progressDialog.dismiss();
                         Helper.syncDate = syncDate;
                         SharedPreferences sharedpreferences = getSharedPreferences(
@@ -937,7 +945,7 @@ public class BaseActivity extends Activity {
                     }
 
                 } else {
-                    if (  Helper.progressDialog != null &&   Helper.progressDialog.isShowing())
+                    if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
                         Helper.progressDialog.dismiss();
                     Helper.showShortToast(BaseActivity.this, response);
                 }

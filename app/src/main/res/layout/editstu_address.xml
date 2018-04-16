@@ -2,34 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:keepScreenOn="true"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:weightSum="4" >
+            android:weightSum="4">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3" >
+                android:layout_weight="3">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="20dp"
-                        android:weightSum="4.6" >
+                        android:weightSum="4.6">
 
                         <TextView
                             android:id="@+id/textView1"
@@ -47,13 +48,13 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="20dp"
                             android:layout_weight="1.4"
-                            android:orientation="horizontal" >
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView3"
@@ -74,7 +75,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView4"
@@ -95,7 +96,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView5"
@@ -116,7 +117,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView9"
@@ -140,13 +141,13 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="20dp"
                             android:layout_weight="1.4"
-                            android:orientation="horizontal" >
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView14"
@@ -167,7 +168,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView20"
@@ -187,15 +188,14 @@
                                     android:imeOptions="actionNext"
                                     android:maxLength="6"
                                     android:numeric="integer"
-                                    android:singleLine="true" >
-                                </EditText>
+                                    android:singleLine="true"></EditText>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView21"
@@ -215,15 +215,14 @@
                                     android:hint="Address Line 1"
                                     android:imeOptions="actionNext"
                                     android:maxLength="50"
-                                    android:singleLine="true" >
-                                </EditText>
+                                    android:singleLine="true"></EditText>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView31"
@@ -243,8 +242,7 @@
                                     android:hint="Address Line 2"
                                     android:imeOptions="actionGo"
                                     android:maxLength="50"
-                                    android:singleLine="true" >
-                                </EditText>
+                                    android:singleLine="true"></EditText>
                             </LinearLayout>
                         </LinearLayout>
 
@@ -253,7 +251,7 @@
                             android:layout_height="0dp"
                             android:layout_marginTop="20dp"
                             android:layout_weight="1"
-                            android:gravity="center_vertical" >
+                            android:gravity="center_vertical">
 
                             <CheckBox
                                 android:id="@+id/cb_edit_student_address_permanent_y_n"
@@ -274,7 +272,7 @@
                         android:orientation="vertical"
                         android:padding="20dp"
                         android:visibility="gone"
-                        android:weightSum="4.6" >
+                        android:weightSum="4.6">
 
                         <TextView
                             android:id="@+id/textView12"
@@ -292,13 +290,13 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="20dp"
                             android:layout_weight="1.4"
-                            android:orientation="horizontal" >
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView311"
@@ -319,7 +317,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView41"
@@ -340,7 +338,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView51"
@@ -361,7 +359,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView91"
@@ -385,13 +383,13 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="20dp"
                             android:layout_weight="1.4"
-                            android:orientation="horizontal" >
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView141"
@@ -412,7 +410,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView201"
@@ -432,15 +430,14 @@
                                     android:imeOptions="actionNext"
                                     android:maxLength="6"
                                     android:numeric="integer"
-                                    android:singleLine="true" >
-                                </EditText>
+                                    android:singleLine="true"></EditText>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView211"
@@ -460,15 +457,14 @@
                                     android:hint="Address Line 1"
                                     android:imeOptions="actionNext"
                                     android:maxLength="50"
-                                    android:singleLine="true" >
-                                </EditText>
+                                    android:singleLine="true"></EditText>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:layout_weight="1"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/textView"
@@ -487,8 +483,7 @@
                                     android:ems="10"
                                     android:hint="Address Line 2"
                                     android:imeOptions="actionGo"
-                                    android:singleLine="true" >
-                                </EditText>
+                                    android:singleLine="true"></EditText>
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
@@ -500,7 +495,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="bottom|right"
-                android:padding="20dp" >
+                android:padding="20dp">
 
                 <Button
                     android:id="@+id/btn_edit_student_address_next"

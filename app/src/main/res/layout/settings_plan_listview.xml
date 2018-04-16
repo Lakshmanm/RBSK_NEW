@@ -5,7 +5,8 @@
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="15dp"
-    android:weightSum="5" >
+    android:weightSum="5"
+    android:keepScreenOn="true">
 
     <TextView
         android:id="@+id/tv_settings_sno"

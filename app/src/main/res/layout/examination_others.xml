@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dialog_width"
     android:layout_height="@dimen/dialog_height"
     android:background="#FCFEFC"
-    android:orientation="vertical" >
+    android:keepScreenOn="true"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/et_examination_others"
@@ -14,7 +15,6 @@
         android:background="@drawable/border_style_edittext"
         android:digits="@string/dataAllowData"
         android:ems="10"
-        android:hint="Add Comments" >
-    </EditText>
+        android:hint="Add Comments"></EditText>
 
 </LinearLayout>

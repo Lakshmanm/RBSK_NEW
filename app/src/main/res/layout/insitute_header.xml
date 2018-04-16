@@ -4,14 +4,15 @@
     android:layout_width="@dimen/dialog_width"
     android:layout_height="@dimen/dialog_height"
     android:background="#ffffff"
+    android:keepScreenOn="true"
     android:orientation="vertical"
-    android:weightSum="10" >
+    android:weightSum="10">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="55dp"
-        android:layout_weight="1"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/tv_editInst_instName"
@@ -43,7 +44,7 @@
         android:layout_weight="1"
         android:background="#eeeeee"
         android:orientation="horizontal"
-        android:weightSum="5" >
+        android:weightSum="5">
 
         <TextView
             android:id="@+id/tv_editInst_basicInfo"
@@ -89,19 +90,19 @@
             android:textColor="#ffffff"
             android:textSize="18dp" />
 
-      <TextView
-        android:id="@+id/tv_editInst_signoff"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="Sign Off"
-        android:textColor="#ffffff"
-        android:textSize="18dp" />
+        <TextView
+            android:id="@+id/tv_editInst_signoff"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Sign Off"
+            android:textColor="#ffffff"
+            android:textSize="18dp" />
     </LinearLayout>
 
-   <FrameLayout
+    <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"

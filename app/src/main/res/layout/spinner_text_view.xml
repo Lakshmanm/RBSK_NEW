@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/bg_violet"
+    android:keepScreenOn="true"
    >
 
     <TextView

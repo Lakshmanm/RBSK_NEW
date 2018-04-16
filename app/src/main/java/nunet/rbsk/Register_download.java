@@ -116,7 +116,7 @@ public class Register_download extends Activity implements OnClickListener {
                 TokenID = sharedpreferences.getString("DeviceCode", "");
                 // webConn(UrlUtils.URL_INTITAL_SETUP, TokenID);
                 navIndex = 0;
-                new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + Helper.syncDate + "/1");
+                new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/1");
 //                Toast.makeText(this, "Downloading DBfile", Toast.LENGTH_LONG)
 //                        .show();
 //                v.setVisibility(View.GONE);
@@ -721,7 +721,12 @@ public class Register_download extends Activity implements OnClickListener {
                     dbHelper.bulkinsertintoTable(Register_download.this, "CHILDSCREENINGFH", CHILDSCREENINGFH);
                 }
                 if (mJsonObject.has("SyncDate")) {
-                    Helper.syncDate = mJsonObject.getString("SyncDate");
+                    Log.e("sync dt frm service 2", mJsonObject.getString("SyncDate"));
+                    Helper.syncDate1 = mJsonObject.getString("SyncDate");
+                    SharedPreferences sharedpreferences = getSharedPreferences(
+                            UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
+
+                    sharedpreferences.edit().putString("SyncDate1", Helper.syncDate1).commit();
                 }
                 retStr = "200";
             } else {
@@ -801,7 +806,7 @@ public class Register_download extends Activity implements OnClickListener {
                 } else if (response.trim().equalsIgnoreCase("200")) {
                     if (navIndex == 0) {
                         navIndex = 1;
-                        new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + Helper.syncDate + "/2");
+                        new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate +"/2");
                     } else {
                         if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
                             Helper.progressDialog.dismiss();

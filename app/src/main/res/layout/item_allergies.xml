@@ -3,8 +3,9 @@
     android:id="@+id/ll_refertablelist"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:keepScreenOn="true"
     android:orientation="horizontal"
-    android:padding="6dp" >
+    android:padding="6dp">
 
     <TextView
         android:id="@+id/tv_allergy_year"

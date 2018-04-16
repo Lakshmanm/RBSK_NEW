@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dialog_width_fill"
     android:layout_height="match_parent"
     android:background="#fff" 
-    android:weightSum="4">
+    android:weightSum="4"
+    android:keepScreenOn="true">
 
     <ScrollView
         android:layout_width="match_parent"

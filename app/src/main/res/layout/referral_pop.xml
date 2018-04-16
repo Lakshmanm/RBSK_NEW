@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dialog_width"
     android:layout_height="@dimen/dialog_height"
     android:background="#fff"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:keepScreenOn="true">
 
     <ScrollView
         android:layout_width="match_parent"

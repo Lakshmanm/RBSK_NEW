@@ -91,15 +91,9 @@ public class MonthViewCalender extends Fragment {
         customCalendar.generateDays(yearSelected, monthSelected, scheduleList,
                 eventList);
 
-        Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (Helper.progressDialog != null) {
-                    Helper.progressDialog.dismiss();
-                }
-            }
-        }, 500);
+        if (Helper.progressDialog != null && Helper.progressDialog.isShowing()) {
+            Helper.progressDialog.dismiss();
+        }
 
 
     }

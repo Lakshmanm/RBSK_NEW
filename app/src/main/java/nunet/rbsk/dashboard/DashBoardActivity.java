@@ -104,6 +104,7 @@ public class DashBoardActivity extends BaseActivity {
     public SharedPreferences sharedpreferences;
     public String UnlockID = "", UnlockPassword = "", HealthBlockID = "",
             DeviceID = "", TokenID = "";
+    public boolean progFlag = false;
 
     // inner classes
     private class Item {
@@ -246,7 +247,6 @@ public class DashBoardActivity extends BaseActivity {
                 if (!isHoliday()) {
                     Intent in = new Intent(DashBoardActivity.this,
                             PlanOffLineActivity.class);
-
                     startActivity(in);
                     finish();
                 } else {
@@ -256,23 +256,29 @@ public class DashBoardActivity extends BaseActivity {
                 }
             }
         });
-        // if (savedInstanceState == null) {
-        // on first time display view for first nav item
-        isDayView = true;
-        isMonthView = false;
-        currYearIndex = spn_calendar_year.getSelectedItemPosition();
-        currMonthIndex = spn_calendar_month.getSelectedItemPosition();
-        updateCalendar();
+        if (savedInstanceState == null) {
+            // on first time display view for first nav item
+            isDayView = true;
+            isMonthView = false;
+            currYearIndex = spn_calendar_year.getSelectedItemPosition();
+            currMonthIndex = spn_calendar_month.getSelectedItemPosition();
+            progFlag = true;
+            updateCalendar();
 
-        //  }
+        } else {
+            progFlag = false;
+            //  Helper.showProgressDialog(this);
+        }
 
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        updateCalendar();
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
+//            Helper.progressDialog.dismiss();
+
+    }
 
     public boolean isHoliday() {
 
@@ -294,61 +300,65 @@ public class DashBoardActivity extends BaseActivity {
 
     }
 
+    public class LoadCalendar extends AsyncTask<Void, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //  if (progFlag == true)
+            //    Helper.showProgressDialog(DashBoardActivity.this);
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            String str = "";
+            String currentMonthString = String.valueOf(monthItems
+                    .get(currMonthIndex).id + 1);
+            if (currentMonthString.length() == 1) {
+                currentMonthString = "0" + currentMonthString;
+            }
+
+            selectedStartDate = yearItems.get(currYearIndex).id + "-"
+                    + currentMonthString + "-" + "01";
+            selectedEndDate = yearItems.get(currYearIndex).id + "-"
+                    + currentMonthString + "-" + "31";
+            List<InstituteSchedule> list = getScheduleDataFromDB();
+            List<Event> events = getHolidayDataFromDB();
+            if (list != null) {
+                str = "200";
+            }
+            if (events != null) {
+                str = "200";
+            }
+
+            return str;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if (s.length() > 0) {
+                if (isMonthView) {
+                    displayView(btn_schedule_monthview, DashBoardActivity.this,
+                            0);
+                } else {
+                    displayView(btn_schedule_dayview, DashBoardActivity.this, 0);
+                }
+
+            } else {
+                Helper.progressDialog.dismiss();
+                Helper.showShortToast(DashBoardActivity.this, "Problem in loading dashboard");
+            }
+        }
+    }
+
+    ;
+
     protected void updateCalendar() {
 
-        new AsyncTask<Void, Void, String>() {
-
-            @Override
-            protected void onPreExecute() {
-
-                super.onPreExecute();
-                Helper.showProgressDialog(DashBoardActivity.this);
-            }
-
-            @Override
-            protected String doInBackground(Void... params) {
-                String str = "";
-                String currentMonthString = String.valueOf(monthItems
-                        .get(currMonthIndex).id + 1);
-                if (currentMonthString.length() == 1) {
-                    currentMonthString = "0" + currentMonthString;
-                }
-
-                selectedStartDate = yearItems.get(currYearIndex).id + "-"
-                        + currentMonthString + "-" + "01";
-                selectedEndDate = yearItems.get(currYearIndex).id + "-"
-                        + currentMonthString + "-" + "31";
-                List<InstituteSchedule> list = getScheduleDataFromDB();
-                List<Event> events = getHolidayDataFromDB();
-                if (list != null) {
-                    str = "200";
-                }
-                if (events != null) {
-                    str = "200";
-                }
-
-                return str;
-            }
-
-
-            protected void onPostExecute(String result) {
-                if (result.length() > 0) {
-                    if (isMonthView) {
-                        displayView(btn_schedule_monthview, DashBoardActivity.this,
-                                0);
-                    } else {
-                        displayView(btn_schedule_dayview, DashBoardActivity.this, 0);
-                    }
-                } else {
-                    Helper.progressDialog.dismiss();
-                    Helper.showShortToast(DashBoardActivity.this, "Problem in loading dashboard");
-                }
-
-
-            }
-        }.execute();
+        new LoadCalendar().execute();
 
     }
+
 
     /**
      * To get schedule List from db Kiruthika 07/05/2015

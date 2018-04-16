@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_border"
+    android:keepScreenOn="true"
     android:orientation="vertical"
-    android:weightSum="5" >
+    android:weightSum="5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:weightSum="3" >
+        android:weightSum="3">
 
         <TextView
             android:id="@+id/tv_screening_disablity_type"
@@ -31,9 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="%"
-            android:textSize="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#6b6b76"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <TextView

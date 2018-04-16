@@ -6,7 +6,8 @@
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:weightSum="5.70" >
+    android:weightSum="5.70"
+    android:keepScreenOn="true">
 
     <TextView
         android:id="@+id/tv_plan_search_result_dise_code"
