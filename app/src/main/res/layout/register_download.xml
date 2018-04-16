@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#815CC5"
+    android:keepScreenOn="true"
     tools:context=".Register_download">
 
     <LinearLayout

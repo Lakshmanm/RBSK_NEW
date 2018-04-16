@@ -12,6 +12,7 @@
 
     <style name="CustomAlertDialog" parent="android:Theme.DeviceDefault.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
         <item name="DialogTitleText">Please Wait...</item>
         <item name="DialogSpotColor">#00ffff</item>
         <item name="DialogSpotCount">8</item>

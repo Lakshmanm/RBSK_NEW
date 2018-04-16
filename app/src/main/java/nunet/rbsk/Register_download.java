@@ -720,6 +720,9 @@ public class Register_download extends Activity implements OnClickListener {
                     }
                     dbHelper.bulkinsertintoTable(Register_download.this, "CHILDSCREENINGFH", CHILDSCREENINGFH);
                 }
+                if (mJsonObject.has("SyncDate")) {
+                    Helper.syncDate = mJsonObject.getString("SyncDate");
+                }
                 retStr = "200";
             } else {
                 retStr = strResponse;

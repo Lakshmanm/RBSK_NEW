@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FCFEFC"
+    android:keepScreenOn="true"
     android:orientation="vertical"
-    android:weightSum="3" >
+    android:weightSum="3">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -12,7 +13,7 @@
         android:layout_weight=".3"
         android:background="@drawable/bg_violet"
         android:orientation="horizontal"
-        android:weightSum="6" >
+        android:weightSum="6">
 
         <Spinner
             android:id="@+id/spn_calendar_month"
@@ -41,7 +42,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".8" >
+            android:layout_weight=".8">
 
             <ImageView
                 android:id="@+id/btn_schedule_monthview"
@@ -66,16 +67,15 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1.6"
-            android:layout_height="match_parent" >
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_weight="1.6"></LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="right|center"
-            android:paddingLeft="20dp" >
+            android:paddingLeft="20dp">
 
             <View
                 android:layout_width="1dp"
@@ -113,7 +113,6 @@
         android:id="@+id/frame_container"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.7" >
-    </FrameLayout>
+        android:layout_weight="2.7"></FrameLayout>
 
 </LinearLayout>

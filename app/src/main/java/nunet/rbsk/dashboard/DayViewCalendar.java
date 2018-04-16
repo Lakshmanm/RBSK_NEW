@@ -26,6 +26,7 @@ import android.app.Fragment;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,14 +122,25 @@ public class DayViewCalendar extends Fragment {
             @Override
             protected void onPostExecute(ArrayList<DaySchedule> result) {
                 super.onPostExecute(result);
-                if (getActivity() == null)
+                if (getActivity() == null) {
+                    Helper.progressDialog.dismiss();
                     return;
+                }
+
                 dayAdapter = new CustomDayAdapter(getActivity(), result,
                         monthSelected, yearSelected, daySelected);
                 lv_day_calendar.setAdapter(dayAdapter);
                 lv_day_calendar.setSelector(R.drawable.listselector);
                 lv_day_calendar.setSelection(daySelected - 1);
-
+                Handler h = new Handler();
+                h.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (Helper.progressDialog != null) {
+                            Helper.progressDialog.dismiss();
+                        }
+                    }
+                }, 500);
             }
         }.execute();
     }

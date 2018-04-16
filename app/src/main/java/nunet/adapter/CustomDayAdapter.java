@@ -547,9 +547,7 @@ public class CustomDayAdapter extends BaseAdapter {
         lastSelectedPosition = position;
 
         notifyDataSetChanged();
-        if (Helper.progressDialog != null) {
-            Helper.progressDialog.dismiss();
-        }
+
     }
 
     private void updateAreaName(final TextView tv_area, final int instId) {

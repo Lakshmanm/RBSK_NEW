@@ -7,26 +7,8 @@
 //=============================================================================
 package nunet.rbsk.dashboard;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import nunet.rbsk.BaseActivity;
-import nunet.rbsk.R;
-import nunet.rbsk.helpers.CustomDialog;
-import nunet.rbsk.helpers.DBHelper;
-import nunet.rbsk.helpers.Helper;
-import nunet.rbsk.login.IdentifyLoginActivity;
-import nunet.rbsk.model.Event;
-import nunet.rbsk.model.Institute;
-import nunet.rbsk.model.InstituteSchedule;
-import nunet.rbsk.planoffline.PlanOffLineActivity;
-
-import org.apache.http.NameValuePair;
-
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -39,8 +21,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -54,6 +34,22 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import nunet.rbsk.BaseActivity;
+import nunet.rbsk.R;
+import nunet.rbsk.helpers.DBHelper;
+import nunet.rbsk.helpers.Helper;
+import nunet.rbsk.login.IdentifyLoginActivity;
+import nunet.rbsk.model.Event;
+import nunet.rbsk.model.Institute;
+import nunet.rbsk.model.InstituteSchedule;
+import nunet.rbsk.planoffline.PlanOffLineActivity;
 
 //*****************************************************************************
 //* Name   :  ScheduleFragment.java
@@ -300,7 +296,7 @@ public class DashBoardActivity extends BaseActivity {
 
     protected void updateCalendar() {
 
-        new AsyncTask<Void, String, String>() {
+        new AsyncTask<Void, Void, String>() {
 
             @Override
             protected void onPreExecute() {
@@ -311,6 +307,7 @@ public class DashBoardActivity extends BaseActivity {
 
             @Override
             protected String doInBackground(Void... params) {
+                String str = "";
                 String currentMonthString = String.valueOf(monthItems
                         .get(currMonthIndex).id + 1);
                 if (currentMonthString.length() == 1) {
@@ -323,19 +320,31 @@ public class DashBoardActivity extends BaseActivity {
                         + currentMonthString + "-" + "31";
                 List<InstituteSchedule> list = getScheduleDataFromDB();
                 List<Event> events = getHolidayDataFromDB();
-                return null;
+                if (list != null) {
+                    str = "200";
+                }
+                if (events != null) {
+                    str = "200";
+                }
+
+                return str;
             }
 
-            ;
 
             protected void onPostExecute(String result) {
-                if (isMonthView) {
-                    displayView(btn_schedule_monthview, DashBoardActivity.this,
-                            0);
+                if (result.length() > 0) {
+                    if (isMonthView) {
+                        displayView(btn_schedule_monthview, DashBoardActivity.this,
+                                0);
+                    } else {
+                        displayView(btn_schedule_dayview, DashBoardActivity.this, 0);
+                    }
                 } else {
-                    displayView(btn_schedule_dayview, DashBoardActivity.this, 0);
+                    Helper.progressDialog.dismiss();
+                    Helper.showShortToast(DashBoardActivity.this, "Problem in loading dashboard");
                 }
-                Helper.progressDialog.dismiss();
+
+
             }
         }.execute();
 
@@ -576,9 +585,6 @@ public class DashBoardActivity extends BaseActivity {
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
 
-        } else {
-            // error in creating fragment
-            Log.e("MainActivity", "Error in creating fragment");
         }
 
     }

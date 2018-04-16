@@ -7,6 +7,13 @@
 //=============================================================================
 package nunet.rbsk.dashboard;
 
+import android.app.Fragment;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import java.util.ArrayList;
 
 import nunet.custom.CustomCalendar;
@@ -14,11 +21,6 @@ import nunet.rbsk.R;
 import nunet.rbsk.helpers.Helper;
 import nunet.rbsk.model.Event;
 import nunet.rbsk.model.InstituteSchedule;
-import android.app.Fragment;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 //*****************************************************************************
 //* Name   :  MonthViewCalender.java
@@ -45,56 +47,62 @@ import android.view.ViewGroup;
 public class MonthViewCalender extends Fragment {
 
 
+    private CustomCalendar customCalendar;
+    private ArrayList<InstituteSchedule> scheduleList;
+    private ArrayList<Event> eventList;
+    private int monthSelected;
+    private int yearSelected;
 
-	private CustomCalendar customCalendar;
-	private ArrayList<InstituteSchedule> scheduleList;
-	private ArrayList<Event> eventList;
-	private int monthSelected;
-	private int yearSelected;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		
 
-		View rootView = inflater.inflate(R.layout.month_view_calendar,
-				container, false);
+        View rootView = inflater.inflate(R.layout.month_view_calendar,
+                container, false);
 
-		monthSelected = getArguments().getInt("Month");// Get selected Month
-		yearSelected = getArguments().getInt("Year");// Get selected Year
-		scheduleList = Helper.scheduleList;// Get Schedule list
-		eventList = Helper.eventList;// Get event List
-		findViews(rootView);
-		main();
+        monthSelected = getArguments().getInt("Month");// Get selected Month
+        yearSelected = getArguments().getInt("Year");// Get selected Year
+        scheduleList = Helper.scheduleList;// Get Schedule list
+        eventList = Helper.eventList;// Get event List
+        findViews(rootView);
+        main();
 
-		return rootView;
-	}
+        return rootView;
+    }
 
-	/**
-	 * Method to get id of all views Kiruthika 05/05/2015
-	 */
-	private void findViews(View rootView) {
-		customCalendar = (CustomCalendar) rootView
-				.findViewById(R.id.custom_calendar);
-	}
+    /**
+     * Method to get id of all views Kiruthika 05/05/2015
+     */
+    private void findViews(View rootView) {
+        customCalendar = (CustomCalendar) rootView
+                .findViewById(R.id.custom_calendar);
+    }
 
-	private void main() {
-		updateCalendar();
-	}
+    private void main() {
+        updateCalendar();
+    }
 
-	/**
-	 * Method to Display custom calendar Kiruthika 06/05/2015
-	 */
-	private void updateCalendar() {
+    /**
+     * Method to Display custom calendar Kiruthika 06/05/2015
+     */
+    private void updateCalendar() {
 
-		customCalendar.generateDays(yearSelected, monthSelected, scheduleList,
-				eventList);
-		if (Helper.progressDialog != null) {
-			Helper.progressDialog.dismiss();
-		}
+        customCalendar.generateDays(yearSelected, monthSelected, scheduleList,
+                eventList);
 
-	}
-	
-	
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (Helper.progressDialog != null) {
+                    Helper.progressDialog.dismiss();
+                }
+            }
+        }, 500);
+
+
+    }
+
 
 }
