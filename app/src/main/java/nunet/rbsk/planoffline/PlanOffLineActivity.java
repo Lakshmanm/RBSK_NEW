@@ -143,7 +143,7 @@ public class PlanOffLineActivity extends BaseActivity implements
      */
 
     private void getScheduleDataFromDB() {
-       Helper.showProgressDialog(PlanOffLineActivity.this);
+        Helper.showProgressDialog(PlanOffLineActivity.this);
         new Thread(new Runnable() {
 
             @Override
@@ -155,7 +155,7 @@ public class PlanOffLineActivity extends BaseActivity implements
                         + " IP.LocalInstitutePlanID=IPD.LocalInstitutePlanID "
                         + " inner join institutes I on I.InstituteID=IP.InstituteID where"
                         + " IPD.isDeleted!=1 AND IP.IsDeleted!=1 AND  I.IsDeleted!=1"
-                        + " AND IPD.PlanStatusID in(1,2)";
+                        + " AND IPD.PlanStatusID in(1,2) Order by IPD.scheduleDate desc";
                 Cursor scheduleCur = dbh.getCursorData(
                         PlanOffLineActivity.this, query_Wards);
                 setToScheduleModel(scheduleCur);
@@ -163,7 +163,7 @@ public class PlanOffLineActivity extends BaseActivity implements
                 runOnUiThread(new Runnable() {
                     public void run() {
                         getUpdate_view("", 0, scheduleList);
-                     Helper.progressDialog.dismiss();
+
 
                     }
                 });
@@ -393,7 +393,7 @@ public class PlanOffLineActivity extends BaseActivity implements
                 // finish();
                 startActivity(i);
             } else if (v == iv_plan_search_result_institute[v.getId()]) {
-               Helper.showProgressDialog(PlanOffLineActivity.this);
+                Helper.showProgressDialog(PlanOffLineActivity.this);
                 Intent i = new Intent(PlanOffLineActivity.this,
                         InsituteFragmentActivityDialog.class);
                 i.putExtra("instituteID", institute.getInstituteServerID());
@@ -760,6 +760,7 @@ public class PlanOffLineActivity extends BaseActivity implements
                 ll_search_plan_result.addView(myText);
             }
         }
+        Helper.progressDialog.dismiss();
     }
 
     private void updateScreenPercentage(
@@ -808,10 +809,11 @@ public class PlanOffLineActivity extends BaseActivity implements
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         Intent i = new Intent(PlanOffLineActivity.this, DashBoardActivity.class);
         finish();
         startActivity(i);
-        super.onBackPressed();
+
     }
 
     @Override

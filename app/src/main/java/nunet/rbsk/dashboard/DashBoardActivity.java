@@ -105,7 +105,6 @@ public class DashBoardActivity extends BaseActivity {
     public ArrayList<InstituteSchedule> scheduleList;
     public ArrayList<Event> eventList;
     private DBHelper dbh;
-    public static CustomDialog dialog;
     public SharedPreferences sharedpreferences;
     public String UnlockID = "", UnlockPassword = "", HealthBlockID = "",
             DeviceID = "", TokenID = "";
@@ -136,7 +135,7 @@ public class DashBoardActivity extends BaseActivity {
 
         sharedpreferences = getSharedPreferences("RbskPref",
                 Context.MODE_PRIVATE);
-        dialog = new CustomDialog(DashBoardActivity.this);
+
         // String data = Helper.getTableDataForJSON(dbh, this, "children");
         scheduleList = new ArrayList<InstituteSchedule>();
         eventList = new ArrayList<Event>();
@@ -251,8 +250,9 @@ public class DashBoardActivity extends BaseActivity {
                 if (!isHoliday()) {
                     Intent in = new Intent(DashBoardActivity.this,
                             PlanOffLineActivity.class);
-                    finish();
+
                     startActivity(in);
+                    finish();
                 } else {
                     Toast.makeText(DashBoardActivity.this,
                             "You can't plan on holiday", Toast.LENGTH_SHORT)
@@ -260,23 +260,23 @@ public class DashBoardActivity extends BaseActivity {
                 }
             }
         });
-        if (savedInstanceState == null) {
-            // on first time display view for first nav item
-            isDayView = true;
-            isMonthView = false;
-            currYearIndex = spn_calendar_year.getSelectedItemPosition();
-            currMonthIndex = spn_calendar_month.getSelectedItemPosition();
-            updateCalendar();
-
-        }
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+        // if (savedInstanceState == null) {
+        // on first time display view for first nav item
+        isDayView = true;
+        isMonthView = false;
+        currYearIndex = spn_calendar_year.getSelectedItemPosition();
+        currMonthIndex = spn_calendar_month.getSelectedItemPosition();
         updateCalendar();
+
+        //  }
+
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        updateCalendar();
+//    }
 
     public boolean isHoliday() {
 
@@ -300,10 +300,17 @@ public class DashBoardActivity extends BaseActivity {
 
     protected void updateCalendar() {
 
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTask<Void, String, String>() {
 
             @Override
-            protected Void doInBackground(Void... params) {
+            protected void onPreExecute() {
+
+                super.onPreExecute();
+                Helper.showProgressDialog(DashBoardActivity.this);
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
                 String currentMonthString = String.valueOf(monthItems
                         .get(currMonthIndex).id + 1);
                 if (currentMonthString.length() == 1) {
@@ -314,20 +321,21 @@ public class DashBoardActivity extends BaseActivity {
                         + currentMonthString + "-" + "01";
                 selectedEndDate = yearItems.get(currYearIndex).id + "-"
                         + currentMonthString + "-" + "31";
-                getScheduleDataFromDB();
-                getHolidayDataFromDB();
+                List<InstituteSchedule> list = getScheduleDataFromDB();
+                List<Event> events = getHolidayDataFromDB();
                 return null;
             }
 
             ;
 
-            protected void onPostExecute(Void result) {
+            protected void onPostExecute(String result) {
                 if (isMonthView) {
                     displayView(btn_schedule_monthview, DashBoardActivity.this,
                             0);
                 } else {
                     displayView(btn_schedule_dayview, DashBoardActivity.this, 0);
                 }
+                Helper.progressDialog.dismiss();
             }
         }.execute();
 
@@ -337,7 +345,7 @@ public class DashBoardActivity extends BaseActivity {
      * To get schedule List from db Kiruthika 07/05/2015
      */
 
-    private void getScheduleDataFromDB() {
+    private List<InstituteSchedule> getScheduleDataFromDB() {
         String query_Wards = "";
 
         query_Wards = "SELECT distinct I.InstituteID,I.InstituteName,I.DiseCode,IPD.scheduleDate,"
@@ -348,13 +356,13 @@ public class DashBoardActivity extends BaseActivity {
                 + selectedStartDate + "' AND '" + selectedEndDate + "'";
 
         scheduleCur = dbh.getCursorData(this, query_Wards);
-        setToScheduleModel();
+        return setToScheduleModel();
     }
 
     /**
      * Method to set to InsituteSchedule Model class Kiruthika 07/05/2015
      */
-    private void setToScheduleModel() {
+    private List<InstituteSchedule> setToScheduleModel() {
         scheduleList.clear();
         if (scheduleCur != null) {
             try {
@@ -395,22 +403,23 @@ public class DashBoardActivity extends BaseActivity {
                 scheduleCur.close();
             }
         }
+        return scheduleList;
     }
 
     /**
      * Method to get Holiday list from DB Kiruthika 07/05/2015
      */
-    private void getHolidayDataFromDB() {
+    private List<Event> getHolidayDataFromDB() {
         String query_Wards = "SELECT * FROM events E WHERE    E.IsDeleted!=1  AND CalendarDate BETWEEN '"
                 + selectedStartDate + "' AND '" + selectedEndDate + "'";
         scheduleCur = dbh.getCursorData(this, query_Wards);
-        setToEventModel();
+        return setToEventModel();
     }
 
     /**
      * Method to set Event List to Model class Kiruthika 07/05/2015
      */
-    private void setToEventModel() {
+    private List<Event> setToEventModel() {
         eventList.clear();
         if (scheduleCur != null) {
             try {
@@ -433,6 +442,7 @@ public class DashBoardActivity extends BaseActivity {
                 scheduleCur.close();
             }
         }
+        return eventList;
     }
 
     /**
@@ -532,10 +542,7 @@ public class DashBoardActivity extends BaseActivity {
 
     // public static int kk = 0;
     public void displayView(View v, Context ctx, int day) {
-        if(!((Activity)ctx).isFinishing()) {
-            if (dialog != null)
-                dialog.show();
-        }
+
         switch (v.getId()) {
             case R.id.btn_schedule_monthview:
                 bundle = new Bundle();
@@ -573,16 +580,7 @@ public class DashBoardActivity extends BaseActivity {
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
         }
-        final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                if (dialog.isShowing()) {
-                    dialog.dismiss();
-                }
-            }
-        };
-        handler.postDelayed(runnable, 500);
+
     }
 
     public static FragmentManager fragmentManager;
@@ -591,7 +589,7 @@ public class DashBoardActivity extends BaseActivity {
     public void onBackPressed() {
 
         if (fragment instanceof MonthViewCalender) {
-            dialog.show();
+            Helper.showProgressDialog(this);
             bundle = new Bundle();
             bundle.putInt("Month", monthItems.get(currMonthIndex).id + 1);
             bundle.putInt("Year", yearItems.get(currYearIndex).id);
@@ -605,16 +603,6 @@ public class DashBoardActivity extends BaseActivity {
             fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, fragment).commitAllowingStateLoss();
-            final Handler handler = new Handler();
-            final Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    if (dialog.isShowing()) {
-                        dialog.dismiss();
-                    }
-                }
-            };
-            handler.postDelayed(runnable, 500);
             return;
         }
 

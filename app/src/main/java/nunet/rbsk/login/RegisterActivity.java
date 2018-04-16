@@ -13,9 +13,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -69,7 +71,6 @@ public class RegisterActivity extends Activity implements OnClickListener {
     private Button btn_register;
 
     private int navigationIndex = 0;
-    private String strResponse = "";
     private String deviceId = "", tokenId = "";
 
     /*
@@ -121,69 +122,69 @@ public class RegisterActivity extends Activity implements OnClickListener {
                     + "/"
                     + et_register_healthBlockId.getText().toString().trim();
             navigationIndex = 1;
-            webConn(UrlUtils.URL_Register, registerStr);
+            new WebConn().execute(UrlUtils.URL_Register + registerStr);
         }
     }
 
     // -------------------GET METHOD CALL-----------------
-    private void webConn(final String url, final String str) {
-        System.out.println("Sending URL :" + url);
-        System.out.println("Sending String :" + str);
-        Helper.showProgressDialog(RegisterActivity.this);
-        new Thread() {
-            public void run() {
-                try {
-                    strResponse = postData(url + str);
-                    handler.sendEmptyMessage(0);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Helper.progressDialog.dismiss();
-            }
-        }.start();
-    }
 
-    public String postData(String s_url) {
-        // Create a new HttpClient and get Header
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpGet httppost = new HttpGet(s_url);
-        try {
-            // Execute HTTP Post Request
-            HttpResponse response = httpclient.execute(httppost);
 
-            HttpEntity entity = response.getEntity();
-            InputStream is = entity.getContent();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    is, "UTF8"), 8);
-            StringBuilder sb = new StringBuilder();
-            sb.append(reader.readLine());
-            String line = "0";
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-            is.close();
-            strResponse = sb.toString();
-        } catch (ClientProtocolException e) {
-            strResponse = "ClientProtocolException";
-        } catch (IOException e) {
-            strResponse = "There is no network";
-        } catch (Exception e) {
-            strResponse = "Exception";
+    public class WebConn extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            if (navigationIndex == 1)
+                Helper.showProgressDialog(RegisterActivity.this);
+
         }
-        return strResponse;
-    }
 
-    private Handler handler = new Handler() {
+        @Override
+        protected String doInBackground(String... params) {
+            HttpClient httpclient = new DefaultHttpClient();
+            Log.e("url in intitial setup", params[0]);
+            HttpGet httppost = new HttpGet(params[0]);
+            String strResponse = "";
+            try {
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                HttpEntity entity = response.getEntity();
+                InputStream is = entity.getContent();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        is, "UTF8"), 8);
+                StringBuilder sb = new StringBuilder();
+                sb.append(reader.readLine());
+                String line = "0";
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+                is.close();
+                System.out.println("output post...." + sb.toString());
 
-        public void handleMessage(Message msg) {
-            System.out.println("Response String :" + strResponse);
-            if (navigationIndex == 1) {
-                try {
-                    if (strResponse.trim().indexOf("{") != -1) {
-                        JSONObject mJsonObject = new JSONObject(strResponse);
+                strResponse = sb.toString();
+
+            } catch (ClientProtocolException e) {
+                strResponse = "ClientProtocolException";
+            } catch (IOException e) {
+                strResponse = "There is no network";
+            } catch (Exception e) {
+                strResponse = "Exception";
+            }
+            return strResponse;
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            try {
+
+                System.out.println("in post...." + response);
+                if (navigationIndex == 1) {
+
+                    if (response.trim().indexOf("{") != -1) {
+                        JSONObject mJsonObject = new JSONObject(response);
                         String mData = mJsonObject.getString("Data");
                         if (mData.equalsIgnoreCase("0")
                                 || mData.equalsIgnoreCase("-1")) {
+                            Helper.progressDialog.dismiss();
                             Helper.showShortToast(RegisterActivity.this,
                                     "Device is not identified by Server");
                         } else {
@@ -197,25 +198,24 @@ public class RegisterActivity extends Activity implements OnClickListener {
                                     + "/"
                                     + et_register_unlockPassword.getText()
                                     .toString().trim();
-                            webConn(UrlUtils.URL_Hello, helloStr);
+                            new WebConn().execute(UrlUtils.URL_Hello + helloStr);
                         }
                     } else {
+                        Helper.progressDialog.dismiss();
                         Helper.showShortToast(RegisterActivity.this,
-                                strResponse);
+                                response);
                     }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
-            } else if (navigationIndex == 2) {
-                JSONObject mJsonObject;
-                try {
-                    if (strResponse.trim().indexOf("{") != -1) {
-                        mJsonObject = new JSONObject(strResponse);
+                } else if (navigationIndex == 2) {
+                    JSONObject mJsonObject;
+
+                    if (response.trim().indexOf("{") != -1) {
+                        mJsonObject = new JSONObject(response);
                         String mData = mJsonObject.getString("Data");
                         if (mData.equalsIgnoreCase("-1")
                                 || mData.equalsIgnoreCase("0")) {
+                            Helper.progressDialog.dismiss();
                             Helper.showShortToast(RegisterActivity.this,
                                     "Device is not identified by Server");
                         } else {
@@ -243,16 +243,22 @@ public class RegisterActivity extends Activity implements OnClickListener {
                             Intent intent = new Intent(RegisterActivity.this,
                                     Register_download.class);
                             startActivity(intent);
+                            Helper.progressDialog.dismiss();
                         }
                     } else {
                         Helper.showShortToast(RegisterActivity.this,
-                                strResponse);
+                                response);
+                        Helper.progressDialog.dismiss();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+
                 }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
 
             }
         }
-    };
+    }
+
 }

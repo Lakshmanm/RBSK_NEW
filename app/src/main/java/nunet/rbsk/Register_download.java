@@ -733,6 +733,13 @@ public class Register_download extends Activity implements OnClickListener {
         return retStr;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        if (Helper.progressDialog != null && !Helper.progressDialog.isShowing())
+//            Helper.showProgressDialog(Register_download.this);
+    }
+
     public class WebConn extends AsyncTask<String, Void, String> {
 
         @Override

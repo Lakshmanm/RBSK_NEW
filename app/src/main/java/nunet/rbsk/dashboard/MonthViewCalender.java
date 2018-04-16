@@ -89,6 +89,9 @@ public class MonthViewCalender extends Fragment {
 
 		customCalendar.generateDays(yearSelected, monthSelected, scheduleList,
 				eventList);
+		if (Helper.progressDialog != null) {
+			Helper.progressDialog.dismiss();
+		}
 
 	}
 	
