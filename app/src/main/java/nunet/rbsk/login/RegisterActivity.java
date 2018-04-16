@@ -9,7 +9,6 @@
 package nunet.rbsk.login;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -130,8 +129,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
     private void webConn(final String url, final String str) {
         System.out.println("Sending URL :" + url);
         System.out.println("Sending String :" + str);
-        final ProgressDialog progDailog = ProgressDialog.show(this,
-                "Please Wait...", "Fetching Data...", true);
+        Helper.showProgressDialog(RegisterActivity.this);
         new Thread() {
             public void run() {
                 try {
@@ -140,7 +138,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                progDailog.dismiss();
+                Helper.progressDialog.dismiss();
             }
         }.start();
     }

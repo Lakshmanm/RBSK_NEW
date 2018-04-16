@@ -127,11 +127,10 @@ public class EditInstituteStaffInfo extends Fragment implements OnClickListener 
 	private void getStaffInfoFromDB() {
 
 		new AsyncTask<Void, Void, Void>() {
-			CustomDialog mCustomDialog = new CustomDialog(getActivity());
+
 
 			protected void onPreExecute() {
-				mCustomDialog.setCancelable(false);
-				mCustomDialog.show();
+			Helper.showProgressDialog(getActivity());
 			};
 
 			@Override
@@ -154,7 +153,7 @@ public class EditInstituteStaffInfo extends Fragment implements OnClickListener 
 				mAdapter = new ExpandableStaffListAdapter(getActivity(),
 						staffListObject);
 				loadParentList(staffListObject);
-				mCustomDialog.cancel();
+				Helper.progressDialog.dismiss();
 			};
 		}.execute();
 

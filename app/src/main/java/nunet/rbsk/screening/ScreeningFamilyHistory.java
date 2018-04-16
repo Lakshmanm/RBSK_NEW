@@ -7,13 +7,6 @@
 //=============================================================================
 package nunet.rbsk.screening;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import nunet.rbsk.R;
-import nunet.rbsk.helpers.DBHelper;
-import nunet.rbsk.helpers.Helper;
-import nunet.rbsk.model.FamilyHistoryDisease;
 import android.app.Activity;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -34,6 +27,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nunet.utils.StringUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import nunet.rbsk.R;
+import nunet.rbsk.helpers.DBHelper;
+import nunet.rbsk.helpers.Helper;
+import nunet.rbsk.model.FamilyHistoryDisease;
 
 //*****************************************************************************
 //* Name   :  ScreeningFamilyHistoryNew.java
@@ -79,8 +80,8 @@ public class ScreeningFamilyHistory extends Activity implements OnClickListener 
 		final Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				if (ScreeningBasicInfoFragment.dialog.isShowing()) {
-					ScreeningBasicInfoFragment.dialog.dismiss();
+				if (Helper.progressDialog.isShowing()) {
+					Helper.progressDialog.dismiss();
 				}
 			}
 		};

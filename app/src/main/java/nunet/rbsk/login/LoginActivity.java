@@ -1,15 +1,9 @@
 package nunet.rbsk.login;
 
-import nunet.rbsk.BaseActivity;
-import nunet.rbsk.R;
-import nunet.rbsk.helpers.Helper;
-
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,6 +18,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import nunet.rbsk.R;
+import nunet.rbsk.helpers.Helper;
 
 //=============================================================================
 //All rights reserved to Nunet Cube Software Solutions.
@@ -163,8 +160,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 						.equals(unlockId)
 						&& et_login_password.getText().toString().trim()
 								.equals(unlockPassword)) {
-					final ProgressDialog progDailog = ProgressDialog.show(this,
-							"Processing ", "Please Wait", true);
+				Helper.showProgressDialog(LoginActivity.this);
 					new Thread() {
 						public void run() {
 							try {
@@ -176,7 +172,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 							}
 							handler.sendEmptyMessage(0);
-							progDailog.dismiss();
+                            Helper.progressDialog.dismiss();
 						}
 					}.start();
 

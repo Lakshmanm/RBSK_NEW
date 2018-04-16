@@ -11,7 +11,6 @@ package nunet.rbsk.screening;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -101,7 +100,6 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
     private boolean tempImages;
     private String tempName;
     private LinearLayout ll_sign_off_cam;
-    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -651,16 +649,12 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
 
         public Loader(Context context) {
             this.targetCtx = context;
-            progressDialog = new ProgressDialog(targetCtx);
-            progressDialog.setCancelable(false);
-            progressDialog.setMessage("Updating Screening data...");
-            progressDialog.setTitle("Please wait");
-            progressDialog.setIndeterminate(true);
+            Helper.showProgressDialog(targetCtx);
         }
 
         @Override
         protected void onPreExecute() {
-            progressDialog.show();
+            Helper.progressDialog.dismiss();
         }
 
         @Override
@@ -672,8 +666,8 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
 
         @Override
         protected void onPostExecute(Void result) {
-            if (progressDialog != null && progressDialog.isShowing()) {
-                progressDialog.dismiss();
+            if (Helper.progressDialog != null && Helper.progressDialog.isShowing()) {
+                Helper.progressDialog.dismiss();
                 final ListView localListView = ScreeningActivity.ll_screening_list_students;
                 final View v;
                 final int lvpos = ScreeningActivity.listSelectedPosition + 1;// Modified
@@ -753,16 +747,16 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
+        if (Helper.progressDialog != null && Helper.progressDialog.isShowing()) {
+            Helper.progressDialog.dismiss();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
+        if (Helper.progressDialog != null && Helper.progressDialog.isShowing()) {
+            Helper.progressDialog.dismiss();
         }
     }
 

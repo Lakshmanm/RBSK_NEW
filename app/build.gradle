@@ -6,9 +6,9 @@ android {
 
     defaultConfig {
         applicationId "nunet.rbsk"
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion 17
       multiDexEnabled true
+
     }
 
     buildTypes {
@@ -24,7 +24,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'com.android.support:appcompat-v7:26.0.0-beta1'
     compile files('libs/crittercism_v5_4_0_sdkonly.jar')
     compile 'com.google.android.gms:play-services-maps:9.0.0'
+    compile 'com.github.d-max:spots-dialog:0.4@aar'
 }

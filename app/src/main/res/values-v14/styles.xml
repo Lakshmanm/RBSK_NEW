@@ -9,4 +9,12 @@
         <!-- API 14 theme customizations can go here. -->
     </style>
 
+
+    <style name="CustomAlertDialog" parent="android:Theme.DeviceDefault.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">Please Wait...</item>
+        <item name="DialogSpotColor">@color/progress_color</item>
+        <item name="DialogSpotCount">8</item>
+    </style>
+
 </resources>

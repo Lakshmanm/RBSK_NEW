@@ -2,7 +2,6 @@ package nunet.rbsk.info.inst;
 
 import android.Manifest;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -34,7 +33,6 @@ import java.util.List;
 import java.util.Random;
 
 import nunet.rbsk.R;
-import nunet.rbsk.helpers.CustomDialog;
 import nunet.rbsk.helpers.DBHelper;
 import nunet.rbsk.helpers.Helper;
 import nunet.rbsk.model.Address;
@@ -90,7 +88,6 @@ public class EditInstituteSignOff extends Fragment implements OnClickListener {
     private DBHelper dbh;
     int image_count = 0;
     List<String> imagenames = new ArrayList<>();
-    CustomDialog mCustomDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,7 +97,6 @@ public class EditInstituteSignOff extends Fragment implements OnClickListener {
         getActivity().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         dbh = DBHelper.getInstance(this.getActivity());
-        mCustomDialog = new CustomDialog(getActivity());
         Helper.insModelObject = new Institute();
         Helper.addModelObject = new Address();
         Helper.contactModelObject = new ArrayList<Contacts>();
@@ -125,16 +121,16 @@ public class EditInstituteSignOff extends Fragment implements OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
-        if (mCustomDialog != null && mCustomDialog.isShowing()) {
-            mCustomDialog.dismiss();
+        if (Helper.progressDialog != null && Helper.progressDialog.isShowing()) {
+            Helper.progressDialog.dismiss();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mCustomDialog != null && mCustomDialog.isShowing()) {
-            mCustomDialog.dismiss();
+        if (Helper.progressDialog != null && Helper.progressDialog.isShowing()) {
+            Helper.progressDialog.dismiss();
         }
     }
 
@@ -148,8 +144,7 @@ public class EditInstituteSignOff extends Fragment implements OnClickListener {
 
 
             protected void onPreExecute() {
-                mCustomDialog.setCancelable(false);
-                mCustomDialog.show();
+               Helper.showProgressDialog(getActivity());
             }
 
             ;
@@ -201,7 +196,7 @@ public class EditInstituteSignOff extends Fragment implements OnClickListener {
                 }
                 getSignoffImagesFromDB();
 
-                mCustomDialog.cancel();
+               Helper.progressDialog.dismiss();
 
             }
         }.execute();
@@ -211,7 +206,7 @@ public class EditInstituteSignOff extends Fragment implements OnClickListener {
     /**
      * Method to Set data from db to Institute Model class kiruthika 22/04/2015
      *
-     * @param instituteCursor from DB
+     * @param
      */
     private void setToInstituteModel(Cursor insCur) {
         if (insCur != null) {

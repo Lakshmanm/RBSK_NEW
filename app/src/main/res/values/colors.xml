@@ -18,4 +18,5 @@
     <color name="text_today">#ffffff</color>
     <color name="bg_today">#8f70cb</color>
     <color name="transparency_white">#AAFFFFFF</color>
+    <color name="progress_color">#00507a</color>
 </resources>

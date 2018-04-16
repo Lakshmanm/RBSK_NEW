@@ -9,7 +9,6 @@
 package nunet.rbsk;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -74,7 +73,6 @@ public class Register_download extends Activity implements OnClickListener {
     private Button btn_register_setup;
     private Button btn_register_checkSetupStatus;
     private Button btn_register_continue;
-    public ProgressDialog progDailog = null;
     DBHelper dbHelper;
     String TokenID = "";
     int navIndex = 0;
@@ -740,8 +738,7 @@ public class Register_download extends Activity implements OnClickListener {
         @Override
         protected void onPreExecute() {
             if (navIndex == 0)
-                progDailog = ProgressDialog.show(Register_download.this,
-                        "Please Wait...", "Setting up Device...", true);
+                Helper.showProgressDialog(Register_download.this);
 
         }
 
@@ -788,16 +785,16 @@ public class Register_download extends Activity implements OnClickListener {
                 System.out.println("in post...." + response);
 
                 if (response.trim().length() == 0) {
-                    if (progDailog != null && progDailog.isShowing())
-                        progDailog.dismiss();
+                    if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
+                        Helper.progressDialog.dismiss();
                     Helper.showShortToast(Register_download.this, "There is a problem in setup process so please try again...");
                 } else if (response.trim().equalsIgnoreCase("200")) {
                     if (navIndex == 0) {
                         navIndex = 1;
                         new WebConn().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + Helper.syncDate + "/2");
                     } else {
-                        if (progDailog != null && progDailog.isShowing())
-                            progDailog.dismiss();
+                        if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
+                            Helper.progressDialog.dismiss();
                         SharedPreferences sharedpreferences = getSharedPreferences(
                                 "LoginMain", Context.MODE_PRIVATE);
                         sharedpreferences = getSharedPreferences(
@@ -810,8 +807,8 @@ public class Register_download extends Activity implements OnClickListener {
                     }
 
                 } else {
-                    if (progDailog != null && progDailog.isShowing())
-                        progDailog.dismiss();
+                    if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
+                        Helper.progressDialog.dismiss();
                     Helper.showShortToast(Register_download.this, response);
                 }
 

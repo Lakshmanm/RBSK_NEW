@@ -3,12 +3,6 @@
  */
 package nunet.rbsk.info.inst;
 
-import nunet.rbsk.R;
-import nunet.rbsk.SettingsPlanActivity;
-import nunet.rbsk.helpers.Helper;
-import nunet.rbsk.login.LoginActivity;
-import nunet.rbsk.planoffline.PlanOffLineActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -25,6 +19,11 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import nunet.rbsk.R;
+import nunet.rbsk.SettingsPlanActivity;
+import nunet.rbsk.helpers.Helper;
+import nunet.rbsk.login.LoginActivity;
 
 //=============================================================================
 //All rights reserved to Nunet Cube Software Solutions.
@@ -79,9 +78,9 @@ public class InsituteFragmentActivityDialog extends Activity implements
     final Runnable runnable = new Runnable() {
       @Override
       public void run() {
-        if (PlanOffLineActivity.dialog != null) {
-          if (PlanOffLineActivity.dialog.isShowing()) {
-            PlanOffLineActivity.dialog.dismiss();
+        if (Helper.progressDialog != null) {
+          if (Helper.progressDialog.isShowing()) {
+            Helper.progressDialog.dismiss();
           }
         }
 

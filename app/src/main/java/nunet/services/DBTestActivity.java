@@ -1,7 +1,5 @@
 package nunet.services;
 
-import nunet.rbsk.R;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +7,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import nunet.rbsk.R;
+import nunet.rbsk.helpers.Helper;
 
 public class DBTestActivity extends FragmentActivity implements OnClickListener {
 
@@ -55,10 +56,7 @@ public class DBTestActivity extends FragmentActivity implements OnClickListener 
 
 	@Override
 	public void onClick(View v) {
-		final ProgressDialog mDialog = new ProgressDialog(this);
-		mDialog.setMessage("Loading ...");
-		mDialog.setCancelable(false);
-		mDialog.show();
+		Helper.showProgressDialog(this);
 		switch (v.getId()) {
 		case R.id.step1:
 			mTextView.setText(step1);
@@ -83,7 +81,7 @@ public class DBTestActivity extends FragmentActivity implements OnClickListener 
 		new Handler().post(new Runnable() {
 			@Override
 			public void run() {
-				mDialog.dismiss();
+				Helper.progressDialog.dismiss();
 			}
 		});
 	}

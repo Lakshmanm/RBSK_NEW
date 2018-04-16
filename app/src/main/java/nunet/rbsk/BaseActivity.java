@@ -2,7 +2,6 @@ package nunet.rbsk;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -58,7 +57,6 @@ import nunet.rbsk.login.UserLoginActivity;
 
 public class BaseActivity extends Activity {
 
-    ProgressDialog progDailog;
     int navIndex = 0;
     String syncDate = "";
 
@@ -186,8 +184,7 @@ public class BaseActivity extends Activity {
 
         @Override
         protected void onPreExecute() {
-            progDailog = ProgressDialog.show(BaseActivity.this,
-                    "Please Wait...", "Syncing Data...", true);
+       Helper.showProgressDialog(BaseActivity.this);
 
         }
 
@@ -257,7 +254,7 @@ public class BaseActivity extends Activity {
                     navIndex = 0;
                     new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + syncDate + "/1");
                 } else {
-                    progDailog.dismiss();
+                    Helper.progressDialog.dismiss();
                     Helper.showShortToast(BaseActivity.this, response);
                 }
 
@@ -918,8 +915,8 @@ public class BaseActivity extends Activity {
                 System.out.println("in post...." + response);
 
                 if (response.trim().length() == 0) {
-                    if (progDailog != null && progDailog.isShowing())
-                        progDailog.dismiss();
+                    if (  Helper.progressDialog != null &&   Helper.progressDialog.isShowing())
+                        Helper.progressDialog.dismiss();
                     Helper.showShortToast(BaseActivity.this, "There is a problem in sync process so please try again...");
                 } else if (response.trim().equalsIgnoreCase("200")) {
                     if (navIndex == 0) {
@@ -929,8 +926,8 @@ public class BaseActivity extends Activity {
                         String TokenID = sharedpreferences.getString("DeviceCode", "");
                         new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate + "/" + syncDate + "/2");
                     } else {
-                        if (progDailog != null && progDailog.isShowing())
-                            progDailog.dismiss();
+                        if (  Helper.progressDialog != null &&   Helper.progressDialog.isShowing())
+                            Helper.progressDialog.dismiss();
                         Helper.syncDate = syncDate;
                         SharedPreferences sharedpreferences = getSharedPreferences(
                                 UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
@@ -940,8 +937,8 @@ public class BaseActivity extends Activity {
                     }
 
                 } else {
-                    if (progDailog != null && progDailog.isShowing())
-                        progDailog.dismiss();
+                    if (  Helper.progressDialog != null &&   Helper.progressDialog.isShowing())
+                        Helper.progressDialog.dismiss();
                     Helper.showShortToast(BaseActivity.this, response);
                 }
 

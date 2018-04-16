@@ -95,11 +95,10 @@ public class EditInstBasicInfo extends Fragment implements OnClickListener {
 
 		new AsyncTask<Void, Void, Void>() {
 
-			CustomDialog mCustomDialog = new CustomDialog(getActivity());
+
 
 			protected void onPreExecute() {
-				mCustomDialog.setCancelable(false);
-				mCustomDialog.show();
+			Helper.showProgressDialog(getActivity());
 			};
 
 			@Override
@@ -138,7 +137,7 @@ public class EditInstBasicInfo extends Fragment implements OnClickListener {
 			protected void onPostExecute(Void result) {
 				super.onPostExecute(result);
 				setTextToBasicInfo();
-				mCustomDialog.cancel();
+				Helper.progressDialog.dismiss();
 
 			}
 		}.execute();

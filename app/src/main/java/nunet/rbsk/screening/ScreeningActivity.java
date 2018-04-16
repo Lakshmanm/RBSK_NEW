@@ -58,7 +58,6 @@ import nunet.rbsk.BaseActivity;
 import nunet.rbsk.NoRecords;
 import nunet.rbsk.R;
 import nunet.rbsk.dashboard.DashBoardActivity;
-import nunet.rbsk.helpers.CustomDialog;
 import nunet.rbsk.helpers.DBHelper;
 import nunet.rbsk.helpers.Helper;
 import nunet.rbsk.info.child.AddStudentActivityDialog;
@@ -128,7 +127,6 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
     private DBHelper dbh;
     public static HashMap<String, Integer> filterData = new HashMap<String, Integer>();
     public static boolean resumeFlag = false;
-    public static CustomDialog dialoga;
     public Button btn_screening_list_searchGo;
     private int TotalStudentsCount;
 
@@ -149,7 +147,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
             filterData.put("GenderID", null);
         }
 
-        dialoga = new CustomDialog(ScreeningActivity.this);
+
         dbh = DBHelper.getInstance(this);
 
         findViews();
@@ -438,11 +436,10 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
      */
     public void displayView(View v, Context context) {
         Bundle bundle = new Bundle();
-        dialoga.setCancelable(false);
-        dialoga.show();
+    Helper.showProgressDialog(ScreeningActivity.this);
         if (childrenList == null || childrenList.size() == 0) {
-            if (dialoga.isShowing()) {
-                dialoga.dismiss();
+            if (Helper.progressDialog.isShowing()) {
+                Helper.progressDialog.dismiss();
             }
             return;
         }
@@ -527,8 +524,8 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (dialoga.isShowing()) {
-                    dialoga.dismiss();
+                if (Helper.progressDialog.isShowing()) {
+                    Helper.progressDialog.dismiss();
                 }
             }
         };
@@ -1042,8 +1039,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == btn_screening_list_add_child) {
-            dialoga = new CustomDialog(ScreeningActivity.this);
-            dialoga.show();
+          Helper.showProgressDialog(ScreeningActivity.this);
             Helper.addChildFlag = true;
             Helper.childrenObject = new Children();
             Intent s = new Intent(ScreeningActivity.this,

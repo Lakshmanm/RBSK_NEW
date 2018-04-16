@@ -41,7 +41,6 @@ import java.util.List;
 import nunet.rbsk.BaseActivity;
 import nunet.rbsk.R;
 import nunet.rbsk.dashboard.DashBoardActivity;
-import nunet.rbsk.helpers.CustomDialog;
 import nunet.rbsk.helpers.DBHelper;
 import nunet.rbsk.helpers.Helper;
 import nunet.rbsk.info.inst.InsituteFragmentActivityDialog;
@@ -74,7 +73,6 @@ public class PlanOffLineActivity extends BaseActivity implements
     ArrayAdapter<String> adp_spnVillage;
     int phcId = 0;
     private String currentDate = "";
-    public static CustomDialog dialog;
 
     @SuppressLint("InflateParams")
     @Override
@@ -145,9 +143,7 @@ public class PlanOffLineActivity extends BaseActivity implements
      */
 
     private void getScheduleDataFromDB() {
-        final CustomDialog mCustomDialog = new CustomDialog(this);
-        mCustomDialog.setCancelable(false);
-        mCustomDialog.show();
+       Helper.showProgressDialog(PlanOffLineActivity.this);
         new Thread(new Runnable() {
 
             @Override
@@ -167,7 +163,8 @@ public class PlanOffLineActivity extends BaseActivity implements
                 runOnUiThread(new Runnable() {
                     public void run() {
                         getUpdate_view("", 0, scheduleList);
-                        mCustomDialog.cancel();
+                     Helper.progressDialog.dismiss();
+
                     }
                 });
             }
@@ -396,9 +393,7 @@ public class PlanOffLineActivity extends BaseActivity implements
                 // finish();
                 startActivity(i);
             } else if (v == iv_plan_search_result_institute[v.getId()]) {
-                dialog = new CustomDialog(PlanOffLineActivity.this);
-                dialog.setCancelable(false);
-                dialog.show();
+               Helper.showProgressDialog(PlanOffLineActivity.this);
                 Intent i = new Intent(PlanOffLineActivity.this,
                         InsituteFragmentActivityDialog.class);
                 i.putExtra("instituteID", institute.getInstituteServerID());

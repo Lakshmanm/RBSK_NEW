@@ -3,43 +3,8 @@
  */
 package nunet.rbsk.helpers;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-import java.util.regex.Pattern;
-
-import nunet.rbsk.R;
-import nunet.rbsk.model.Address;
-import nunet.rbsk.model.Children;
-import nunet.rbsk.model.ChildrenScreeningModel;
-import nunet.rbsk.model.ContactCategories;
-import nunet.rbsk.model.Contacts;
-import nunet.rbsk.model.District;
-import nunet.rbsk.model.Event;
-import nunet.rbsk.model.Habitation;
-import nunet.rbsk.model.Institute;
-import nunet.rbsk.model.InstituteSchedule;
-import nunet.rbsk.model.Mandal;
-import nunet.rbsk.model.Panchayat;
-import nunet.rbsk.model.Salutation;
-import nunet.rbsk.model.State;
-import nunet.rbsk.model.Village;
-
-import org.apache.http.util.ByteArrayBuffer;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -63,6 +28,43 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nunet.utils.StringUtils;
+
+import org.apache.http.util.ByteArrayBuffer;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+import java.util.regex.Pattern;
+
+import dmax.dialog.SpotsDialog;
+import nunet.rbsk.R;
+import nunet.rbsk.model.Address;
+import nunet.rbsk.model.Children;
+import nunet.rbsk.model.ChildrenScreeningModel;
+import nunet.rbsk.model.ContactCategories;
+import nunet.rbsk.model.Contacts;
+import nunet.rbsk.model.District;
+import nunet.rbsk.model.Event;
+import nunet.rbsk.model.Habitation;
+import nunet.rbsk.model.Institute;
+import nunet.rbsk.model.InstituteSchedule;
+import nunet.rbsk.model.Mandal;
+import nunet.rbsk.model.Panchayat;
+import nunet.rbsk.model.Salutation;
+import nunet.rbsk.model.State;
+import nunet.rbsk.model.Village;
 
 //=============================================================================
 //All rights reserved to Nunet Cube Software Solutions.
@@ -129,6 +131,7 @@ public class Helper {
 	// public static String localTreatment ="";
 
 	public static String syncDate="20000101000000";
+	public static AlertDialog progressDialog;
 
 	public static void updateHeaderFromNext(Context ctx, TextView oldHeader,
 			TextView newHeader, int oldId, int newId) {
@@ -1263,5 +1266,13 @@ public class Helper {
 		 * cur.getString(cur.getColumnIndex(localIdColumnName)) .trim(); }
 		 */
 		return localId;
+	}
+
+	public static void showProgressDialog(Context mContext) {
+		if (progressDialog == null) {
+			progressDialog = new SpotsDialog(mContext, R.style.CustomAlertDialog);
+			progressDialog.setCancelable(false);
+			progressDialog.show();
+		}
 	}
 }

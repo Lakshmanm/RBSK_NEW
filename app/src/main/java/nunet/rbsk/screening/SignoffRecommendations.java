@@ -8,9 +8,6 @@
 
 package nunet.rbsk.screening;
 
-import nunet.rbsk.R;
-import nunet.rbsk.helpers.Helper;
-import nunet.rbsk.model.Recommendations;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -20,6 +17,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import nunet.rbsk.R;
+import nunet.rbsk.helpers.Helper;
+import nunet.rbsk.model.Recommendations;
 
 //*****************************************************************************
 //* Name   :  SignoffRecommendations.java
@@ -114,9 +115,9 @@ public class SignoffRecommendations extends Activity implements OnClickListener 
 					.toString().trim());
 			Helper.childScreeningObj.getSignOffModel().setRecommendations(recommendationsObj);
 			Helper.childScreeningObj.getReferrals().get(position).getHealthConditonReferred().setUpdate(true);
-			finish();
+			SignoffRecommendations.this.finish();
 		} else if (v == btn_recommendations_close) {
-			finish();
+			SignoffRecommendations.this.finish();
 		}
 	}
 	@Override
