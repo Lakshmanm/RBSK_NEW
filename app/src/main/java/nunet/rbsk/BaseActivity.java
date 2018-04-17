@@ -852,6 +852,7 @@ public class BaseActivity extends Activity {
                     dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDSCREENINGFH", CHILDSCREENINGFH);
                 }
                 if (mJsonObject.has("SyncDate")) {
+                    Log.e("sync dt frm service 2", mJsonObject.getString("SyncDate"));
                     Helper.syncDate1 = mJsonObject.getString("SyncDate");
                     SharedPreferences sharedpreferences = getSharedPreferences(
                             UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
@@ -870,6 +871,17 @@ public class BaseActivity extends Activity {
 
 
         return retStr;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Helper.syncDate1.length() == 0) {
+            SharedPreferences sharedpreferences = getSharedPreferences(
+                    UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
+            Helper.syncDate1 = sharedpreferences.getString("SyncDate1", "");
+        }
+
     }
 
     public class WebConn1 extends AsyncTask<String, Void, String> {

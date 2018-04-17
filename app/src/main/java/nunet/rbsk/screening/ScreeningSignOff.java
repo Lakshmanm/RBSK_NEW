@@ -107,13 +107,13 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
         View rootView = inflater.inflate(R.layout.screening_sign_off,
                 container, false);
         dbh = DBHelper.getInstance(this.getActivity());
-    /*
-     * if (Helper.childScreeningObj.getScreeningID() != 0) {
-		 * getScreenedSignoffDataFromDB(); } if
-		 * (Helper.childScreeningObj.getSignOffModel() == null) {
-		 * SignOffScreenModel signOffModel = new SignOffScreenModel();
-		 * Helper.childScreeningObj.setSignOffModel(signOffModel); }
-		 */
+        /*
+         * if (Helper.childScreeningObj.getScreeningID() != 0) {
+         * getScreenedSignoffDataFromDB(); } if
+         * (Helper.childScreeningObj.getSignOffModel() == null) {
+         * SignOffScreenModel signOffModel = new SignOffScreenModel();
+         * Helper.childScreeningObj.setSignOffModel(signOffModel); }
+         */
 
         findViews(rootView);
         String path = checkDbforImage();
@@ -265,13 +265,13 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 Helper.childScreeningObj.getScreeningID() + "",
                                 fname, "/DCIM/myCapturedImages"});
             } else {
-        /*
-         * dbh.insertintoTable(getActivity(),
-				 * "childrenscreeningpicturesTemp", new String[] {
-				 * "LocalChildrenID", "ImageName", "ImagePath" }, new String[] {
-				 * Helper.childrenObject.getChildrenID() + "", fname,
-				 * "/DCIM/myCapturedImages" });
-				 */
+                /*
+                 * dbh.insertintoTable(getActivity(),
+                 * "childrenscreeningpicturesTemp", new String[] {
+                 * "LocalChildrenID", "ImageName", "ImagePath" }, new String[] {
+                 * Helper.childrenObject.getChildrenID() + "", fname,
+                 * "/DCIM/myCapturedImages" });
+                 */
                 tempImages = true;
                 tempName = fname;
             }
@@ -283,57 +283,57 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
         }
     }
 
-	/*
-   * public void getScreenedSignoffDataFromDB() { SignOffScreenModel
-	 * signOffModel; if (Helper.childScreeningObj.getSignOffModel() == null) {
-	 * signOffModel = new SignOffScreenModel();
-	 * Helper.childScreeningObj.setSignOffModel(signOffModel); } signOffModel =
-	 * Helper.childScreeningObj.getSignOffModel(); // *** Recommendations
-	 *
-	 * String reccomandationsQuery =
-	 * "select * from childrenscreeningrecommendations where LocalChildrenScreeningID='"
-	 * + Helper.childScreeningObj.getScreeningID() + "';"; Cursor
-	 * recommendationsCursor = dbh.getCursorData(this.getActivity(),
-	 * reccomandationsQuery); if (recommendationsCursor != null) { if
-	 * (recommendationsCursor.moveToFirst()) { do { Recommendations
-	 * signOffRecommendations = signOffModel .getRecommendations(); if
-	 * (signOffRecommendations == null) { signOffRecommendations = new
-	 * Recommendations(); } signOffRecommendations.setDiet(recommendationsCursor
-	 * .getString(recommendationsCursor .getColumnIndex("Diet")));
-	 * signOffRecommendations .setPersonalHygine(recommendationsCursor
-	 * .getString(recommendationsCursor .getColumnIndex("personalHygiene")));
-	 * signOffRecommendations.setOralHygine(recommendationsCursor
-	 * .getString(recommendationsCursor .getColumnIndex("OralHygience")));
-	 * signOffRecommendations.setMedications(recommendationsCursor
-	 * .getString(recommendationsCursor
-	 * .getColumnIndex("PresribedMedication")));
-	 * signOffRecommendations.setOthers(recommendationsCursor
-	 * .getString(recommendationsCursor .getColumnIndex("OtherComments"))); //
-	 * *** Doctor Comments
-	 *
-	 * signOffModel.setDoctorComments(recommendationsCursor
-	 * .getString(recommendationsCursor .getColumnIndex("DoctorComments")));
-	 * signOffModel.setRecommendations(signOffRecommendations); } while
-	 * (recommendationsCursor.moveToNext());
-	 *
-	 * } }
-	 *
-	 * // *** Local Treatment. String localTreatmentQuery =
-	 * "select * from childrenscreeninglocaltreatment where LocalChildrenScreeningID='"
-	 * + Helper.childScreeningObj.getScreeningID() + "';"; Cursor
-	 * localTreatCursor = dbh.getCursorData(this.getActivity(),
-	 * localTreatmentQuery); if (localTreatCursor != null) { if
-	 * (localTreatCursor.moveToFirst()) { do {
-	 *
-	 * signOffModel.setMedicationsGiven(localTreatCursor
-	 * .getString(localTreatCursor .getColumnIndex("MedicationGiven")));
-	 * signOffModel.setDiagnosis(localTreatCursor .getString(localTreatCursor
-	 * .getColumnIndex("Diagnosis"))); } while (localTreatCursor.moveToNext());
-	 * } } recommendationsCursor.close(); // localTreatCursor.close();
-	 * Helper.childScreeningObj.setSignOffModel(signOffModel);
-	 *
-	 * }
-	 */
+    /*
+     * public void getScreenedSignoffDataFromDB() { SignOffScreenModel
+     * signOffModel; if (Helper.childScreeningObj.getSignOffModel() == null) {
+     * signOffModel = new SignOffScreenModel();
+     * Helper.childScreeningObj.setSignOffModel(signOffModel); } signOffModel =
+     * Helper.childScreeningObj.getSignOffModel(); // *** Recommendations
+     *
+     * String reccomandationsQuery =
+     * "select * from childrenscreeningrecommendations where LocalChildrenScreeningID='"
+     * + Helper.childScreeningObj.getScreeningID() + "';"; Cursor
+     * recommendationsCursor = dbh.getCursorData(this.getActivity(),
+     * reccomandationsQuery); if (recommendationsCursor != null) { if
+     * (recommendationsCursor.moveToFirst()) { do { Recommendations
+     * signOffRecommendations = signOffModel .getRecommendations(); if
+     * (signOffRecommendations == null) { signOffRecommendations = new
+     * Recommendations(); } signOffRecommendations.setDiet(recommendationsCursor
+     * .getString(recommendationsCursor .getColumnIndex("Diet")));
+     * signOffRecommendations .setPersonalHygine(recommendationsCursor
+     * .getString(recommendationsCursor .getColumnIndex("personalHygiene")));
+     * signOffRecommendations.setOralHygine(recommendationsCursor
+     * .getString(recommendationsCursor .getColumnIndex("OralHygience")));
+     * signOffRecommendations.setMedications(recommendationsCursor
+     * .getString(recommendationsCursor
+     * .getColumnIndex("PresribedMedication")));
+     * signOffRecommendations.setOthers(recommendationsCursor
+     * .getString(recommendationsCursor .getColumnIndex("OtherComments"))); //
+     * *** Doctor Comments
+     *
+     * signOffModel.setDoctorComments(recommendationsCursor
+     * .getString(recommendationsCursor .getColumnIndex("DoctorComments")));
+     * signOffModel.setRecommendations(signOffRecommendations); } while
+     * (recommendationsCursor.moveToNext());
+     *
+     * } }
+     *
+     * // *** Local Treatment. String localTreatmentQuery =
+     * "select * from childrenscreeninglocaltreatment where LocalChildrenScreeningID='"
+     * + Helper.childScreeningObj.getScreeningID() + "';"; Cursor
+     * localTreatCursor = dbh.getCursorData(this.getActivity(),
+     * localTreatmentQuery); if (localTreatCursor != null) { if
+     * (localTreatCursor.moveToFirst()) { do {
+     *
+     * signOffModel.setMedicationsGiven(localTreatCursor
+     * .getString(localTreatCursor .getColumnIndex("MedicationGiven")));
+     * signOffModel.setDiagnosis(localTreatCursor .getString(localTreatCursor
+     * .getColumnIndex("Diagnosis"))); } while (localTreatCursor.moveToNext());
+     * } } recommendationsCursor.close(); // localTreatCursor.close();
+     * Helper.childScreeningObj.setSignOffModel(signOffModel);
+     *
+     * }
+     */
 
     /**
      * to update spinner values of Institute coordinators
@@ -437,30 +437,30 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
     /**
      * to update recommendations data
      */
-  /*
-   * private void updateRecommendations() { Recommendations
-	 * recommendationsObj;
-	 *
-	 * if (Helper.childScreeningObj.getSignOffModel().getRecommendations() ==
-	 * null) { recommendationsObj = new Recommendations();
-	 * Helper.childScreeningObj.getSignOffModel().setRecommendations(
-	 * recommendationsObj); } else { recommendationsObj =
-	 * Helper.childScreeningObj.getSignOffModel() .getRecommendations(); }
-	 * String recommendationsStr = ""; if
-	 * (!recommendationsObj.getDiet().trim().equals("")) { recommendationsStr +=
-	 * "Diet" + ","; } if
-	 * (!recommendationsObj.getPersonalHygine().trim().equals("")) {
-	 * recommendationsStr += "Personal Hygiene" + ","; } if
-	 * (!recommendationsObj.getOralHygine().trim().equals("")) {
-	 * recommendationsStr += "Oral Hygiene" + ","; } if
-	 * (!recommendationsObj.getMedications().trim().equals("")) {
-	 * recommendationsStr += "Medications" + ","; } if
-	 * (!recommendationsObj.getOthers().trim().equals("")) { recommendationsStr
-	 * += "Others" + ","; } if (!recommendationsStr.trim().equals("")) {
-	 * recommendationsStr = recommendationsStr.substring(0,
-	 * recommendationsStr.lastIndexOf(",")); }
-	 * tv_sign_off_recommendations.setText(recommendationsStr); // } }
-	 */
+    /*
+     * private void updateRecommendations() { Recommendations
+     * recommendationsObj;
+     *
+     * if (Helper.childScreeningObj.getSignOffModel().getRecommendations() ==
+     * null) { recommendationsObj = new Recommendations();
+     * Helper.childScreeningObj.getSignOffModel().setRecommendations(
+     * recommendationsObj); } else { recommendationsObj =
+     * Helper.childScreeningObj.getSignOffModel() .getRecommendations(); }
+     * String recommendationsStr = ""; if
+     * (!recommendationsObj.getDiet().trim().equals("")) { recommendationsStr +=
+     * "Diet" + ","; } if
+     * (!recommendationsObj.getPersonalHygine().trim().equals("")) {
+     * recommendationsStr += "Personal Hygiene" + ","; } if
+     * (!recommendationsObj.getOralHygine().trim().equals("")) {
+     * recommendationsStr += "Oral Hygiene" + ","; } if
+     * (!recommendationsObj.getMedications().trim().equals("")) {
+     * recommendationsStr += "Medications" + ","; } if
+     * (!recommendationsObj.getOthers().trim().equals("")) { recommendationsStr
+     * += "Others" + ","; } if (!recommendationsStr.trim().equals("")) {
+     * recommendationsStr = recommendationsStr.substring(0,
+     * recommendationsStr.lastIndexOf(",")); }
+     * tv_sign_off_recommendations.setText(recommendationsStr); // } }
+     */
 
     /**
      * to find views from R.java
@@ -479,11 +479,11 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                     .setText(Helper.childrenObject.getFirstName() + " "
                             + Helper.childrenObject.getLastName());
 
-		/*
-     * iv_screening_sign_off_cam = (ImageView) rootView
-		 * .findViewById(R.id.iv_screening_sign_off_cam);
-		 * iv_screening_sign_off_cam.setOnClickListener(this);
-		 */
+        /*
+         * iv_screening_sign_off_cam = (ImageView) rootView
+         * .findViewById(R.id.iv_screening_sign_off_cam);
+         * iv_screening_sign_off_cam.setOnClickListener(this);
+         */
         spn_sign_off_screened_by = (Spinner) rootView
                 .findViewById(R.id.spn_sign_off_screened_by);
         spn_sign_off_inst_coordinator = (Spinner) rootView
@@ -499,8 +499,8 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
     }
 
     /*
-       * click events for views
-       */
+     * click events for views
+     */
     @Override
     public void onClick(View v) {
         if (v == btn_sign_off_save_proceed) {
@@ -649,12 +649,13 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
 
         public Loader(Context context) {
             this.targetCtx = context;
-            Helper.showProgressDialog(targetCtx);
+
         }
 
         @Override
         protected void onPreExecute() {
-            Helper.progressDialog.dismiss();
+            super.onPreExecute();
+            Helper.showProgressDialog(targetCtx);
         }
 
         @Override
@@ -666,6 +667,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
 
         @Override
         protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
             if (Helper.progressDialog != null && Helper.progressDialog.isShowing()) {
                 Helper.progressDialog.dismiss();
                 final ListView localListView = ScreeningActivity.ll_screening_list_students;
@@ -796,7 +798,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                     new String[]{"ScreeningTemplateTypeID",
                             // "ScreeningStartDateTime",
                             "ScreeningEndDateTime", "ChildrenScreenStatusID",
-                            "ScreeningComments", "ScreenedBy","LastCommitedDate"},
+                            "ScreeningComments", "ScreenedBy", "LastCommitedDate"},
                     new String[]{
                             childrenObject.getChildrenInsitute()
                                     .getInstituteTypeId() + "".trim(),
@@ -805,7 +807,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                             childScreenStatusID + "".trim(),
                             childrenObject.getScreeningComments(),
                             mListSingoffUserId.get(spn_sign_off_screened_by
-                                    .getSelectedItemPosition()),Helper.getTodayDateTime1()},
+                                    .getSelectedItemPosition()), Helper.getTodayDateTime1()},
                     "LocalChildrenScreeningID", localChildScreeningID);
 
             long localChildScreeningID1 = 0;
@@ -821,7 +823,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                         "ScreeningStartDateTime",
                                         "ScreeningEndDateTime",
                                         "ChildrenScreenStatusID",
-                                        "ScreeningComments", "ScreenedBy","LastCommitedDate"},
+                                        "ScreeningComments", "ScreenedBy", "LastCommitedDate"},
                                 new String[]{
                                         String.valueOf(mScreeningActivity.locInsScreeningDetailID),
                                         childrenObject.getChildrenID()
@@ -834,7 +836,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                         childScreenStatusID + "".trim(),
                                         childrenObject.getScreeningComments(),
                                         mListSingoffUserId.get(spn_sign_off_screened_by
-                                                .getSelectedItemPosition()),Helper.getTodayDateTime1()});
+                                                .getSelectedItemPosition()), Helper.getTodayDateTime1()});
 
                 localChildScreeningID = String.valueOf(localChildScreeningID1);
                 Helper.childScreeningObj
@@ -846,7 +848,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                         .getFamilyHistoryDiseases();
 
                 dbh.updateROW(getActivity(), "childscreeningfh",
-                        new String[]{"IsDeleted","LastCommitedDate"}, new String[]{"1",Helper.getTodayDateTime1()},
+                        new String[]{"IsDeleted", "LastCommitedDate"}, new String[]{"1", Helper.getTodayDateTime1()},
                         "LocalChildrenScreeningID",
                         String.valueOf(localChildScreeningID));
                 for (int i = 0; i < familyHistoryDiseases.size(); i++) {
@@ -858,12 +860,12 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 "childscreeningfh",
                                 new String[]{"HasHistory",
                                         "FamilyMemberRelationID", "Notes",
-                                        "IsDeleted","LastCommitedDate"},
+                                        "IsDeleted", "LastCommitedDate"},
                                 new String[]{
 
                                         valueOf(fhDisease.isSelected()),
                                         fhDisease.getRelationID() + "".trim(),
-                                        fhDisease.getDiseaseComments(), "0",Helper.getTodayDateTime1()},
+                                        fhDisease.getDiseaseComments(), "0", Helper.getTodayDateTime1()},
                                 new String[]{"LocalChildrenScreeningID",
                                         "FamilyHistoryID",},
                                 new String[]{localChildScreeningID,
@@ -875,7 +877,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     new String[]{"LocalChildrenScreeningID",
                                             "FamilyHistoryID", "HasHistory",
                                             "FamilyMemberRelationID", "Notes",
-                                            "IsDeleted","LastCommitedDate"},
+                                            "IsDeleted", "LastCommitedDate"},
                                     new String[]{
                                             localChildScreeningID + "".trim(),
                                             fhDisease.getDiseaseID()
@@ -883,7 +885,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                             valueOf(fhDisease.isSelected()),
                                             fhDisease.getRelationID()
                                                     + "".trim(),
-                                            fhDisease.getDiseaseComments(), "0",Helper.getTodayDateTime1()});
+                                            fhDisease.getDiseaseComments(), "0", Helper.getTodayDateTime1()});
                         }
                     }
                 }
@@ -900,7 +902,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                             .getMedicalHistoryScreenModel().getAllergies();
                     dbh.updateROW(this.getActivity(),
                             "childrenscreeningallergies",
-                            new String[]{"IsDeleted","LastCommitedDate"}, new String[]{"1",Helper.getTodayDateTime1()},
+                            new String[]{"IsDeleted", "LastCommitedDate"}, new String[]{"1", Helper.getTodayDateTime1()},
                             "LocalChildrenScreeningID", localChildScreeningID
                                     + "".trim());
                     for (int i = 0; i < allergyAry.size(); i++) {
@@ -908,10 +910,10 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                         dbh.insertintoTable(this.getActivity(),
                                 "childrenscreeningallergies", new String[]{
                                         "LocalChildrenScreeningID",
-                                        "AllergyID", "Comments", "IsDeleted","LastCommitedDate"},
+                                        "AllergyID", "Comments", "IsDeleted", "LastCommitedDate"},
                                 new String[]{localChildScreeningID,
                                         allergyAry.get(i).getId() + "".trim(),
-                                        allergyAry.get(i).getComments(), "0",Helper.getTodayDateTime1()});
+                                        allergyAry.get(i).getComments(), "0", Helper.getTodayDateTime1()});
                     }
                 }
 
@@ -923,7 +925,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                             .getMedicalHistoryScreenModel().getSurgeries();
                     dbh.updateROW(this.getActivity(),
                             "childrenscreeningsurgicals",
-                            new String[]{"IsDeleted","LastCommitedDate"}, new String[]{"1",Helper.getTodayDateTime1()},
+                            new String[]{"IsDeleted", "LastCommitedDate"}, new String[]{"1", Helper.getTodayDateTime1()},
                             "LocalChildrenScreeningID", localChildScreeningID
                                     + "".trim());
                     for (int i = 0; i < surgeryAry.size(); i++) {
@@ -931,10 +933,10 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 this.getActivity(),
                                 "childrenscreeningsurgicals",
                                 new String[]{"LocalChildrenScreeningID",
-                                        "SurgicalID", "Comments", "IsDeleted","LastCommitedDate"},
+                                        "SurgicalID", "Comments", "IsDeleted", "LastCommitedDate"},
                                 new String[]{localChildScreeningID,
                                         surgeryAry.get(i).getId() + "".trim(),
-                                        surgeryAry.get(i).getComments(), "0",Helper.getTodayDateTime1()});
+                                        surgeryAry.get(i).getComments(), "0", Helper.getTodayDateTime1()});
 
                     }
                 }
@@ -959,7 +961,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 "HemoGlobinID", "HemoGlobinIndication",
                                 "MUACInCms", "MUACIndication",
                                 "HeadCircumferenceInCms",
-                                "HeadCircumferenceIndication","LastCommitedDate"},
+                                "HeadCircumferenceIndication", "LastCommitedDate"},
                         new String[]{
                                 vitals.getHeight() + "".trim(),
                                 vitals.getHeightIndication() + "".trim(),
@@ -981,7 +983,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 vitals.getMuacIndication() + "".trim(),
                                 vitals.getHeadCircumferenceCm() + "".trim(),
                                 vitals.getHeadCircumferenceIndication()
-                                        + "".trim(),Helper.getTodayDateTime1()},
+                                        + "".trim(), Helper.getTodayDateTime1()},
                         "LocalChildrenScreeningID", localChildScreeningID);
             }
 
@@ -1000,7 +1002,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 "MUACInCms", "MUACIndication",
                                 "HeadCircumferenceInCms",
                                 "HeadCircumferenceIndication",
-                                "LocalChildrenScreeningID","LastCommitedDate"},
+                                "LocalChildrenScreeningID", "LastCommitedDate"},
                         new String[]{
                                 vitals.getHeight() + "".trim(),
                                 vitals.getHeightIndication() + "".trim(),
@@ -1023,7 +1025,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 vitals.getHeadCircumferenceCm() + "".trim(),
                                 vitals.getHeadCircumferenceIndication()
                                         + "".trim(),
-                                localChildScreeningID + "".trim(),Helper.getTodayDateTime1()});
+                                localChildScreeningID + "".trim(), Helper.getTodayDateTime1()});
             }
 
             // --------------------Physical examinations-------------
@@ -1038,8 +1040,8 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                             boolean updateflag = dbh.updateROWByValues(
                                     this.getActivity(),
                                     "childrenscreeningpe",
-                                    new String[]{"Answer","LastCommitedDate"},
-                                    new String[]{question.getAnswer(),Helper.getTodayDateTime1()},
+                                    new String[]{"Answer", "LastCommitedDate"},
+                                    new String[]{question.getAnswer(), Helper.getTodayDateTime1()},
                                     new String[]{"LocalChildrenScreeningID",
                                             "ScreeningQuestionID"},
                                     new String[]{
@@ -1059,12 +1061,20 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                 ArrayList<Referral> referrals = Helper.childScreeningObj
                         .getReferrals();
                 int size = referrals.size();
-                referrals.remove(size - 1);
-                referrals.remove(size - 2);
-                referrals.remove(size - 3);
+                if (size == 1) {
+                    referrals.remove(size - 1);
+                } else if (size == 2) {
+                    referrals.remove(size - 1);
+                    referrals.remove(size - 2);
+                } else if (size == 3) {
+                    referrals.remove(size - 1);
+                    referrals.remove(size - 2);
+                    referrals.remove(size - 3);
+                }
+
 
                 dbh.updateROW(this.getActivity(), "childrenscreeningreferrals",
-                        new String[]{"IsDeleted","LastCommitedDate"}, new String[]{"1",Helper.getTodayDateTime1()},
+                        new String[]{"IsDeleted", "LastCommitedDate"}, new String[]{"1", Helper.getTodayDateTime1()},
                         "LocalChildrenScreeningID", localChildScreeningID);
                 for (Referral referral : referrals) {
                     String referralQuery = "Select LocalChildrenScreeningReferralID from childrenscreeningreferrals where    IsDeleted!=1 and  LocalChildrenScreeningID='"
@@ -1084,8 +1094,8 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                         // columnValues, whereColumn, whereValue)
                         dbh.updateROW(this.getActivity(),
                                 "childrenscreeninginvestigations",
-                                new String[]{"IsDeleted","LastCommitedDate"},
-                                new String[]{"1",Helper.getTodayDateTime1()},
+                                new String[]{"IsDeleted", "LastCommitedDate"},
+                                new String[]{"1", Helper.getTodayDateTime1()},
                                 "LocalChildrenScreeningReferralID",
                                 ChildrenScreeningReferralID);
 
@@ -1101,13 +1111,13 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                                 "LocalChildrenScreeningID",
                                                 "LocalChildrenScreeningReferralID",
                                                 "LabInvestigationID",
-                                                "Comments", "IsDeleted","LastCommitedDate"},
+                                                "Comments", "IsDeleted", "LastCommitedDate"},
                                         new String[]{
                                                 localChildScreeningID
                                                         + "".trim(),
                                                 ChildrenScreeningReferralID,
                                                 investigations.get(i).get("id")
-                                                        + "".trim(), "", "0",Helper.getTodayDateTime1()});
+                                                        + "".trim(), "", "0", Helper.getTodayDateTime1()});
                             }
                         }
                         // --------Update comments and facilities to
@@ -1116,9 +1126,9 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 this.getActivity(),
                                 "childrenscreeningreferrals",
                                 new String[]{"ReferredFacilityID",
-                                        "Comments", "IsDeleted","LastCommitedDate"},
+                                        "Comments", "IsDeleted", "LastCommitedDate"},
                                 new String[]{"" + referral.getFacilityID(),
-                                        referral.getComments(), "0",Helper.getTodayDateTime1()},
+                                        referral.getComments(), "0", Helper.getTodayDateTime1()},
                                 new String[]{"LocalChildrenScreeningReferralID"},
                                 new String[]{ChildrenScreeningReferralID});
 
@@ -1130,7 +1140,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 new String[]{"LocalChildrenScreeningID",
                                         "HealthConditonID", "WasReferred",
                                         "ReferredFacilityID", "Comments",
-                                        "ReferredDateTime", "IsDeleted","LastCommitedDate"},
+                                        "ReferredDateTime", "IsDeleted", "LastCommitedDate"},
                                 new String[]{
                                         localChildScreeningID + "".trim(),
                                         referral.getHealthConditonReferred()
@@ -1138,7 +1148,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                                 + "".trim(), "1",
                                         "" + referral.getFacilityID(),
                                         referral.getComments(),
-                                        Helper.getTodayDateTime(), "0",Helper.getTodayDateTime1()});
+                                        Helper.getTodayDateTime(), "0", Helper.getTodayDateTime1()});
 
                         ArrayList<HashMap<String, String>> investigations = referral
                                 .getInvestigations();
@@ -1152,13 +1162,13 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                                 "LocalChildrenScreeningID",
                                                 "LocalChildrenScreeningReferralID",
                                                 "LabInvestigationID",
-                                                "Comments","LastCommitedDate"},
+                                                "Comments", "LastCommitedDate"},
                                         new String[]{
                                                 localChildScreeningID
                                                         + "".trim(),
                                                 referalId + "".trim(),
                                                 investigations.get(i).get("id")
-                                                        + "".trim(), "",Helper.getTodayDateTime1()});
+                                                        + "".trim(), "", Helper.getTodayDateTime1()});
                             }
                         }
                     }
@@ -1176,22 +1186,22 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                             "childrenscreeningrecommendations", new String[]{
                                     "Diet", "personalHygiene", "OralHygience",
                                     "PresribedMedication", "OtherComments",
-                                    "DoctorComments","LastCommitedDate"},
+                                    "DoctorComments", "LastCommitedDate"},
                             new String[]{recommendation.getDiet(),
                                     recommendation.getPersonalHygine(),
                                     recommendation.getOralHygine(),
                                     recommendation.getMedications(),
                                     recommendation.getOthers(),
-                                    signOffscreenModel.getDoctorComments(),Helper.getTodayDateTime1()},
+                                    signOffscreenModel.getDoctorComments(), Helper.getTodayDateTime1()},
                             "LocalChildrenScreeningID", localChildScreeningID);
                 }
                 dbh.updateROW(this.getActivity(),
                         "childrenscreeninglocaltreatment", new String[]{
                                 "LocalChildrenScreeningID", "Diagnosis",
-                                "MedicationGiven","LastCommitedDate"}, new String[]{
+                                "MedicationGiven", "LastCommitedDate"}, new String[]{
                                 localChildScreeningID + "".trim(),
                                 signOffscreenModel.getDiagnosis(),
-                                signOffscreenModel.getMedicationsGiven(),Helper.getTodayDateTime1()},
+                                signOffscreenModel.getMedicationsGiven(), Helper.getTodayDateTime1()},
                         "LocalChildrenScreeningID", localChildScreeningID);
             }
 
@@ -1218,7 +1228,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     "ScreeningStartDateTime",
                                     "ScreeningEndDateTime",
                                     "ChildrenScreenStatusID",
-                                    "ScreeningComments", "ScreenedBy","LastCommitedDate"},
+                                    "ScreeningComments", "ScreenedBy", "LastCommitedDate"},
                             new String[]{
                                     String.valueOf(mScreeningActivity.locInsScreeningDetailID),
                                     childrenObject.getChildrenID() + "".trim(),
@@ -1230,7 +1240,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     childrenObject.getScreeningComments(),
                                     mListSingoffUserId
                                             .get(spn_sign_off_screened_by
-                                            .getSelectedItemPosition()),Helper.getTodayDateTime1()});
+                                            .getSelectedItemPosition()), Helper.getTodayDateTime1()});
 
             // *** ChildrenScreningFH
             Helper.childScreeningObj
@@ -1238,13 +1248,13 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
             if (tempImages == true) {
                 dbh.insertintoTable(getActivity(), "childrenscreeningpictures",
                         new String[]{"LocalChildrenScreeningID", "ImageName",
-                                "ImagePath","LastCommitedDate"}, new String[]{
+                                "ImagePath", "LastCommitedDate"}, new String[]{
                                 localChildScreeningID + "", tempName,
-                                "/DCIM/myCapturedImages",Helper.getTodayDateTime1()});
+                                "/DCIM/myCapturedImages", Helper.getTodayDateTime1()});
             }
 
             dbh.updateROW(getActivity(), "childscreeningfh",
-                    new String[]{"IsDeleted","LastCommitedDate"}, new String[]{"1",Helper.getTodayDateTime1()},
+                    new String[]{"IsDeleted", "LastCommitedDate"}, new String[]{"1", Helper.getTodayDateTime1()},
                     "LocalChildrenScreeningID",
                     String.valueOf(localChildScreeningID));
             if (Helper.childScreeningObj.getFamilyHistoryDiseases() != null) {
@@ -1260,12 +1270,12 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                         "LocalChildrenScreeningID",
                                         "FamilyHistoryID", "HasHistory",
                                         "FamilyMemberRelationID", "Notes",
-                                        "IsDeleted","LastCommitedDate"}, new String[]{
+                                        "IsDeleted", "LastCommitedDate"}, new String[]{
                                         localChildScreeningID + "".trim(),
                                         fhDisease.getDiseaseID() + "".trim(),
                                         valueOf(fhDisease.isSelected()),
                                         fhDisease.getRelationID() + "".trim(),
-                                        fhDisease.getDiseaseComments(), "0",Helper.getTodayDateTime1()});
+                                        fhDisease.getDiseaseComments(), "0", Helper.getTodayDateTime1()});
                 }
             }
             // ------------------Medical History-------------------------
@@ -1282,11 +1292,11 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 this.getActivity(),
                                 "childrenscreeningallergies",
                                 new String[]{"LocalChildrenScreeningID",
-                                        "AllergyID", "Comments", "IsDeleted","LastCommitedDate"},
+                                        "AllergyID", "Comments", "IsDeleted", "LastCommitedDate"},
                                 new String[]{
                                         localChildScreeningID + "".trim(),
                                         allergyAry.get(i).getId() + "".trim(),
-                                        allergyAry.get(i).getComments(), "0",Helper.getTodayDateTime1()});
+                                        allergyAry.get(i).getComments(), "0", Helper.getTodayDateTime1()});
                     }
                 }
 
@@ -1301,11 +1311,11 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                 this.getActivity(),
                                 "childrenscreeningsurgicals",
                                 new String[]{"LocalChildrenScreeningID",
-                                        "SurgicalID", "Comments", "IsDeleted","LastCommitedDate"},
+                                        "SurgicalID", "Comments", "IsDeleted", "LastCommitedDate"},
                                 new String[]{
                                         localChildScreeningID + "".trim(),
                                         surgeryAry.get(i).getId() + "".trim(),
-                                        surgeryAry.get(i).getComments(), "0",Helper.getTodayDateTime1()});
+                                        surgeryAry.get(i).getComments(), "0", Helper.getTodayDateTime1()});
                     }
                 }
             }
@@ -1329,7 +1339,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                             "HemoGlobinIndication", "MUACInCms",
                             "MUACIndication", "HeadCircumferenceInCms",
                             "HeadCircumferenceIndication",
-                            "LocalChildrenScreeningID","LastCommitedDate"},
+                            "LocalChildrenScreeningID", "LastCommitedDate"},
                     new String[]{
                             vitals.getHeight() + "".trim(),
                             vitals.getHeightIndication() + "".trim(),
@@ -1351,7 +1361,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                             vitals.getMuacIndication() + "".trim(),
                             vitals.getHeadCircumferenceCm() + "".trim(),
                             vitals.getHeadCircumferenceIndication() + "".trim(),
-                            localChildScreeningID + "".trim(),Helper.getTodayDateTime1()});
+                            localChildScreeningID + "".trim(), Helper.getTodayDateTime1()});
 
             // --------------------Physical examinations-------------
             Category[] categories = Helper.childScreeningObj.getCategories();
@@ -1368,7 +1378,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     new String[]{"LocalChildrenScreeningID",
                                             "ScreeningQuestionID", "Question",
                                             "Answer", "IsReferredWhenYes",
-                                            "HealthConditionID","LastCommitedDate"},
+                                            "HealthConditionID", "LastCommitedDate"},
                                     new String[]{
                                             localChildScreeningID + "".trim(),
                                             question.getScreenQuestionID() + "".trim(),
@@ -1376,7 +1386,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                             question.getAnswer(),
                                             question.getIsReferedWhen() + "".trim(),
                                             question.getHealthConditionID() + "".trim(),
-                                    Helper.getTodayDateTime1()});
+                                            Helper.getTodayDateTime1()});
                         }
                 }
             // ------------------------Referal----------------------Update
@@ -1387,7 +1397,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
             if (Helper.childScreeningObj.getReferrals() != null) {
 
                 dbh.updateROW(getActivity(), "childrenscreeningreferrals",
-                        new String[]{"IsDeleted","LastCommitedDate"}, new String[]{"1",Helper.getTodayDateTime1()},
+                        new String[]{"IsDeleted", "LastCommitedDate"}, new String[]{"1", Helper.getTodayDateTime1()},
                         "LocalChildrenScreeningID",
                         String.valueOf(localChildScreeningID));
 
@@ -1405,7 +1415,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     new String[]{"LocalChildrenScreeningID",
                                             "HealthConditonID", "WasReferred",
                                             "ReferredFacilityID", "Comments",
-                                            "ReferredDateTime", "IsDeleted","LastCommitedDate"},
+                                            "ReferredDateTime", "IsDeleted", "LastCommitedDate"},
                                     new String[]{
                                             localChildScreeningID + "".trim(),
                                             referral.getHealthConditonReferred()
@@ -1413,7 +1423,7 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                                     + "".trim(), "1",
                                             "" + referral.getFacilityID(),
                                             referral.getComments(),
-                                            Helper.getTodayDateTime(), "0",Helper.getTodayDateTime1()});
+                                            Helper.getTodayDateTime(), "0", Helper.getTodayDateTime1()});
 
                     ArrayList<HashMap<String, String>> investigations = referral
                             .getInvestigations();
@@ -1426,12 +1436,12 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                                     "childrenscreeninginvestigations",
                                     new String[]{"LocalChildrenScreeningID",
                                             "LocalChildrenScreeningReferralID",
-                                            "LabInvestigationID", "Comments","LastCommitedDate"},
+                                            "LabInvestigationID", "Comments", "LastCommitedDate"},
                                     new String[]{
                                             localChildScreeningID + "".trim(),
                                             referalId + "".trim(),
                                             investigations.get(i).get("id")
-                                                    + "".trim(), "",Helper.getTodayDateTime1()});
+                                                    + "".trim(), "", Helper.getTodayDateTime1()});
                         }
                     }
                 }
@@ -1450,50 +1460,50 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                         new String[]{"LocalChildrenScreeningID", "Diet",
                                 "personalHygiene", "OralHygience",
                                 "PresribedMedication", "OtherComments",
-                                "DoctorComments","LastCommitedDate"},
+                                "DoctorComments", "LastCommitedDate"},
                         new String[]{localChildScreeningID + "".trim(),
                                 recommendation.getDiet(),
                                 recommendation.getPersonalHygine(),
                                 recommendation.getOralHygine(),
                                 recommendation.getMedications(),
                                 recommendation.getOthers(),
-                                signOffscreenModel.getDoctorComments(),Helper.getTodayDateTime1()});
+                                signOffscreenModel.getDoctorComments(), Helper.getTodayDateTime1()});
             }
 
             dbh.insertintoTable(this.getActivity(),
                     "childrenscreeninglocaltreatment", new String[]{
                             "LocalChildrenScreeningID", "Diagnosis",
-                            "MedicationGiven","LastCommitedDate"}, new String[]{
+                            "MedicationGiven", "LastCommitedDate"}, new String[]{
                             localChildScreeningID + "".trim(),
                             signOffscreenModel.getDiagnosis(),
-                            signOffscreenModel.getMedicationsGiven(),Helper.getTodayDateTime1()});
+                            signOffscreenModel.getMedicationsGiven(), Helper.getTodayDateTime1()});
         }
     }
 
     /**
      * to update doctor comments data
      */
-  /*
-   * private void updateDoctorComments() {
-	 * tv_sign_off_doc_comments.setText(Helper.childScreeningObj
-	 * .getSignOffModel().getDoctorComments()); }
-	 */
+    /*
+     * private void updateDoctorComments() {
+     * tv_sign_off_doc_comments.setText(Helper.childScreeningObj
+     * .getSignOffModel().getDoctorComments()); }
+     */
 
     /**
      * to update local treatments data
      */
-  /*
-   * private void updateLocalTreatment() { if
-	 * (!Helper.childScreeningObj.getSignOffModel().getDiagnosis().trim()
-	 * .equals("")) {
-	 * tv_sign_off_local_treatment.setText(Helper.childScreeningObj
-	 * .getSignOffModel().getDiagnosis() + " : " +
-	 * Helper.childScreeningObj.getSignOffModel() .getMedicationsGiven()); } }
-	 */
+    /*
+     * private void updateLocalTreatment() { if
+     * (!Helper.childScreeningObj.getSignOffModel().getDiagnosis().trim()
+     * .equals("")) {
+     * tv_sign_off_local_treatment.setText(Helper.childScreeningObj
+     * .getSignOffModel().getDiagnosis() + " : " +
+     * Helper.childScreeningObj.getSignOffModel() .getMedicationsGiven()); } }
+     */
 
-	/*
-   * will be called on resume of the activity
-	 */
+    /*
+     * will be called on resume of the activity
+     */
     @Override
     public void onResume() {
         // updateRecommendations();

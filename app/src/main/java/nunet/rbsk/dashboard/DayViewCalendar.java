@@ -123,7 +123,8 @@ public class DayViewCalendar extends Fragment {
             protected void onPostExecute(ArrayList<DaySchedule> result) {
                 super.onPostExecute(result);
                 if (getActivity() == null) {
-                    Helper.progressDialog.dismiss();
+                    if (Helper.progressDialog != null)
+                        Helper.progressDialog.dismiss();
                     return;
                 }
 
