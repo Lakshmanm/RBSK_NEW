@@ -48,6 +48,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import nunet.rbsk.helpers.DBHelper;
 import nunet.rbsk.helpers.Helper;
@@ -582,7 +584,7 @@ public class BaseActivity extends Activity {
 //
 //                if (mJsonObject.has("CHILDREN")) {
 //                    JSONArray CHILDREN = mJsonObject.getJSONArray("CHILDREN");
-//
+//                    JSONArray CHILDREN_UPDATE = new JSONArray();
 //                    for (int i = 0; i < CHILDREN.length(); i++) {
 //                        JSONObject j = CHILDREN.getJSONObject(i);
 //                        String insplanID = j.getString("InstituteID");
@@ -595,6 +597,36 @@ public class BaseActivity extends Activity {
 //                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(contID)));
 //                            CHILDREN.put(i, j);
 //                        }
+//                        int children = dbHelper.checkColoumnDatabyID(BaseActivity.this, "CHILDREN", new String[]{"CHILDRENID"}, new String[]{j.getString("CHILDRENID")});
+//                        if (children > 0) {
+//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                                CHILDREN.remove(i);
+//                            }
+//                            CHILDREN_UPDATE.put(j);
+//                        }
+//
+//                    }
+//                    if (CHILDREN_UPDATE.length() > 0) {
+//                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+//                        for (int i = 0; i < CHILDREN_UPDATE.length(); i++) {
+//                            JSONObject j = CHILDREN_UPDATE.getJSONObject(i);
+//                            Iterator<String> coloumnsArr = j.keys();
+//                            String set = "";
+//                            while (coloumnsArr.hasNext()) {
+//                                String str = coloumnsArr.next().trim();
+//                                if (str.indexOf("CHILDRENID") != -1)
+//                                    set += str + "= " + j.getString(str) + ",";
+//                            }
+//                            if (set.length() > 0)
+//
+//                                set = set.substring(0, set.lastIndexOf(','));
+//                            String Query = "UPDATE CHILDREN SET " + set + " WHERE CHILDRENID =" + j.getString("CHILDRENID");
+//                            Log.e("UPDATE IN CHILDREN", Query);
+//                            Cursor c = db.rawQuery(Query, null);
+//                            Log.e("UPDATE CUR", "" + c.getCount());
+//                            c.close();
+//                        }
+//                        db.close();
 //                    }
 //                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDREN", CHILDREN);
 //                }
@@ -861,275 +893,275 @@ public class BaseActivity extends Activity {
                     sharedpreferences.edit().putString("SyncDate1", Helper.syncDate1).commit();
                 }
 
-                if (mJsonObject.has("AGEGROUPS")) {
-                    JSONArray AGEGROUPS = mJsonObject.getJSONArray("AGEGROUPS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "AGEGROUPS", AGEGROUPS);
-                }
-
-                if (mJsonObject.has("ALLERGIES")) {
-                    JSONArray ALLERGIES = mJsonObject.getJSONArray("ALLERGIES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "ALLERGIES", ALLERGIES);
-                }
-                if (mJsonObject.has("BLOODPRESSUREREFERENCES")) {
-                    JSONArray BLOODPRESSUREREFERENCES = mJsonObject.getJSONArray("BLOODPRESSUREREFERENCES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "BLOODPRESSUREREFERENCES", BLOODPRESSUREREFERENCES);
-                }
-                if (mJsonObject.has("BPCLASSIFICATIONS")) {
-                    JSONArray BPCLASSIFICATIONS = mJsonObject.getJSONArray("BPCLASSIFICATIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "BPCLASSIFICATIONS", BPCLASSIFICATIONS);
-                }
-                if (mJsonObject.has("CASTE")) {
-                    JSONArray CASTE = mJsonObject.getJSONArray("CASTE");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CASTE", CASTE);
-                }
-                if (mJsonObject.has("COUNTRIES")) {
-                    JSONArray COUNTRIES = mJsonObject.getJSONArray("COUNTRIES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "COUNTRIES", COUNTRIES);
-                }
-                if (mJsonObject.has("DECLAREDBYDEPARTMENTS")) {
-                    JSONArray DECLAREDBYDEPARTMENTS = mJsonObject.getJSONArray("DECLAREDBYDEPARTMENTS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DECLAREDBYDEPARTMENTS", DECLAREDBYDEPARTMENTS);
-                }
-                if (mJsonObject.has("DEVICEACTIONS")) {
-                    JSONArray DEVICEACTIONS = mJsonObject.getJSONArray("DEVICEACTIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICEACTIONS", DEVICEACTIONS);
-                }
-                if (mJsonObject.has("DEVICESTATUSES")) {
-                    JSONArray DEVICESTATUSES = mJsonObject.getJSONArray("DEVICESTATUSES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICESTATUSES", DEVICESTATUSES);
-                }
-                if (mJsonObject.has("DEPARTMENTS")) {
-                    JSONArray DEPARTMENTS = mJsonObject.getJSONArray("DEPARTMENTS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEPARTMENTS", DEPARTMENTS);
-                }
-                if (mJsonObject.has("DESIGNATIONS")) {
-                    JSONArray DESIGNATIONS = mJsonObject.getJSONArray("DESIGNATIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DESIGNATIONS", DESIGNATIONS);
-                }
-                if (mJsonObject.has("HEALTHCONDITIONGROUPS")) {
-                    JSONArray HEALTHCONDITIONGROUPS = mJsonObject.getJSONArray("HEALTHCONDITIONGROUPS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONGROUPS", HEALTHCONDITIONGROUPS);
-                }
-                if (mJsonObject.has("HEALTHCONDITIONS")) {
-                    JSONArray HEALTHCONDITIONS = mJsonObject.getJSONArray("HEALTHCONDITIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONS", HEALTHCONDITIONS);
-                }
-                if (mJsonObject.has("EVENTTYPES")) {
-                    JSONArray EVENTTYPES = mJsonObject.getJSONArray("EVENTTYPES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EVENTTYPES", EVENTTYPES);
-                }
-                if (mJsonObject.has("FAMILYMEMBERRELATIONS")) {
-                    JSONArray FAMILYMEMBERRELATIONS = mJsonObject.getJSONArray("FAMILYMEMBERRELATIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FAMILYMEMBERRELATIONS", FAMILYMEMBERRELATIONS);
-                }
-                if (mJsonObject.has("HEALTHCONDITIONFACILITIES")) {
-                    JSONArray HEALTHCONDITIONFACILITIES = mJsonObject.getJSONArray("HEALTHCONDITIONFACILITIES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONFACILITIES", HEALTHCONDITIONFACILITIES);
-                }
-                if (mJsonObject.has("LANGUAGES")) {
-                    JSONArray LANGUAGES = mJsonObject.getJSONArray("LANGUAGES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "LANGUAGES", LANGUAGES);
-                }
-                if (mJsonObject.has("STATUSES")) {
-                    JSONArray STATUSES = mJsonObject.getJSONArray("STATUSES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "STATUSES", STATUSES);
-                }
-                if (mJsonObject.has("SURGICALS")) {
-                    JSONArray SURGICALS = mJsonObject.getJSONArray("SURGICALS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SURGICALS", SURGICALS);
-                }
-                if (mJsonObject.has("PANCHAYATS")) {
-                    JSONArray PANCHAYATS = mJsonObject.getJSONArray("PANCHAYATS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PANCHAYATS", PANCHAYATS);
-                }
-                if (mJsonObject.has("INSTITUTECATEGORIES")) {
-                    JSONArray INSTITUTECATEGORIES = mJsonObject.getJSONArray("INSTITUTECATEGORIES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTECATEGORIES", INSTITUTECATEGORIES);
-                }
-                if (mJsonObject.has("RELATIONS")) {
-                    JSONArray RELATIONS = mJsonObject.getJSONArray("RELATIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RELATIONS", RELATIONS);
-                }
-                if (mJsonObject.has("RELIGIONS")) {
-                    JSONArray RELIGIONS = mJsonObject.getJSONArray("RELIGIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RELIGIONS", RELIGIONS);
-                }
-                if (mJsonObject.has("SALUTATIONS")) {
-                    JSONArray SALUTATIONS = mJsonObject.getJSONArray("SALUTATIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SALUTATIONS", SALUTATIONS);
-                }
-                if (mJsonObject.has("SECTIONS")) {
-                    JSONArray SECTIONS = mJsonObject.getJSONArray("SECTIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SECTIONS", SECTIONS);
-                }
-                if (mJsonObject.has("STATES")) {
-                    JSONArray STATES = mJsonObject.getJSONArray("STATES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "STATES", STATES);
-                }
-                if (mJsonObject.has("TEMPERATURES")) {
-                    JSONArray TEMPERATURES = mJsonObject.getJSONArray("TEMPERATURES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "TEMPERATURES", TEMPERATURES);
-                }
-                if (mJsonObject.has("USERTYPES")) {
-                    JSONArray USERTYPES = mJsonObject.getJSONArray("USERTYPES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "USERTYPES", USERTYPES);
-                }
-                if (mJsonObject.has("DEVICEACTIONSTATUSES")) {
-                    JSONArray DEVICEACTIONSTATUSES = mJsonObject.getJSONArray("DEVICEACTIONSTATUSES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICEACTIONSTATUSES", DEVICEACTIONSTATUSES);
-                }
-                if (mJsonObject.has("INSTITUTETYPES")) {
-                    JSONArray INSTITUTETYPES = mJsonObject.getJSONArray("INSTITUTETYPES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTETYPES", INSTITUTETYPES);
-                }
-                if (mJsonObject.has("PLANSTATUSES")) {
-                    JSONArray PLANSTATUSES = mJsonObject.getJSONArray("PLANSTATUSES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PLANSTATUSES", PLANSTATUSES);
-                }
-                if (mJsonObject.has("PLANTYPES")) {
-                    JSONArray PLANTYPES = mJsonObject.getJSONArray("PLANTYPES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PLANTYPES", PLANTYPES);
-                }
-                if (mJsonObject.has("RBSKCALENDARYEARS")) {
-                    JSONArray RBSKCALENDARYEARS = mJsonObject.getJSONArray("RBSKCALENDARYEARS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RBSKCALENDARYEARS", RBSKCALENDARYEARS);
-                }
-                if (mJsonObject.has("SCREENSTATUSES")) {
-                    JSONArray SCREENSTATUSES = mJsonObject.getJSONArray("SCREENSTATUSES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENSTATUSES", SCREENSTATUSES);
-                }
-                if (mJsonObject.has("CHILDRENSTATUS")) {
-                    JSONArray CHILDRENSTATUS = mJsonObject.getJSONArray("CHILDRENSTATUS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSTATUS", CHILDRENSTATUS);
-                }
-                if (mJsonObject.has("CHILDRENSCREENSTATUSES")) {
-                    JSONArray CHILDRENSCREENSTATUSES = mJsonObject.getJSONArray("CHILDRENSCREENSTATUSES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENSTATUSES", CHILDRENSCREENSTATUSES);
-                }
-                if (mJsonObject.has("CLASSES")) {
-                    JSONArray CLASSES = mJsonObject.getJSONArray("CLASSES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CLASSES", CLASSES);
-                }
-                if (mJsonObject.has("CONTACTCATEGORIES")) {
-                    JSONArray CONTACTCATEGORIES = mJsonObject.getJSONArray("CONTACTCATEGORIES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTCATEGORIES", CONTACTCATEGORIES);
-                }
-                if (mJsonObject.has("CONTACTTYPES")) {
-                    JSONArray CONTACTTYPES = mJsonObject.getJSONArray("CONTACTTYPES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTTYPES", CONTACTTYPES);
-                }
-                if (mJsonObject.has("DISABILITYTYPES")) {
-                    JSONArray DISABILITYTYPES = mJsonObject.getJSONArray("DISABILITYTYPES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DISABILITYTYPES", DISABILITYTYPES);
-                }
-                if (mJsonObject.has("DISTRICTS")) {
-                    JSONArray DISTRICTS = mJsonObject.getJSONArray("DISTRICTS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DISTRICTS", DISTRICTS);
-                }
-                if (mJsonObject.has("EDUCATION")) {
-                    JSONArray EDUCATION = mJsonObject.getJSONArray("EDUCATION");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EDUCATION", EDUCATION);
-                }
-                if (mJsonObject.has("EDUCATIONYEARS")) {
-                    JSONArray EDUCATIONYEARS = mJsonObject.getJSONArray("EDUCATIONYEARS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EDUCATIONYEARS", EDUCATIONYEARS);
-                }
-                if (mJsonObject.has("FAMILYHISTORY")) {
-                    JSONArray FAMILYHISTORY = mJsonObject.getJSONArray("FAMILYHISTORY");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FAMILYHISTORY", FAMILYHISTORY);
-                }
-                if (mJsonObject.has("GENDER")) {
-                    JSONArray GENDER = mJsonObject.getJSONArray("GENDER");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "GENDER", GENDER);
-                }
-                if (mJsonObject.has("HEMOGLOBINS")) {
-                    JSONArray HEMOGLOBINS = mJsonObject.getJSONArray("HEMOGLOBINS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEMOGLOBINS", HEMOGLOBINS);
-                }
-                if (mJsonObject.has("INSTITUTEPLANSKIPREASONS")) {
-                    JSONArray INSTITUTEPLANSKIPREASONS = mJsonObject.getJSONArray("INSTITUTEPLANSKIPREASONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANSKIPREASONS", INSTITUTEPLANSKIPREASONS);
-                }
-                if (mJsonObject.has("INSTITUTEPLANSTATUSES")) {
-                    JSONArray INSTITUTEPLANSTATUSES = mJsonObject.getJSONArray("INSTITUTEPLANSTATUSES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANSTATUSES", INSTITUTEPLANSTATUSES);
-                }
-                if (mJsonObject.has("MANDALS")) {
-                    JSONArray MANDALS = mJsonObject.getJSONArray("MANDALS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MANDALS", MANDALS);
-                }
-                if (mJsonObject.has("MUACREFERNCES")) {
-                    JSONArray MUACREFERNCES = mJsonObject.getJSONArray("MUACREFERNCES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MUACREFERNCES", MUACREFERNCES);
-                }
-                if (mJsonObject.has("OCCUPATIONS")) {
-                    JSONArray OCCUPATIONS = mJsonObject.getJSONArray("OCCUPATIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "OCCUPATIONS", OCCUPATIONS);
-                }
-                if (mJsonObject.has("SAMREFERENCES")) {
-                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
-                }
-                if (mJsonObject.has("SCHOOLCATEGORIES")) {
-                    JSONArray SCHOOLCATEGORIES = mJsonObject.getJSONArray("SCHOOLCATEGORIES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCHOOLCATEGORIES", SCHOOLCATEGORIES);
-                }
-                if (mJsonObject.has("SCREENCATEGORIES")) {
-                    JSONArray SCREENCATEGORIES = mJsonObject.getJSONArray("SCREENCATEGORIES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENCATEGORIES", SCREENCATEGORIES);
-                }
-                if (mJsonObject.has("SAMREFERENCES")) {
-                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
-                }
-                if (mJsonObject.has("SCREENQUESTIONS")) {
-                    JSONArray SCREENQUESTIONS = mJsonObject.getJSONArray("SCREENQUESTIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENQUESTIONS", SCREENQUESTIONS);
-                }
-                if (mJsonObject.has("SCREENTEMPLATETYPES")) {
-                    JSONArray SCREENTEMPLATETYPES = mJsonObject.getJSONArray("SCREENTEMPLATETYPES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENTEMPLATETYPES", SCREENTEMPLATETYPES);
-                }
-                if (mJsonObject.has("0TO5YEARSHCCHART")) {
-                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("0TO5YEARSHCCHART");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSHCCHART]", SAMREFERENCES);
-                }
-                if (mJsonObject.has("0TO5YEARSWEIGHTCHART")) {
-                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("0TO5YEARSWEIGHTCHART");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSWEIGHTCHART]", SAMREFERENCES);
-                }
-                if (mJsonObject.has("6TO18YEARSWEIGHTCHART")) {
-                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("6TO18YEARSWEIGHTCHART");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6TO18YEARSWEIGHTCHART]", SAMREFERENCES);
-                }
-                if (mJsonObject.has("6MTO19YBMICHARTZSCORES")) {
-                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("6MTO19YBMICHARTZSCORES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6MTO19YBMICHARTZSCORES]", SAMREFERENCES);
-                }
-                if (mJsonObject.has("0TO5YEARSHEIGHTCHART")) {
-                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("0TO5YEARSHEIGHTCHART");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSHEIGHTCHART]", SAMREFERENCES);
-                }
-                if (mJsonObject.has("6TO18YEARSHEIGHTCHART")) {
-                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("6TO18YEARSHEIGHTCHART");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6TO18YEARSHEIGHTCHART]", SAMREFERENCES);
-                }
-                if (mJsonObject.has("EVENTS")) {
-                    JSONArray EVENTS = mJsonObject.getJSONArray("EVENTS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EVENTS", EVENTS);
-                }
-                if (mJsonObject.has("SAMREFERENCES")) {
-                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
-                }
-                if (mJsonObject.has("LABINVESTIGATIONS")) {
-                    JSONArray LABINVESTIGATIONS = mJsonObject.getJSONArray("LABINVESTIGATIONS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "LABINVESTIGATIONS", LABINVESTIGATIONS);
-                }
-                if (mJsonObject.has("SCREENINGROUNDS")) {
-                    JSONArray SCREENINGROUNDS = mJsonObject.getJSONArray("SCREENINGROUNDS");
-                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENINGROUNDS", SCREENINGROUNDS);
-                }
+//                if (mJsonObject.has("AGEGROUPS")) {
+//                    JSONArray AGEGROUPS = mJsonObject.getJSONArray("AGEGROUPS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "AGEGROUPS", AGEGROUPS);
+//                }
+//
+//                if (mJsonObject.has("ALLERGIES")) {
+//                    JSONArray ALLERGIES = mJsonObject.getJSONArray("ALLERGIES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "ALLERGIES", ALLERGIES);
+//                }
+//                if (mJsonObject.has("BLOODPRESSUREREFERENCES")) {
+//                    JSONArray BLOODPRESSUREREFERENCES = mJsonObject.getJSONArray("BLOODPRESSUREREFERENCES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "BLOODPRESSUREREFERENCES", BLOODPRESSUREREFERENCES);
+//                }
+//                if (mJsonObject.has("BPCLASSIFICATIONS")) {
+//                    JSONArray BPCLASSIFICATIONS = mJsonObject.getJSONArray("BPCLASSIFICATIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "BPCLASSIFICATIONS", BPCLASSIFICATIONS);
+//                }
+//                if (mJsonObject.has("CASTE")) {
+//                    JSONArray CASTE = mJsonObject.getJSONArray("CASTE");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CASTE", CASTE);
+//                }
+//                if (mJsonObject.has("COUNTRIES")) {
+//                    JSONArray COUNTRIES = mJsonObject.getJSONArray("COUNTRIES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "COUNTRIES", COUNTRIES);
+//                }
+//                if (mJsonObject.has("DECLAREDBYDEPARTMENTS")) {
+//                    JSONArray DECLAREDBYDEPARTMENTS = mJsonObject.getJSONArray("DECLAREDBYDEPARTMENTS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DECLAREDBYDEPARTMENTS", DECLAREDBYDEPARTMENTS);
+//                }
+//                if (mJsonObject.has("DEVICEACTIONS")) {
+//                    JSONArray DEVICEACTIONS = mJsonObject.getJSONArray("DEVICEACTIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICEACTIONS", DEVICEACTIONS);
+//                }
+//                if (mJsonObject.has("DEVICESTATUSES")) {
+//                    JSONArray DEVICESTATUSES = mJsonObject.getJSONArray("DEVICESTATUSES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICESTATUSES", DEVICESTATUSES);
+//                }
+//                if (mJsonObject.has("DEPARTMENTS")) {
+//                    JSONArray DEPARTMENTS = mJsonObject.getJSONArray("DEPARTMENTS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEPARTMENTS", DEPARTMENTS);
+//                }
+//                if (mJsonObject.has("DESIGNATIONS")) {
+//                    JSONArray DESIGNATIONS = mJsonObject.getJSONArray("DESIGNATIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DESIGNATIONS", DESIGNATIONS);
+//                }
+//                if (mJsonObject.has("HEALTHCONDITIONGROUPS")) {
+//                    JSONArray HEALTHCONDITIONGROUPS = mJsonObject.getJSONArray("HEALTHCONDITIONGROUPS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONGROUPS", HEALTHCONDITIONGROUPS);
+//                }
+//                if (mJsonObject.has("HEALTHCONDITIONS")) {
+//                    JSONArray HEALTHCONDITIONS = mJsonObject.getJSONArray("HEALTHCONDITIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONS", HEALTHCONDITIONS);
+//                }
+//                if (mJsonObject.has("EVENTTYPES")) {
+//                    JSONArray EVENTTYPES = mJsonObject.getJSONArray("EVENTTYPES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EVENTTYPES", EVENTTYPES);
+//                }
+//                if (mJsonObject.has("FAMILYMEMBERRELATIONS")) {
+//                    JSONArray FAMILYMEMBERRELATIONS = mJsonObject.getJSONArray("FAMILYMEMBERRELATIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FAMILYMEMBERRELATIONS", FAMILYMEMBERRELATIONS);
+//                }
+//                if (mJsonObject.has("HEALTHCONDITIONFACILITIES")) {
+//                    JSONArray HEALTHCONDITIONFACILITIES = mJsonObject.getJSONArray("HEALTHCONDITIONFACILITIES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONFACILITIES", HEALTHCONDITIONFACILITIES);
+//                }
+//                if (mJsonObject.has("LANGUAGES")) {
+//                    JSONArray LANGUAGES = mJsonObject.getJSONArray("LANGUAGES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "LANGUAGES", LANGUAGES);
+//                }
+//                if (mJsonObject.has("STATUSES")) {
+//                    JSONArray STATUSES = mJsonObject.getJSONArray("STATUSES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "STATUSES", STATUSES);
+//                }
+//                if (mJsonObject.has("SURGICALS")) {
+//                    JSONArray SURGICALS = mJsonObject.getJSONArray("SURGICALS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SURGICALS", SURGICALS);
+//                }
+//                if (mJsonObject.has("PANCHAYATS")) {
+//                    JSONArray PANCHAYATS = mJsonObject.getJSONArray("PANCHAYATS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PANCHAYATS", PANCHAYATS);
+//                }
+//                if (mJsonObject.has("INSTITUTECATEGORIES")) {
+//                    JSONArray INSTITUTECATEGORIES = mJsonObject.getJSONArray("INSTITUTECATEGORIES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTECATEGORIES", INSTITUTECATEGORIES);
+//                }
+//                if (mJsonObject.has("RELATIONS")) {
+//                    JSONArray RELATIONS = mJsonObject.getJSONArray("RELATIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RELATIONS", RELATIONS);
+//                }
+//                if (mJsonObject.has("RELIGIONS")) {
+//                    JSONArray RELIGIONS = mJsonObject.getJSONArray("RELIGIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RELIGIONS", RELIGIONS);
+//                }
+//                if (mJsonObject.has("SALUTATIONS")) {
+//                    JSONArray SALUTATIONS = mJsonObject.getJSONArray("SALUTATIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SALUTATIONS", SALUTATIONS);
+//                }
+//                if (mJsonObject.has("SECTIONS")) {
+//                    JSONArray SECTIONS = mJsonObject.getJSONArray("SECTIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SECTIONS", SECTIONS);
+//                }
+//                if (mJsonObject.has("STATES")) {
+//                    JSONArray STATES = mJsonObject.getJSONArray("STATES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "STATES", STATES);
+//                }
+//                if (mJsonObject.has("TEMPERATURES")) {
+//                    JSONArray TEMPERATURES = mJsonObject.getJSONArray("TEMPERATURES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "TEMPERATURES", TEMPERATURES);
+//                }
+//                if (mJsonObject.has("USERTYPES")) {
+//                    JSONArray USERTYPES = mJsonObject.getJSONArray("USERTYPES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "USERTYPES", USERTYPES);
+//                }
+//                if (mJsonObject.has("DEVICEACTIONSTATUSES")) {
+//                    JSONArray DEVICEACTIONSTATUSES = mJsonObject.getJSONArray("DEVICEACTIONSTATUSES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICEACTIONSTATUSES", DEVICEACTIONSTATUSES);
+//                }
+//                if (mJsonObject.has("INSTITUTETYPES")) {
+//                    JSONArray INSTITUTETYPES = mJsonObject.getJSONArray("INSTITUTETYPES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTETYPES", INSTITUTETYPES);
+//                }
+//                if (mJsonObject.has("PLANSTATUSES")) {
+//                    JSONArray PLANSTATUSES = mJsonObject.getJSONArray("PLANSTATUSES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PLANSTATUSES", PLANSTATUSES);
+//                }
+//                if (mJsonObject.has("PLANTYPES")) {
+//                    JSONArray PLANTYPES = mJsonObject.getJSONArray("PLANTYPES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PLANTYPES", PLANTYPES);
+//                }
+//                if (mJsonObject.has("RBSKCALENDARYEARS")) {
+//                    JSONArray RBSKCALENDARYEARS = mJsonObject.getJSONArray("RBSKCALENDARYEARS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RBSKCALENDARYEARS", RBSKCALENDARYEARS);
+//                }
+//                if (mJsonObject.has("SCREENSTATUSES")) {
+//                    JSONArray SCREENSTATUSES = mJsonObject.getJSONArray("SCREENSTATUSES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENSTATUSES", SCREENSTATUSES);
+//                }
+//                if (mJsonObject.has("CHILDRENSTATUS")) {
+//                    JSONArray CHILDRENSTATUS = mJsonObject.getJSONArray("CHILDRENSTATUS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSTATUS", CHILDRENSTATUS);
+//                }
+//                if (mJsonObject.has("CHILDRENSCREENSTATUSES")) {
+//                    JSONArray CHILDRENSCREENSTATUSES = mJsonObject.getJSONArray("CHILDRENSCREENSTATUSES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENSTATUSES", CHILDRENSCREENSTATUSES);
+//                }
+//                if (mJsonObject.has("CLASSES")) {
+//                    JSONArray CLASSES = mJsonObject.getJSONArray("CLASSES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CLASSES", CLASSES);
+//                }
+//                if (mJsonObject.has("CONTACTCATEGORIES")) {
+//                    JSONArray CONTACTCATEGORIES = mJsonObject.getJSONArray("CONTACTCATEGORIES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTCATEGORIES", CONTACTCATEGORIES);
+//                }
+//                if (mJsonObject.has("CONTACTTYPES")) {
+//                    JSONArray CONTACTTYPES = mJsonObject.getJSONArray("CONTACTTYPES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTTYPES", CONTACTTYPES);
+//                }
+//                if (mJsonObject.has("DISABILITYTYPES")) {
+//                    JSONArray DISABILITYTYPES = mJsonObject.getJSONArray("DISABILITYTYPES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DISABILITYTYPES", DISABILITYTYPES);
+//                }
+//                if (mJsonObject.has("DISTRICTS")) {
+//                    JSONArray DISTRICTS = mJsonObject.getJSONArray("DISTRICTS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DISTRICTS", DISTRICTS);
+//                }
+//                if (mJsonObject.has("EDUCATION")) {
+//                    JSONArray EDUCATION = mJsonObject.getJSONArray("EDUCATION");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EDUCATION", EDUCATION);
+//                }
+//                if (mJsonObject.has("EDUCATIONYEARS")) {
+//                    JSONArray EDUCATIONYEARS = mJsonObject.getJSONArray("EDUCATIONYEARS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EDUCATIONYEARS", EDUCATIONYEARS);
+//                }
+//                if (mJsonObject.has("FAMILYHISTORY")) {
+//                    JSONArray FAMILYHISTORY = mJsonObject.getJSONArray("FAMILYHISTORY");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FAMILYHISTORY", FAMILYHISTORY);
+//                }
+//                if (mJsonObject.has("GENDER")) {
+//                    JSONArray GENDER = mJsonObject.getJSONArray("GENDER");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "GENDER", GENDER);
+//                }
+//                if (mJsonObject.has("HEMOGLOBINS")) {
+//                    JSONArray HEMOGLOBINS = mJsonObject.getJSONArray("HEMOGLOBINS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEMOGLOBINS", HEMOGLOBINS);
+//                }
+//                if (mJsonObject.has("INSTITUTEPLANSKIPREASONS")) {
+//                    JSONArray INSTITUTEPLANSKIPREASONS = mJsonObject.getJSONArray("INSTITUTEPLANSKIPREASONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANSKIPREASONS", INSTITUTEPLANSKIPREASONS);
+//                }
+//                if (mJsonObject.has("INSTITUTEPLANSTATUSES")) {
+//                    JSONArray INSTITUTEPLANSTATUSES = mJsonObject.getJSONArray("INSTITUTEPLANSTATUSES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANSTATUSES", INSTITUTEPLANSTATUSES);
+//                }
+//                if (mJsonObject.has("MANDALS")) {
+//                    JSONArray MANDALS = mJsonObject.getJSONArray("MANDALS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MANDALS", MANDALS);
+//                }
+//                if (mJsonObject.has("MUACREFERNCES")) {
+//                    JSONArray MUACREFERNCES = mJsonObject.getJSONArray("MUACREFERNCES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MUACREFERNCES", MUACREFERNCES);
+//                }
+//                if (mJsonObject.has("OCCUPATIONS")) {
+//                    JSONArray OCCUPATIONS = mJsonObject.getJSONArray("OCCUPATIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "OCCUPATIONS", OCCUPATIONS);
+//                }
+//                if (mJsonObject.has("SAMREFERENCES")) {
+//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
+//                }
+//                if (mJsonObject.has("SCHOOLCATEGORIES")) {
+//                    JSONArray SCHOOLCATEGORIES = mJsonObject.getJSONArray("SCHOOLCATEGORIES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCHOOLCATEGORIES", SCHOOLCATEGORIES);
+//                }
+//                if (mJsonObject.has("SCREENCATEGORIES")) {
+//                    JSONArray SCREENCATEGORIES = mJsonObject.getJSONArray("SCREENCATEGORIES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENCATEGORIES", SCREENCATEGORIES);
+//                }
+//                if (mJsonObject.has("SAMREFERENCES")) {
+//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
+//                }
+//                if (mJsonObject.has("SCREENQUESTIONS")) {
+//                    JSONArray SCREENQUESTIONS = mJsonObject.getJSONArray("SCREENQUESTIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENQUESTIONS", SCREENQUESTIONS);
+//                }
+//                if (mJsonObject.has("SCREENTEMPLATETYPES")) {
+//                    JSONArray SCREENTEMPLATETYPES = mJsonObject.getJSONArray("SCREENTEMPLATETYPES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENTEMPLATETYPES", SCREENTEMPLATETYPES);
+//                }
+//                if (mJsonObject.has("[0TO5YEARSHCCHART]")) {
+//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[0TO5YEARSHCCHART]");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSHCCHART]", SAMREFERENCES);
+//                }
+//                if (mJsonObject.has("[0TO5YEARSWEIGHTCHART]")) {
+//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[0TO5YEARSWEIGHTCHART]");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSWEIGHTCHART]", SAMREFERENCES);
+//                }
+//                if (mJsonObject.has("[6TO18YEARSWEIGHTCHART]")) {
+//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[6TO18YEARSWEIGHTCHART]");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6TO18YEARSWEIGHTCHART]", SAMREFERENCES);
+//                }
+//                if (mJsonObject.has("[6MTO19YBMICHARTZSCORES]")) {
+//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[6MTO19YBMICHARTZSCORES]");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6MTO19YBMICHARTZSCORES]", SAMREFERENCES);
+//                }
+//                if (mJsonObject.has("[0TO5YEARSHEIGHTCHART]")) {
+//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[0TO5YEARSHEIGHTCHART]");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSHEIGHTCHART]", SAMREFERENCES);
+//                }
+//                if (mJsonObject.has("[6TO18YEARSHEIGHTCHART]")) {
+//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[6TO18YEARSHEIGHTCHART]");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6TO18YEARSHEIGHTCHART]", SAMREFERENCES);
+//                }
+//                if (mJsonObject.has("EVENTS")) {
+//                    JSONArray EVENTS = mJsonObject.getJSONArray("EVENTS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EVENTS", EVENTS);
+//                }
+//                if (mJsonObject.has("SAMREFERENCES")) {
+//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
+//                }
+//                if (mJsonObject.has("LABINVESTIGATIONS")) {
+//                    JSONArray LABINVESTIGATIONS = mJsonObject.getJSONArray("LABINVESTIGATIONS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "LABINVESTIGATIONS", LABINVESTIGATIONS);
+//                }
+//                if (mJsonObject.has("SCREENINGROUNDS")) {
+//                    JSONArray SCREENINGROUNDS = mJsonObject.getJSONArray("SCREENINGROUNDS");
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENINGROUNDS", SCREENINGROUNDS);
+//                }
 
                 retStr = "200";
             } else {

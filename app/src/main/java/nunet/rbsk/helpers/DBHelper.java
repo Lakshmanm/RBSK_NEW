@@ -452,7 +452,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 } finally {
                     db.endTransaction();
                 }
-               Log.e("Table Completed....", tableName);
+                Log.e("Table Completed....", tableName);
             }
 
         } catch (Exception e) {
@@ -460,6 +460,9 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
     }
+
+
+
 
     public long insertintoTable(Context context, final String tableName,
                                 String[] columnNames, String[] columnValues,
@@ -891,6 +894,29 @@ public class DBHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    public int checkColoumnDatabyID(Context context,
+                                    String TableName, String columname[],
+                                    String columnValue[]) {
+        DBHelper cdbh = getInstance(mContext);
+        SQLiteDatabase db = cdbh.getReadableDatabase();
+        String query = "SELECT * ";
+
+        query = query + " FROM " + TableName + " WHERE ";
+        for (int k = 0; k < columname.length; k++)
+            query = query + columname[k] + "='" + columnValue[k] + "'"
+                    + " AND ";
+        query = query.substring(0, query.length() - 5);
+        System.out.println("Query:" + query);
+        Cursor cur = db.rawQuery(query, null);
+        int count = -1;
+        count = cur.getCount();
+        cur.close();
+        db.close();
+        cdbh.close();
+        return count;
+    }
+
+
     public static String getColoumnFromDBonWhere(Context ctx, String tablename,
                                                  String colName, String whereCol, String whereVal) {
         String retStr = "";
@@ -906,6 +932,5 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return retStr;
     }
-
 
 }
