@@ -255,7 +255,7 @@ public class BaseActivity extends Activity {
                     Helper.syncDate = syncDate;
                     sharedpreferences.edit().putString("SyncDate", Helper.syncDate).commit();
                     navIndex = 0;
-                    new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate1 + "/1");
+                    new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate1 + "/3");
                 } else {
                     Helper.progressDialog.dismiss();
                     Helper.showShortToast(BaseActivity.this, response);
@@ -277,95 +277,133 @@ public class BaseActivity extends Activity {
                 strResponse = strResponse.replace("\\", "");
                 strResponse = strResponse.substring(1, strResponse.length() - 1);
                 JSONObject mJsonObject = new JSONObject(strResponse);
-//                if (mJsonObject.has("ADDRESS")) {
-//                    JSONArray ADDRESS = mJsonObject.getJSONArray("ADDRESS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "ADDRESS", ADDRESS);
-//                }
-//                if (mJsonObject.has("CONTACTS")) {
-//                    JSONArray CONTACTS = mJsonObject.getJSONArray("CONTACTS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTS", CONTACTS);
-//                }
-//                SQLiteDatabase db = dbHelper.getWritableDatabase();
-//                String Query1 = "Select DISTINCT addressID , LocalAddressID from Address";
-//                Cursor c1 = db.rawQuery(Query1, null);
-//                List<String> addressID = new ArrayList<>();
-//                List<String> LocalAddressID = new ArrayList<>();
-//                while (c1.moveToNext()) {
-//                    addressID.add(c1.getString(0));
-//                    LocalAddressID.add(c1.getString(1));
-//                }
-//                c1.close();
-//                String Query2 = "Select DISTINCT contactID, LocalContactID from Contacts";
-//                Cursor c2 = db.rawQuery(Query2, null);
-//                List<String> contactID = new ArrayList<>();
-//                List<String> LocalContactID = new ArrayList<>();
-//                while (c2.moveToNext()) {
-//                    contactID.add(c2.getString(0));
-//                    LocalContactID.add(c2.getString(1));
-//                }
-//                c2.close();
-//
-//
-//                if (mJsonObject.has("USERS")) {
-//
-//                    JSONArray USERS = mJsonObject.getJSONArray("USERS");
-//                    for (int i = 0; i < USERS.length(); i++) {
-//                        JSONObject j = USERS.getJSONObject(i);
-//                        String insplanID = j.getString("AddressID");
-//                        if (addressID.contains(insplanID)) {
-//                            j.put("LocalAddressID", LocalAddressID.get(addressID.indexOf(insplanID)));
-//                            USERS.put(i, j);
-//                        }
-//                        String contID = j.getString("ContactID");
-//                        if (contactID.contains(contID)) {
-//                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(contID)));
-//                            USERS.put(i, j);
-//                        }
-//                    }
-//
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "USERS", USERS);
-//                }
-//                String Query6 = "Select DISTINCT userID, LocalUserID from Users";
-//                Cursor c6 = db.rawQuery(Query6, null);
-//                List<String> userID = new ArrayList<>();
-//                List<String> LocalUserID = new ArrayList<>();
-//                while (c6.moveToNext()) {
-//                    userID.add(c6.getString(0));
-//                    LocalUserID.add(c6.getString(1));
-//                }
-//                c6.close();
-//                db.close();
-//                if (mJsonObject.has("INSTITUTES")) {
-//                    JSONArray INSTITUTES = mJsonObject.getJSONArray("INSTITUTES");
-//
-//                    for (int i = 0; i < INSTITUTES.length(); i++) {
-//                        JSONObject j = INSTITUTES.getJSONObject(i);
-//                        String insplanID = j.getString("AddressID");
-//                        if (addressID.contains(insplanID)) {
-//                            j.put("LocalAddressID", LocalAddressID.get(addressID.indexOf(insplanID)));
-//                            INSTITUTES.put(i, j);
-//                        }
-//                        String contID = j.getString("ContactID");
-//                        if (contactID.contains(contID.trim())) {
-//                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(contID)));
-//                            INSTITUTES.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTES", INSTITUTES);
-//
-//
-//                }
-//                SQLiteDatabase db2 = dbHelper.getWritableDatabase();
-//                String Query3 = "Select DISTINCT InstituteID , LocalInstituteID from Institutes";
-//                Cursor c3 = db2.rawQuery(Query3, null);
-//                List<String> InstituteID = new ArrayList<>();
-//                List<String> LocalInstituteID = new ArrayList<>();
-//                while (c3.moveToNext()) {
-//                    InstituteID.add(c3.getString(0));
-//                    LocalInstituteID.add(c3.getString(1));
-//                }
-//                c3.close();
-//                db2.close();
+                if (mJsonObject.has("ADDRESS")) {
+                    JSONArray ADDRESS = mJsonObject.getJSONArray("ADDRESS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "ADDRESS", ADDRESS);
+                }
+                if (mJsonObject.has("CONTACTS")) {
+                    JSONArray CONTACTS = mJsonObject.getJSONArray("CONTACTS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTS", CONTACTS);
+                }
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                String Query1 = "Select DISTINCT addressID , LocalAddressID from Address";
+                Cursor c1 = db.rawQuery(Query1, null);
+                List<String> addressID = new ArrayList<>();
+                List<String> LocalAddressID = new ArrayList<>();
+                while (c1.moveToNext()) {
+                    addressID.add(c1.getString(0));
+                    LocalAddressID.add(c1.getString(1));
+                }
+                c1.close();
+                String Query2 = "Select DISTINCT contactID, LocalContactID from Contacts";
+                Cursor c2 = db.rawQuery(Query2, null);
+                List<String> contactID = new ArrayList<>();
+                List<String> LocalContactID = new ArrayList<>();
+                while (c2.moveToNext()) {
+                    contactID.add(c2.getString(0));
+                    LocalContactID.add(c2.getString(1));
+                }
+                c2.close();
+
+
+                if (mJsonObject.has("USERS")) {
+
+                    JSONArray USERS = mJsonObject.getJSONArray("USERS");
+                    for (int i = 0; i < USERS.length(); i++) {
+                        JSONObject j = USERS.getJSONObject(i);
+                        String insplanID = j.getString("AddressID");
+                        if (addressID.contains(insplanID)) {
+                            j.put("LocalAddressID", LocalAddressID.get(addressID.indexOf(insplanID)));
+                            USERS.put(i, j);
+                        }
+                        String contID = j.getString("ContactID");
+                        if (contactID.contains(contID)) {
+                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(contID)));
+                            USERS.put(i, j);
+                        }
+                    }
+
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "USERS", USERS);
+                }
+                String Query6 = "Select DISTINCT userID, LocalUserID from Users";
+                Cursor c6 = db.rawQuery(Query6, null);
+                List<String> userID = new ArrayList<>();
+                List<String> LocalUserID = new ArrayList<>();
+                while (c6.moveToNext()) {
+                    userID.add(c6.getString(0));
+                    LocalUserID.add(c6.getString(1));
+                }
+                c6.close();
+                db.close();
+                if (mJsonObject.has("INSTITUTES")) {
+                    JSONArray INSTITUTES = mJsonObject.getJSONArray("INSTITUTES");
+                    JSONArray INSTITUTE_UPDATE = new JSONArray();
+                    for (int i = 0; i < INSTITUTES.length(); i++) {
+                        JSONObject j = INSTITUTES.getJSONObject(i);
+                        String insplanID = j.getString("AddressID");
+                        if (addressID.contains(insplanID)) {
+                            j.put("LocalAddressID", LocalAddressID.get(addressID.indexOf(insplanID)));
+                            INSTITUTES.put(i, j);
+                        }
+                        String contID = j.getString("ContactID");
+                        if (contactID.contains(contID.trim())) {
+                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(contID)));
+                            INSTITUTES.put(i, j);
+                        }
+
+                        int instituteid = dbHelper.checkColoumnDatabyID(BaseActivity.this, "INSTITUTES", new String[]{"INSTITUTEID"}, new String[]{j.getString("InstituteID")});
+                        if (instituteid > 0) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                INSTITUTES.remove(i);
+                            }
+                            INSTITUTE_UPDATE.put(j);
+                        }
+
+                    }
+                    if (INSTITUTE_UPDATE.length() > 0) {
+                        SQLiteDatabase db1 = dbHelper.getWritableDatabase();
+                        for (int i = 0; i < INSTITUTE_UPDATE.length(); i++) {
+                            JSONObject j = INSTITUTE_UPDATE.getJSONObject(i);
+                            Iterator<String> coloumnsArr = j.keys();
+                            String set = "";
+                            while (coloumnsArr.hasNext()) {
+                                String str = coloumnsArr.next().trim();
+                                if (str.indexOf("InstituteID") == -1) {
+                                    if (str.indexOf("IsDeleted") != -1) {
+                                        if (j.getString(str).trim().equalsIgnoreCase("false")) {
+                                            set += str + " = '0',";
+                                        } else {
+                                            set += str + " = '1',";
+                                        }
+                                    } else {
+                                        set += str + " = '" + j.getString(str) + "',";
+                                    }
+                                }
+                            }
+                            set = set + " LastCommitedDate ='" + Helper.syncDate + "', PushStatus ='0',";
+                            if (set.length() > 0)
+                                set = set.substring(0, set.lastIndexOf(','));
+                            String Query = "UPDATE INSTITUTES SET " + set + " WHERE INSTITUTEID =" + j.getString("InstituteID");
+                            Log.e("UPDATE IN INSTITUTE", Query);
+                            Cursor c = db1.rawQuery(Query, null);
+                            Log.e("UPDATE CUR", "" + c.getCount());
+                            c.close();
+                        }
+                        db1.close();
+                    }
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTES", INSTITUTES);
+                }
+                SQLiteDatabase db2 = dbHelper.getWritableDatabase();
+                String Query3 = "Select DISTINCT InstituteID , LocalInstituteID from Institutes";
+                Cursor c3 = db2.rawQuery(Query3, null);
+                List<String> InstituteID = new ArrayList<>();
+                List<String> LocalInstituteID = new ArrayList<>();
+                while (c3.moveToNext()) {
+                    InstituteID.add(c3.getString(0));
+                    LocalInstituteID.add(c3.getString(1));
+                }
+                c3.close();
+                db2.close();
 //                if (mJsonObject.has("INSTITUTEPICTURES")) {
 //                    JSONArray INSTITUTEPICTURES = mJsonObject.getJSONArray("INSTITUTEPICTURES");
 //                    for (int i = 0; i < INSTITUTEPICTURES.length(); i++) {
@@ -378,163 +416,589 @@ public class BaseActivity extends Activity {
 //                    }
 //                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPICTURES", INSTITUTEPICTURES);
 //                }
-//                if (mJsonObject.has("INSTITUTEPLANS")) {
-//                    JSONArray INSTITUTEPLANS = mJsonObject.getJSONArray("INSTITUTEPLANS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANS", INSTITUTEPLANS);
-//                }
+                if (mJsonObject.has("INSTITUTEPLANS")) {
+                    JSONArray INSTITUTEPLANS = mJsonObject.getJSONArray("INSTITUTEPLANS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANS", INSTITUTEPLANS);
+                }
+
+                if (mJsonObject.has("INSTITUTEPLANDETAILS")) {
+                    JSONArray INSTITUTEPLANDETAILS = mJsonObject.getJSONArray("INSTITUTEPLANDETAILS");
+                    SQLiteDatabase dbin = dbHelper.getWritableDatabase();
+                    String Query5 = "Select DISTINCT InstitutePlanID , localinstituteplanid from INSTITUTEPLANS";
+                    Cursor c5 = dbin.rawQuery(Query5, null);
+                    List<String> InstitutePlanID = new ArrayList<>();
+                    List<String> localinstituteplanid = new ArrayList<>();
+                    while (c5.moveToNext()) {
+                        InstitutePlanID.add(c5.getString(0));
+                        localinstituteplanid.add(c5.getString(1));
+                    }
+                    c5.close();
+                    dbin.close();
+                    for (int i = 0; i < INSTITUTEPLANDETAILS.length(); i++) {
+                        JSONObject j = INSTITUTEPLANDETAILS.getJSONObject(i);
+                        String insplanID = j.getString("InstitutePlanID");
+                        if (InstitutePlanID.contains(insplanID.trim())) {
+                            j.put("LocalInstitutePlanID", localinstituteplanid.get(InstitutePlanID.indexOf(insplanID)));
+                            INSTITUTEPLANDETAILS.put(i, j);
+                        }
+                    }
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANDETAILS", INSTITUTEPLANDETAILS);
+
+                }
+                if (mJsonObject.has("CONTACTDETAILS")) {
+
+                    JSONArray CONTACTDETAILS = mJsonObject.getJSONArray("CONTACTDETAILS");
+                    for (int i = 0; i < CONTACTDETAILS.length(); i++) {
+                        JSONObject j = CONTACTDETAILS.getJSONObject(i);
+                        String insplanID = j.getString("ContactID");
+                        if (contactID.contains(insplanID)) {
+                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(insplanID)));
+                            CONTACTDETAILS.put(i, j);
+                        }
+
+                    }
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTDETAILS", CONTACTDETAILS);
+                }
+                if (mJsonObject.has("DEVICESETTINGS")) {
+                    JSONArray DEVICESETTINGS = mJsonObject.getJSONArray("DEVICESETTINGS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICESETTINGS", DEVICESETTINGS);
+                }
+                if (mJsonObject.has("FACILITIES")) {
+                    JSONArray FACILITIES = mJsonObject.getJSONArray("FACILITIES");
+
+                    for (int i = 0; i < FACILITIES.length(); i++) {
+                        JSONObject j = FACILITIES.getJSONObject(i);
+                        String insplanID = j.getString("AddressID");
+                        if (addressID.contains(insplanID)) {
+                            j.put("LocalAddressID", LocalAddressID.get(addressID.indexOf(insplanID)));
+                            FACILITIES.put(i, j);
+                        }
+                        String contID = j.getString("ContactID");
+                        if (contactID.contains(contID)) {
+                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(contID)));
+                            FACILITIES.put(i, j);
+                        }
+                    }
+
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FACILITIES", FACILITIES);
+                }
+                if (mJsonObject.has("FACILITYCOVERAGE")) {
+                    JSONArray FACILITYCOVERAGE = mJsonObject.getJSONArray("FACILITYCOVERAGE");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FACILITYCOVERAGE", FACILITYCOVERAGE);
+                }
+                if (mJsonObject.has("HABITATS")) {
+                    JSONArray HABITATS = mJsonObject.getJSONArray("HABITATS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HABITATS", HABITATS);
+                }
+                if (mJsonObject.has("MHTSTAFF")) {
+                    JSONArray MHTSTAFF = mJsonObject.getJSONArray("MHTSTAFF");
+
+                    for (int i = 0; i < MHTSTAFF.length(); i++) {
+                        JSONObject j = MHTSTAFF.getJSONObject(i);
+                        String insplanID = j.getString("UserID");
+                        if (userID.contains(insplanID)) {
+                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(insplanID)));
+                            MHTSTAFF.put(i, j);
+                        }
+
+                    }
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MHTSTAFF", MHTSTAFF);
+                }
+                if (mJsonObject.has("MOBILEHEALTHTEAMS")) {
+                    JSONArray MOBILEHEALTHTEAMS = mJsonObject.getJSONArray("MOBILEHEALTHTEAMS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MOBILEHEALTHTEAMS", MOBILEHEALTHTEAMS);
+                }
+                if (mJsonObject.has("USERCREDENTIALS")) {
+                    JSONArray USERCREDENTIALS = mJsonObject.getJSONArray("USERCREDENTIALS");
+
+                    for (int i = 0; i < USERCREDENTIALS.length(); i++) {
+                        JSONObject j = USERCREDENTIALS.getJSONObject(i);
+                        String insplanID = j.getString("UserID");
+                        if (userID.contains(insplanID)) {
+                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(insplanID)));
+                            USERCREDENTIALS.put(i, j);
+                        }
+                    }
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "USERCREDENTIALS", USERCREDENTIALS);
+                }
+                if (mJsonObject.has("VILLAGES")) {
+                    JSONArray VILLAGES = mJsonObject.getJSONArray("VILLAGES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "VILLAGES", VILLAGES);
+                }
+
+                if (mJsonObject.has("CHILDREN")) {
+                    JSONArray CHILDREN = mJsonObject.getJSONArray("CHILDREN");
+                    JSONArray CHILDREN_UPDATE = new JSONArray();
+                    for (int i = 0; i < CHILDREN.length(); i++) {
+                        JSONObject j = CHILDREN.getJSONObject(i);
+                        String insplanID = j.getString("InstituteID");
+                        if (InstituteID.contains(insplanID.trim())) {
+                            j.put("LocalInstituteID", LocalInstituteID.get(InstituteID.indexOf(insplanID)));
+                            CHILDREN.put(i, j);
+                        }
+                        String contID = j.getString("UserID");
+                        if (userID.contains(contID.trim())) {
+                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(contID)));
+                            CHILDREN.put(i, j);
+                        }
+                        int children = dbHelper.checkColoumnDatabyID(BaseActivity.this, "CHILDREN", new String[]{"CHILDRENID"}, new String[]{j.getString("ChildrenID")});
+                        if (children > 0) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                CHILDREN.remove(i);
+                            }
+                            CHILDREN_UPDATE.put(j);
+                        }
+
+                    }
+                    if (CHILDREN_UPDATE.length() > 0) {
+                        SQLiteDatabase db1 = dbHelper.getWritableDatabase();
+                        for (int i = 0; i < CHILDREN_UPDATE.length(); i++) {
+                            JSONObject j = CHILDREN_UPDATE.getJSONObject(i);
+                            Iterator<String> coloumnsArr = j.keys();
+                            String set = "";
+                            while (coloumnsArr.hasNext()) {
+                                String str = coloumnsArr.next().trim();
+                                if (str.indexOf("ChildrenID") == -1) {
+                                    if (str.indexOf("IsDeleted") != -1) {
+                                        if (j.getString(str).trim().equalsIgnoreCase("false")) {
+                                            set += str + " = '0',";
+                                        } else {
+                                            set += str + " = '1',";
+                                        }
+                                    } else {
+                                        set += str + " = '" + j.getString(str) + "',";
+                                    }
+                                }
+
+                            }
+                            set = set + " LastCommitedDate ='" + Helper.syncDate + "', PushStatus ='0',";
+                            if (set.length() > 0)
+                                set = set.substring(0, set.lastIndexOf(','));
+                            String Query = "UPDATE CHILDREN SET " + set + " WHERE CHILDRENID =" + j.getString("ChildrenID");
+                            Log.e("UPDATE IN CHILDREN", Query);
+                            Cursor c = db1.rawQuery(Query, null);
+                            Log.e("UPDATE CUR", "" + c.getCount());
+                            c.close();
+                        }
+                        db1.close();
+                    }
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDREN", CHILDREN);
+                }
+
+                SQLiteDatabase db8 = dbHelper.getWritableDatabase();
+                String Query18 = "Select DISTINCT childrenID , LocalChildrenID from Children";
+                Cursor c18 = db8.rawQuery(Query18, null);
+                List<String> childrenID = new ArrayList<>();
+                List<String> LocalChildrenID = new ArrayList<>();
+                while (c18.moveToNext()) {
+                    childrenID.add(c18.getString(0));
+                    LocalChildrenID.add(c18.getString(1));
+                }
+                c18.close();
+                db8.close();
+                //               if (mJsonObject.has("CHILDRENPICTURES")) {
+//                    JSONArray CHILDRENPICTURES = mJsonObject.getJSONArray("CHILDRENPICTURES");
 //
-//                if (mJsonObject.has("INSTITUTEPLANDETAILS")) {
-//                    JSONArray INSTITUTEPLANDETAILS = mJsonObject.getJSONArray("INSTITUTEPLANDETAILS");
-//                    SQLiteDatabase dbin = dbHelper.getWritableDatabase();
-//                    String Query5 = "Select DISTINCT InstitutePlanID , localinstituteplanid from INSTITUTEPLANS";
-//                    Cursor c5 = dbin.rawQuery(Query5, null);
-//                    List<String> InstitutePlanID = new ArrayList<>();
-//                    List<String> localinstituteplanid = new ArrayList<>();
-//                    while (c5.moveToNext()) {
-//                        InstitutePlanID.add(c5.getString(0));
-//                        localinstituteplanid.add(c5.getString(1));
-//                    }
-//                    c5.close();
-//                    dbin.close();
-//                    for (int i = 0; i < INSTITUTEPLANDETAILS.length(); i++) {
-//                        JSONObject j = INSTITUTEPLANDETAILS.getJSONObject(i);
-//                        String insplanID = j.getString("InstitutePlanID");
-//                        if (InstitutePlanID.contains(insplanID.trim())) {
-//                            j.put("LocalInstitutePlanID", localinstituteplanid.get(InstitutePlanID.indexOf(insplanID)));
-//                            INSTITUTEPLANDETAILS.put(i, j);
+//                    for (int i = 0; i < CHILDRENPICTURES.length(); i++) {
+//                        JSONObject j = CHILDRENPICTURES.getJSONObject(i);
+//                        String insplanID = j.getString("ChildrenID");
+//                        if (childrenID.contains(insplanID.trim())) {
+//                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
+//                            CHILDRENPICTURES.put(i, j);
 //                        }
 //                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANDETAILS", INSTITUTEPLANDETAILS);
-//
+//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENPICTURES", CHILDRENPICTURES);
 //                }
-//
-//                if (mJsonObject.has("INSTITUTESTAFF")) {
-//                    JSONArray INSTITUTESTAFF = mJsonObject.getJSONArray("INSTITUTESTAFF");
-//
-//                    for (int i = 0; i < INSTITUTESTAFF.length(); i++) {
-//                        JSONObject j = INSTITUTESTAFF.getJSONObject(i);
-//                        String insplanID = j.getString("InstituteID");
-//                        if (InstituteID.contains(insplanID.trim())) {
-//                            j.put("LocalInstituteID", LocalInstituteID.get(InstituteID.indexOf(insplanID)));
-//                            INSTITUTESTAFF.put(i, j);
-//                        }
-//                        String contID = j.getString("UserID");
-//                        if (userID.contains(contID.trim())) {
-//                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(contID)));
-//                            INSTITUTESTAFF.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTESTAFF", INSTITUTESTAFF);
-//                }
-//                if (mJsonObject.has("INSTITUTESCREENING")) {
-//                    JSONArray INSTITUTESCREENING = mJsonObject.getJSONArray("INSTITUTESCREENING");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTESCREENING", INSTITUTESCREENING);
-//                }
-//                if (mJsonObject.has("INSTITUTESCREENINGDETAILS")) {
-//                    JSONArray INSTITUTESCREENINGDETAILS = mJsonObject.getJSONArray("INSTITUTESCREENINGDETAILS");
-//                    SQLiteDatabase db4 = dbHelper.getWritableDatabase();
-//                    String Query14 = "Select DISTINCT institutescreeningid , localinstitutescreeningid from INSTITUTESCREENING";
-//                    Cursor c14 = db4.rawQuery(Query14, null);
-//                    List<String> institutescreeningid = new ArrayList<>();
-//                    List<String> localinstitutescreeningid = new ArrayList<>();
-//                    while (c14.moveToNext()) {
-//                        institutescreeningid.add(c14.getString(0));
-//                        localinstitutescreeningid.add(c14.getString(1));
-//                    }
-//                    c14.close();
-//                    db4.close();
-//                    for (int i = 0; i < INSTITUTESCREENINGDETAILS.length(); i++) {
-//                        JSONObject j = INSTITUTESCREENINGDETAILS.getJSONObject(i);
-//                        String insplanID = j.getString("InstituteScreeningID");
-//                        if (institutescreeningid.contains(insplanID.trim())) {
-//                            j.put("LocalInstituteScreeningID", localinstitutescreeningid.get(institutescreeningid.indexOf(insplanID)));
-//                            INSTITUTESCREENINGDETAILS.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTESCREENINGDETAILS", INSTITUTESCREENINGDETAILS);
-//                }
-//
-//
-//                if (mJsonObject.has("CONTACTDETAILS")) {
-//
-//                    JSONArray CONTACTDETAILS = mJsonObject.getJSONArray("CONTACTDETAILS");
-//                    for (int i = 0; i < CONTACTDETAILS.length(); i++) {
-//                        JSONObject j = CONTACTDETAILS.getJSONObject(i);
-//                        String insplanID = j.getString("ContactID");
-//                        if (contactID.contains(insplanID)) {
-//                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(insplanID)));
-//                            CONTACTDETAILS.put(i, j);
-//                        }
-//
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTDETAILS", CONTACTDETAILS);
-//                }
-//                if (mJsonObject.has("DEVICESETTINGS")) {
-//                    JSONArray DEVICESETTINGS = mJsonObject.getJSONArray("DEVICESETTINGS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICESETTINGS", DEVICESETTINGS);
-//                }
-//                if (mJsonObject.has("FACILITIES")) {
-//                    JSONArray FACILITIES = mJsonObject.getJSONArray("FACILITIES");
-//
-//                    for (int i = 0; i < FACILITIES.length(); i++) {
-//                        JSONObject j = FACILITIES.getJSONObject(i);
-//                        String insplanID = j.getString("AddressID");
-//                        if (addressID.contains(insplanID)) {
-//                            j.put("LocalAddressID", LocalAddressID.get(addressID.indexOf(insplanID)));
-//                            FACILITIES.put(i, j);
-//                        }
-//                        String contID = j.getString("ContactID");
-//                        if (contactID.contains(contID)) {
-//                            j.put("LocalContactID", LocalContactID.get(contactID.indexOf(contID)));
-//                            FACILITIES.put(i, j);
-//                        }
-//                    }
-//
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FACILITIES", FACILITIES);
-//                }
-//                if (mJsonObject.has("FACILITYCOVERAGE")) {
-//                    JSONArray FACILITYCOVERAGE = mJsonObject.getJSONArray("FACILITYCOVERAGE");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FACILITYCOVERAGE", FACILITYCOVERAGE);
-//                }
-//                if (mJsonObject.has("HABITATS")) {
-//                    JSONArray HABITATS = mJsonObject.getJSONArray("HABITATS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HABITATS", HABITATS);
-//                }
-//                if (mJsonObject.has("MHTSTAFF")) {
-//                    JSONArray MHTSTAFF = mJsonObject.getJSONArray("MHTSTAFF");
-//
-//                    for (int i = 0; i < MHTSTAFF.length(); i++) {
-//                        JSONObject j = MHTSTAFF.getJSONObject(i);
-//                        String insplanID = j.getString("UserID");
-//                        if (userID.contains(insplanID)) {
-//                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(insplanID)));
-//                            MHTSTAFF.put(i, j);
-//                        }
-//
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MHTSTAFF", MHTSTAFF);
-//                }
-//                if (mJsonObject.has("MOBILEHEALTHTEAMS")) {
-//                    JSONArray MOBILEHEALTHTEAMS = mJsonObject.getJSONArray("MOBILEHEALTHTEAMS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MOBILEHEALTHTEAMS", MOBILEHEALTHTEAMS);
-//                }
-//                if (mJsonObject.has("USERCREDENTIALS")) {
-//                    JSONArray USERCREDENTIALS = mJsonObject.getJSONArray("USERCREDENTIALS");
-//
-//                    for (int i = 0; i < USERCREDENTIALS.length(); i++) {
-//                        JSONObject j = USERCREDENTIALS.getJSONObject(i);
-//                        String insplanID = j.getString("UserID");
-//                        if (userID.contains(insplanID)) {
-//                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(insplanID)));
-//                            USERCREDENTIALS.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "USERCREDENTIALS", USERCREDENTIALS);
-//                }
-//                if (mJsonObject.has("VILLAGES")) {
-//                    JSONArray VILLAGES = mJsonObject.getJSONArray("VILLAGES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "VILLAGES", VILLAGES);
-//                }
+
+                if (mJsonObject.has("CHILDRENPARENTS")) {
+                    JSONArray CHILDRENPARENTS = mJsonObject.getJSONArray("CHILDRENPARENTS");
+                    JSONArray CHILDRENPARENTS_UPDATE = new JSONArray();
+                    for (int i = 0; i < CHILDRENPARENTS.length(); i++) {
+                        JSONObject j = CHILDRENPARENTS.getJSONObject(i);
+                        String insplanID = j.getString("ChildrenID");
+                        if (childrenID.contains(insplanID.trim())) {
+                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
+                            CHILDRENPARENTS.put(i, j);
+                        }
+                        String contID = j.getString("UserID");
+                        if (userID.contains(contID.trim())) {
+                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(contID)));
+                            CHILDRENPARENTS.put(i, j);
+                        }
+                        int children = dbHelper.checkColoumnDatabyID(BaseActivity.this, "CHILDRENPARENTS", new String[]{"CHILDRENID"}, new String[]{j.getString("ChildrenID")});
+                        if (children > 0) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                CHILDRENPARENTS.remove(i);
+                            }
+                            CHILDRENPARENTS_UPDATE.put(j);
+                        }
+                    }
+
+                    if (CHILDRENPARENTS_UPDATE.length() > 0) {
+                        SQLiteDatabase db1 = dbHelper.getWritableDatabase();
+                        for (int i = 0; i < CHILDRENPARENTS_UPDATE.length(); i++) {
+                            JSONObject j = CHILDRENPARENTS_UPDATE.getJSONObject(i);
+                            Iterator<String> coloumnsArr = j.keys();
+                            String set = "";
+                            while (coloumnsArr.hasNext()) {
+                                String str = coloumnsArr.next().trim();
+                                if (str.indexOf("ChildrenID") == -1) {
+                                    if (str.indexOf("IsDeleted") != -1) {
+                                        if (j.getString(str).trim().equalsIgnoreCase("false")) {
+                                            set += str + " = '0',";
+                                        } else {
+                                            set += str + " = '1',";
+                                        }
+                                    } else {
+                                        set += str + " = '" + j.getString(str) + "',";
+                                    }
+                                }
+
+                            }
+                            set = set + " LastCommitedDate ='" + Helper.syncDate + "', PushStatus ='0',";
+                            if (set.length() > 0)
+                                set = set.substring(0, set.lastIndexOf(','));
+                            String Query = "UPDATE CHILDRENPARENTS SET " + set + " WHERE CHILDRENID =" + j.getString("ChildrenID");
+                            Log.e("UPDATE IN CHILDPARENTS", Query);
+                            Cursor c = db1.rawQuery(Query, null);
+                            Log.e("UPDATE CUR", "" + c.getCount());
+                            c.close();
+                        }
+                        db1.close();
+                    }
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENPARENTS", CHILDRENPARENTS);
+                }
+
+                if (mJsonObject.has("CHILDRENDISABILITIES")) {
+                    JSONArray CHILDRENDISABILITIES = mJsonObject.getJSONArray("CHILDRENDISABILITIES");
+                    JSONArray CHILDRENDISABILITIES_UPDATE = new JSONArray();
+                    for (int i = 0; i < CHILDRENDISABILITIES.length(); i++) {
+                        JSONObject j = CHILDRENDISABILITIES.getJSONObject(i);
+                        String insplanID = j.getString("ChildrenID");
+                        if (childrenID.contains(insplanID.trim())) {
+                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
+                            CHILDRENDISABILITIES.put(i, j);
+                        }
+                        int children = dbHelper.checkColoumnDatabyID(BaseActivity.this, "CHILDRENDISABILITIES", new String[]{"CHILDRENID"}, new String[]{j.getString("ChildrenID")});
+                        if (children > 0) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                CHILDRENDISABILITIES.remove(i);
+                            }
+                            CHILDRENDISABILITIES_UPDATE.put(j);
+                        }
+                    }
+                    if (CHILDRENDISABILITIES_UPDATE.length() > 0) {
+                        SQLiteDatabase db1 = dbHelper.getWritableDatabase();
+                        for (int i = 0; i < CHILDRENDISABILITIES_UPDATE.length(); i++) {
+                            JSONObject j = CHILDRENDISABILITIES_UPDATE.getJSONObject(i);
+                            Iterator<String> coloumnsArr = j.keys();
+                            String set = "";
+                            while (coloumnsArr.hasNext()) {
+                                String str = coloumnsArr.next().trim();
+                                if (str.indexOf("ChildrenID") == -1) {
+                                    if (str.indexOf("IsDeleted") != -1) {
+                                        if (j.getString(str).trim().equalsIgnoreCase("false")) {
+                                            set += str + " = '0',";
+                                        } else {
+                                            set += str + " = '1',";
+                                        }
+                                    } else {
+                                        set += str + " = '" + j.getString(str) + "',";
+                                    }
+                                }
+
+                            }
+                            set = set + " LastCommitedDate ='" + Helper.syncDate + "', PushStatus ='0',";
+                            if (set.length() > 0)
+                                set = set.substring(0, set.lastIndexOf(','));
+                            String Query = "UPDATE CHILDRENDISABILITIES SET " + set + " WHERE CHILDRENID =" + j.getString("ChildrenID");
+                            Log.e("UPDATE IN CHILDDISAB", Query);
+                            Cursor c = db1.rawQuery(Query, null);
+                            Log.e("UPDATE CUR", "" + c.getCount());
+                            c.close();
+                        }
+                        db1.close();
+                    }
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENDISABILITIES", CHILDRENDISABILITIES);
+                }
+                if (mJsonObject.has("SyncDate")) {
+                    Log.e("sync dt frm service 2", mJsonObject.getString("SyncDate"));
+                    Helper.syncDate1 = mJsonObject.getString("SyncDate");
+                    SharedPreferences sharedpreferences = getSharedPreferences(
+                            UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
+
+                    sharedpreferences.edit().putString("SyncDate1", Helper.syncDate1).commit();
+                }
+
+                if (mJsonObject.has("AGEGROUPS")) {
+                    JSONArray AGEGROUPS = mJsonObject.getJSONArray("AGEGROUPS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "AGEGROUPS", AGEGROUPS);
+                }
+
+                if (mJsonObject.has("ALLERGIES")) {
+                    JSONArray ALLERGIES = mJsonObject.getJSONArray("ALLERGIES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "ALLERGIES", ALLERGIES);
+                }
+                if (mJsonObject.has("BLOODPRESSUREREFERENCES")) {
+                    JSONArray BLOODPRESSUREREFERENCES = mJsonObject.getJSONArray("BLOODPRESSUREREFERENCES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "BLOODPRESSUREREFERENCES", BLOODPRESSUREREFERENCES);
+                }
+                if (mJsonObject.has("BPCLASSIFICATIONS")) {
+                    JSONArray BPCLASSIFICATIONS = mJsonObject.getJSONArray("BPCLASSIFICATIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "BPCLASSIFICATIONS", BPCLASSIFICATIONS);
+                }
+                if (mJsonObject.has("CASTE")) {
+                    JSONArray CASTE = mJsonObject.getJSONArray("CASTE");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CASTE", CASTE);
+                }
+                if (mJsonObject.has("COUNTRIES")) {
+                    JSONArray COUNTRIES = mJsonObject.getJSONArray("COUNTRIES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "COUNTRIES", COUNTRIES);
+                }
+                if (mJsonObject.has("DECLAREDBYDEPARTMENTS")) {
+                    JSONArray DECLAREDBYDEPARTMENTS = mJsonObject.getJSONArray("DECLAREDBYDEPARTMENTS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DECLAREDBYDEPARTMENTS", DECLAREDBYDEPARTMENTS);
+                }
+                if (mJsonObject.has("DEVICEACTIONS")) {
+                    JSONArray DEVICEACTIONS = mJsonObject.getJSONArray("DEVICEACTIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICEACTIONS", DEVICEACTIONS);
+                }
+                if (mJsonObject.has("DEVICESTATUSES")) {
+                    JSONArray DEVICESTATUSES = mJsonObject.getJSONArray("DEVICESTATUSES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICESTATUSES", DEVICESTATUSES);
+                }
+                if (mJsonObject.has("DEPARTMENTS")) {
+                    JSONArray DEPARTMENTS = mJsonObject.getJSONArray("DEPARTMENTS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEPARTMENTS", DEPARTMENTS);
+                }
+                if (mJsonObject.has("DESIGNATIONS")) {
+                    JSONArray DESIGNATIONS = mJsonObject.getJSONArray("DESIGNATIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DESIGNATIONS", DESIGNATIONS);
+                }
+                if (mJsonObject.has("HEALTHCONDITIONGROUPS")) {
+                    JSONArray HEALTHCONDITIONGROUPS = mJsonObject.getJSONArray("HEALTHCONDITIONGROUPS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONGROUPS", HEALTHCONDITIONGROUPS);
+                }
+                if (mJsonObject.has("HEALTHCONDITIONS")) {
+                    JSONArray HEALTHCONDITIONS = mJsonObject.getJSONArray("HEALTHCONDITIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONS", HEALTHCONDITIONS);
+                }
+                if (mJsonObject.has("EVENTTYPES")) {
+                    JSONArray EVENTTYPES = mJsonObject.getJSONArray("EVENTTYPES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EVENTTYPES", EVENTTYPES);
+                }
+                if (mJsonObject.has("FAMILYMEMBERRELATIONS")) {
+                    JSONArray FAMILYMEMBERRELATIONS = mJsonObject.getJSONArray("FAMILYMEMBERRELATIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FAMILYMEMBERRELATIONS", FAMILYMEMBERRELATIONS);
+                }
+                if (mJsonObject.has("HEALTHCONDITIONFACILITIES")) {
+                    JSONArray HEALTHCONDITIONFACILITIES = mJsonObject.getJSONArray("HEALTHCONDITIONFACILITIES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONFACILITIES", HEALTHCONDITIONFACILITIES);
+                }
+                if (mJsonObject.has("LANGUAGES")) {
+                    JSONArray LANGUAGES = mJsonObject.getJSONArray("LANGUAGES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "LANGUAGES", LANGUAGES);
+                }
+                if (mJsonObject.has("STATUSES")) {
+                    JSONArray STATUSES = mJsonObject.getJSONArray("STATUSES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "STATUSES", STATUSES);
+                }
+                if (mJsonObject.has("SURGICALS")) {
+                    JSONArray SURGICALS = mJsonObject.getJSONArray("SURGICALS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SURGICALS", SURGICALS);
+                }
+                if (mJsonObject.has("PANCHAYATS")) {
+                    JSONArray PANCHAYATS = mJsonObject.getJSONArray("PANCHAYATS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PANCHAYATS", PANCHAYATS);
+                }
+                if (mJsonObject.has("INSTITUTECATEGORIES")) {
+                    JSONArray INSTITUTECATEGORIES = mJsonObject.getJSONArray("INSTITUTECATEGORIES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTECATEGORIES", INSTITUTECATEGORIES);
+                }
+                if (mJsonObject.has("RELATIONS")) {
+                    JSONArray RELATIONS = mJsonObject.getJSONArray("RELATIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RELATIONS", RELATIONS);
+                }
+                if (mJsonObject.has("RELIGIONS")) {
+                    JSONArray RELIGIONS = mJsonObject.getJSONArray("RELIGIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RELIGIONS", RELIGIONS);
+                }
+                if (mJsonObject.has("SALUTATIONS")) {
+                    JSONArray SALUTATIONS = mJsonObject.getJSONArray("SALUTATIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SALUTATIONS", SALUTATIONS);
+                }
+                if (mJsonObject.has("SECTIONS")) {
+                    JSONArray SECTIONS = mJsonObject.getJSONArray("SECTIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SECTIONS", SECTIONS);
+                }
+                if (mJsonObject.has("STATES")) {
+                    JSONArray STATES = mJsonObject.getJSONArray("STATES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "STATES", STATES);
+                }
+                if (mJsonObject.has("TEMPERATURES")) {
+                    JSONArray TEMPERATURES = mJsonObject.getJSONArray("TEMPERATURES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "TEMPERATURES", TEMPERATURES);
+                }
+                if (mJsonObject.has("USERTYPES")) {
+                    JSONArray USERTYPES = mJsonObject.getJSONArray("USERTYPES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "USERTYPES", USERTYPES);
+                }
+                if (mJsonObject.has("DEVICEACTIONSTATUSES")) {
+                    JSONArray DEVICEACTIONSTATUSES = mJsonObject.getJSONArray("DEVICEACTIONSTATUSES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICEACTIONSTATUSES", DEVICEACTIONSTATUSES);
+                }
+                if (mJsonObject.has("INSTITUTETYPES")) {
+                    JSONArray INSTITUTETYPES = mJsonObject.getJSONArray("INSTITUTETYPES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTETYPES", INSTITUTETYPES);
+                }
+                if (mJsonObject.has("PLANSTATUSES")) {
+                    JSONArray PLANSTATUSES = mJsonObject.getJSONArray("PLANSTATUSES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PLANSTATUSES", PLANSTATUSES);
+                }
+                if (mJsonObject.has("PLANTYPES")) {
+                    JSONArray PLANTYPES = mJsonObject.getJSONArray("PLANTYPES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PLANTYPES", PLANTYPES);
+                }
+                if (mJsonObject.has("RBSKCALENDARYEARS")) {
+                    JSONArray RBSKCALENDARYEARS = mJsonObject.getJSONArray("RBSKCALENDARYEARS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RBSKCALENDARYEARS", RBSKCALENDARYEARS);
+                }
+                if (mJsonObject.has("SCREENSTATUSES")) {
+                    JSONArray SCREENSTATUSES = mJsonObject.getJSONArray("SCREENSTATUSES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENSTATUSES", SCREENSTATUSES);
+                }
+                if (mJsonObject.has("CHILDRENSTATUS")) {
+                    JSONArray CHILDRENSTATUS = mJsonObject.getJSONArray("CHILDRENSTATUS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSTATUS", CHILDRENSTATUS);
+                }
+                if (mJsonObject.has("CHILDRENSCREENSTATUSES")) {
+                    JSONArray CHILDRENSCREENSTATUSES = mJsonObject.getJSONArray("CHILDRENSCREENSTATUSES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENSTATUSES", CHILDRENSCREENSTATUSES);
+                }
+                if (mJsonObject.has("CLASSES")) {
+                    JSONArray CLASSES = mJsonObject.getJSONArray("CLASSES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CLASSES", CLASSES);
+                }
+                if (mJsonObject.has("CONTACTCATEGORIES")) {
+                    JSONArray CONTACTCATEGORIES = mJsonObject.getJSONArray("CONTACTCATEGORIES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTCATEGORIES", CONTACTCATEGORIES);
+                }
+                if (mJsonObject.has("CONTACTTYPES")) {
+                    JSONArray CONTACTTYPES = mJsonObject.getJSONArray("CONTACTTYPES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTTYPES", CONTACTTYPES);
+                }
+                if (mJsonObject.has("DISABILITYTYPES")) {
+                    JSONArray DISABILITYTYPES = mJsonObject.getJSONArray("DISABILITYTYPES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DISABILITYTYPES", DISABILITYTYPES);
+                }
+                if (mJsonObject.has("DISTRICTS")) {
+                    JSONArray DISTRICTS = mJsonObject.getJSONArray("DISTRICTS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DISTRICTS", DISTRICTS);
+                }
+                if (mJsonObject.has("EDUCATION")) {
+                    JSONArray EDUCATION = mJsonObject.getJSONArray("EDUCATION");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EDUCATION", EDUCATION);
+                }
+                if (mJsonObject.has("EDUCATIONYEARS")) {
+                    JSONArray EDUCATIONYEARS = mJsonObject.getJSONArray("EDUCATIONYEARS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EDUCATIONYEARS", EDUCATIONYEARS);
+                }
+                if (mJsonObject.has("FAMILYHISTORY")) {
+                    JSONArray FAMILYHISTORY = mJsonObject.getJSONArray("FAMILYHISTORY");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FAMILYHISTORY", FAMILYHISTORY);
+                }
+                if (mJsonObject.has("GENDER")) {
+                    JSONArray GENDER = mJsonObject.getJSONArray("GENDER");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "GENDER", GENDER);
+                }
+                if (mJsonObject.has("HEMOGLOBINS")) {
+                    JSONArray HEMOGLOBINS = mJsonObject.getJSONArray("HEMOGLOBINS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEMOGLOBINS", HEMOGLOBINS);
+                }
+                if (mJsonObject.has("INSTITUTEPLANSKIPREASONS")) {
+                    JSONArray INSTITUTEPLANSKIPREASONS = mJsonObject.getJSONArray("INSTITUTEPLANSKIPREASONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANSKIPREASONS", INSTITUTEPLANSKIPREASONS);
+                }
+                if (mJsonObject.has("INSTITUTEPLANSTATUSES")) {
+                    JSONArray INSTITUTEPLANSTATUSES = mJsonObject.getJSONArray("INSTITUTEPLANSTATUSES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANSTATUSES", INSTITUTEPLANSTATUSES);
+                }
+                if (mJsonObject.has("MANDALS")) {
+                    JSONArray MANDALS = mJsonObject.getJSONArray("MANDALS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MANDALS", MANDALS);
+                }
+                if (mJsonObject.has("MUACREFERNCES")) {
+                    JSONArray MUACREFERNCES = mJsonObject.getJSONArray("MUACREFERNCES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MUACREFERNCES", MUACREFERNCES);
+                }
+                if (mJsonObject.has("OCCUPATIONS")) {
+                    JSONArray OCCUPATIONS = mJsonObject.getJSONArray("OCCUPATIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "OCCUPATIONS", OCCUPATIONS);
+                }
+                if (mJsonObject.has("SAMREFERENCES")) {
+                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
+                }
+                if (mJsonObject.has("SCHOOLCATEGORIES")) {
+                    JSONArray SCHOOLCATEGORIES = mJsonObject.getJSONArray("SCHOOLCATEGORIES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCHOOLCATEGORIES", SCHOOLCATEGORIES);
+                }
+                if (mJsonObject.has("SCREENCATEGORIES")) {
+                    JSONArray SCREENCATEGORIES = mJsonObject.getJSONArray("SCREENCATEGORIES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENCATEGORIES", SCREENCATEGORIES);
+                }
+                if (mJsonObject.has("SAMREFERENCES")) {
+                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
+                }
+                if (mJsonObject.has("SCREENQUESTIONS")) {
+                    JSONArray SCREENQUESTIONS = mJsonObject.getJSONArray("SCREENQUESTIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENQUESTIONS", SCREENQUESTIONS);
+                }
+                if (mJsonObject.has("SCREENTEMPLATETYPES")) {
+                    JSONArray SCREENTEMPLATETYPES = mJsonObject.getJSONArray("SCREENTEMPLATETYPES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENTEMPLATETYPES", SCREENTEMPLATETYPES);
+                }
+                if (mJsonObject.has("[0TO5YEARSHCCHART]")) {
+                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[0TO5YEARSHCCHART]");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSHCCHART]", SAMREFERENCES);
+                }
+                if (mJsonObject.has("[0TO5YEARSWEIGHTCHART]")) {
+                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[0TO5YEARSWEIGHTCHART]");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSWEIGHTCHART]", SAMREFERENCES);
+                }
+                if (mJsonObject.has("[6TO18YEARSWEIGHTCHART]")) {
+                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[6TO18YEARSWEIGHTCHART]");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6TO18YEARSWEIGHTCHART]", SAMREFERENCES);
+                }
+                if (mJsonObject.has("[6MTO19YBMICHARTZSCORES]")) {
+                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[6MTO19YBMICHARTZSCORES]");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6MTO19YBMICHARTZSCORES]", SAMREFERENCES);
+                }
+                if (mJsonObject.has("[0TO5YEARSHEIGHTCHART]")) {
+                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[0TO5YEARSHEIGHTCHART]");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSHEIGHTCHART]", SAMREFERENCES);
+                }
+                if (mJsonObject.has("[6TO18YEARSHEIGHTCHART]")) {
+                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[6TO18YEARSHEIGHTCHART]");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6TO18YEARSHEIGHTCHART]", SAMREFERENCES);
+                }
+                if (mJsonObject.has("EVENTS")) {
+                    JSONArray EVENTS = mJsonObject.getJSONArray("EVENTS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EVENTS", EVENTS);
+                }
+                if (mJsonObject.has("SAMREFERENCES")) {
+                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
+                }
+                if (mJsonObject.has("LABINVESTIGATIONS")) {
+                    JSONArray LABINVESTIGATIONS = mJsonObject.getJSONArray("LABINVESTIGATIONS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "LABINVESTIGATIONS", LABINVESTIGATIONS);
+                }
+                if (mJsonObject.has("SCREENINGROUNDS")) {
+                    JSONArray SCREENINGROUNDS = mJsonObject.getJSONArray("SCREENINGROUNDS");
+                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENINGROUNDS", SCREENINGROUNDS);
+                }
 
                 retstr = "200";
 
@@ -549,631 +1013,6 @@ public class BaseActivity extends Activity {
         }
 
         return retstr;
-    }
-
-    public String UpdateTable1(String strResponse) {
-        String retStr = "";
-        try {
-            if (strResponse.indexOf("{") != -1) {
-                DBHelper dbHelper = new DBHelper(BaseActivity.this);
-                strResponse = strResponse.replace("\\", "");
-                strResponse = strResponse.substring(1, strResponse.length() - 1);
-                JSONObject mJsonObject = new JSONObject(strResponse);
-//                SQLiteDatabase db2 = dbHelper.getWritableDatabase();
-//                String Query3 = "Select DISTINCT InstituteID , LocalInstituteID from Institutes";
-//                Cursor c3 = db2.rawQuery(Query3, null);
-//                List<String> InstituteID = new ArrayList<>();
-//                List<String> LocalInstituteID = new ArrayList<>();
-//                while (c3.moveToNext()) {
-//                    InstituteID.add(c3.getString(0));
-//                    LocalInstituteID.add(c3.getString(1));
-//                }
-//                c3.close();
-//
-//                String Query6 = "Select DISTINCT userID, LocalUserID from Users";
-//                Cursor c6 = db2.rawQuery(Query6, null);
-//                List<String> userID = new ArrayList<>();
-//                List<String> LocalUserID = new ArrayList<>();
-//                while (c6.moveToNext()) {
-//                    userID.add(c6.getString(0));
-//                    LocalUserID.add(c6.getString(1));
-//                }
-//                c6.close();
-//                db2.close();
-//
-//
-//                if (mJsonObject.has("CHILDREN")) {
-//                    JSONArray CHILDREN = mJsonObject.getJSONArray("CHILDREN");
-//                    JSONArray CHILDREN_UPDATE = new JSONArray();
-//                    for (int i = 0; i < CHILDREN.length(); i++) {
-//                        JSONObject j = CHILDREN.getJSONObject(i);
-//                        String insplanID = j.getString("InstituteID");
-//                        if (InstituteID.contains(insplanID.trim())) {
-//                            j.put("LocalInstituteID", LocalInstituteID.get(InstituteID.indexOf(insplanID)));
-//                            CHILDREN.put(i, j);
-//                        }
-//                        String contID = j.getString("UserID");
-//                        if (userID.contains(contID.trim())) {
-//                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(contID)));
-//                            CHILDREN.put(i, j);
-//                        }
-//                        int children = dbHelper.checkColoumnDatabyID(BaseActivity.this, "CHILDREN", new String[]{"CHILDRENID"}, new String[]{j.getString("CHILDRENID")});
-//                        if (children > 0) {
-//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//                                CHILDREN.remove(i);
-//                            }
-//                            CHILDREN_UPDATE.put(j);
-//                        }
-//
-//                    }
-//                    if (CHILDREN_UPDATE.length() > 0) {
-//                        SQLiteDatabase db = dbHelper.getWritableDatabase();
-//                        for (int i = 0; i < CHILDREN_UPDATE.length(); i++) {
-//                            JSONObject j = CHILDREN_UPDATE.getJSONObject(i);
-//                            Iterator<String> coloumnsArr = j.keys();
-//                            String set = "";
-//                            while (coloumnsArr.hasNext()) {
-//                                String str = coloumnsArr.next().trim();
-//                                if (str.indexOf("CHILDRENID") != -1)
-//                                    set += str + "= " + j.getString(str) + ",";
-//                            }
-//                            if (set.length() > 0)
-//
-//                                set = set.substring(0, set.lastIndexOf(','));
-//                            String Query = "UPDATE CHILDREN SET " + set + " WHERE CHILDRENID =" + j.getString("CHILDRENID");
-//                            Log.e("UPDATE IN CHILDREN", Query);
-//                            Cursor c = db.rawQuery(Query, null);
-//                            Log.e("UPDATE CUR", "" + c.getCount());
-//                            c.close();
-//                        }
-//                        db.close();
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDREN", CHILDREN);
-//                }
-//                SQLiteDatabase db8 = dbHelper.getWritableDatabase();
-//                String Query18 = "Select DISTINCT childrenID , LocalChildrenID from Children";
-//                Cursor c18 = db8.rawQuery(Query18, null);
-//                List<String> childrenID = new ArrayList<>();
-//                List<String> LocalChildrenID = new ArrayList<>();
-//                while (c18.moveToNext()) {
-//                    childrenID.add(c18.getString(0));
-//                    LocalChildrenID.add(c18.getString(1));
-//                }
-//                c18.close();
-//                db8.close();
-//                if (mJsonObject.has("CHILDRENSCREENING")) {
-//                    JSONArray CHILDRENSCREENING = mJsonObject.getJSONArray("CHILDRENSCREENING");
-//
-//                    for (int i = 0; i < CHILDRENSCREENING.length(); i++) {
-//                        JSONObject j = CHILDRENSCREENING.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenID");
-//                        if (childrenID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
-//                            CHILDRENSCREENING.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENING", CHILDRENSCREENING);
-//                }
-//                SQLiteDatabase db9 = dbHelper.getWritableDatabase();
-//                String Query19 = "Select DISTINCT childrenscreeningID , LocalChildrenScreeningID from ChildrenScreening";
-//                Cursor c19 = db9.rawQuery(Query19, null);
-//                List<String> childrenscreeningID = new ArrayList<>();
-//                List<String> LocalChildrenScreeningID = new ArrayList<>();
-//                while (c19.moveToNext()) {
-//                    childrenscreeningID.add(c19.getString(0));
-//                    LocalChildrenScreeningID.add(c19.getString(1));
-//                }
-//                c19.close();
-//                db9.close();
-//                if (mJsonObject.has("CHILDRENSCREENINGREFERRALS")) {
-//                    JSONArray CHILDRENSCREENINGREFERRALS = mJsonObject.getJSONArray("CHILDRENSCREENINGREFERRALS");
-//
-//                    for (int i = 0; i < CHILDRENSCREENINGREFERRALS.length(); i++) {
-//                        JSONObject j = CHILDRENSCREENINGREFERRALS.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenScreeningID");
-//                        if (childrenscreeningID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenScreeningID", LocalChildrenScreeningID.get(childrenscreeningID.indexOf(insplanID)));
-//                            CHILDRENSCREENINGREFERRALS.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGREFERRALS", CHILDRENSCREENINGREFERRALS);
-//                }
-//                if (mJsonObject.has("CHILDRENSCREENINGINVESTIGATIONS")) {
-//                    JSONArray CHILDRENSCREENINGINVESTIGATIONS = mJsonObject.getJSONArray("CHILDRENSCREENINGINVESTIGATIONS");
-//                    SQLiteDatabase db90 = dbHelper.getWritableDatabase();
-//                    String Query190 = "Select DISTINCT ChildrenScreeningReferralID , LocalChildrenScreeningReferralID from CHILDRENSCREENINGREFERRALS";
-//                    Cursor c190 = db90.rawQuery(Query190, null);
-//                    List<String> ChildrenScreeningReferralID = new ArrayList<>();
-//                    List<String> LocalChildrenScreeningReferralID = new ArrayList<>();
-//                    while (c190.moveToNext()) {
-//                        ChildrenScreeningReferralID.add(c190.getString(0));
-//                        LocalChildrenScreeningReferralID.add(c190.getString(1));
-//                    }
-//                    c190.close();
-//                    db90.close();
-//                    for (int i = 0; i < CHILDRENSCREENINGINVESTIGATIONS.length(); i++) {
-//                        JSONObject j = CHILDRENSCREENINGINVESTIGATIONS.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenScreeningReferralID");
-//                        if (ChildrenScreeningReferralID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenScreeningReferralID", LocalChildrenScreeningReferralID.get(ChildrenScreeningReferralID.indexOf(insplanID)));
-//                            CHILDRENSCREENINGINVESTIGATIONS.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGINVESTIGATIONS", CHILDRENSCREENINGINVESTIGATIONS);
-//                }
-//                if (mJsonObject.has("CHILDRENPICTURES")) {
-//                    JSONArray CHILDRENPICTURES = mJsonObject.getJSONArray("CHILDRENPICTURES");
-//
-//                    for (int i = 0; i < CHILDRENPICTURES.length(); i++) {
-//                        JSONObject j = CHILDRENPICTURES.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenID");
-//                        if (childrenID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
-//                            CHILDRENPICTURES.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENPICTURES", CHILDRENPICTURES);
-//                }
-//
-//                if (mJsonObject.has("CHILDRENSCREENINGALLERGIES")) {
-//                    JSONArray CHILDRENSCREENINGALLERGIES = mJsonObject.getJSONArray("CHILDRENSCREENINGALLERGIES");
-//
-//                    for (int i = 0; i < CHILDRENSCREENINGALLERGIES.length(); i++) {
-//                        JSONObject j = CHILDRENSCREENINGALLERGIES.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenScreeningID");
-//                        if (childrenscreeningID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenScreeningID", LocalChildrenScreeningID.get(childrenscreeningID.indexOf(insplanID)));
-//                            CHILDRENSCREENINGALLERGIES.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGALLERGIES", CHILDRENSCREENINGALLERGIES);
-//                }
-//                if (mJsonObject.has("CHILDRENSCREENINGHISTORY")) {
-//                    JSONArray CHILDRENSCREENINGHISTORY = mJsonObject.getJSONArray("CHILDRENSCREENINGHISTORY");
-//
-//                    for (int i = 0; i < CHILDRENSCREENINGHISTORY.length(); i++) {
-//                        JSONObject j = CHILDRENSCREENINGHISTORY.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenID");
-//                        if (childrenID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
-//                            CHILDRENSCREENINGHISTORY.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGHISTORY", CHILDRENSCREENINGHISTORY);
-//                }
-//                if (mJsonObject.has("CHILDRENSCREENINGLOCALTREATMENT")) {
-//                    JSONArray CHILDRENSCREENINGLOCALTREATMENT = mJsonObject.getJSONArray("CHILDRENSCREENINGLOCALTREATMENT");
-//
-//                    for (int i = 0; i < CHILDRENSCREENINGLOCALTREATMENT.length(); i++) {
-//                        JSONObject j = CHILDRENSCREENINGLOCALTREATMENT.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenScreeningID");
-//                        if (childrenscreeningID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenScreeningID", LocalChildrenScreeningID.get(childrenscreeningID.indexOf(insplanID)));
-//                            CHILDRENSCREENINGLOCALTREATMENT.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGLOCALTREATMENT", CHILDRENSCREENINGLOCALTREATMENT);
-//                }
-//                if (mJsonObject.has("CHILDRENSCREENINGPE")) {
-//                    JSONArray CHILDRENSCREENINGPE = mJsonObject.getJSONArray("CHILDRENSCREENINGPE");
-//
-//                    for (int i = 0; i < CHILDRENSCREENINGPE.length(); i++) {
-//                        JSONObject j = CHILDRENSCREENINGPE.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenScreeningID");
-//                        if (childrenscreeningID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenScreeningID", LocalChildrenScreeningID.get(childrenscreeningID.indexOf(insplanID)));
-//                            CHILDRENSCREENINGPE.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGPE", CHILDRENSCREENINGPE);
-//                }
-//                if (mJsonObject.has("CHILDRENFAMILYHISTORY")) {
-//                    JSONArray CHILDRENFAMILYHISTORY = mJsonObject.getJSONArray("CHILDRENFAMILYHISTORY");
-//
-//                    for (int i = 0; i < CHILDRENFAMILYHISTORY.length(); i++) {
-//                        JSONObject j = CHILDRENFAMILYHISTORY.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenID");
-//                        if (childrenID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
-//                            CHILDRENFAMILYHISTORY.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENFAMILYHISTORY", CHILDRENFAMILYHISTORY);
-//                }
-//                if (mJsonObject.has("CHILDRENMEDICALHISTORY")) {
-//                    JSONArray CHILDRENMEDICALHISTORY = mJsonObject.getJSONArray("CHILDRENMEDICALHISTORY");
-//
-//                    for (int i = 0; i < CHILDRENMEDICALHISTORY.length(); i++) {
-//                        JSONObject j = CHILDRENMEDICALHISTORY.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenID");
-//                        if (childrenID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
-//                            CHILDRENMEDICALHISTORY.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENMEDICALHISTORY", CHILDRENMEDICALHISTORY);
-//                }
-//                if (mJsonObject.has("CHILDRENPARENTS")) {
-//                    JSONArray CHILDRENPARENTS = mJsonObject.getJSONArray("CHILDRENPARENTS");
-//
-//                    for (int i = 0; i < CHILDRENPARENTS.length(); i++) {
-//                        JSONObject j = CHILDRENPARENTS.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenID");
-//                        if (childrenID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
-//                            CHILDRENPARENTS.put(i, j);
-//                        }
-//                        String contID = j.getString("UserID");
-//                        if (userID.contains(contID.trim())) {
-//                            j.put("LocalUserID", LocalUserID.get(userID.indexOf(contID)));
-//                            CHILDRENPARENTS.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENPARENTS", CHILDRENPARENTS);
-//                }
-//                if (mJsonObject.has("CHILDRENALLERGIESHISTORY")) {
-//                    JSONArray CHILDRENALLERGIESHISTORY = mJsonObject.getJSONArray("CHILDRENALLERGIESHISTORY");
-//
-//                    for (int i = 0; i < CHILDRENALLERGIESHISTORY.length(); i++) {
-//                        JSONObject j = CHILDRENALLERGIESHISTORY.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenID");
-//                        if (childrenID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
-//                            CHILDRENALLERGIESHISTORY.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENALLERGIESHISTORY", CHILDRENALLERGIESHISTORY);
-//                }
-//                if (mJsonObject.has("CHILDRENSCREENINGPICTURES")) {
-//                    JSONArray CHILDRENSCREENINGPICTURES = mJsonObject.getJSONArray("CHILDRENSCREENINGPICTURES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGPICTURES", CHILDRENSCREENINGPICTURES);
-//                }
-//                if (mJsonObject.has("CHILDRENSCREENINGRECOMMENDATIONS")) {
-//                    JSONArray CHILDRENSCREENINGRECOMMENDATIONS = mJsonObject.getJSONArray("CHILDRENSCREENINGRECOMMENDATIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGRECOMMENDATIONS", CHILDRENSCREENINGRECOMMENDATIONS);
-//                }
-//
-//                if (mJsonObject.has("CHILDRENDISABILITIES")) {
-//                    JSONArray CHILDRENDISABILITIES = mJsonObject.getJSONArray("CHILDRENDISABILITIES");
-//
-//                    for (int i = 0; i < CHILDRENDISABILITIES.length(); i++) {
-//                        JSONObject j = CHILDRENDISABILITIES.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenID");
-//                        if (childrenID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenID", LocalChildrenID.get(childrenID.indexOf(insplanID)));
-//                            CHILDRENDISABILITIES.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENDISABILITIES", CHILDRENDISABILITIES);
-//                }
-//                if (mJsonObject.has("CHILDRENSCREENINGSURGICALS")) {
-//                    JSONArray CHILDRENSCREENINGSURGICALS = mJsonObject.getJSONArray("CHILDRENSCREENINGSURGICALS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGSURGICALS", CHILDRENSCREENINGSURGICALS);
-//                }
-//                if (mJsonObject.has("CHILDRENSCREENINGVITALS")) {
-//                    JSONArray CHILDRENSCREENINGVITALS = mJsonObject.getJSONArray("CHILDRENSCREENINGVITALS");
-//
-//                    for (int i = 0; i < CHILDRENSCREENINGVITALS.length(); i++) {
-//                        JSONObject j = CHILDRENSCREENINGVITALS.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenScreeningID");
-//                        if (childrenscreeningID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenScreeningID", LocalChildrenScreeningID.get(childrenscreeningID.indexOf(insplanID)));
-//                            CHILDRENSCREENINGVITALS.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGVITALS", CHILDRENSCREENINGVITALS);
-//                }
-//                if (mJsonObject.has("CHILDRENSCREENINGSTATUSES")) {
-//                    JSONArray CHILDRENSCREENINGSTATUSES = mJsonObject.getJSONArray("CHILDRENSCREENINGSTATUSES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENINGSTATUSES", CHILDRENSCREENINGSTATUSES);
-//                }
-//                if (mJsonObject.has("CHILDRENSURGICALHISTORY")) {
-//                    JSONArray CHILDRENSURGICALHISTORY = mJsonObject.getJSONArray("CHILDRENSURGICALHISTORY");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSURGICALHISTORY", CHILDRENSURGICALHISTORY);
-//                }
-//                if (mJsonObject.has("CHILDSCREENINGFH")) {
-//                    JSONArray CHILDSCREENINGFH = mJsonObject.getJSONArray("CHILDSCREENINGFH");
-//
-//                    for (int i = 0; i < CHILDSCREENINGFH.length(); i++) {
-//                        JSONObject j = CHILDSCREENINGFH.getJSONObject(i);
-//                        String insplanID = j.getString("ChildrenScreeningID");
-//                        if (childrenscreeningID.contains(insplanID.trim())) {
-//                            j.put("LocalChildrenScreeningID", LocalChildrenScreeningID.get(childrenscreeningID.indexOf(insplanID)));
-//                            CHILDSCREENINGFH.put(i, j);
-//                        }
-//                    }
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDSCREENINGFH", CHILDSCREENINGFH);
-//                }
-                if (mJsonObject.has("SyncDate")) {
-                    Log.e("sync dt frm service 2", mJsonObject.getString("SyncDate"));
-                    Helper.syncDate1 = mJsonObject.getString("SyncDate");
-                    SharedPreferences sharedpreferences = getSharedPreferences(
-                            UserLoginActivity.UserLogin, Context.MODE_PRIVATE);
-
-                    sharedpreferences.edit().putString("SyncDate1", Helper.syncDate1).commit();
-                }
-
-//                if (mJsonObject.has("AGEGROUPS")) {
-//                    JSONArray AGEGROUPS = mJsonObject.getJSONArray("AGEGROUPS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "AGEGROUPS", AGEGROUPS);
-//                }
-//
-//                if (mJsonObject.has("ALLERGIES")) {
-//                    JSONArray ALLERGIES = mJsonObject.getJSONArray("ALLERGIES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "ALLERGIES", ALLERGIES);
-//                }
-//                if (mJsonObject.has("BLOODPRESSUREREFERENCES")) {
-//                    JSONArray BLOODPRESSUREREFERENCES = mJsonObject.getJSONArray("BLOODPRESSUREREFERENCES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "BLOODPRESSUREREFERENCES", BLOODPRESSUREREFERENCES);
-//                }
-//                if (mJsonObject.has("BPCLASSIFICATIONS")) {
-//                    JSONArray BPCLASSIFICATIONS = mJsonObject.getJSONArray("BPCLASSIFICATIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "BPCLASSIFICATIONS", BPCLASSIFICATIONS);
-//                }
-//                if (mJsonObject.has("CASTE")) {
-//                    JSONArray CASTE = mJsonObject.getJSONArray("CASTE");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CASTE", CASTE);
-//                }
-//                if (mJsonObject.has("COUNTRIES")) {
-//                    JSONArray COUNTRIES = mJsonObject.getJSONArray("COUNTRIES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "COUNTRIES", COUNTRIES);
-//                }
-//                if (mJsonObject.has("DECLAREDBYDEPARTMENTS")) {
-//                    JSONArray DECLAREDBYDEPARTMENTS = mJsonObject.getJSONArray("DECLAREDBYDEPARTMENTS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DECLAREDBYDEPARTMENTS", DECLAREDBYDEPARTMENTS);
-//                }
-//                if (mJsonObject.has("DEVICEACTIONS")) {
-//                    JSONArray DEVICEACTIONS = mJsonObject.getJSONArray("DEVICEACTIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICEACTIONS", DEVICEACTIONS);
-//                }
-//                if (mJsonObject.has("DEVICESTATUSES")) {
-//                    JSONArray DEVICESTATUSES = mJsonObject.getJSONArray("DEVICESTATUSES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICESTATUSES", DEVICESTATUSES);
-//                }
-//                if (mJsonObject.has("DEPARTMENTS")) {
-//                    JSONArray DEPARTMENTS = mJsonObject.getJSONArray("DEPARTMENTS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEPARTMENTS", DEPARTMENTS);
-//                }
-//                if (mJsonObject.has("DESIGNATIONS")) {
-//                    JSONArray DESIGNATIONS = mJsonObject.getJSONArray("DESIGNATIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DESIGNATIONS", DESIGNATIONS);
-//                }
-//                if (mJsonObject.has("HEALTHCONDITIONGROUPS")) {
-//                    JSONArray HEALTHCONDITIONGROUPS = mJsonObject.getJSONArray("HEALTHCONDITIONGROUPS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONGROUPS", HEALTHCONDITIONGROUPS);
-//                }
-//                if (mJsonObject.has("HEALTHCONDITIONS")) {
-//                    JSONArray HEALTHCONDITIONS = mJsonObject.getJSONArray("HEALTHCONDITIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONS", HEALTHCONDITIONS);
-//                }
-//                if (mJsonObject.has("EVENTTYPES")) {
-//                    JSONArray EVENTTYPES = mJsonObject.getJSONArray("EVENTTYPES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EVENTTYPES", EVENTTYPES);
-//                }
-//                if (mJsonObject.has("FAMILYMEMBERRELATIONS")) {
-//                    JSONArray FAMILYMEMBERRELATIONS = mJsonObject.getJSONArray("FAMILYMEMBERRELATIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FAMILYMEMBERRELATIONS", FAMILYMEMBERRELATIONS);
-//                }
-//                if (mJsonObject.has("HEALTHCONDITIONFACILITIES")) {
-//                    JSONArray HEALTHCONDITIONFACILITIES = mJsonObject.getJSONArray("HEALTHCONDITIONFACILITIES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEALTHCONDITIONFACILITIES", HEALTHCONDITIONFACILITIES);
-//                }
-//                if (mJsonObject.has("LANGUAGES")) {
-//                    JSONArray LANGUAGES = mJsonObject.getJSONArray("LANGUAGES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "LANGUAGES", LANGUAGES);
-//                }
-//                if (mJsonObject.has("STATUSES")) {
-//                    JSONArray STATUSES = mJsonObject.getJSONArray("STATUSES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "STATUSES", STATUSES);
-//                }
-//                if (mJsonObject.has("SURGICALS")) {
-//                    JSONArray SURGICALS = mJsonObject.getJSONArray("SURGICALS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SURGICALS", SURGICALS);
-//                }
-//                if (mJsonObject.has("PANCHAYATS")) {
-//                    JSONArray PANCHAYATS = mJsonObject.getJSONArray("PANCHAYATS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PANCHAYATS", PANCHAYATS);
-//                }
-//                if (mJsonObject.has("INSTITUTECATEGORIES")) {
-//                    JSONArray INSTITUTECATEGORIES = mJsonObject.getJSONArray("INSTITUTECATEGORIES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTECATEGORIES", INSTITUTECATEGORIES);
-//                }
-//                if (mJsonObject.has("RELATIONS")) {
-//                    JSONArray RELATIONS = mJsonObject.getJSONArray("RELATIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RELATIONS", RELATIONS);
-//                }
-//                if (mJsonObject.has("RELIGIONS")) {
-//                    JSONArray RELIGIONS = mJsonObject.getJSONArray("RELIGIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RELIGIONS", RELIGIONS);
-//                }
-//                if (mJsonObject.has("SALUTATIONS")) {
-//                    JSONArray SALUTATIONS = mJsonObject.getJSONArray("SALUTATIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SALUTATIONS", SALUTATIONS);
-//                }
-//                if (mJsonObject.has("SECTIONS")) {
-//                    JSONArray SECTIONS = mJsonObject.getJSONArray("SECTIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SECTIONS", SECTIONS);
-//                }
-//                if (mJsonObject.has("STATES")) {
-//                    JSONArray STATES = mJsonObject.getJSONArray("STATES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "STATES", STATES);
-//                }
-//                if (mJsonObject.has("TEMPERATURES")) {
-//                    JSONArray TEMPERATURES = mJsonObject.getJSONArray("TEMPERATURES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "TEMPERATURES", TEMPERATURES);
-//                }
-//                if (mJsonObject.has("USERTYPES")) {
-//                    JSONArray USERTYPES = mJsonObject.getJSONArray("USERTYPES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "USERTYPES", USERTYPES);
-//                }
-//                if (mJsonObject.has("DEVICEACTIONSTATUSES")) {
-//                    JSONArray DEVICEACTIONSTATUSES = mJsonObject.getJSONArray("DEVICEACTIONSTATUSES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DEVICEACTIONSTATUSES", DEVICEACTIONSTATUSES);
-//                }
-//                if (mJsonObject.has("INSTITUTETYPES")) {
-//                    JSONArray INSTITUTETYPES = mJsonObject.getJSONArray("INSTITUTETYPES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTETYPES", INSTITUTETYPES);
-//                }
-//                if (mJsonObject.has("PLANSTATUSES")) {
-//                    JSONArray PLANSTATUSES = mJsonObject.getJSONArray("PLANSTATUSES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PLANSTATUSES", PLANSTATUSES);
-//                }
-//                if (mJsonObject.has("PLANTYPES")) {
-//                    JSONArray PLANTYPES = mJsonObject.getJSONArray("PLANTYPES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "PLANTYPES", PLANTYPES);
-//                }
-//                if (mJsonObject.has("RBSKCALENDARYEARS")) {
-//                    JSONArray RBSKCALENDARYEARS = mJsonObject.getJSONArray("RBSKCALENDARYEARS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "RBSKCALENDARYEARS", RBSKCALENDARYEARS);
-//                }
-//                if (mJsonObject.has("SCREENSTATUSES")) {
-//                    JSONArray SCREENSTATUSES = mJsonObject.getJSONArray("SCREENSTATUSES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENSTATUSES", SCREENSTATUSES);
-//                }
-//                if (mJsonObject.has("CHILDRENSTATUS")) {
-//                    JSONArray CHILDRENSTATUS = mJsonObject.getJSONArray("CHILDRENSTATUS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSTATUS", CHILDRENSTATUS);
-//                }
-//                if (mJsonObject.has("CHILDRENSCREENSTATUSES")) {
-//                    JSONArray CHILDRENSCREENSTATUSES = mJsonObject.getJSONArray("CHILDRENSCREENSTATUSES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CHILDRENSCREENSTATUSES", CHILDRENSCREENSTATUSES);
-//                }
-//                if (mJsonObject.has("CLASSES")) {
-//                    JSONArray CLASSES = mJsonObject.getJSONArray("CLASSES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CLASSES", CLASSES);
-//                }
-//                if (mJsonObject.has("CONTACTCATEGORIES")) {
-//                    JSONArray CONTACTCATEGORIES = mJsonObject.getJSONArray("CONTACTCATEGORIES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTCATEGORIES", CONTACTCATEGORIES);
-//                }
-//                if (mJsonObject.has("CONTACTTYPES")) {
-//                    JSONArray CONTACTTYPES = mJsonObject.getJSONArray("CONTACTTYPES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "CONTACTTYPES", CONTACTTYPES);
-//                }
-//                if (mJsonObject.has("DISABILITYTYPES")) {
-//                    JSONArray DISABILITYTYPES = mJsonObject.getJSONArray("DISABILITYTYPES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DISABILITYTYPES", DISABILITYTYPES);
-//                }
-//                if (mJsonObject.has("DISTRICTS")) {
-//                    JSONArray DISTRICTS = mJsonObject.getJSONArray("DISTRICTS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "DISTRICTS", DISTRICTS);
-//                }
-//                if (mJsonObject.has("EDUCATION")) {
-//                    JSONArray EDUCATION = mJsonObject.getJSONArray("EDUCATION");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EDUCATION", EDUCATION);
-//                }
-//                if (mJsonObject.has("EDUCATIONYEARS")) {
-//                    JSONArray EDUCATIONYEARS = mJsonObject.getJSONArray("EDUCATIONYEARS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EDUCATIONYEARS", EDUCATIONYEARS);
-//                }
-//                if (mJsonObject.has("FAMILYHISTORY")) {
-//                    JSONArray FAMILYHISTORY = mJsonObject.getJSONArray("FAMILYHISTORY");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "FAMILYHISTORY", FAMILYHISTORY);
-//                }
-//                if (mJsonObject.has("GENDER")) {
-//                    JSONArray GENDER = mJsonObject.getJSONArray("GENDER");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "GENDER", GENDER);
-//                }
-//                if (mJsonObject.has("HEMOGLOBINS")) {
-//                    JSONArray HEMOGLOBINS = mJsonObject.getJSONArray("HEMOGLOBINS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "HEMOGLOBINS", HEMOGLOBINS);
-//                }
-//                if (mJsonObject.has("INSTITUTEPLANSKIPREASONS")) {
-//                    JSONArray INSTITUTEPLANSKIPREASONS = mJsonObject.getJSONArray("INSTITUTEPLANSKIPREASONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANSKIPREASONS", INSTITUTEPLANSKIPREASONS);
-//                }
-//                if (mJsonObject.has("INSTITUTEPLANSTATUSES")) {
-//                    JSONArray INSTITUTEPLANSTATUSES = mJsonObject.getJSONArray("INSTITUTEPLANSTATUSES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "INSTITUTEPLANSTATUSES", INSTITUTEPLANSTATUSES);
-//                }
-//                if (mJsonObject.has("MANDALS")) {
-//                    JSONArray MANDALS = mJsonObject.getJSONArray("MANDALS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MANDALS", MANDALS);
-//                }
-//                if (mJsonObject.has("MUACREFERNCES")) {
-//                    JSONArray MUACREFERNCES = mJsonObject.getJSONArray("MUACREFERNCES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "MUACREFERNCES", MUACREFERNCES);
-//                }
-//                if (mJsonObject.has("OCCUPATIONS")) {
-//                    JSONArray OCCUPATIONS = mJsonObject.getJSONArray("OCCUPATIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "OCCUPATIONS", OCCUPATIONS);
-//                }
-//                if (mJsonObject.has("SAMREFERENCES")) {
-//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
-//                }
-//                if (mJsonObject.has("SCHOOLCATEGORIES")) {
-//                    JSONArray SCHOOLCATEGORIES = mJsonObject.getJSONArray("SCHOOLCATEGORIES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCHOOLCATEGORIES", SCHOOLCATEGORIES);
-//                }
-//                if (mJsonObject.has("SCREENCATEGORIES")) {
-//                    JSONArray SCREENCATEGORIES = mJsonObject.getJSONArray("SCREENCATEGORIES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENCATEGORIES", SCREENCATEGORIES);
-//                }
-//                if (mJsonObject.has("SAMREFERENCES")) {
-//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
-//                }
-//                if (mJsonObject.has("SCREENQUESTIONS")) {
-//                    JSONArray SCREENQUESTIONS = mJsonObject.getJSONArray("SCREENQUESTIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENQUESTIONS", SCREENQUESTIONS);
-//                }
-//                if (mJsonObject.has("SCREENTEMPLATETYPES")) {
-//                    JSONArray SCREENTEMPLATETYPES = mJsonObject.getJSONArray("SCREENTEMPLATETYPES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENTEMPLATETYPES", SCREENTEMPLATETYPES);
-//                }
-//                if (mJsonObject.has("[0TO5YEARSHCCHART]")) {
-//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[0TO5YEARSHCCHART]");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSHCCHART]", SAMREFERENCES);
-//                }
-//                if (mJsonObject.has("[0TO5YEARSWEIGHTCHART]")) {
-//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[0TO5YEARSWEIGHTCHART]");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSWEIGHTCHART]", SAMREFERENCES);
-//                }
-//                if (mJsonObject.has("[6TO18YEARSWEIGHTCHART]")) {
-//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[6TO18YEARSWEIGHTCHART]");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6TO18YEARSWEIGHTCHART]", SAMREFERENCES);
-//                }
-//                if (mJsonObject.has("[6MTO19YBMICHARTZSCORES]")) {
-//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[6MTO19YBMICHARTZSCORES]");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6MTO19YBMICHARTZSCORES]", SAMREFERENCES);
-//                }
-//                if (mJsonObject.has("[0TO5YEARSHEIGHTCHART]")) {
-//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[0TO5YEARSHEIGHTCHART]");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[0TO5YEARSHEIGHTCHART]", SAMREFERENCES);
-//                }
-//                if (mJsonObject.has("[6TO18YEARSHEIGHTCHART]")) {
-//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("[6TO18YEARSHEIGHTCHART]");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "[6TO18YEARSHEIGHTCHART]", SAMREFERENCES);
-//                }
-//                if (mJsonObject.has("EVENTS")) {
-//                    JSONArray EVENTS = mJsonObject.getJSONArray("EVENTS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "EVENTS", EVENTS);
-//                }
-//                if (mJsonObject.has("SAMREFERENCES")) {
-//                    JSONArray SAMREFERENCES = mJsonObject.getJSONArray("SAMREFERENCES");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SAMREFERENCES", SAMREFERENCES);
-//                }
-//                if (mJsonObject.has("LABINVESTIGATIONS")) {
-//                    JSONArray LABINVESTIGATIONS = mJsonObject.getJSONArray("LABINVESTIGATIONS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "LABINVESTIGATIONS", LABINVESTIGATIONS);
-//                }
-//                if (mJsonObject.has("SCREENINGROUNDS")) {
-//                    JSONArray SCREENINGROUNDS = mJsonObject.getJSONArray("SCREENINGROUNDS");
-//                    dbHelper.bulkinsertintoTable(BaseActivity.this, "SCREENINGROUNDS", SCREENINGROUNDS);
-//                }
-
-                retStr = "200";
-            } else {
-                retStr = strResponse;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            retStr = "";
-        }
-
-
-        return retStr;
     }
 
     @Override
@@ -1216,10 +1055,10 @@ public class BaseActivity extends Activity {
                 }
                 is.close();
                 System.out.println("output post...." + sb.toString());
-                if (navIndex == 0)
-                    strResponse = UpdateTable(sb.toString());
-                else
-                    strResponse = UpdateTable1(sb.toString());
+                // if (navIndex == 0)
+                strResponse = UpdateTable(sb.toString());
+//                else
+//                    strResponse = UpdateTable1(sb.toString());
 
             } catch (ClientProtocolException e) {
                 strResponse = "ClientProtocolException";
@@ -1242,17 +1081,9 @@ public class BaseActivity extends Activity {
                         Helper.progressDialog.dismiss();
                     Helper.showShortToast(BaseActivity.this, "There is a problem in sync process so please try again...");
                 } else if (response.trim().equalsIgnoreCase("200")) {
-                    if (navIndex == 0) {
-                        navIndex = 1;
-                        SharedPreferences sharedpreferences = getSharedPreferences(
-                                "LoginMain", Context.MODE_PRIVATE);
-                        String TokenID = sharedpreferences.getString("DeviceCode", "");
-                        new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate1 + "/2");
-                    } else {
-                        if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
-                            Helper.progressDialog.dismiss();
-                        Helper.showShortToast(BaseActivity.this, "Sync Process Completed");
-                    }
+                    if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
+                        Helper.progressDialog.dismiss();
+                    Helper.showShortToast(BaseActivity.this, "Sync Process Completed");
 
                 } else {
                     if (Helper.progressDialog != null && Helper.progressDialog.isShowing())
