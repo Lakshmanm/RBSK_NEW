@@ -38,11 +38,11 @@
         android:icon="@drawable/primor_color"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".SpalshScreenActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,20 +53,17 @@
         <activity
             android:name="nunet.services.DBTestActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
 
         <activity
             android:name="nunet.rbsk.login.LoginActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan|stateHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
         <activity
             android:name="nunet.rbsk.info.inst.InsituteFragmentActivityDialog"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!--
         <activity android:windowSoftInputMode="adjustPan"
             android:name="nunet.rbsk.info.inst.SearchInstitute"
@@ -96,8 +93,7 @@
             android:name="nunet.rbsk.info.child.AddStudentActivityDialog"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!--
         <activity android:windowSoftInputMode="adjustPan"
             android:name=".MainActivity"
@@ -117,8 +113,7 @@
         <activity
             android:name="nunet.rbsk.dashboard.DashBoardActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!--
         <activity android:windowSoftInputMode="adjustPan"
             android:name=".SearchPlan"
@@ -139,202 +134,174 @@
         <activity
             android:name="nunet.rbsk.planoffline.PlanOffLineActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.login.UserLoginActivity"
             android:label="@string/title_activity_user_login"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.planoffline.ModifyPlanActivtyDialog"
             android:label="@string/title_activity_modify_plan"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.dashboard.SkipInstituteActivityDialog"
             android:label="@string/title_activity_modify_plan"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.SettingsPlanActivity"
             android:label="@string/title_activity_settings_plan"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.mh.ScreenHistActivityDialog"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.ScreeningActivity"
             android:label="@string/title_activity_user_login"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.ScreeningLastScreenHistory"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.cv.ScreenVitalHeight"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.ScreeningFamilyHistory"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.DynamicQuestions"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.cv.ScreeningVitalsWeightght"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.cv.ScreenVitalMuac"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.cv.ScreenVitalHead"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.cv.ScreenVitalBloodlBlood"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.ScreeningSummary"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.cv.ScreenVitalTempalTemp"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.cv.ScreenVitalHemoglobinalHemoglobin"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.cv.ScreenVitalBP"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.cv.ScreenVitalAcuity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.SignoffRecommendations"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.SignOffDocComments"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.SignOffLocalTreatment"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.ScreeningChildDropoutActivity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.ExpandableQuestions"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.MH_HealthConditionsTable"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.ScreeningFilterStudent"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.screening.ReferralPopActivityDialog"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Dialog"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.login.IdentifyLoginActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.login.FinalLoginActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name="nunet.rbsk.login.RegisterActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".Register_download"
             android:screenOrientation="landscape"
 
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity
+            android:name=".Register_download_New"
+            android:screenOrientation="landscape"
+
+            android:windowSoftInputMode="adjustPan"></activity>
 
         <service
             android:name="nunet.services.IncrementalService"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
         <service
             android:name="nunet.services.ObjectIncrementalService"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
     </application>
 
 </manifest>

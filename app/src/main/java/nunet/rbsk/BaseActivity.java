@@ -255,7 +255,7 @@ public class BaseActivity extends Activity {
                     Helper.syncDate = syncDate;
                     sharedpreferences.edit().putString("SyncDate", Helper.syncDate).commit();
                     navIndex = 0;
-                    new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate1 + "/3");
+                    new WebConn1().execute(UrlUtils.URL_INTITAL_SETUP + TokenID + "/" + Helper.syncDate1 + "/4");
                 } else {
                     Helper.progressDialog.dismiss();
                     Helper.showShortToast(BaseActivity.this, response);

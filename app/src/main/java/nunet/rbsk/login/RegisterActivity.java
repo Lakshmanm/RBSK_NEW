@@ -41,6 +41,7 @@ import java.io.InputStreamReader;
 
 import nunet.rbsk.R;
 import nunet.rbsk.Register_download;
+import nunet.rbsk.Register_download_New;
 import nunet.rbsk.helpers.Helper;
 
 //*****************************************************************************
@@ -241,7 +242,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 
                             finish();
                             Intent intent = new Intent(RegisterActivity.this,
-                                    Register_download.class);
+                                    Register_download_New.class);
                             startActivity(intent);
                             Helper.progressDialog.dismiss();
                         }
