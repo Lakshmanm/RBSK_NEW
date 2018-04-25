@@ -1327,6 +1327,16 @@ public class BaseActivity extends Activity {
                         j.put("InstituteName", "");
                     else
                         j.put("InstituteName", c2.getString(c2.getColumnIndex("InstituteName")));
+
+                    if (c2.isNull(c2.getColumnIndex("AddressID")))
+                        j.put("AddressID", "");
+                    else
+                        j.put("AddressID", c2.getString(c2.getColumnIndex("AddressID")));
+
+                    if (c2.isNull(c2.getColumnIndex("ContactID")))
+                        j.put("ContactID", "");
+                    else
+                        j.put("ContactID", c2.getString(c2.getColumnIndex("ContactID")));
                     if (c2.isNull(c2.getColumnIndex("DISECode")))
                         j.put("DISECode", "");
                     else
@@ -1559,9 +1569,11 @@ public class BaseActivity extends Activity {
                     j.put("LocalChildrenID", c3.getString(c3.getColumnIndex("LocalChildrenID")));
                 }
                 if (c3.isNull(c3.getColumnIndex("LocalUserID"))) {
-                    j.put("UserID", "");
+                    j.put("LocalUserID", "");
+                    j.put("AddressID", "");
                 } else {
-                    j.put("UserID", c3.getString(c3.getColumnIndex("LocalUserID")));
+                    j.put("AddressID", DBHelper.getColoumnFromDBonWhere(BaseActivity.this, "USERS", "ADDRESSID", "LocalUserID", c3.getString(c3.getColumnIndex("LocalUserID"))));
+                    j.put("LocalUserID", c3.getString(c3.getColumnIndex("LocalUserID")));
                 }
                 if (c3.isNull(c3.getColumnIndex("MCTSID"))) {
                     j.put("MCTSID", "");
@@ -1588,11 +1600,7 @@ public class BaseActivity extends Activity {
                 } else {
                     j.put("ChildrenStatusID", c3.getString(c3.getColumnIndex("ChildrenStatusID")));
                 }
-                if (c3.isNull(c3.getColumnIndex("AddressID"))) {
-                    j.put("AddressID", "");
-                } else {
-                    j.put("AddressID", c3.getString(c3.getColumnIndex("AddressID")));
-                }
+
                 j.put("UserID", userID);
                 if (c3.isNull(c3.getColumnIndex("LastCommitedDate"))) {
                     j.put("LastCommitedDateTime", "");
