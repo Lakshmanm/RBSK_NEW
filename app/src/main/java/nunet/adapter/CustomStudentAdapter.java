@@ -445,6 +445,7 @@ public class CustomStudentAdapter extends BaseAdapter implements
 
     public void notifyDataSetChanged(ArrayList<Children> childrenList) {
         synchronized (studList) {
+            studList=new ArrayList<>();
             studList = childrenList;
             notifyDataSetChanged();
         }

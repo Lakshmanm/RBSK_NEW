@@ -206,10 +206,13 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        if (MyRunnable != null)
-                            MyRunnable.cancle();
-                        MyRunnable = new MyRunnable(s.toString());
-                        new Handler().postDelayed(MyRunnable, 1200);
+                        if (s.length() > 0) {
+                            if (MyRunnable != null)
+                                MyRunnable.cancle();
+                            MyRunnable = new MyRunnable(s.toString());
+                            new Handler().postDelayed(MyRunnable, 1200);
+                        }
+
                     }
                 });
 
@@ -378,14 +381,14 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
             //listSelectedPosition = 0;
             startingRang = 0;
             rangeCount = 1;
-            if (mArrayListRang != null)
-                mArrayListRang.clear();
+            //  if (mArrayListRang != null)
+            mArrayListRang = new ArrayList<>();
             noMoreUpdate = false;
 
-            if (childrenList != null)
-                childrenList.clear();
-            if (adapter != null)
-                adapter.notifyDataSetChanged();
+            // if (childrenList != null)
+            childrenList = new ArrayList<>();
+//            if (adapter != null)
+//                adapter.notifyDataSetChanged();
             getStudentDataFromDB(instituteID, et_screening_list_student_search
                     .getText().toString().trim());
 
@@ -436,7 +439,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
      */
     public void displayView(View v, Context context) {
         Bundle bundle = new Bundle();
-    Helper.showProgressDialog(ScreeningActivity.this);
+        Helper.showProgressDialog(ScreeningActivity.this);
         if (childrenList == null || childrenList.size() == 0) {
             if (Helper.progressDialog.isShowing()) {
                 Helper.progressDialog.dismiss();
@@ -588,7 +591,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
             @Override
             public void run() {
 
-                String query_students = "select u.FirstName,u.MiddleName,u.LastName, u.DateOfBirth,u.GenderID,c.MCTSID,c.ChildrenStatusID, "
+                String query_students = "select distinct u.FirstName,u.MiddleName,u.LastName, u.DateOfBirth,u.GenderID,c.MCTSID,c.ChildrenStatusID, "
                         + "(select ChildrenScreenStatusID from childrenscreening cs "
                         + "inner join institutescreeningdetails isd on isd.localinstitutescreeningdetailid=cs.localinstitutescreeningdetailid "
                         + "inner join institutescreening ins on ins.localinstitutescreeningid=isd.localinstitutescreeningid "
@@ -625,13 +628,18 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                             + ChildrenScreenStatusID;
 
                 if (searchString.length() > 0) {
+//                    query_students += " and (u.firstname like '%" + searchString
+//                            + "%' or u.lastname like '%" + searchString + "%')"
+//                            + " order by lower(firstname) limit " + startingRang
+//                            + " , " + rangeCount;
                     query_students += " and (u.firstname like '%" + searchString
                             + "%' or u.lastname like '%" + searchString + "%')"
-                            + " order by lower(firstname) limit " + startingRang
-                            + " , " + rangeCount;
+                            + " order by lower(firstname) ";
                 } else {
-                    query_students += " order by lower(firstname) limit " + startingRang
-                            + " , " + rangeCount;
+//                    query_students += " order by lower(firstname) limit " + startingRang
+//                            + " , " + rangeCount;
+
+                    query_students += " order by lower(firstname) ";
                 }
 
 
@@ -662,16 +670,16 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
             CustomStudentAdapter.lastSelectedPosition = -1;
         mArrayListRang.add(startingRang);
 
-        if (childrenList == null) {
-            childrenList = new ArrayList<Children>();
-        }
+        // if (childrenList == null) {
+        childrenList = new ArrayList<Children>();
+        //    }
 
         new Thread(new Runnable() {
 
             @Override
             public void run() {
 
-                String query_students = "select u.FirstName,u.MiddleName,u.LastName, u.DateOfBirth,u.GenderID,c.MCTSID,c.ChildrenStatusID, "
+                String query_students = "select distinct u.FirstName,u.MiddleName,u.LastName, u.DateOfBirth,u.GenderID,c.MCTSID,c.ChildrenStatusID, "
                         + "(select ChildrenScreenStatusID from childrenscreening cs "
                         + "inner join institutescreeningdetails isd on isd.localinstitutescreeningdetailid=cs.localinstitutescreeningdetailid "
                         + "inner join institutescreening ins on ins.localinstitutescreeningid=isd.localinstitutescreeningid "
@@ -708,13 +716,18 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                             + ChildrenScreenStatusID;
 
                 if (searchString.length() > 0) {
+//                    query_students += " and (u.firstname like '%" + searchString
+//                            + "%' or u.lastname like '%" + searchString + "%')"
+//                            + " order by lower(firstname) limit " + startingRang
+//                            + " , " + rangeCount;
+
                     query_students += " and (u.firstname like '%" + searchString
                             + "%' or u.lastname like '%" + searchString + "%')"
-                            + " order by lower(firstname) limit " + startingRang
-                            + " , " + rangeCount;
+                            + " order by lower(firstname) ";
                 } else {
-                    query_students += " order by lower(firstname) limit " + startingRang
-                            + " , " + rangeCount;
+//                    query_students += " order by lower(firstname) limit " + startingRang
+//                            + " , " + rangeCount;
+                    query_students += " order by lower(firstname) ";
                 }
 
 
@@ -725,6 +738,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                         query_students);
                 if (studentCur != null)
                     Log.e("Cursor pos", "" + studentCur.getCount());
+                noMoreUpdate = true;
                 setToChildrenModel(studentCur, 0);
 
             }
@@ -1039,7 +1053,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == btn_screening_list_add_child) {
-          Helper.showProgressDialog(ScreeningActivity.this);
+            Helper.showProgressDialog(ScreeningActivity.this);
             Helper.addChildFlag = true;
             Helper.childrenObject = new Children();
             Intent s = new Intent(ScreeningActivity.this,

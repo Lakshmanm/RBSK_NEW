@@ -144,9 +144,10 @@ public class ScreeningExaminations extends Fragment implements OnClickListener {
 				String screenCategoryID = hashMap.get(String
 						.valueOf(screenedQuestion.getScreenQuestionID()));
 				for (Category screenedCategory : screenedCategories) {
-					screenedCategory.setIsVerified(true);
+
 					if (NumUtil.IntegerParse.parseInt(screenCategoryID) == screenedCategory
 							.getCategoryID()) {
+						screenedCategory.setIsVerified(true);
 						ArrayList<Question> questions;
 						if (screenedCategory.getQuestions() != null) {
 							questions = screenedCategory.getQuestions();
