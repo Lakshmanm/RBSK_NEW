@@ -269,10 +269,10 @@ public class ScreeningSummary extends Fragment implements OnClickListener {
     }
 
     /*
-       * (non-Javadoc)
-       *
-       * @see android.app.Fragment#onResume()
-       */
+     * (non-Javadoc)
+     *
+     * @see android.app.Fragment#onResume()
+     */
     @Override
     public void onResume() {
         updateScreenUI();
@@ -294,29 +294,35 @@ public class ScreeningSummary extends Fragment implements OnClickListener {
         }
         Category[] screenedCategories = Helper.childScreeningObj
                 .getCategories();
-        if (screenedCategories != null)
-            for (Question screenedQuestion : screenedQuestions) {
-                String screenCategoryID = hashMap.get(String
-                        .valueOf(screenedQuestion.getScreenQuestionID()));
-                for (Category screenedCategory : screenedCategories) {
-                    if (NumUtil.IntegerParse.parseInt(screenCategoryID) == screenedCategory
-                            .getCategoryID()) {
-                        ArrayList<Question> questions;
-                        if (screenedCategory.getQuestions() != null) {
-                            questions = screenedCategory.getQuestions();
-                        } else {
-                            screenedCategory
-                                    .setQuestions(new ArrayList<Question>());
-                            questions = screenedCategory.getQuestions();
-                        }
+        if (screenedCategories != null) {
+            if (screenedQuestions != null)
+                for (Question screenedQuestion : screenedQuestions) {
+                    if (hashMap.size() > 0) {
+                        String screenCategoryID = hashMap.get(String
+                                .valueOf(screenedQuestion.getScreenQuestionID()));
+                        for (Category screenedCategory : screenedCategories) {
+                            if (NumUtil.IntegerParse.parseInt(screenCategoryID) == screenedCategory
+                                    .getCategoryID()) {
+                                ArrayList<Question> questions;
+                                if (screenedCategory.getQuestions() != null) {
+                                    questions = screenedCategory.getQuestions();
+                                } else {
+                                    screenedCategory
+                                            .setQuestions(new ArrayList<Question>());
+                                    questions = screenedCategory.getQuestions();
+                                }
 
-                        questions.add(screenedQuestion);
-                        screenedCategory.setQuestions(questions);
-                        screenedCategory.setIsVerified(true);
-                        break;
+                                questions.add(screenedQuestion);
+                                screenedCategory.setQuestions(questions);
+                                screenedCategory.setIsVerified(true);
+                                break;
+                            }
+                        }
                     }
+
                 }
-            }
+        }
+
         Helper.childScreeningObj.setCategories(screenedCategories);
     }
 
@@ -575,15 +581,19 @@ public class ScreeningSummary extends Fragment implements OnClickListener {
         String query = "select * from healthconditions where IsDeleted!=1 and   HealthConditionID='"
                 + HealthConditionID + "';";
         Cursor cursor = dbh.getCursorData(this.getActivity(), query);
-        cursor.moveToNext();
-        String healthConditionName = cursor.getString(cursor
-                .getColumnIndex("DisplayText"));
-        cursor.close();
+        String healthConditionName = "";
+        if (cursor != null) {
+            cursor.moveToNext();
+            healthConditionName = cursor.getString(cursor
+                    .getColumnIndex("DisplayText"));
+            cursor.close();
+        }
+
         return healthConditionName;
     }
 
     public void updateHealthCondtionsData() {
-    /* ll_summary_health_conditions.removeAllViews(); */
+        /* ll_summary_health_conditions.removeAllViews(); */
         String healthStr = "";
         ArrayList<Referral> referrals_array = new ArrayList<Referral>();
 
@@ -707,52 +717,52 @@ public class ScreeningSummary extends Fragment implements OnClickListener {
 
     }
 
-	/*
+    /*
      * click event for views
-	 */
+     */
 
     @Override
     public void onClick(View v) {
         if (v == iv_referral_healthconditions) {
-			/*
-			 * getHealthConditionData(this.getActivity()); ArrayList<Question>
-			 * allQuestionsList = new ArrayList<Question>(); for (int i = 0; i <
-			 * Helper.categoryAry.length - 1; i++) { Category iteratedCategory =
-			 * Helper.categoryAry[i];
-			 *
-			 * for (int j = 0; j < iteratedCategory.getQuestions().size(); j++)
-			 * { Question iteratedQuestion = iteratedCategory.getQuestions()
-			 * .get(j);
-			 *
-			 * allQuestionsList.add(iteratedQuestion); } }
-			 */
+            /*
+             * getHealthConditionData(this.getActivity()); ArrayList<Question>
+             * allQuestionsList = new ArrayList<Question>(); for (int i = 0; i <
+             * Helper.categoryAry.length - 1; i++) { Category iteratedCategory =
+             * Helper.categoryAry[i];
+             *
+             * for (int j = 0; j < iteratedCategory.getQuestions().size(); j++)
+             * { Question iteratedQuestion = iteratedCategory.getQuestions()
+             * .get(j);
+             *
+             * allQuestionsList.add(iteratedQuestion); } }
+             */
 
             Intent intent = new Intent(this.getActivity(),
                     ExpandableQuestions.class);
             startActivity(intent);
 
         } /*
-		 * else if (v == iv_add_refer) { int errorcount = 0; if
-		 * (spn_summary_health_condition.getSelectedItemPosition() == 0) {
-		 * errorcount++; Helper.setErrorForSpinner(spn_summary_health_condition,
-		 * "Select Health Condition"); } if
-		 * (spn_summary_place_referral.getSelectedItemPosition() == 0) {
-		 * errorcount++; Helper.setErrorForSpinner(spn_summary_place_referral,
-		 * "Select Place of Referral"); } if (errorcount == 0) {
-		 * addRowToInvestigations();
-		 *
-		 * for (int i = 0; i < cb_labInvestigationsAry.length; i++) {
-		 * cb_labInvestigationsAry[i].setChecked(false); }
-		 * et_summary_investigate.setText("".trim()); } }
-		 */ else if (v == iv_examinations_next) {
-			/*
-			 * if (spn_summary_health_condition.getCount() > 1) { new
-			 * AlertDialog.Builder(this.getActivity()) .setMessage(
-			 * "One or more identified Health Conditions have not been referred, Please refer the Health Condition(s) to proceed further"
-			 * ) .setPositiveButton("OK", new DialogInterface.OnClickListener()
-			 * { public void onClick(DialogInterface dialog, int which) { //
-			 * continue with delete dialog.cancel(); } }).show(); } else {
-			 */
+         * else if (v == iv_add_refer) { int errorcount = 0; if
+         * (spn_summary_health_condition.getSelectedItemPosition() == 0) {
+         * errorcount++; Helper.setErrorForSpinner(spn_summary_health_condition,
+         * "Select Health Condition"); } if
+         * (spn_summary_place_referral.getSelectedItemPosition() == 0) {
+         * errorcount++; Helper.setErrorForSpinner(spn_summary_place_referral,
+         * "Select Place of Referral"); } if (errorcount == 0) {
+         * addRowToInvestigations();
+         *
+         * for (int i = 0; i < cb_labInvestigationsAry.length; i++) {
+         * cb_labInvestigationsAry[i].setChecked(false); }
+         * et_summary_investigate.setText("".trim()); } }
+         */ else if (v == iv_examinations_next) {
+            /*
+             * if (spn_summary_health_condition.getCount() > 1) { new
+             * AlertDialog.Builder(this.getActivity()) .setMessage(
+             * "One or more identified Health Conditions have not been referred, Please refer the Health Condition(s) to proceed further"
+             * ) .setPositiveButton("OK", new DialogInterface.OnClickListener()
+             * { public void onClick(DialogInterface dialog, int which) { //
+             * continue with delete dialog.cancel(); } }).show(); } else {
+             */
             int errorCount = 0;
 
             for (int i = 0; i < Helper.childScreeningObj.getReferrals().size() - 3; i++) {

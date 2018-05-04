@@ -115,7 +115,7 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
     private int panelWidth;
     private boolean isExpanded = false;
     public CustomStudentAdapter adapter;
-    public int instituteID;
+    public static int instituteID;
     public long locInsScreeningDetailID;
     public static ArrayList<Children> childrenList;
     private Fragment fragment = null;
@@ -381,39 +381,16 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
             //listSelectedPosition = 0;
             startingRang = 0;
             rangeCount = 1;
-            //  if (mArrayListRang != null)
-            mArrayListRang = new ArrayList<>();
+            if (mArrayListRang != null)
+                mArrayListRang = new ArrayList<>();
             noMoreUpdate = false;
 
-            // if (childrenList != null)
-            childrenList = new ArrayList<>();
-//            if (adapter != null)
-//                adapter.notifyDataSetChanged();
+            if (childrenList != null)
+                childrenList = new ArrayList<>();
+            if (adapter != null)
+                adapter.notifyDataSetChanged();
             getStudentDataFromDB(instituteID, et_screening_list_student_search
                     .getText().toString().trim());
-
-            final ListView localListView = ll_screening_list_students;
-            final int lvpos = listSelectedPosition + 1;// Modified
-            final View v = localListView.getChildAt(lvpos);
-            if (childrenList.size() > (listSelectedPosition + 1)) {
-                int nextPosition = (listSelectedPosition + 1);
-                localListView
-                        .performItemClick(
-                                localListView
-                                        .getAdapter()
-                                        .getView(
-                                                nextPosition,
-                                                null,
-                                                null),
-                                nextPosition,
-                                localListView
-                                        .getAdapter()
-                                        .getItemId(
-                                                nextPosition));
-
-                localListView.getAdapter().getView(
-                        lvpos, v, localListView);
-            }
 
 
         }
@@ -670,9 +647,9 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
             CustomStudentAdapter.lastSelectedPosition = -1;
         mArrayListRang.add(startingRang);
 
-        // if (childrenList == null) {
-        childrenList = new ArrayList<Children>();
-        //    }
+        if (childrenList == null) {
+            childrenList = new ArrayList<Children>();
+        }
 
         new Thread(new Runnable() {
 
@@ -894,10 +871,37 @@ public class ScreeningActivity extends BaseActivity implements OnClickListener {
                     }
                     if (childrenList.size() != 0) {
 
+
+
+
                         if (adapter != null) {
                             if (ll_screening_list_students.getAdapter() == null)
                                 ll_screening_list_students.setAdapter(adapter);
                             adapter.notifyDataSetChanged(childrenList);
+                            if (resumeFlag) {
+                                final ListView localListView = ll_screening_list_students;
+                                final int lvpos = listSelectedPosition + 1;// Modified
+                                final View v = localListView.getChildAt(lvpos);
+                                if (childrenList.size() > (listSelectedPosition + 1)) {
+                                    int nextPosition = (listSelectedPosition + 1);
+                                    localListView
+                                            .performItemClick(
+                                                    localListView
+                                                            .getAdapter()
+                                                            .getView(
+                                                                    nextPosition,
+                                                                    null,
+                                                                    null),
+                                                    nextPosition,
+                                                    localListView
+                                                            .getAdapter()
+                                                            .getItemId(
+                                                                    nextPosition));
+
+                                    localListView.getAdapter().getView(
+                                            lvpos, v, localListView);
+                                }
+                            }
                             if (index == 0) {
                                 if (childrenList.size() == 1) {
                                     adapter.performClick(0);

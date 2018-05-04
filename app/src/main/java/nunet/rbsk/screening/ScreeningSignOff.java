@@ -1205,16 +1205,29 @@ public class ScreeningSignOff extends Fragment implements OnClickListener {
                         "LocalChildrenScreeningID", localChildScreeningID);
             }
 
-            ScreeningActivity.childrenList.get(
-                    ScreeningActivity.listSelectedPosition)
-                    .setChildScreenStatusID(childScreenStatusID);
+            if (ScreeningActivity.listSelectedPosition >= ScreeningActivity.childrenList.size()) {
+                ScreeningActivity.childrenList.get(
+                        (ScreeningActivity.childrenList.size() - 1))
+                        .setChildScreenStatusID(childScreenStatusID);
+            } else {
+                ScreeningActivity.childrenList.get(
+                        ScreeningActivity.listSelectedPosition)
+                        .setChildScreenStatusID(childScreenStatusID);
+            }
+
 
         } else {// new student---insert
             // ----------------------Family Details-------------------------
 
-            ScreeningActivity.childrenList.get(
-                    ScreeningActivity.listSelectedPosition)
-                    .setChildScreenStatusID(childScreenStatusID);
+            if (ScreeningActivity.listSelectedPosition >= ScreeningActivity.childrenList.size()) {
+                ScreeningActivity.childrenList.get(
+                        (ScreeningActivity.childrenList.size() - 1))
+                        .setChildScreenStatusID(childScreenStatusID);
+            } else {
+                ScreeningActivity.childrenList.get(
+                        ScreeningActivity.listSelectedPosition)
+                        .setChildScreenStatusID(childScreenStatusID);
+            }
             // ScreenedBy
             long localChildScreeningID = -1;
 

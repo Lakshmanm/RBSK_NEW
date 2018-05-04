@@ -190,7 +190,7 @@ public class SkipInstituteActivityDialog extends Activity implements
 				new String[] { "PlanStatusID", "InstitutePlanSkipReasonID",
 						"SkipComments"}, new String[] { "2",
 						String.valueOf(skipReasonID),
-						et_skip_plan_skip_reason.getText().toString().trim()}, new String[] { "LocalInstitutePlanDetailID" },
+						et_skip_plan_skip_reason.getText().toString().trim() }, new String[] { "LocalInstitutePlanDetailID" },
 				new String[] { String.valueOf(LocalInstitutePlanDetailID) });
 	}
 
